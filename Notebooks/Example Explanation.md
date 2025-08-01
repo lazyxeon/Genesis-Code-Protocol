@@ -4,7 +4,8 @@ _This document explains each example notebook included in the `Notebooks/Example
 
 ---
 
-## ⚙️ 1. `alloy_perceptual_loss_example.ipynb`
+## ⚙️ 1. 
+`alloy_perceptual_loss_example.ipynb`
 **Summary:**  
 This notebook demonstrates the integration and application of the `alloy_perceptual_loss.py` module — a custom perceptual loss function designed for neural network training with visual data. It aligns with Phase 5.5–7.2 of the GCP by applying invention and mutation layers to optimize perceptual loss performance.
 
@@ -15,7 +16,8 @@ This notebook demonstrates the integration and application of the `alloy_percept
 
 ---
 
-## 📡 2. `JACCO_Beam_Management_Engine.ipynb`
+## 📡 2.
+`JACCO_Beam_Management_Engine.ipynb`
 **Summary:**  
 This notebook is a direct output of the GCP Forge during a recursive invention session, targeting an adaptive beam management system. It’s designed to showcase Phases 3–7, especially recursive divergence, multi-agent injection, and audit-resilience layers.
 
@@ -26,7 +28,8 @@ This notebook is a direct output of the GCP Forge during a recursive invention s
 
 ---
 
-## 🛰️ 3. `MOSAIC_Swarm_Topology_Manager.ipynb`
+## 🛰️ 3.
+`MOSAIC_Swarm_Topology_Manager.ipynb`
 **Summary:**  
 An alternate invention run of the same problem space as JACCO, but through a different philosophical lens injected via the Socratic Diffuser (Phase 2.5). Divergence paths between this and JACCO offer insight into GCP’s multi-style invention capacity.
 
@@ -48,6 +51,14 @@ AlloyScript V12 is a demo of an entirely new AI-native scripting language. This 
 - Google Colab ready with install/setup scaffolding
 
 ---
+## 📡 5.
+Adaptive QoS Benchmark (`adaptive_qos_benchmark.ipynb`)
+- **Objective**: Invent an AI-powered traffic prioritization protocol for Starlink satellite mesh networks.
+- **Highlights**: Predictive routing, dynamic bandwidth reallocation, congestion detection.
+- **Protocol Features**: Latent Problem Scanner, Phase 4 Convergence Test, Phase 6.7 Efficiency Audit.
+
+---
+
 
 ## 🔬 Integration Summary
 Each example showcases a different pathway of invention using the GCP v43.7 REA protocol. They are structured to follow phases:
