@@ -1,8 +1,10 @@
-
-
 # Genesis Code Protocol (GCP)
 
 The Genesis Code Protocol (GCP) is a recursive invention engine designed to help state-of-the-art AI systems generate, simulate, and validate novel algorithms, tools, and technologies. Inspired by human scientific method, symbolic recursion, and structured phase progression, it serves as a scaffolding for AI-led R&D.
+
+![MIT License](https://img.shields.io/badge/license-MIT-green)
+![Build](https://img.shields.io/badge/build-passing-brightgreen)
+![Python](https://img.shields.io/badge/python-3.10-blue)
 
 ## Features
 
