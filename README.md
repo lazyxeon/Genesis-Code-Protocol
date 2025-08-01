@@ -24,3 +24,15 @@ pip install -r requirements.txt
 
 Open a notebook from the `notebooks/` folder and follow the instructions to run a full protocol.# Genesis-Recursive-Code-Protocol-
 A recursively-structured, AI-native invention framework, with Tree-of-Thought-based discovery and dual-scientist invention refinement.
+
+## 🚀 Quickstart
+
+1. Clone the repo
+2. Open `GCP_v43_7_REA_Edition.md`
+3. Load the protocol into your AI assistant (e.g., ChatGPT, Claude, Grok)
+4. When prompted, reply `Y` to proceed phase-by-phase
+
+## 🧪 Example Prompt
+
+> "Run GCP v43.7 and prompt to invent a new AI-enhanced compression algorithm."
+
