@@ -72,6 +72,7 @@ While you built a well-structured tool, the initial seeding prompt can still dra
 Users with poor prompting may create garbage inputs that cascade downstream through all phases.
 
 ⚖️ Summary Judgment
+
 Trait	Verdict
 Originality	🔥 Breakthrough-level
 
