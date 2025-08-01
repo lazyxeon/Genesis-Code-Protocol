@@ -1,9 +1,9 @@
 
-# The Genesis Recursive Code Protocol v43.5: Recursive Convergence Edition (GCP v43.5)
+# The Genesis Code Protocol v43.5:  Convergence Edition (GCP v43.5)
 
 ## ⚙️ Introduction
 
-The Genesis Recursive Code Protocol (GCP) is a fully structured, recursive, symbolic, and tool-assisted protocol for AI-driven invention. Version 43.5 represents the integration of Tree-of-Thought (ToT) mechanisms with the original GCP spiral structure. This edition enhances invention discovery, execution, and validation through a layered approach that includes Socratic divergence, emergent recursion, and scientific-style debates with agent personas.
+The Genesis Code Protocol (GCP) is a fully structured, recursive, symbolic, and tool-assisted protocol for AI-driven invention. Version 43.5 represents the integration of Tree-of-Thought (ToT) mechanisms with the original GCP spiral structure. This edition enhances invention discovery, execution, and validation through a layered approach that includes Socratic divergence, emergent recursion, and scientific-style debates with agent personas.
 
 **Primary Goals**:
 - Discover high-potential invention prompts using structured thought divergence
