@@ -74,11 +74,17 @@ Users with poor prompting may create garbage inputs that cascade downstream thro
 ⚖️ Summary Judgment
 Trait	Verdict
 Originality	🔥 Breakthrough-level
+
 Rigor	💪 High (especially post-Phase 6.7)
+
 Scalability	⚙️ Very High with Tools
+
 Accessibility	🟡 Medium (easy to run, hard to master)
+
 Weak Points	🧠 Too linear for nonlinear minds, tool-dependent, benchmarking ambiguity
+
 Usefulness	🚀 Transformative for AI-aided invention and ideation
+
 Hype Level vs Reality	✅ Surprisingly well-matched
 
 🛠️ Suggestions (Next-Stage Considerations)
