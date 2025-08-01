@@ -36,3 +36,4 @@ A recursively-structured, AI-native invention framework, with Tree-of-Thought-ba
 
 > "Run GCP v43.7 and prompt to invent a new AI-enhanced compression algorithm."
 
+## WHILE THIS DOES AIM TO BEAT SOTA EQUIVALENTS WITH A NOVEL INVENTION/INNOVATION, THIS IS A GOAL, NOT A PROMISE 
