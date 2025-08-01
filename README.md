@@ -31,6 +31,7 @@ A recursively-structured, AI-native invention framework, with Tree-of-Thought-ba
 2. Open `GCP_v43_7_REA_Edition.md`
 3. Load the protocol into your AI assistant (e.g., ChatGPT, Claude, Grok)
 4. When prompted, reply `Y` to proceed phase-by-phase
+5. ChatGPT recommended, other SOTA LLM's work great, but ChatGPT is most refined output in my experience.
 
 ## 🧪 Example Prompt
 
