@@ -1,4 +1,4 @@
-# 📘 EXAMPLES_EXPLANATION.md
+
 **Genesis Recursive Code Protocol — Example Suite**  
 _This document explains each example notebook included in the `Notebooks/Examples/` folder, demonstrating how the GCP protocol generates, mutates, and audits functional code across AI development domains._
 
