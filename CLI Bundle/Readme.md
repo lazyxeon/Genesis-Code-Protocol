@@ -7,7 +7,7 @@ The CLI Bundle provides a command-line interface for orchestrating GRCP protocol
 1. Ensure Python 3.10+ is installed.
 2. Install dependencies:
 
-#Overview
+# Overview
 
 ## CLI Bundle for Genesis Recursive Code Protocol (GRCP)
 
