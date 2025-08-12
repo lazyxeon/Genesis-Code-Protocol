@@ -69,18 +69,18 @@ A high-level flowchart of the GRCP workflow, incorporating v47's realism phases 
 
 ```mermaid
 flowchart TD
-    A[Start: Invention Prompt] --> B[Phase -1: Problem Discovery and Worth-It Sprint]
-    B -->|Worth-It Score >= 0.7| C[Phase 0: Domain Profile and Risk Tier]
-    C --> D[Discovery and Ideation (ToT)]
-    D --> E[Refinement and Debate]
-    E --> F[Synthesis and Simulation]
-    F --> G[Validation and Benchmarking]
-    G --> H[Audit and Governance]
-    H --> I[Productization and Deployment]
-    I --> J[Continuous Assurance and Monitoring]
+    A["Start: Invention Prompt"] --> B["Phase -1: Problem Discovery and Worth-It Sprint"]
+    B -->|Worth-It Score >= 0.7| C["Phase 0: Domain Profile and Risk Tier"]
+    C --> D["Discovery and Ideation (ToT)"]
+    D --> E["Refinement and Debate"]
+    E --> F["Synthesis and Simulation"]
+    F --> G["Validation and Benchmarking"]
+    G --> H["Audit and Governance"]
+    H --> I["Productization and Deployment"]
+    I --> J["Continuous Assurance and Monitoring"]
     J -->|Recursion Needed| D
-    J --> K[End: Field-Ready Output]
-    B -->|Fail Gate| L[Stop or Pivot to Non-Tech]
+    J --> K["End: Field-Ready Output"]
+    B -->|Fail Gate| L["Stop or Pivot to Non-Tech"]
 ```
 
 ## Invention Impact Breakdown
