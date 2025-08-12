@@ -1,3 +1,9 @@
+argparse==1.4.0
+subprocess
+os
+sys
+# Add more as needed, e.g., pyspark for v47
+
 3. (Optional) For Spark integration in v47: Install PySpark separately if needed.
 
 ## Usage
