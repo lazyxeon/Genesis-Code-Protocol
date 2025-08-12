@@ -24,6 +24,7 @@ We actively maintain security for the latest GRCP variants (v47 and above). Olde
 
 
 VersionSupportedv47+✅
+
 Reporting a Vulnerability
 If you discover a security vulnerability in GRCP (e.g., in CLI scripts, protocol logic, or dependencies), please report it responsibly:
 
