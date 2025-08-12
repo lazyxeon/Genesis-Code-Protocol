@@ -1,32 +1,38 @@
-## 🧬 Why I Built the GCP
+# About GRCP: Genesis Recursive Code Protocol
 
-In a world racing to generate code, I asked:  
-**“What if AI could invent — not just write?”**
+🧬 **Why I Built GRCP**
 
-The Genesis Code Protocol (GCP) was born from that question.  
-Not as a novelty, but as a serious tool — a way to *guide AI through the full cycle of invention*.
+In a world obsessed with AI-generated code, I paused and asked:  
+“What if AI could truly *invent* — not just replicate or automate, but discover, refine, and validate breakthroughs?”
 
-Over months of testing with GPT, Claude, and Grok, I built GCP to be:
-- 🔁 **Recursive** (returns to refine ideas based on benchmarks)
-- 🧪 **Scientific** (runs code, simulates, and audits results)
-- 🧠 **Socratic** (debates itself and forks divergent thought paths)
-- 📊 **Grounded** (asks: “How does this compare to real-world baselines?”)
+The Genesis Recursive Code Protocol (GRCP) — originally Genesis Code Protocol (GCP) — emerged from that challenge. It's not a gimmick or a prompt hack; it's a structured, AI-native framework designed to orchestrate invention from ideation to field-ready deployment.
+
+Over years of iterative development and testing with leading LLMs like GPT, Claude, and Grok, I've evolved GRCP into a robust system that mimics human scientific rigor while leveraging AI's speed and scale. From early recursive editions to the latest v47 "Worth-It Realism" variant, it now incorporates problem worthiness assessments, risk-tiered execution, ethical safeguards, and continuous assurance — ensuring inventions are not only novel but practical, ethical, and impactful.
+
+Key principles that define GRCP:
+
+🔁 **Recursive & Adaptive**: Loops back to refine ideas via benchmarks, mutations, and Tree-of-Thought (ToT) exploration.  
+🧪 **Scientific & Empirical**: Executes code, simulates scenarios, debates alternatives, and audits against real-world SOTA baselines.  
+🧠 **Socratic & Collaborative**: Simulates dual-scientist critiques, peer reviews, and ontological boundary checks to foster deep reasoning.  
+📊 **Grounded & Realistic**: Prioritizes "worth-it" problems with expected-value models (EVM), non-tech alternatives, and field-testing readiness.  
+⚖️ **Ethical & Governed**: Built-in proxies for emergence, fairness deltas, personhood risks, SBOM/provenance, and continuous monitoring with auto-rollbacks.
 
 And now?  
-It’s open source. MIT licensed.  
-Ready for you to run, test, mutate — or improve.
+It's fully open source under the MIT license.  
+Clone it, run it, mutate it — or contribute to its evolution.  
 
-This isn’t a miracle.  
-It’s a forge.
+This isn't magic or hype.  
+It's a forge for forging the future.
 
-**Who is this for?**
-- AI researchers
-- Code inventors
-- Toolmakers and thinkers
-- Anyone tired of gimmicks and ready to teach AI how to *build with intent*
+## Who Is This For?
 
-I made the protocol I wish I had when I started.
+- **AI Researchers & Developers**: Push LLMs beyond generation into autonomous invention and R&D.  
+- **Code Inventors & Toolmakers**: Create novel algorithms, languages (like AlloyScript), or systems (e.g., EV charging optimizers) with built-in validation.  
+- **Innovators in Emerging Fields**: Tackle quantum-inspired tools, multimodal agents, or sustainable tech with ethical guardrails.  
+- **Thinkers Tired of Superficial AI**: Anyone seeking intent-driven creation over quick fixes — from hobbyists to enterprise teams.  
 
-Now it's yours.
+I built the protocol I wished existed when I started experimenting with AI-led innovation. Now, as of August 12, 2025, with variants spanning recursive emergence to realism-focused governance, it's ready for you to wield.
 
-— *Andrew R. Brown (LazyXeon)*
+Now it's yours.  
+
+— LazyXeon
