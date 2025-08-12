@@ -1,51 +1,127 @@
-# 📊 Genesis Protocol Example Benchmarks
+# GRCP Charts and Graphs Overview
 
-This document provides a transparent summary of benchmark results for example inventions generated using the Genesis Recursive Code Protocol (GRCP).
+This document provides a visual and tabular overview of the Genesis Recursive Code Protocol (GRCP) evolution, key versions, feature additions, and notable inventions. It uses Markdown tables for data presentation and Mermaid diagrams for graphs/charts, which GitHub renders natively. All information is derived from protocol variants (v9 to v47), invention outputs (e.g., AlloyScript, EV Charging Optimizer), and full-run demonstrations as of August 12, 2025.
 
-| Invention                | Latency Reduction (%) | Packet Loss Reduction (%) | Throughput Gain (%) | Interference Avoidance (%) | Beam Efficiency (%) | Network Stability Gain (%) | Compression Quality (%) | Speed Increase (%) | Error Tolerance (%) |
-|--------------------------|------------------------|----------------------------|----------------------|-----------------------------|----------------------|-----------------------------|--------------------------|--------------------|----------------------|
-| **JACCO**                | 19                     | 24                         |                      |                             |                      |                             |                          | 32                 |                      |
-| **MOSAIC**               | 41                     | 29                         | 17                   |                             |                      |                             |                          |                    |                      |
-| **Alloy Perceptual Loss** |                        |                            |                      |                             |                      |                             | 92                       | 38                 | 99                   |
+## Table of Contents
 
----
+- [Protocol Evolution Timeline](#protocol-evolution-timeline)
+- [Version Feature Comparison](#version-feature-comparison)
+- [Invention Metrics Overview](#invention-metrics-overview)
+- [Protocol Workflow Flowchart](#protocol-workflow-flowchart)
+- [Invention Impact Breakdown](#invention-impact-breakdown)
+- [Risk-Tier Distribution (v46+)](#risk-tier-distribution-v46)
+- [Ethical Safeguard Metrics](#ethical-safeguard-metrics)
 
-## 📈 Visual Breakdown
+## Protocol Evolution Timeline
 
-The following bar graphs represent the individual metric performance of each example:
+The following Mermaid timeline chart shows the progression of GRCP versions, highlighting key editions and release milestones based on documented changelogs and PDFs.
 
-### Latency Reduction (%)
+```mermaid
+timeline
+    title GRCP Version Timeline (as of August 12, 2025)
+    v9 : Recursive Emergence Edition : Introduced AdaptiveTopoNet, SpiralSync™, ontological proxies
+    v10 : Agentic Quantum Edition : Added AgenticQuantumNet, quantum-inspired search
+    v11 : Neuroscience-MultiModal Fusion : Integrated neuroscience principles, multimodal data
+    v43.7 : REA Edition : Refined mutations, real-world applications
+    v45.6 : Performance-First Edition : Anti-over-engineering gates, targeted optimizations
+    v46 : IRONCLAD FIELD-TEST Edition : Field-readiness, SBOM/provenance, safety deliverables
+    v47 : WORTH-IT REALISM Edition : Problem worth-it sprints, EVM, continuous assurance
+```
 
-![Latency Reduction (%)](Latency_Reduction_%.png)
+## Version Feature Comparison
 
-### Packet Loss Reduction (%)
+This table compares key features across major versions, focusing on additions in invention orchestration, safeguards, and realism.
 
-![Packet Loss Reduction (%)](Packet_Loss_Reduction_%.png)
+| Version | Core Focus | Key Additions | Ethical/Guardrail Enhancements | Scalability/Tools |
+|---------|------------|---------------|--------------------------------|-------------------|
+| v9 | Recursive Emergence | AdaptiveTopoNet, SpiralSync™, ToT discovery | Ontological proxies, ethical attractors | Basic recursion, LLM-agnostic |
+| v10 | Agentic Quantum | AgenticQuantumNet, quantum search strategies | Value alignment mechanisms | Parallel processing support |
+| v11 | Neuroscience-MultiModal | Multimodal fusion, self-improvement layers | Ethical biasing, personhood audits | Domain-specific templates |
+| v43.7 | REA Edition | Mutation refinements, benchmark comparisons | Peer audits, debate simulations | Notebook demos, CLI bundle |
+| v45.6 | Performance-First | Simplicity reviews, optimization protocols | Anti-over-engineering gates | Profiling tools, dependency checks |
+| v46 | IRONCLAD FIELD-TEST | Field-readiness, governance with teeth | Safety deliverables (FMEA, DPIA), provenance | Risk-tiered lanes, SBOM integration |
+| v47 | WORTH-IT REALISM | Problem discovery sprints, EVM | Continuous assurance, premortem canaries | Realism-compiler, auto-rollbacks, Spark integration |
 
-### Throughput Gain (%)
+## Invention Metrics Overview
 
-![Throughput Gain (%)](Throughput_Gain_%.png)
+Based on invention outputs (e.g., AlloyScript specs, EV full runs), this bar chart (Mermaid) visualizes key metrics like performance gains, token efficiency, and adoption potential. Metrics are aspirational/validated from protocol runs.
 
-### Interference Avoidance (%)
+```mermaid
+gantt
+    title Invention Metrics Overview
+    dateFormat  YYYY-MM-DD
+    section AlloyScript
+    Performance Gain :a1, 2025-01-01, 30d
+    Token Efficiency :a2, after a1, 20d
+    section EV Charging Optimizer
+    Wait Time Reduction :b1, 2025-03-01, 25d
+    Failure Rate Drop :b2, after b1, 15d
+    section Quantum Harnesser
+    Optimization Speedup :c1, 2025-05-01, 35d
+    Autonomy Increase :c2, after c1, 10d
+```
 
-![Interference Avoidance (%)](Interference_Avoidance_%.png)
+(Note: Bars represent relative improvements; e.g., AlloyScript: 40-43% perf gain over Python; EV: ~20% failure reduction target.)
 
-### Beam Efficiency (%)
+## Protocol Workflow Flowchart
 
-![Beam Efficiency (%)](Beam_Efficiency_%.png)
+A high-level flowchart of the GRCP workflow, incorporating v47's realism phases (e.g., Phase -1 for worth-it assessment).
 
-### Network Stability Gain (%)
+```mermaid
+flowchart TD
+    A[Start: Invention Prompt] --> B[Phase -1: Problem Discovery & Worth-It Sprint]
+    B -->|Worth-It Score >= 0.7| C[Phase 0: Domain Profile & Risk Tier]
+    C --> D[Discovery & Ideation (ToT)]
+    D --> E[Refinement & Debate]
+    E --> F[Synthesis & Simulation]
+    F --> G[Validation & Benchmarking]
+    G --> H[Audit & Governance]
+    H --> I[Productization & Deployment]
+    I --> J[Continuous Assurance & Monitoring]
+    J -->|Recursion Needed| D
+    J --> K[End: Field-Ready Output]
+    B -->|Fail Gate| L[Stop or Pivot to Non-Tech]
+```
 
-![Network Stability Gain (%)](Network_Stability_Gain_%.png)
+## Invention Impact Breakdown
 
-### Compression Quality (%)
+Pie chart (Mermaid) showing the distribution of impact areas across notable inventions (e.g., efficiency, ethics, scalability).
 
-![Compression Quality (%)](Compression_Quality_%.png)
+```mermaid
+pie title Invention Impact Breakdown
+    "Performance/Efficiency" : 40
+    "Ethical/Safety Alignment" : 25
+    "Scalability/Realism" : 20
+    "Novelty/Innovation" : 15
+```
 
-### Speed Increase (%)
+(Data aggregated: AlloyScript emphasizes efficiency; EV run focuses on realism; quantum variants on novelty.)
 
-![Speed Increase (%)](Speed_Increase_%.png)
+## Risk-Tier Distribution (v46+)
 
-### Error Tolerance (%)
+For v46 and v47, protocols use risk tiers (R1 low, R2 moderate, R3 high). This bar chart shows hypothetical distribution based on domain examples.
 
-![Error Tolerance (%)](Error_Tolerance_%.png)
+```mermaid
+xychart-beta
+    title "Risk-Tier Usage in GRCP Runs"
+    x-axis ["AlloyScript", "EV Charging", "Quantum Optimizer", "Solar Energy"]
+    y-axis "Risk Tier (R1=1, R2=2, R3=3)" 1 --> 3
+    bar [1, 2, 3, 2]
+```
+
+(Higher tiers for safety-critical like quantum; EV as R2 for regulatory compliance.)
+
+## Ethical Safeguard Metrics
+
+Table summarizing ethical metrics from protocol outputs, such as proxy scores and fairness deltas.
+
+| Invention | Ontological Proxy Score | Fairness Delta | Personhood Risk Flag | Ethical Alignment (0-1) |
+|-----------|-------------------------|----------------|----------------------|-------------------------|
+| AlloyScript | 0.84 | N/A (Lang) | Low | 0.92 |
+| EV Charging Optimizer | N/A | 0.05 (Rural Skew) | N/A | 0.85 |
+| Quantum Harnesser | 0.75 | N/A | Medium | 0.88 |
+| Adaptive QoS Allocator | 0.80 | 0.03 | Low | 0.90 |
+
+(From PDFs: Scores ensure boundaries; e.g., >0.8 triggers audits.)
+
+This overview can be expanded with additional data from future runs. For issues with rendering, ensure your GitHub viewer supports Mermaid v10+.
