@@ -1,4 +1,4 @@
-# Genesis Recursive Code Protocol (GRCP)
+# Genesis Code Protocol (GCP)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
