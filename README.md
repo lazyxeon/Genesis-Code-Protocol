@@ -1,374 +1,168 @@
-Genesis Code Protocol (GCP)
+# Genesis Recursive Code Protocol (GRCP)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
+[![Stars](https://img.shields.io/github/stars/lazyxeon/Genesis-Recursive-Code-Protocol-?style=flat)](https://github.com/lazyxeon/Genesis-Recursive-Code-Protocol-/stargazers)
+[![Forks](https://img.shields.io/github/forks/lazyxeon/Genesis-Recursive-Code-Protocol-?style=flat)](https://github.com/lazyxeon/Genesis-Recursive-Code-Protocol-/network)
+[![Commits](https://img.shields.io/github/commit-activity/m/lazyxeon/Genesis-Recursive-Code-Protocol-)](https://github.com/lazyxeon/Genesis-Recursive-Code-Protocol-/commits/main)
 
-License: MIT • Language: Python 3.10+ • Status: Active development (Aug 2025)
+The Genesis Recursive Code Protocol (GRCP), formerly Genesis Code Protocol (GCP), is an advanced, recursively-structured, AI-native invention framework. It empowers state-of-the-art large language models (LLMs) to autonomously select worthwhile problems, generate, simulate, refine, validate, and deploy novel algorithms, tools, and technologies. Inspired by the human scientific method, symbolic recursion, Tree-of-Thought (ToT) reasoning, multi-phase progression, and emerging AI paradigms like agentic quantum emergence, neuroscience-multimodal fusion, and realism-focused governance, GRCP serves as a robust scaffold for AI-driven research and development (R&D). It incorporates dual-scientist refinement through simulated debates and peer audits, ontological proxies for ethical boundaries, adaptive self-improvement mechanisms, and now emphasizes problem worthiness, field-readiness, continuous assurance, and risk-tiered execution.
+
+GRCP is LLM-agnostic, compatible with any model supporting tool access (e.g., ChatGPT, Claude, Grok), and optimized for environments with strong reasoning capabilities. As of August 12, 2025, the protocol has evolved to v47 (Worth-It Realism Edition), with significant expansions including problem discovery sprints, realism compilers, risk tiers, continuous operations, and full-run demonstrations like an EV charging queue prediction system. The framework has produced groundbreaking inventions such as AlloyScript and practical applications in domains like sustainable energy and transportation.
+
+## Key Features
+
+- **Recursive Multi-Phase Workflow**: Iterative phases for problem validation, ideation, discovery, synthesis, validation, auditing, and continuous monitoring, with recursion for deeper exploration and self-evolution.
+- **Autonomous Orchestration**: Enables AI to manage the full lifecycle, including SOTA benchmarking, mutation refinements, and post-release assurance with automated rollbacks.
+- **Dual-Scientist Simulation**: Debate and peer audit stages for rigorous critique, enhancement, and ethical alignment.
+- **Ontological and Ethical Safeguards**: Proxy scores for emergence (Φ), self-reference, and personhood risks; humility prompts, hazard analyses, and fairness metrics grounded in 2025 AI ethics.
+- **CLI Integration**: Command-line interface for streamlined execution, phase management, and automation.
+- **Expanded Variants**: From v9 (Recursive Emergence) to v47 (Worth-It Realism), with new focuses on field-testing (v46), performance-first (v45.6), and realism/economics (v47).
+- **Notebook Demonstrations**: Full runs showcasing inventions like AlloyScript, quantum mechanics harnessers, and EV charging optimizers.
+- **Scalability and Tools**: Supports parallel processing, quantum-inspired strategies, risk-tiered lanes, and integrations with libraries like Torch, SciPy, Transformers, and Apache Spark for real-time applications.
+- **Realism and Governance**: Problem "worth-it" sprints, expected-value models, non-tech alternatives, safety/privacy deliverables, SBOM/provenance, and continuous assurance with canaries and drift detection.
+
+## Table of Contents
+
+- [Key Features](#key-features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [CLI Tool](#cli-tool)
+- [Quickstart](#quickstart)
+- [Example Prompts](#example-prompts)
+- [How It Works](#how-it-works)
+- [Protocol Variants](#protocol-variants)
+- [Repository Structure](#repository-structure)
+- [Recent Updates (as of August 12, 2025)](#recent-updates-as-of-august-12-2025)
+- [Notable Inventions](#notable-inventions)
+- [Contributing](#contributing)
+- [License](#license)
+- [Disclaimer](#disclaimer)
 
-The Genesis Code Protocol (GCP)—formerly GRCP—is an AI-native invention framework that lets modern LLMs autonomously discover, design, simulate, validate, and harden novel algorithms, tools, and systems. It combines recursive phases, dual-scientist debate, rigorous gates, statistical benchmarking, safety/privacy governance, and automated post-release monitoring. GCP is model-agnostic (ChatGPT, Claude, Grok, etc.) and tool-friendly (CLI + notebooks + integrations).
+## Installation
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/lazyxeon/Genesis-Recursive-Code-Protocol-.git
+   ```
+2. Navigate to the directory:
+   ```
+   cd Genesis-Recursive-Code-Protocol-
+   ```
+3. Install dependencies (Python 3.10+ required):
+   ```
+   pip install -r requirements.txt
+   ```
 
-This README adds the V46, V46.5, and V47 editions alongside the previously documented v45.6D.
+Core requirements assume LLM interpretation, but auxiliary packages (e.g., transformers>=4.30.0, torch>=2.0.0, scipy>=1.10.0, numpy>=1.23.0, pandas>=1.5.0, matplotlib>=3.6.0, jupyterlab>=3.6.0) support simulations, tools, and notebooks. For v47 real-time features, Apache Spark integration is available via example notebooks.
 
+## Usage
 
----
+1. Load a protocol variant (e.g., from `GRCP most recent variants/`) into your LLM.
+2. Provide an invention prompt and confirm phases with `Y`.
+3. For interactive runs, use Jupyter notebooks in `Notebooks/`.
+4. Leverage the CLI for automated execution, including risk-tier assignments and continuous monitoring.
 
-✨ Why GCP
+Optimal with ChatGPT; Claude and Grok yield strong results, though outputs may vary.
 
-From idea → field test: A single protocol takes you from hypothesis to signed, reproducible release artifacts.
+## CLI Tool
 
-Evidence over vibes: Statistical significance, tail metrics, seed sweeps, fairness deltas, SBOM/signing/provenance.
+The CLI Bundle provides a command-line interface for running GRCP:
 
-Safety + compliance built-in: DPIA, threat models, attack trees, assurance cases (GSN), license/SPDX.
+- **gcp_cli.py**: Main entry point for protocol orchestration, now with risk-tier flags and realism checks.
+- **phase1.py**, **phase6.7.py**: Phase-specific scripts.
+- **full_run.py**: Executes complete invention cycles, including post-release monitoring.
+- **audit_utils.py**, **prompt_utils.py**: Utilities for auditing, prompting, and governance.
 
-Operate in the real world: Canary, shadow, drift detection, auto-rollback, evidence TTL & re-verification.
+Example:
+```
+python gcp_cli.py --version 47 --risk-tier R2 --prompt "Invent a system to optimize EV charging queues in California"
+```
 
-Worth it or stop (V47): “Do-Nothing” and Non-Tech baselines, expected value modeling, problem red-team, and No-Go memoranda.
+See `CLI Bundle/CLI_Readme.md` for details.
 
+## Quickstart
 
+1. Clone the repo.
+2. Load `GCP V47 — WORTH-IT REALISM EDITION.md` into your AI assistant.
+3. Start with: "Run GRCP v47".
+4. Reply `Y` to progress recursively, confirming worth-it gates.
 
----
+Variants like v46 (IRONCLAD FIELD-TEST) are also available for specific use cases.
 
-🚀 What’s New (since v45.6D)
+## Example Prompts
 
-V46 — Ironclad Field-Test Edition
+- "Run GRCP v47 and assess if inventing an EV charging queue predictor is worth it; if yes, build a field-ready system surpassing SOTA in reliability."
+- "Apply GRCP v46 to develop a self-healing quantum-classical hybrid with ironclad provenance and safety assurances."
+- "Use GRCP v45.6 for creating a multimodal fusion agent with performance optimizations and ethical boundaries."
 
-Reordered gates to prevent late-stage API churn: Simplicity (8.4) and Optimization (8.5) occur before productization.
+These trigger phases including worth-it sprints, ToT discovery, synthesis, validation, and continuous assurance.
 
-Statistical benchmarking mandatory (N≥30, 95% CI, Mann-Whitney on medians, p50/p95/p99).
+## How It Works
 
-Perf Pareto across time/memory/energy/cost; cost/energy first-class metrics.
+GRCP follows a structured, recursive pipeline with realism enhancements:
 
-Supply-chain integrity: SBOM, pinned deps, signatures/attestations, reproducible builds.
+1. **Problem Discovery (Phase -1)**: Validate problem worthiness via charters, EVM, causal sketches, and non-tech alternatives.
+2. **Initialization & Profiling**: Define domain profile, risk tiers, and budgets.
+3. **Discovery (ToT)**: Generate reasoning paths with topological gating.
+4. **Refinement**: Dual-scientist debates, mutations, and SpiralSync™ for drift control.
+5. **Synthesis & Simulation**: Code generation, testing, and SOTA benchmarking.
+6. **Validation & Audit**: Metrics (e.g., Φ emergence, proxy scores), ethical reviews, provenance checks.
+7. **Productization & Operation**: APIs, runbooks, canaries, and automated rollbacks.
+8. **Recursion**: Iterate until convergence or breakthrough.
 
-Field-test kit: runbooks, failure-injection, rollback, acceptance checklists.
+v47 introduces Realism-Compiler Orchestrator (RCO) for cyclic progress and auto-actions like branching on failures.
 
+## Protocol Variants
 
-V46.5 — Ironclad+ Continuous Assurance Edition
+| Version | Edition | Key Additions |
+|---------|---------|---------------|
+| v9 | Recursive Emergence | AdaptiveTopoNet, SpiralSync™, ontological proxies, ethical attractors. |
+| v10 | Agentic Quantum | AgenticQuantumNet, quantum-inspired search, increased autonomy. |
+| v11 | Neuroscience-MultiModal Fusion | Evolved with neuroscience principles, multimodal data integration. |
+| ... | ... | ... |
+| v43.7 | REA Edition | Refined for real-world applications, enhanced mutation strategies. |
+| v45.6 | Performance-First | Anti-over-engineering gates, targeted optimizations, simplicity reviews. |
+| v46 | IRONCLAD FIELD-TEST | Field-readiness, integrity (SBOM/provenance), safety deliverables, governance with teeth. |
+| v47 | WORTH-IT REALISM | Problem discovery sprints, expected-value models, non-tech alternatives, continuous assurance, risk-tiered lanes, realism-compiler. |
 
-Risk-tiered lanes (R1/R2/R3) to right-size rigor (R3 adds FMEA, STPA, GSN, DPIA, HIL).
+Full changelogs in `GRCP most recent variants/Changelog.md`. Complete revisions in attached PDFs (e.g., GCP v45.6Delta.pdf, GCP V46 — IRONCLAD FIELD-TEST EDITION.pdf, GCP V47 — WORTH-IT REALISM EDITION.pdf).
 
-Phase 10: Continuous Evaluation — canary → shadow → drift → auto-rollback; evidence TTL + re-verify triggers.
+## Repository Structure
 
-Security depth: SAST/DAST/secret scanning, CVE policy, attack trees.
+- **CLI Bundle**: CLI tools and scripts (e.g., gcp_cli.py, phase scripts, requirements.txt).
+- **Documents**: Setup guides, requirements, critical analyses (e.g., AI Critical Analysis GCP V4.3.7, Requirements.md).
+- **GRCP most recent variants**: Protocol editions (V09.md to V47.md), Changelog.md, master lists.
+- **Notebooks**: Demonstrations (e.g., Adaptive QoS Allocator.ipynb, AlloyScript V12.py, JACCO.ipynb, MOSAIC.ipynb, full runs for quantum mechanics, solar energy, EV charging queues).
+- **Root Files**: About.md (overview), Charts.md (visualizations), Contributing.md, GCP Current Version(47).md, LICENSE.md, README.md.
 
-SemVer + compatibility tests; license/SPDX compliance; operator training and usability checks.
+## Recent Updates (as of August 12, 2025)
 
+- Evolved to v47 (Worth-It Realism Edition) with problem worthiness validation, continuous assurance, and realism-focused governance.
+- Added v46 (IRONCLAD FIELD-TEST Edition) for field-ready outputs, safety/privacy deliverables, and provenance.
+- New notebooks and full-run PDFs for EV charging optimization and other domains.
+- Enhanced CLI with risk-tier support and auto-actions.
+- Updated changelogs, requirements, and critical analyses.
+- Recent commits: Additions of v46/v47 variants, EV full-run examples, governance docs.
 
-V47 — Worth-It Realism Edition
+View [commit history](https://github.com/lazyxeon/Genesis-Recursive-Code-Protocol-/commits/main).
 
-Phase −1: Problem Discovery & Worth-It Sprint (new gate C−0.5 “Should we even try?”).
-Includes Do-Nothing and Non-Tech baselines, Expected-Value modeling with sensitivity, Causal sketch, Problem Red-Team, Premortem, Ethics/Externalities.
+## Notable Inventions
 
-Four-Fit at Phase 0: Problem–User, Problem–World, Solution–Problem, Capability–Solution.
+- **AlloyScript**: AI-native programming language with 40-43% performance gains over Python, multimodal processing, token efficiency, and self-healing (full spec in GCP Full runs-Output inventions Master.pdf).
+- **EV Charging Queue Predictor**: v47 full run producing a PRR (Predict-Route-Reserve) system for reducing wait times and failures, integrated with Spark for real-time ops (details in GCP V47 Known EV issue Full Run.pdf).
+- Others: Quantum mechanics harnessers, latch latent capability harnessers, adaptive allocators (summaries in CGP_Invention_Runs_Changelog.md).
 
-Minimal-Intervention Track (choose the smallest thing that works) & No-Go memo as a first-class outcome.
+## Contributing
 
-Gate C6.9 Field Realism & Adoption (serviceability, compliance, training, TCO) before scale-out.
+Fork, branch, commit, and PR. Adhere to Python best practices; discuss major changes in issues. For v47+, include worth-it assessments in PRs.
 
-Decision forecasts with Brier scoring to calibrate future bets.
+See Contributing.md for guidelines.
 
+## License
 
-> Full gate lineup in “How It Works” below.
+MIT License - see [LICENSE](LICENSE) for details.
 
+## Disclaimer
 
-
-
----
-
-🧩 Key Features (all editions)
-
-Recursive multi-phase workflow with mandatory gates and artifacts per phase.
-
-Dual-scientist simulation (debate + peer audit) and adversarial testing (metamorphic/property/fuzz).
-
-Autonomous orchestration via CLI and notebooks; supports parallel branches with AMEND/BRANCH governance.
-
-Tooling ecosystem: Torch/SciPy/Transformers, Spark/Delta, profiling suites (perf/VTune/Nsight), fairness evaluators.
-
-
-
----
-
-📦 Installation
-
-git clone https://github.com/lazyxeon/Genesis-Recursive-Code-Protocol-.git
-cd Genesis-Recursive-Code-Protocol-
-python -m venv .venv && source .venv/bin/activate  # or your preferred env
-pip install -r requirements.txt
-
-> Python 3.10+ recommended. Aux packages (e.g., transformers>=4.30, torch>=2.0, scipy>=1.10) power simulations and notebooks.
-
-
-
-
----
-
-🖥️ Usage Overview
-
-Run a protocol edition from the CLI
-
-# Example: run Ironclad (V46)
-python CLI\ Bundle/gcp_cli.py --version 46 --prompt "Invent a real-time anomaly detector for time series"
-
-# Continuous Assurance (V46.5)
-python CLI\ Bundle/gcp_cli.py --version 46.5 --prompt "Design, verify, and operate an LLM-based retrieval service"
-
-# Worth-It Realism (V47)
-python CLI\ Bundle/gcp_cli.py --version 47 --prompt "Should we even build X? Evaluate + pick smallest effective intervention"
-
-CLI flags (common):
-
---version {45.6D,46,46.5,47}
-
---prompt "…", --risk {R1,R2,R3}, --output_dir ./runs/<name>
-
---notebook to launch the matching example notebook.
-
-
-Notebook runs
-
-Open Notebooks/ and start with:
-
-GCP_V46_Quickstart.ipynb
-
-GCP_V46_5_CE.ipynb (Phase 10 demos)
-
-GCP_V47_WorthIt_Sprint.ipynb (Phase −1, EV modeling, red-team flows)
-
-
-
----
-
-🔧 CLI Tooling
-
-gcp_cli.py — main orchestrator
-
-full_run.py — executes a complete invention cycle
-
-phase*.py — phase-focused utilities (e.g., benchmarking, safety pack)
-
-audit_utils.py, prompt_utils.py — evidence capture, debate prompts, red-team templates
-
-
-See CLI Bundle/CLI_Readme.md for all switches/output formats.
-
-
----
-
-🧠 How It Works (Phases & Gates)
-
-Shared Core (all editions):
-
-1. Init/Intake → define goals, constraints, artifacts.
-
-
-2. Design/Build → prototypes, harnesses, profilers.
-
-
-3. Adversarial → metamorphic/property/fuzz/misuse testing.
-
-
-4. Benchmarks → replication, tails, statistics (C7, C7.Sigma).
-
-
-5. Simplicity/Optimization → C8.4 then C8.5 (before productization).
-
-
-6. Productize → APIs/CLIs/configs/telemetry; surface freeze + compatibility.
-
-
-7. Release → signed checkpoint with SBOM, runbooks, field-test kit.
-
-
-8. Operate → CE loop (canary/shadow/drift/rollback), evidence TTL, re-verify.
-
-
-
-Edition-specific gates:
-
-V46
-
-C8.4 Simplicity (KISS/YAGNI, dep trim, API audit)
-
-C8.5 Optimization (stat-sig perf/cost/energy; Perf Pareto)
-
-C9 Release (SBOM/signing/provenance; field-test kit)
-
-
-V46.5
-
-Risk tiering (R1/R2/R3) with escalating evidence
-
-Phase 10 Continuous Evaluation: canary → shadow → drift → auto-rollback
-
-Security depth (SAST/DAST/secrets/CVE gates), SemVer + compat tests, SPDX
-
-
-V47
-
-Phase −1 Problem Discovery & Worth-It Sprint → Gate C−0.5 “Should we even try?”
-
-Do-Nothing & Non-Tech baselines, EV modeling, causal sketch, Problem Red-Team, Premortem, Ethics.
-
-
-Phase 0 adds Four-Fit and falsification criteria.
-
-Phase 2 adds Minimal-Intervention Track (pivot if it ties/beats EV).
-
-Gate C6.9 Field Realism & Adoption (serviceability, compliance, training, TCO).
-
-Forecasts + Brier scoring for decision calibration.
-
-
-
-> All editions enforce AMEND/BRANCH rules, dual-signing for threshold reductions, and append-only Run Ledger events.
-
-
-
-
----
-
-🧮 Risk-Tiered Lanes (V46.5+)
-
-R1 (low risk): N≥15 reps; seed sweep ≥5; integrity lite.
-
-R2 (moderate): N≥30; seeds ≥10; full integrity.
-
-R3 (regulated/safety-critical): N≥50; seeds ≥20; FMEA, STPA, Assurance Case (GSN), DPIA, attack trees, HIL.
-
-
-
----
-
-🛡️ Safety, Privacy, Security & Compliance
-
-Safety: misuse tests; for R3 → FMEA, STPA, Assurance Case (GSN).
-
-Privacy: DPIA where applicable; retention/erasure; consent tracing; re-identification checks (k/l/t when relevant).
-
-Security: SBOM, signatures/attestations, repro builds; SAST/DAST/secret scans; CVE policy with dual-signed exceptions.
-
-Licensing: SPDX scan; block non-commercial/incompatible copyleft in prod; attribution bundle.
-
-
-
----
-
-📊 Example End-to-End (V47 + Spark): EV Fast-Charging PRR
-
-Problem: Long waits and failed sessions at public DC fast chargers.
-
-Phase −1 proved value vs Do-Nothing and Non-Tech and passed C−0.5; CA’s real-time data mandate enables a clean pilot.
-
-Solution: Predict → Route → (Soft) Reserve with Spark Structured Streaming + Delta:
-
-Ingest OCPP/network feeds + AFDC metadata + traffic/weather/events.
-
-Predict per-site wait + failure risk; advisory routing first; soft holds with bounded overbooking.
-
-Canaries: prediction error, feed freshness, reservation uptake; auto-rollback to advisory-only.
-
-Fairness: slice deltas; constraints prevent starving rural/low-income regions.
-
-
-Gates: C2 (powered diff-in-diff A/B), C3 (labeling state machine), C7/C7.Sigma (stats), C6.9 (adoption/serviceability/compliance/TCO), C9 (release), C10 (CE on).
-
-
-> See Notebooks/EV_PRR_V47_Spark.ipynb (provided in this repo’s notebooks) for a runnable skeleton.
-
-
-
-
----
-
-📁 Repository Structure
-
-Genesis-Recursive-Code-Protocol-/
-├─ CLI Bundle/
-│  ├─ gcp_cli.py, full_run.py, phase*.py, audit_utils.py, prompt_utils.py
-│  └─ CLI_Readme.md
-├─ Documents/
-│  ├─ Requirements.md, Contributing.md, LICENSE.md, README.md (this file)
-│  ├─ Critical Analyses/ (V45.6D+ audits)
-│  └─ Safety-Privacy/ (DPIA templates, GSN examples, FMEA/STPA guides)
-├─ GRCP most recent variants/
-│  ├─ V09.md … V45.6D.md
-│  ├─ V46.md, V46.5.md, V47.md     ← **NEW** editions
-│  └─ Changelog.md
-├─ Notebooks/
-│  ├─ GCP_V46_Quickstart.ipynb
-│  ├─ GCP_V46_5_CE.ipynb
-│  ├─ GCP_V47_WorthIt_Sprint.ipynb
-│  └─ EV_PRR_V47_Spark.ipynb
-└─ Examples/
-   ├─ AlloyScript specs & demos
-   └─ End-to-end invention runs (QoS allocators, retrieval, etc.)
-
-
----
-
-🧭 Version Matrix (at a glance)
-
-Edition	Purpose Focus	New Gates/Phases	Security/Compliance	Operations
-
-v45.6D	Agentic multimodal, enterprise scaffolding	—	SBOM/signing introd.	Runbooks, field kits
-V46	Field-test hardening	C8.4 before C8; C8.5 before C8; tighter C7	Repro builds, attestations	Perf Pareto, cost/energy
-V46.5	Continuous assurance	Phase 10 CE; risk tiering	SAST/DAST/secrets, SPDX, SemVer/compat	Canary/shadow/drift/rollback
-V47	Worth-it problem selection	Phase −1 + Gate C−0.5; C6.9; Minimal-Intervention	DPIA formalization; No-Go as outcome	Decision forecasting + Brier
-
-
-
----
-
-🧪 Quickstart Prompts
-
-V46:
-“Run GCP V46 to design a real-time anomaly detector and package a field-test kit with perf/cost/energy Pareto.”
-
-V46.5:
-“Run GCP V46.5 for a retrieval pipeline with Phase 10 CE: configure canary, shadow, drift, and auto-rollback.”
-
-V47:
-“Run GCP V47 to determine if we should build a multi-agent scheduler at all; compare Do-Nothing/Non-Tech, then pick the smallest effective intervention.”
-
-
-
----
-
-🤝 Contributing
-
-1. Fork & branch (feat/<topic>).
-
-
-2. Follow Python best practices (black/ruff/pytest).
-
-
-3. For protocol changes, open a proposal issue; include gate impacts and artifact diffs.
-
-
-4. PRs must pass CI (tests + SAST/DAST/secret scans for code assets) and include updated docs/notebooks if relevant.
-
-
-
-See Contributing.md for full guidelines.
-
-
----
-
-📝 License & Disclaimer
-
-MIT License — see LICENSE.
-GCP is a research-grade protocol. Results depend on model capability, tools, and data access. Follow all applicable laws and ethical guidelines. Safety/privacy/compliance packs are provided; adapt them to your domain and jurisdiction.
-
-
----
-
-Changelog (highlights)
-
-V47 (Aug 2025): Worth-It Realism Edition (Phase −1, C−0.5, Minimal-Intervention, C6.9, forecasts/Brier).
-
-V46.5: Continuous Assurance Edition (risk-tiering, Phase 10 CE, security depth, SPDX, SemVer/compat).
-
-V46: Ironclad Field-Test Edition (reordered gates, stat-rigor, Perf-Pareto, reproducible builds, field-test kits).
-
-v45.6D: Agentic multimodal expansion, CLI bundle, enterprise docs and notebooks.
-
-
-
+GRCP aims to surpass SOTA via novel innovations but outcomes depend on LLM, prompt, and resources. Experimental—verify all outputs ethically and responsibly. Ontological proxies and safety deliverables ensure boundaries, but use with caution.
