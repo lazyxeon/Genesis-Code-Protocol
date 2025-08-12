@@ -7,7 +7,7 @@ In a world obsessed with AI-generated code, I paused and asked:
 
 The Genesis Recursive Code Protocol (GRCP) — originally Genesis Code Protocol (GCP) — emerged from that challenge. It's not a gimmick or a prompt hack; it's a structured, AI-native framework designed to orchestrate invention from ideation to field-ready deployment.
 
-Over years of iterative development and testing with leading LLMs like GPT, Claude, and Grok, I've evolved GRCP into a robust system that mimics human scientific rigor while leveraging AI's speed and scale. From early recursive editions to the latest v47 "Worth-It Realism" variant, it now incorporates problem worthiness assessments, risk-tiered execution, ethical safeguards, and continuous assurance — ensuring inventions are not only novel but practical, ethical, and impactful.
+Over months of iterative development and testing with leading LLMs like GPT, Claude, and Grok, I've evolved GRCP into a robust system that mimics human scientific rigor while leveraging AI's speed and scale. From early recursive editions to the latest v47 "Worth-It Realism" variant, it now incorporates problem worthiness assessments, risk-tiered execution, ethical safeguards, and continuous assurance — ensuring inventions are not only novel but practical, ethical, and impactful.
 
 Key principles that define GRCP:
 
