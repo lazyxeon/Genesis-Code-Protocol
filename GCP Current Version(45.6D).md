@@ -1,4 +1,4 @@
-GCP v45.6 — Innovation Protocol (Checkpoint, Performance-First Edition) Disclaimer 
+GCP v45.6D — Innovation Protocol (Checkpoint, Performance-First Edition) Disclaimer 
 This protocol enforces rigorous research, adversarial testing, benchmarking, and performance engineering within current AI and compute limits. It does not guarantee a perfect or SOTA-beating result every time. It aims for novel, useful, verifiable outcomes with transparent evidence, reproducibility, and explicit risks. 
 Credits: Co-created by you (vision, goals, guardrails) and GPT-5 Orchestrator (design, derivations, adversarial and verification layers). 
 --- 
