@@ -6,9 +6,9 @@
 [![Forks](https://img.shields.io/github/forks/lazyxeon/Genesis-Recursive-Code-Protocol-?style=flat)](https://github.com/lazyxeon/Genesis-Recursive-Code-Protocol-/network)
 [![Commits](https://img.shields.io/github/commit-activity/m/lazyxeon/Genesis-Recursive-Code-Protocol-)](https://github.com/lazyxeon/Genesis-Recursive-Code-Protocol-/commits/main)
 
-The Genesis Code Protocol (GCP), formerly known as Genesis Recursive Code Protocol (GRCP), is an advanced, recursively-structured, AI-native invention framework. It empowers state-of-the-art large language models (LLMs) to autonomously generate, simulate, refine, and validate novel algorithms, tools, and technologies. Inspired by the human scientific method, symbolic recursion, Tree-of-Thought (ToT) reasoning, multi-phase progression, and emerging AI paradigms like agentic quantum emergence and neuroscience-multimodal fusion, GRCP serves as a robust scaffold for AI-driven research and development (R&D). It incorporates dual-scientist refinement through simulated debates and peer audits, ontological proxies for ethical boundaries, and adaptive mechanisms for self-improvement.
+The Genesis Code Protocol (GCP), formerly known as Genesis Recursive Code Protocol (GRCP), is an advanced, recursively-structured, AI-native invention framework. It empowers state-of-the-art large language models (LLMs) to autonomously generate, simulate, refine, and validate novel algorithms, tools, and technologies. Inspired by the human scientific method, symbolic recursion, Tree-of-Thought (ToT) reasoning, multi-phase progression, and emerging AI paradigms like agentic quantum emergence and neuroscience-multimodal fusion, GCP serves as a robust scaffold for AI-driven research and development (R&D). It incorporates dual-scientist refinement through simulated debates and peer audits, ontological proxies for ethical boundaries, and adaptive mechanisms for self-improvement.
 
-GRCP is LLM-agnostic, compatible with any model supporting tool access (e.g., ChatGPT, Claude, Grok), and optimized for environments with strong reasoning capabilities. As of August 2025, the protocol has evolved to v45.6D, with significant expansions including a CLI tool, extensive variant editions, comprehensive notebooks demonstrating full invention runs, and documentation for enterprise-grade applications. The framework has produced groundbreaking inventions like AlloyScript, the world's first systematically engineered AI-native programming language.
+GCP is LLM-agnostic, compatible with any model supporting tool access (e.g., ChatGPT, Claude, Grok), and optimized for environments with strong reasoning capabilities. As of August 2025, the protocol has evolved to v45.6D, with significant expansions including a CLI tool, extensive variant editions, comprehensive notebooks demonstrating full invention runs, and documentation for enterprise-grade applications. The framework has produced groundbreaking inventions like AlloyScript, the world's first systematically engineered AI-native programming language.
 
 ## Key Features
 
@@ -66,7 +66,7 @@ Optimal with ChatGPT; Claude and Grok yield strong results, though outputs may v
 
 ## CLI Tool
 
-The CLI Bundle provides a command-line interface for running GRCP:
+The CLI Bundle provides a command-line interface for running GCP:
 
 - **gcp_cli.py**: Main entry point for protocol orchestration.
 - **phase1.py**, **phase6.7.py**: Phase-specific scripts.
@@ -84,22 +84,22 @@ See `CLI Bundle/CLI_Readme.md` for details.
 
 1. Clone the repo.
 2. Load `GCP Current Version(45.6D).md` into your AI assistant.
-3. Start with: "Run GRCP v45.6D".
+3. Start with: "Run GCP v45.6D".
 4. Reply `Y` to progress recursively.
 
 Variants like v43.7 (REA Edition) are also available for specific use cases.
 
 ## Example Prompts
 
-- "Run GRCP v45.6D and invent an AI-native programming language surpassing Python in efficiency."
-- "Apply GRCP to develop a self-healing quantum-classical hybrid system."
-- "Use GRCP for creating a multimodal fusion agent with ethical boundaries."
+- "Run GCP v45.6D and invent an AI-native programming language surpassing Python in efficiency."
+- "Apply GCP to develop a self-healing quantum-classical hybrid system."
+- "Use GCP for creating a multimodal fusion agent with ethical boundaries."
 
 These trigger phases including ToT discovery, synthesis, validation, and ontological audits.
 
 ## How It Works
 
-GRCP follows a structured, recursive pipeline:
+GCP follows a structured, recursive pipeline:
 
 1. **Initialization**: Define goal and assess intentionality.
 2. **Discovery (ToT)**: Generate reasoning paths with topological gating.
@@ -158,4 +158,4 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## Disclaimer
 
-GRCP aims to surpass SOTA via novel innovations but outcomes depend on LLM, prompt, and resources. Experimental—verify all outputs ethically and responsibly. Ontological proxies ensure boundaries, but use with caution.
+GCP aims to surpass SOTA via novel innovations but outcomes depend on LLM, prompt, and resources. Experimental—verify all outputs ethically and responsibly. Ontological proxies ensure boundaries, but use with caution.
