@@ -1,23 +1,48 @@
+```python
 from setuptools import setup, find_packages
 
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
+
 setup(
-    name='genesis_code_protocol',
-    version='0.1',
+    name="grcp",
+    version="47.0.0",
+    author="LazyXeon",
+    author_email="lazyxeon@example.com",  # Replace with actual email
+    description="Genesis Recursive Code Protocol: AI-native invention framework",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/lazyxeon/Genesis-Recursive-Code-Protocol-",
     packages=find_packages(),
+    include_package_data=True,
     install_requires=[
-        'openai',
-        'transformers',
-        'torch',
-        'numpy',
-        'scipy',
-        'matplotlib',
-        'jupyter',
-        'notebook',
-        'pandas'
+        # List from requirements.txt; adjust as needed
+        "transformers>=4.30.0",
+        "torch>=2.0.0",
+        "scipy>=1.10.0",
+        "numpy>=1.23.0",
+        "pandas>=1.5.0",
+        "matplotlib>=3.6.0",
+        "jupyterlab>=3.6.0",
+        "notebook>=6.5.0",
+        "pyspark>=3.5.0",
+        "sympy>=1.12.0",
+        "networkx>=3.3",
+        "rdkit>=2023.9.1",
+        "biopython>=1.83",
+        "astropy>=6.1.0",
+        "pygame>=2.6.0",
     ],
     entry_points={
-        'console_scripts': [
-            'gcp-run=genesis_code_protocol.main:run'
-        ]
-    }
+        "console_scripts": [
+            "grcp = CLI_Bundle.gcp_cli:main",
+        ],
+    },
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    python_requires=">=3.10",
 )
+```
