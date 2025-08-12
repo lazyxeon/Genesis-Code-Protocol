@@ -1,1 +1,10 @@
-openai
+3. (Optional) For Spark integration in v47: Install PySpark separately if needed.
+
+## Usage
+
+### Main CLI: gcp_cli.py
+
+Run GRCP protocols via CLI.
+
+```bash
+python gcp_cli.py [Openai, Anthropic, xai]
