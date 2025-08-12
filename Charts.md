@@ -69,15 +69,15 @@ A high-level flowchart of the GRCP workflow, incorporating v47's realism phases 
 
 ```mermaid
 flowchart TD
-    A[Start: Invention Prompt] --> B[Phase -1: Problem Discovery & Worth-It Sprint]
-    B -->|Worth-It Score >= 0.7| C[Phase 0: Domain Profile & Risk Tier]
-    C --> D[Discovery & Ideation (ToT)]
-    D --> E[Refinement & Debate]
-    E --> F[Synthesis & Simulation]
-    F --> G[Validation & Benchmarking]
-    G --> H[Audit & Governance]
-    H --> I[Productization & Deployment]
-    I --> J[Continuous Assurance & Monitoring]
+    A[Start: Invention Prompt] --> B[Phase -1: Problem Discovery and Worth-It Sprint]
+    B -->|Worth-It Score >= 0.7| C[Phase 0: Domain Profile and Risk Tier]
+    C --> D[Discovery and Ideation (ToT)]
+    D --> E[Refinement and Debate]
+    E --> F[Synthesis and Simulation]
+    F --> G[Validation and Benchmarking]
+    G --> H[Audit and Governance]
+    H --> I[Productization and Deployment]
+    I --> J[Continuous Assurance and Monitoring]
     J -->|Recursion Needed| D
     J --> K[End: Field-Ready Output]
     B -->|Fail Gate| L[Stop or Pivot to Non-Tech]
@@ -104,7 +104,7 @@ For v46 and v47, protocols use risk tiers (R1 low, R2 moderate, R3 high). This b
 ```mermaid
 xychart-beta
     title "Risk-Tier Usage in GRCP Runs"
-    x-axis [AlloyScript, EV Charging, Quantum Optimizer, Solar Energy]
+    x-axis ["AlloyScript", "EV Charging", "Quantum Optimizer", "Solar Energy"]
     y-axis "Risk Tier (R1=1, R2=2, R3=3)" 1 --> 3
     bar [1, 2, 3, 2]
 ```
