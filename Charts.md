@@ -104,7 +104,7 @@ For v46 and v47, protocols use risk tiers (R1 low, R2 moderate, R3 high). This b
 ```mermaid
 xychart-beta
     title "Risk-Tier Usage in GRCP Runs"
-    x-axis ["AlloyScript", "EV Charging", "Quantum Optimizer", "Solar Energy"]
+    x-axis [AlloyScript, EV Charging, Quantum Optimizer, Solar Energy]
     y-axis "Risk Tier (R1=1, R2=2, R3=3)" 1 --> 3
     bar [1, 2, 3, 2]
 ```
