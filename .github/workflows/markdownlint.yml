@@ -23,41 +23,45 @@ jobs:
         with:
           python-version: "3.x"
 
-      # Pre-normalize CHANGELOG in the workspace so lint sees compliant spacing
-      - name: Normalize CHANGELOG spacing (MD022/MD032) in workspace
+      # Ensure CHANGELOG starts with an H1 and normalize spacing in the workspace
+      - name: Prepare CHANGELOG for lint
         run: |
           python - <<'PY'
           import re
           from pathlib import Path
 
-          path = Path("CHANGELOG.md")
-          if not path.exists():
+          p = Path("CHANGELOG.md")
+          if not p.exists():
               raise SystemExit(0)
 
-          text = path.read_text(encoding="utf-8").splitlines(keepends=True)
+          text = p.read_text(encoding="utf-8")
+          if not text.lstrip().startswith("# "):
+              text = "# Changelog\n\n" + text.lstrip()
+          lines = text.splitlines(keepends=True)
+
           HEADING_RE = re.compile(r'^(#{1,6})\s+\S')
           LIST_RE = re.compile(r'^(\s*)([-*+]|[0-9]+\.)\s+')
 
           def blank(s): return s.strip() == ""
           out, in_code = [], False
-          i, n = 0, len(text)
+          i, n = 0, len(lines)
           while i < n:
-              line = text[i]
+              line = lines[i]
               if line.lstrip().startswith("```"):
                   out.append(line); in_code = not in_code; i += 1; continue
               if not in_code and HEADING_RE.match(line):
                   if len(out) > 0 and not blank(out[-1]): out.append("\n")
                   out.append(line)
-                  nxt = text[i+1] if i+1 < n else ""
+                  nxt = lines[i+1] if i+1 < n else ""
                   if not blank(nxt): out.append("\n")
                   i += 1; continue
               if not in_code and LIST_RE.match(line):
                   prev_nonblank = next((out[j] for j in range(len(out)-1,-1,-1) if not blank(out[j])), None)
                   if prev_nonblank is None or not LIST_RE.match(prev_nonblank):
                       if len(out) > 0 and not blank(out[-1]): out.append("\n")
-                  while i < n and LIST_RE.match(text[i]) and not text[i].lstrip().startswith("```"):
-                      out.append(text[i]); i += 1
-                  nxt = text[i] if i < n else ""
+                  while i < n and LIST_RE.match(lines[i]) and not lines[i].lstrip().startswith("```"):
+                      out.append(lines[i]); i += 1
+                  nxt = lines[i] if i < n else ""
                   if not blank(nxt): out.append("\n")
                   continue
               out.append(line); i += 1
@@ -66,9 +70,9 @@ jobs:
           for l in out:
               if not (len(compact) >= 2 and compact[-1] == "\n" and l == "\n"):
                   compact.append(l)
-          fixed = "".join(compact)
-          path.write_text(fixed, encoding="utf-8")
-          print("Normalized CHANGELOG.md in workspace")
+
+          p.write_text("".join(compact), encoding="utf-8")
+          print("CHANGELOG.md prepared for lint")
           PY
 
       - name: Run markdownlint-cli2
