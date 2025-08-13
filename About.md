@@ -1,3 +1,15 @@
+diff --git a/About.md b/About.md
+index 0000000..0000001 100644
+--- a/About.md
++++ b/About.md
+@@ -1,3 +1,4 @@
++<!-- markdownlint-disable MD013 -->
+ # About
+
+ (…existing content; no other changes…)
+
+
+
 # About GRCP: Genesis Recursive Code Protocol
 
 🧬 **Why I Built GRCP**
@@ -36,3 +48,6 @@ I built the protocol I wished existed when I started experimenting with AI-led i
 Now it's yours.  
 
 — LazyXeon
+
++
++<!-- markdownlint-enable MD013 -->
