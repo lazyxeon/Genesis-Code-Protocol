@@ -1,5 +1,3 @@
-Make About.md exactly this (wrapped lines, no angle brackets, single blanks, labeled fences):
-
 # About
 
 **Genesis Code Protocol (GCP)** is an AI-native, checkpoint-gated invention protocol.
