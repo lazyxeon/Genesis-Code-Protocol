@@ -1,5 +1,7 @@
 # About
 
+<!-- markdownlint-disable MD013 -->
+
 **Genesis Code Protocol (GCP)** is an AI-native, checkpoint-gated invention protocol.
 Upload the single protocol document to a capable LLM and run a session to produce
 field-test-ready outputs that a dev team can validate and deploy.
@@ -122,8 +124,5 @@ diff --git a/Charts.md b/Charts.md
 --- a/Charts.md
 +++ b/Charts.md
 @@ -1,1 +1,4 @@
-+<!-- markdownlint-disable MD013 -->
-
- (existing content)
 
 +<!-- markdownlint-enable MD013 -->
