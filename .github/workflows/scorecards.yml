@@ -2,25 +2,36 @@ name: OpenSSF Scorecard
 
 on:
   schedule:
-    - cron: '27 5 * * 1' # weekly
+    - cron: '27 5 * * 1'  # weekly
   push:
     branches: [ "main" ]
-  workflow_dispatch: {}
+  workflow_dispatch:
 
-permissions:
-  contents: read
-  security-events: write   # upload SARIF
-  id-token: write          # for future OIDC needs
+# Do NOT grant write perms at the workflow level when publishing results.
+permissions: read-all
 
 jobs:
   analysis:
+    # Scorecard v2 requires id-token: write at the JOB level when publish_results: true
+    permissions:
+      contents: read
+      security-events: write   # for SARIF upload
+      id-token: write          # for OIDC when publishing results
     runs-on: ubuntu-latest
+
     steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Run Scorecard
-        uses: ossf/scorecard-action@v2
+        uses: ossf/scorecard-action@v2.4.2
         with:
           results_file: results.sarif
           results_format: sarif
