@@ -4,7 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased] — 2025-08-13
 
+### Documentation
+- **readme**: auto-sync repo structure ([0f4120e](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/0f4120e838d196b2fbf5ef5cd754528f07a8a8c2))
+- auto-update Table Of Contents.md ([c7b4425](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/c7b44254c4b145a2928f4d59c3e7add48a6e17e9))
+- auto-update CHANGELOG.md ([6ae0c76](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/6ae0c769e1f8e2877c371feeef17120476b56b8a))
+
 ### Other
+- .markdownlint.jsonc ([1e1cc49](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/1e1cc4907e9c52dfa09e633ea8f092f315f87d37))
+- .markdownlint.jsonc ([293caca](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/293caca0f79bb36dbaf839b54c232af2449c0da1))
+- markdownlint.yml ([4cc6d48](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/4cc6d486aaf97bd2ce047a86a2ecd958bd027268))
+- scorecards.yml ([0a65e3d](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/0a65e3dd2217254d3ba56b767e12af8d054db96f))
+- GCP Current Version(47.2).md to GCP Current Version(47.2). AI-Native Operational Manual.md ([349d7fa](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/349d7faa221cc7f7c1b4cf4e349d80a7c1136abe))
+- README.md ([4f5b149](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/4f5b149dbd2739bb233bfa89214c0faa0968054a))
 - release-drafter.yml ([bafa31d](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/bafa31df74fa26612242184e7b3881e477ee4ffa))
 - release-drafter.yml ([5cc8432](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/5cc84321f17ae50e9ae16cb915fd654bae2247b5))
 - markdownlint.yml ([81e57b7](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/81e57b7302b752e00d5173e727bc01f8cdc0f9e5))
