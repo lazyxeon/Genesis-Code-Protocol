@@ -185,7 +185,7 @@ Open `Notebooks/` for quickstarts and full runs.
 > **Auto-generated:** The section below is kept in sync by a workflow.
 > Do not edit between the markers.
 
-<!-- BEGIN REPO TREE -->
+</details> <!-- BEGIN REPO TREE -->
 ```text
 - **CLI Bundle/**
   - Readme.md
@@ -277,7 +277,7 @@ Open `Notebooks/` for quickstarts and full runs.
 - README.md
 - Table Of Contents.md
 ```
-<!-- END REPO TREE -->
+<!-- END REPO TREE --> </details> 
 
 ---
 
