@@ -1,9 +1,4 @@
-diff --git a/About.md b/About.md
-index 0000000..0000001 100644
---- a/About.md
-+++ b/About.md
-@@ -1,3 +1,4 @@
-+<!-- markdownlint-disable MD013 -->
+ <!-- markdownlint-disable MD013 -->
  # About
 
  (…existing content; no other changes…)
