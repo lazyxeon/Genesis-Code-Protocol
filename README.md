@@ -27,7 +27,8 @@
 [![Tests: pytest](https://img.shields.io/badge/tests-pytest-0A9EDC)](https://docs.pytest.org/)
 [![Docs](https://img.shields.io/badge/docs-mkdocs%20material-blue)](https://lazyxeon.github.io/Genesis-Code-Protocol/)
 [![Container](https://img.shields.io/badge/ghcr-image-blue)](https://ghcr.io/lazyxeon/Genesis-Code-Protocol)
-[![OpenSSF Scorecard](https://img.shields.io/badge/openssf-scorecard-blue)](https://securityscorecards.dev/viewer/?uri=github.com/lazyxeon/Genesis-Code-Protocol)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/lazyxeon/Genesis-Code-Protocol/badge)](https://scorecard.dev/viewer/?uri=github.com/lazyxeon/Genesis-Code-Protocol)
+
 
 
 > **Formerly:** GRCP (Genesis Recursive Code Protocol)  
