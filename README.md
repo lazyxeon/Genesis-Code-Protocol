@@ -299,7 +299,6 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
   - AI Grok Critical Analysis GCP V45.6D.md
   - AI Grok Critical Analysis GCP V46 .md
   - AI Grok Critical Analysis V47 Full Run EV issue.md
-  - Citation.CFF
   - Feature Requests.md
   - Issue Template.md
   - Pull Request Template.md
@@ -371,6 +370,7 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
   - requirements.txt
 - About.md
 - CHANGELOG.md
+- CITATION.cff
 - Charts.md
 - Code of Conduct.md
 - Contributing.md
