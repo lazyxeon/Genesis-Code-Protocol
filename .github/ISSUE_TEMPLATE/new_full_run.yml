@@ -1,0 +1,26 @@
+name: "🚀 New Full Run (Spark)"
+description: Kick off and track a new end-to-end GCP run
+title: "[Full Run]: {Short name}"
+labels: [run]
+body:
+  - type: input
+    id: idea
+    attributes:
+      label: Spark (Idea / Problem)
+      placeholder: e.g., "Compression algorithm for streaming services"
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Mode
+      options: [Full-Run (stop at all gates), Auto-Mode (stop only when needed)]
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints / Data / Tools
+  - type: textarea
+    id: success
+    attributes:
+      label: Success Metrics
+      placeholder: p95 latency, energy, cost, fairness deltas, etc.
