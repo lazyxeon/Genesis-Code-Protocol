@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased] — 2025-08-13
 
 ### Documentation
+- auto-update Table Of Contents.md ([2edbb6a](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/2edbb6a23a86c717462f5815675d2e1f99c87120))
+- auto-update CHANGELOG.md ([b5a49bf](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/b5a49bf66c42a82fff5beb683fa9bb80628379a7))
 - **readme**: auto-sync repo structure ([9ccebdb](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/9ccebdb96f197c6c11341beb7a64e6d232437d51))
 - **readme**: auto-sync repo structure ([58831ca](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/58831ca32476f4508852219c168a85843e14b260))
 - auto-update Table Of Contents.md ([b6ed932](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/b6ed9322a5165ba77f5abb1409d24bd399b708d9))
@@ -33,6 +35,7 @@ All notable changes to this project will be documented in this file.
 - Documents/Citation.CFF ([9e2c57d](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/9e2c57d93a6f8f6d2c0387201dfa1b8648dd5147))
 - sbom.yml ([590dd83](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/590dd830fd478f636b760fba14832d8e8b5ada1c))
 - scorecard.yml ([6b9ca9a](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/6b9ca9a8e0f5af43d5e287739b8b882a150c645d))
+- actions/checkout from 4 to 5 ([e042eb5](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/e042eb50b2c5e07631ecd8279661682ec2b30b51))
 - dependabot.yml ([06d628d](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/06d628dea72112b6032e20edf0f854ce0b7a0c20))
 - codeql.yml ([78829e9](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/78829e928d1aacc00b181cc15a7a2930405c6789))
 - release-drafter.yml ([a0ef719](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/a0ef719184b39f2230e77fd7dbedc10465072bfa))
