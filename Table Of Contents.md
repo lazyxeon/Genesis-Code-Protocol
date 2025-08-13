@@ -5,6 +5,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 ## Root
 
 - [About.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/About.md)
+- [CHANGELOG.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CHANGELOG.md)
 - [Charts.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Charts.md)
 - [Code of Conduct.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Code%20of%20Conduct.md)
 - [Contributing.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Contributing.md)
