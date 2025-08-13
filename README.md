@@ -1,8 +1,3 @@
-Absolutely — here’s a **clean, copy-paste** `README.md` that’s formatted correctly and plays nicely with your auto-generated repo tree. It avoids the formatting glitches you hit earlier (all code fences are closed, no stray text), and it includes the `<!-- BEGIN REPO TREE --> ... <!-- END REPO TREE -->` markers your workflow expects.
-
----
-
-````md
 # Genesis Code Protocol (GCP)
 
 ![License](https://img.shields.io/badge/license-MIT-brightgreen)
@@ -12,6 +7,8 @@ Absolutely — here’s a **clean, copy-paste** `README.md` that’s formatted c
 ![Last Commit](https://img.shields.io/github/last-commit/lazyxeon/Genesis-Code-Protocol)
 ![CI](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/Python-CI.yml/badge.svg)
 ![Security Scan](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/security-scan.yml/badge.svg)
+![Repo Tree Sync](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml/badge.svg?branch=main)
+
 
 > **Formerly:** GRCP (Genesis Recursive Code Protocol)  
 > **Status:** Active • **License:** MIT • **Language:** Python 3.10+
@@ -225,10 +222,4 @@ GCP is a research-grade protocol. Results depend on model capability, tools, and
 * **V46:** Ironclad Field-Test (reordered gates, stat-rigor, Perf-Pareto, reproducible builds)
 * **v45.6D:** Agentic multimodal expansion, CLI bundle, enterprise docs & notebooks
 
-```
-
----
-
-If you want, I can also give you a **shorter** README variant (for GitHub’s mobile view) or add a **collapsible `<details>`** wrapper around the repo tree so it’s collapsed by default.
-::contentReference[oaicite:0]{index=0}
 ```
