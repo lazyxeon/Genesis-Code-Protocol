@@ -18,7 +18,7 @@ What GCP Is (and Is Not)
 
 Is: A single document and prompt library any LLM can execute in chat to produce auditable artifacts, ledgers, and a release package.
 
-Is: A rigorous process with gates that can stop a run early with a justified No-Go when the expected value isn’t there.
+Is: A rigorous process with gates that can stop a run early with a justified No-Go when the expected value is not there.
 
 Is not: A library that automatically reaches into your repo or services; it stays within the LLM’s capabilities and your provided tools.
 
