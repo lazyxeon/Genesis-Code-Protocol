@@ -1,149 +1,114 @@
 name: Generate Changelog
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "main" ]
-    paths-ignore:
-      - "CHANGELOG.md"                       # avoid loops from our own PRs
-      - "Table Of Contents.md"
-      - ".github/workflows/generate-changelog.yml"
-      - ".github/workflows/update-toc-file.yml"
-      - ".github/workflows/update-repo-structure.yml"
-      - "README.md"
-  workflow_dispatch: {}                      # button to run manually
-  schedule:
-    - cron: "29 3 * * *"                    # optional nightly run
 
 permissions:
   contents: write
-  pull-requests: write
-
-concurrency:
-  group: changelog
-  cancel-in-progress: true
 
 jobs:
   changelog:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout (full history for tags)
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.x"
 
-      - name: Generate/refresh CHANGELOG.md (inline)
+      - name: Ensure Scripts dir exists
+        run: mkdir -p Scripts
+
+      # If you already have Scripts/generate_changelog.py, keep this step and remove the next "Stub" step
+      - name: Generate CHANGELOG (stub example — replace with your script)
         run: |
           python - <<'PY'
-          from __future__ import annotations
-          import os, re, subprocess
           from pathlib import Path
-          from datetime import datetime, timezone
-          ROOT = Path(".").resolve()
-          CHANGELOG = ROOT / "CHANGELOG.md"
-          REPO = os.getenv("GITHUB_REPOSITORY","")
-          GH_BASE = os.getenv("GITHUB_SERVER_URL","https://github.com").rstrip("/")
-          CC_ORDER = ["feat","fix","perf","refactor","docs","test","build","ci","chore","other"]
-          HEAD_RE = re.compile(r"^(?P<type>[a-z]+)(\((?P<scope>[^)]+)\))?[: ]\s*(?P<msg>.+)$", re.I)
-          PR_RE = re.compile(r"\(#(?P<num>\d+)\)")
-
-          def sh(*args:str)->str:
-            return subprocess.check_output(args).decode("utf-8","replace").strip()
-
-          def last_tag():
-            try: return sh("git","describe","--tags","--abbrev=0")
-            except subprocess.CalledProcessError: return None
-
-          def commits_since(tag):
-            fmt = "%H%x09%s"
-            if tag:
-              log = sh("git","log",f"{tag}..HEAD",f"--pretty=format:{fmt}")
-            else:
-              first = sh("git","rev-list","--max-parents=0","HEAD").splitlines()[0]
-              log = sh("git","log",f"{first}..HEAD",f"--pretty=format:{fmt}")
-            pairs=[]
-            for line in log.splitlines():
-              if not line: continue
-              h, s = line.split("\t",1) if "\t" in line else (line[:40],line)
-              if s.lower().startswith("merge"): continue
-              pairs.append((h,s))
-            return pairs
-
-          def classify(subject):
-            m = HEAD_RE.match(subject)
-            if not m: return "other", subject.strip(), None
-            typ = m.group("type").lower()
-            if typ not in CC_ORDER: typ="other"
-            return typ, m.group("msg").strip(), m.group("scope")
-
-          def link_commit(h):
-            short = h[:7]; 
-            return f"[{short}]({GH_BASE}/{REPO}/commit/{h})" if REPO else short
-
-          def link_pr(s):
-            m = PR_RE.search(s)
-            return f"[#{m.group('num')}]({GH_BASE}/{REPO}/pull/{m.group('num')})" if (m and REPO) else None
-
-          def build_section(commits):
-            buckets = {k:[] for k in CC_ORDER}
-            for h,s in commits:
-              typ,msg,scope = classify(s)
-              pr = link_pr(s); scope_txt = f"**{scope}**: " if scope else ""; pr_txt = f" {pr}" if pr else ""
-              buckets[typ].append(f"- {scope_txt}{msg} ({link_commit(h)}){pr_txt}")
-            titles = {"feat":"Features","fix":"Fixes","perf":"Performance","refactor":"Refactors","docs":"Documentation",
-                      "test":"Tests","build":"Build","ci":"CI","chore":"Chores","other":"Other"}
-            lines=[]
-            for cat in CC_ORDER:
-              items=buckets[cat]
-              if not items: continue
-              lines.append(f"### {titles[cat]}"); lines.extend(items); lines.append("")
-            return "\n".join(lines).rstrip()+("\n" if lines else "")
-
-          tag = last_tag()
-          commits = commits_since(tag)
-          print(f"Last_tag={tag or 'None'}; commit_count={len(commits)}")
-          today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-          unreleased = f"## [Unreleased] — {today}\n\n" + (build_section(commits) or "_No changes since last tag._\n")
-
-          header = "# Changelog\n\nAll notable changes to this project will be documented in this file.\n\n"
-          if CHANGELOG.exists():
-            old = CHANGELOG.read_text(encoding="utf-8")
-            base = old if old.startswith("# Changelog") else header + old
-            pat = re.compile(r"^## \[Unreleased\].*?(?=^## |\Z)", re.S|re.M)
-            new = pat.sub(unreleased+"\n", base, 1) if pat.search(base) else header + unreleased + "\n" + base[len(header):]
+          p = Path("CHANGELOG.md")
+          base = [
+            "# Changelog\n",
+            "\n",
+            "## Unreleased\n",
+            "\n",
+            "### Documentation\n",
+            "- auto-update CHANGELOG.md (example)\n",
+            "\n",
+            "### Other\n",
+            "- sample entry\n",
+          ]
+          if not p.exists():
+            p.write_text("".join(base), encoding="utf-8")
           else:
-            new = header + unreleased + "\n"
-          CHANGELOG.write_text(new, encoding="utf-8", newline="\n")
-          print("CHANGELOG.md written/updated.")
+            txt = p.read_text(encoding="utf-8")
+            if "## Unreleased" not in txt:
+              txt = "## Unreleased\n\n" + txt
+            p.write_text(txt, encoding="utf-8")
           PY
 
-      - name: Show diff (debug)
+      - name: Add spacing normalizer
         run: |
-          git status
-          git --no-pager diff -- CHANGELOG.md || true
+          cat > Scripts/fix_md_spacing.py << 'PY'
+          import re, sys
+          from pathlib import Path
+          HEADING_RE = re.compile(r'^(#{1,6})\\s+\\S')
+          LIST_RE = re.compile(r'^(\\s*)([-*+]|[0-9]+\\.)\\s+')
+          def normalize(lines):
+              out, in_code = [], False
+              def blank(s): return s.strip() == ""
+              i, n = 0, len(lines)
+              while i < n:
+                  line = lines[i]
+                  if line.lstrip().startswith("```"):
+                      out.append(line)
+                      in_code = not in_code
+                      i += 1
+                      continue
+                  if not in_code and HEADING_RE.match(line):
+                      if len(out) > 0 and not blank(out[-1]): out.append("\\n")
+                      out.append(line)
+                      nxt = lines[i+1] if i+1 < n else ""
+                      if not blank(nxt): out.append("\\n")
+                      i += 1
+                      continue
+                  if not in_code and LIST_RE.match(line):
+                      prev_nonblank = next((out[j] for j in range(len(out)-1,-1,-1) if not blank(out[j])), None)
+                      if prev_nonblank is None or not LIST_RE.match(prev_nonblank):
+                          if len(out)>0 and not blank(out[-1]): out.append("\\n")
+                      while i < n and LIST_RE.match(lines[i]) and not lines[i].lstrip().startswith("```"):
+                          out.append(lines[i]); i += 1
+                      nxt = lines[i] if i < n else ""
+                      if not blank(nxt): out.append("\\n")
+                      continue
+                  out.append(line); i += 1
+              compact = []
+              for l in out:
+                  if not (len(compact) >= 2 and compact[-1] == "\\n" and l == "\\n"):
+                      compact.append(l)
+              return compact
+          def main():
+              p = Path("CHANGELOG.md")
+              text = p.read_text(encoding="utf-8").splitlines(keepends=True)
+              fixed = normalize(text)
+              if fixed != text:
+                  p.write_text("".join(fixed), encoding="utf-8")
+                  print("Normalized spacing in CHANGELOG.md")
+              else:
+                  print("No changes needed")
+          if __name__ == "__main__":
+              main()
+          PY
 
-      - name: Create PR with changes
-        uses: peter-evans/create-pull-request@v7
-        with:
-          branch: chore/update-changelog
-          title: "chore(docs): refresh CHANGELOG.md"
-          commit-message: "docs: auto-update CHANGELOG.md"
-          body: |
-            This PR updates **CHANGELOG.md** from git history since the last tag.
-            Generated inline by the workflow.
-          labels: documentation
-          signoff: true
+      - name: Normalize CHANGELOG spacing (MD022/MD032)
+        run: python Scripts/fix_md_spacing.py
 
-                - name: Normalize CHANGELOG spacing (MD022/MD032)
-        run: |
-          python Scripts/fix_md_spacing.py CHANGELOG.md
-
-      - name: Commit normalized CHANGELOG
+      - name: Commit updated CHANGELOG
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "chore(changelog): normalize spacing for markdownlint (MD022/MD032)"
+          commit_message: "chore(changelog): update and normalize spacing"
           file_pattern: CHANGELOG.md
-
