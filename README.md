@@ -182,10 +182,10 @@ Open `Notebooks/` for quickstarts and full runs.
 
 ## Repository Structure
 
-> **Auto-generated:** The section below is kept in sync by a workflow.
+<details> **Auto-generated:** The section below is kept in sync by a workflow.
 > Do not edit between the markers.
 
-</details> <!-- BEGIN REPO TREE -->
+<!-- BEGIN REPO TREE -->
 ```text
 - **CLI Bundle/**
   - Readme.md
