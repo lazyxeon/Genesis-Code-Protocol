@@ -515,6 +515,7 @@ Examples/EV_PRR_V47/
   - Latch Latent capability Harnesser.md
   - MOSAIC.ipynb
 - **Scripts/**
+  - generate\_changelog.py
   - generate\_repo\_toc.py
   - update\_repo\_structure.py
 - **docker/**
