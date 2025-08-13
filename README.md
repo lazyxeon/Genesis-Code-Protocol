@@ -31,6 +31,12 @@
 > **Formerly:** GRCP (Genesis Recursive Code Protocol)  
 > **Status:** Active • **License:** MIT • **Language:** Python 3.10+
 
+What it is: an AI-native invention protocol for LLMs—ideate → simulate → validate → ship—with ToT reasoning and peer-audit refinement.
+
+Why it’s different: built-in “worth-it” gate (V47), risk-tiered evidence, SBOM/signing at release, and Phase-10 continuous assurance.
+
+Get started: Download a copy of the latest GCP Revision as a .pdf, .txt, .docx, Attach to a conversation with an LLM of your choice (Grok4, GPT5, Claude4) Recommened: GPT5. Then prompt to Initiate GCP and Run spark :(your idea). Then wait until LLM ends response at a Gate, make your choice and LLM will continue GCP seamlessly. Continue Branching, Resetting, Proceeding, until Output achieved.
+
 The **Genesis Code Protocol (GCP)** is an AI-native, recursively structured invention framework that enables modern LLMs to **discover, design, simulate, validate, and operate** novel algorithms, tools, and systems. It combines multi-phase progression, dual-scientist debate, rigorous gates with statistical evidence, safety/privacy/security governance, and post-release **continuous assurance**.
 
 GCP is **LLM-agnostic** (ChatGPT, Claude, Grok, etc.) and integrates with common tooling (CLI, notebooks, Spark/Delta, Torch/SciPy/Transformers).
