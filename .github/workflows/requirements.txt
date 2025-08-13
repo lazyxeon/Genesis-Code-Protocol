@@ -1,0 +1,24 @@
+argparse==1.4.0
+subprocess==0.0.0  # Included in Python stdlib, no install needed
+os==0.0.0          # Included in Python stdlib, no install needed
+sys==0.0.0         # Included in Python stdlib, no install needed
+transformers>=4.30.0
+torch>=2.0.0
+scipy>=1.10.0
+numpy>=1.23.0
+pandas>=1.5.0
+matplotlib>=3.6.0
+jupyterlab>=3.6.0
+notebook>=6.5.0
+pyspark>=3.5.0
+sympy>=1.12.0
+networkx>=3.3
+rdkit>=2023.9.1
+biopython>=1.83
+astropy>=6.1.0
+pygame>=2.6.0
+flake8>=6.0.0      # For linting in CI
+safety>=2.3.5      # For security scans
+bandit>=1.7.5      # For security scans
+jupyter>=1.0.0     # Core Jupyter support
+nbconvert>=7.0.0   # For notebook validation
