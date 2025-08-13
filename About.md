@@ -38,6 +38,7 @@ GCP supports two execution modes:
 At each checkpoint you can respond with short commands:
 
 ```text
+
 proceed 1
 branch Phase 7
 return C8.4
@@ -127,7 +128,7 @@ diff --git a/Charts.md b/Charts.md
 +++ b/Charts.md
 @@ -1,1 +1,4 @@
 +<!-- markdownlint-disable MD013 -->
-+
+
  (existing content)
-+
+
 +<!-- markdownlint-enable MD013 -->
