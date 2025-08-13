@@ -284,6 +284,8 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
   
 <!-- BEGIN REPO TREE -->
 ```text
+- **.devcontainer/**
+  - devcontainer.json
 - **CLI Bundle/**
   - Readme.md
   - audit\_utils.py
@@ -294,6 +296,8 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
   - prompt\_utils.py
   - requirements.txt
 - **Documents/**
+  - **protocol/**
+    - overview
   - AI ChatGPT Critical Analysis GCP V45.6D.md
   - AI ChatGPT Critical Analysis GCP V46.md
   - AI ChatGPT Critical Analysis V47 Full Run EV issue.md
@@ -309,6 +313,7 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
   - Requirements.md
   - Security.md
   - Setup.py
+  - index.md
   - releases.md
   - security\_report.md
 - **GRCP most recent variants/**
@@ -382,6 +387,7 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
 - LICENSE.md
 - README.md
 - Table Of Contents.md
+- mkdocs.yml
 ```
 <!-- END REPO TREE -->
 </details>
