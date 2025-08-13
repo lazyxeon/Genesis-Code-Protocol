@@ -1,5 +1,7 @@
 # Genesis Code Protocol (GCP) — V47.2
 
+<!-- markdownlint-disable MD013 -->
+
 <!-- CORE BADGES -->
 [![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen)](./Documents/LICENSE.md)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
@@ -399,3 +401,5 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
 
 ---
 ---
+
+<!-- markdownlint-enable MD013 -->
