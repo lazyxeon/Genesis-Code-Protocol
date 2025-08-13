@@ -173,30 +173,17 @@ Canaries: prediction error, feed freshness, reservation uptake → auto-rollback
 
 Fairness: slice deltas; constraints prevent starving rural/low-income regions.
 
-Repository Structure
-mathematica
-Copy
-Edit
-Genesis-Code-Protocol/
-├─ CLI Bundle/
-│  ├─ gcp_cli.py, full_run.py, phase*.py, audit_utils.py, prompt_utils.py
-│  └─ CLI_Readme.md
-├─ Documents/
-│  ├─ Requirements.md, Contributing.md, LICENSE.md
-│  ├─ Critical Analyses/
-│  └─ Safety-Privacy/
-├─ GRCP most recent variants/
-│  ├─ V09.md … V45.6D.md
-│  ├─ V46.md, V46.5.md, V47.md
-│  └─ Changelog.md
-├─ Notebooks/
-│  ├─ GCP_V46_Quickstart.ipynb
-│  ├─ GCP_V46_5_CE.ipynb
-│  ├─ GCP_V47_WorthIt_Sprint.ipynb
-│  └─ EV_PRR_V47_Spark.ipynb
-└─ Examples/
-   ├─ AlloyScript specs & demos
-   └─ End-to-end runs (QoS, retrieval, etc.)
+## Repository Structure (auto-generated)
+
+> **Note:** The tree below is kept in sync automatically by a workflow.  
+> Do not edit between the markers.
+
+<!-- BEGIN REPO TREE -->
+
+
+<!-- END REPO TREE -->
+
+
 Contributing
 See CONTRIBUTING.md. Please also read our Code of Conduct.
 
