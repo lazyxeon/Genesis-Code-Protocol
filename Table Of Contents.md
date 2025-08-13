@@ -31,6 +31,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
     - [update-toc-file.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/update-toc-file.yml)
     - [validate-notebooks.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/validate-notebooks.yml)
   - [dependabot.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/dependabot.yml)
+  - [release-drafter.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/release-drafter.yml)
 
 ## CLI Bundle
 
