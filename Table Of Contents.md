@@ -22,10 +22,10 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
     - [cliff.toml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/cliff.toml)
     - [docker-build.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/docker-build.yml)
     - [generate-changelog.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/generate-changelog.yml)
-    - [notebook-validation.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/notebook-validation.yml)
     - [security-scan.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/security-scan.yml)
     - [update-repo-structure.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/update-repo-structure.yml)
     - [update-toc-file.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/update-toc-file.yml)
+    - [validate-notebooks.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/validate-notebooks.yml)
 
 ## CLI Bundle
 
