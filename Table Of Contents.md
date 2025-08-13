@@ -13,24 +13,38 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 - [LICENSE.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/LICENSE.md)
 - [README.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/README.md)
 - [Table Of Contents.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Table%20Of%20Contents.md)
+- [mkdocs.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/mkdocs.yml)
+
+## .devcontainer
+
 
 ## .github
 
+  - **ISSUE_TEMPLATE/**
+    - [bug_report.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/bug_report.yml)
+    - [config.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/config.yml)
+    - [feature_request.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/feature_request.yml)
+    - [new_full_run.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/new_full_run.yml)
+    - [protocol_review.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/protocol_review.yml)
   - **workflows/**
     - [Python-CI.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/Python-CI.yml)
     - [auto-release.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/auto-release.yml)
     - [cliff.toml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/cliff.toml)
     - [codeql.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/codeql.yml)
     - [docker-build.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/docker-build.yml)
+    - [docs.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/docs.yml)
     - [generate-changelog.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/generate-changelog.yml)
+    - [ghcr-build.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/ghcr-build.yml)
+    - [markdownlint.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/markdownlint.yml)
     - [release-drafter.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/release-drafter.yml)
     - [sbom.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/sbom.yml)
-    - [scorecard.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/scorecard.yml)
+    - [scorecards.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/scorecards.yml)
     - [security-scan.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/security-scan.yml)
     - [update-repo-structure.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/update-repo-structure.yml)
     - [update-toc-file.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/update-toc-file.yml)
     - [validate-notebooks.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/validate-notebooks.yml)
   - [dependabot.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/dependabot.yml)
+  - [pull_request_template.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/pull_request_template.md)
   - [release-drafter.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/release-drafter.yml)
 
 ## CLI Bundle
@@ -45,6 +59,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 
 ## Documents
 
+  - **protocol/**
   - [AI ChatGPT Critical Analysis GCP V45.6D.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20ChatGPT%20Critical%20Analysis%20GCP%20V45.6D.md)
   - [AI ChatGPT Critical Analysis GCP V46.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20ChatGPT%20Critical%20Analysis%20GCP%20V46.md)
   - [AI ChatGPT Critical Analysis V47 Full Run EV issue.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20ChatGPT%20Critical%20Analysis%20V47%20Full%20Run%20EV%20issue.md)
@@ -60,6 +75,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
   - [Requirements.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Requirements.md)
   - [Security.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Security.md)
   - [Setup.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Setup.py)
+  - [index.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/index.md)
   - [releases.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/releases.md)
   - [security_report.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/security_report.md)
 
