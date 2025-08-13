@@ -1,0 +1,4 @@
+# .github/CODEOWNERS
+* @lazyxeon
+/docs/ @lazyxeon
+/.github/ @lazyxeon
