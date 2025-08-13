@@ -1,5 +1,7 @@
 # GRCP Charts and Graphs Overview
 
+<!-- markdownlint-disable MD013 -->
+
 This document provides a visual and tabular overview of the Genesis Recursive Code Protocol (GRCP) evolution, key versions, feature additions, and notable inventions. It uses Markdown tables for data presentation and Mermaid diagrams for graphs/charts, which GitHub renders natively. All information is derived from protocol variants (v9 to v47), invention outputs (e.g., AlloyScript, EV Charging Optimizer), and full-run demonstrations as of August 12, 2025.
 
 ## Table of Contents
@@ -125,3 +127,5 @@ Table summarizing ethical metrics from protocol outputs, such as proxy scores an
 (From PDFs: Scores ensure boundaries; e.g., >0.8 triggers audits.)
 
 This overview can be expanded with additional data from future runs. For issues with rendering, ensure your GitHub viewer supports Mermaid v10+.
+
+<!-- markdownlint-enable MD013 -->
