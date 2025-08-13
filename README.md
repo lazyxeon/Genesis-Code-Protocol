@@ -523,6 +523,7 @@ Examples/EV_PRR_V47/
   - Dockerfile
   - requirements.txt
 - About.md
+- CHANGELOG.md
 - Charts.md
 - Code of Conduct.md
 - Contributing.md
