@@ -1,0 +1,20 @@
+{
+  "name": "GCP Dev",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "postCreateCommand": "pip install -r 'CLI Bundle/requirements.txt' && pip install mkdocs-material",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "yzhang.markdown-all-in-one"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}
