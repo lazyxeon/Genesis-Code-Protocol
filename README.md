@@ -26,9 +26,6 @@
 [![Type Checking: mypy](https://img.shields.io/badge/type%20checking-mypy-2A6DB2)](https://mypy.readthedocs.io/)
 [![Tests: pytest](https://img.shields.io/badge/tests-pytest-0A9EDC)](https://docs.pytest.org/)
 
-<!-- BADGES: release/info (works once you start tagging releases) -->
-[![Latest Release](https://img.shields.io/github/v/release/lazyxeon/Genesis-Code-Protocol?display_name=release)](https://github.com/lazyxeon/Genesis-Code-Protocol/releases)
-[![Commits since latest](https://img.shields.io/github/commits-since/lazyxeon/Genesis-Code-Protocol/latest)](https://github.com/lazyxeon/Genesis-Code-Protocol/commits/main)
 
 
 > **Formerly:** GRCP (Genesis Recursive Code Protocol)  
