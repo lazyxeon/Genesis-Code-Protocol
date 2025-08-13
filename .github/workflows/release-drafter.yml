@@ -1,26 +1,16 @@
-# .github/workflows/release-drafter.yml
 name: Release Drafter
-
 on:
   push:
-    branches:
-      - main
-      - master
-  # PR events are only needed for autolabeler; use supported types only
+    branches: [ "main" ]
   pull_request:
     types: [opened, reopened, synchronize]
-  # Optional: support autolabeling for PRs from forks
-  # pull_request_target:
-  #   types: [opened, reopened, synchronize]
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 jobs:
   update_release_draft:
-    permissions:
-      contents: write         # needed to create/update the draft release
-      pull-requests: write    # needed if autolabeler should set PR labels
     runs-on: ubuntu-latest
     steps:
       - uses: release-drafter/release-drafter@v6
