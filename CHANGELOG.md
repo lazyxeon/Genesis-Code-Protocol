@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased] — 2025-08-13
 
 ### Documentation
+- auto-update Table Of Contents.md ([023ba48](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/023ba48414d9e7d6d537362f6daaff38cd615724))
+- auto-update Table Of Contents.md ([623356a](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/623356a2303f447d9bb08e31e747fe20c51144af))
+- auto-update CHANGELOG.md ([b4828a7](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/b4828a707fb0c7dafa46a33ad386cb65b5532dd6))
+- **readme**: auto-sync repo structure ([dc5ffa5](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/dc5ffa5eb0b822ee86f9c85690450a30fe80f83a))
 - auto-update Table Of Contents.md ([dfba678](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/dfba678aff3af4e33001e6896e947aa480db1e59))
 - auto-update Table Of Contents.md ([590c8eb](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/590c8eba66feb2f24fe11a7cc801b62889bb4712))
 - auto-update CHANGELOG.md ([d435105](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/d43510528e3d6fe3175efeb5f99e5abacaf088bf))
@@ -21,6 +25,14 @@ All notable changes to this project will be documented in this file.
 - **docs**: auto-sync repo structure in README ([4680a4c](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/4680a4c86f6dc230e7c5cf0e3d0ce4dcd5f43df7))
 
 ### Other
+- and rename GCP Current Version(47.1).md to GCP Current Version(47.2).md ([3bd0acc](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/3bd0accfcd4c892fcaeac26458a22df69e4b5b25))
+- V43.md to V43.0.md ([1e4a5b4](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/1e4a5b470e49f62eaedf022fc8818db4d9c16719))
+- V45.md to V45.0.md ([777dbcf](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/777dbcf957523b717e4e44ec39cecdffcd6532b1))
+- V46.md to V46.0.md ([6c4ff9b](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/6c4ff9bf92e3bd6f349fe98371d28893589a9efb))
+- V47.md to V47.0.md ([dbdb0cb](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/dbdb0cbb5bc84f939515f969400bd566d6ba7ac7))
+- V47.1 to V47.1.md ([40fac31](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/40fac314d36224f6f9653d597630e2b8d68525db))
+- V47.2.md ([be6ff71](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/be6ff7170f5af213298f1493886be0dbd246bd14))
+- README.md ([3e66425](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/3e664256eca448fcbf0161253c8c30bb44b2ff35))
 - and rename GCP Current Version(47).md to GCP Current Version(47.1).md ([a939fff](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/a939fffff71276a068e11096a24e6307fbb62907))
 - V47.1 ([b7d9209](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/b7d9209b727c7c729602b4a2f428312b80158539))
 - README.md ([ea5d5de](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/ea5d5dea05a74ea347a60861984397d4fc567a48))
