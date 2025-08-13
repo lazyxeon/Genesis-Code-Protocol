@@ -37,7 +37,6 @@ GCP supports two execution modes:
 
 At each checkpoint you can respond with short commands:
 
-```text
 
 proceed 1
 branch Phase 7
@@ -122,7 +121,7 @@ See the root CITATION.cff (also shown via GitHub’s “Cite this repository” 
 
 If `Charts.md` is intentionally long-form, add a local rule waiver at the top:
 
-```diff
+
 diff --git a/Charts.md b/Charts.md
 --- a/Charts.md
 +++ b/Charts.md
