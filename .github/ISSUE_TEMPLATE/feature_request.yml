@@ -1,0 +1,26 @@
+name: "✨ Feature request"
+description: Propose an enhancement
+title: "[Feat]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / Opportunity
+      description: What use case does this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Solution
+      description: Describe the change (API, prompts, UX, docs).
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk Tier
+      options: [R1, R2, R3]
