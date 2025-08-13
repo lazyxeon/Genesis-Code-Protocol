@@ -118,7 +118,7 @@ jobs:
           git --no-pager diff -- "Table Of Contents.md" || true
 
       - name: Create PR with changes
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           branch: chore/update-top-level-toc
           title: "chore(docs): refresh Table Of Contents.md"
