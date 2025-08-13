@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased] — 2025-08-13
 
 ### Documentation
+- auto-update Table Of Contents.md ([565698f](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/565698fc77357ac3ffb2a0414853685af40fc29c))
+- **readme**: auto-sync repo structure ([546f769](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/546f769bcd2de8af268233c43a8055de8ece6780))
+- auto-update CHANGELOG.md ([b6cd47c](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/b6cd47c52c055f4a90036c2638039714b20b1934))
+- auto-update Table Of Contents.md ([da1e312](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/da1e312df0b81d25f14554a2fede797437e6d549))
 - **readme**: auto-sync repo structure ([8cd78d4](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/8cd78d4cb638ff931edea702270c42d70258de35))
 - **readme**: auto-sync repo structure ([75f15b3](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/75f15b3c5e0d5f42ed353ea600c28a1eaf927d54))
 - **readme**: auto-sync repo structure ([266ae23](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/266ae23cf2a97233a0b9a8db4afbb4c779d8a509))
@@ -14,6 +18,9 @@ All notable changes to this project will be documented in this file.
 - **docs**: auto-sync repo structure in README ([4680a4c](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/4680a4c86f6dc230e7c5cf0e3d0ce4dcd5f43df7))
 
 ### Other
+- validate-notebooks.yml ([8bff73e](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/8bff73eb31dc3c4bdc0057973fe3d7129ad81650))
+- validate-notebooks.yml ([d1667d2](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/d1667d2a6dd70ddf485c1485c0fd8f28ecfc3c29))
+- and rename notebook-validation.yml to validate-notebooks.yml ([ee46b74](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/ee46b74231b0ad00613314e349ba84eb5d3f0884))
 - update-toc-file.yml ([399f390](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/399f390072b1aaf41de0d4412cfdcae27fb69c17))
 - generate-changelog.yml ([d0c8ae4](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/d0c8ae4b50076ebf3b0e544fa485a340f66964bd))
 - generate-changelog.yml ([568f473](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/568f4734e51679b360196a40902188073c05cfbe))
