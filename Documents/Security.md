@@ -1,45 +1,23 @@
-SECURITY.md
-Security Policy
-Supported Versions
-We actively maintain security for the latest GRCP variants (v47 and above). Older versions may receive critical fixes on a case-by-case basis.
+# Security Policy
 
+## Reporting a Vulnerability
 
+Please use GitHub’s **Private vulnerability reporting** to contact the maintainers:
+- Go to **Security → Advisories → “Report a vulnerability”** in this repository.
+- Provide steps to reproduce, affected versions, and impact.
 
+We **do not** accept vulnerability details via email or public issues to avoid disclosure risk.
 
+## Response Targets
 
+- Acknowledge receipt: **72 hours**  
+- Initial assessment & next steps: **7 days**  
+- Fix window: prioritized by severity and exploitability
 
+## Disclosure
 
+We coordinate public disclosure through GitHub Security Advisories after a fix or mitigation is available.
 
+## Scope
 
-
-
-
-
-
-
-
-
-
-
-
-
-VersionSupportedv47+✅
-
-Reporting a Vulnerability
-If you discover a security vulnerability in GRCP (e.g., in CLI scripts, protocol logic, or dependencies), please report it responsibly:
-
-Do not open a public issue: Use a private channel to avoid exposing risks.
-Email the maintainer: Send details to [lazyxeon@example.com] (replace with your actual email). Include:
-
-Description of the vulnerability.
-Steps to reproduce.
-Potential impact (e.g., data exposure in simulations).
-Suggested fix (optional).
-
-
-Response Time: Expect acknowledgment within 48 hours and a resolution plan within 7 days.
-Disclosure: We'll credit you in the fix (unless anonymous). Coordinated disclosure after patching.
-
-We use Dependabot for dependency scans and encourage PRs for security enhancements (e.g., updated SBOM in v46+).
-For ethical concerns (e.g., personhood risks in ontological proxies), report via issues with label "ethics".
-Thank you for helping keep GRCP secured
+This policy applies to the Genesis Code Protocol repository and its published packages/artifacts.
