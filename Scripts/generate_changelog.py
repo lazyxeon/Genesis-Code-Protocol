@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-Generate/refresh CHANGELOG.md from git history (Conventional Commit-ish).
-- Groups commits since last tag into categories (feat, fix, docs, refactor, chore, perf, test, build, ci).
-- If no tags exist, uses the first commit as the start.
-- Writes/updates a top "## [Unreleased]" section (no tagging).
-- Links commits and PRs for GitHub view.
-Run in GitHub Actions or locally.
+Generate/refresh CHANGELOG.md from git history (Conventional-Commit-ish).
+
+- Groups commits since last tag into categories (feat, fix, perf, refactor, docs, test, build, ci, chore, other).
+- If no tags exist, uses first commit → HEAD.
+- Updates or creates a top "## [Unreleased] — YYYY-MM-DD" section.
+- Preserves the rest of the file (older releases).
+- Adds commit and PR links when running in GitHub Actions.
 """
 
 from __future__ import annotations
@@ -16,40 +17,39 @@ from typing import List, Tuple, Dict
 
 ROOT = Path(__file__).resolve().parents[1]
 CHANGELOG = ROOT / "CHANGELOG.md"
-REPO = os.getenv("GITHUB_REPOSITORY", "")  # e.g. "lazyxeon/Genesis-Code-Protocol"
+REPO = os.getenv("GITHUB_REPOSITORY", "")          # e.g. "lazyxeon/Genesis-Code-Protocol"
 GH_BASE = os.getenv("GITHUB_SERVER_URL", "https://github.com").rstrip("/")
 
 CC_ORDER = ["feat", "fix", "perf", "refactor", "docs", "test", "build", "ci", "chore", "other"]
 HEAD_RE = re.compile(r"^(?P<type>[a-z]+)(\((?P<scope>[^)]+)\))?[: ]\s*(?P<msg>.+)$", re.IGNORECASE)
-PR_RE = re.compile(r"\(#(?P<num>\d+)\)")  # matches "(#123)"
+PR_RE = re.compile(r"\(#(?P<num>\d+)\)")
 
-def run(*args: str) -> str:
+def sh(*args: str) -> str:
     return subprocess.check_output(args, cwd=ROOT).decode("utf-8", "replace").strip()
 
 def last_tag() -> str | None:
     try:
-        return run("git", "describe", "--tags", "--abbrev=0")
+        return sh("git", "describe", "--tags", "--abbrev=0")
     except subprocess.CalledProcessError:
         return None
 
 def commits_since(tag: str | None) -> List[Tuple[str, str]]:
-    rng = f"{tag}..HEAD" if tag else "--reverse --max-parents=1 HEAD"
     fmt = "%H%x09%s"
     if tag:
-        log = run("git", "log", rng, f"--pretty=format:{fmt}")
+        log = sh("git", "log", f"{tag}..HEAD", f"--pretty=format:{fmt}")
     else:
-        # from the first commit to HEAD
-        first = run("git", "rev-list", "--max-parents=0", "HEAD").splitlines()[0]
-        log = run("git", "log", f"{first}..HEAD", f"--pretty=format:{fmt}")
-    lines = [l for l in log.splitlines() if l and not l.lower().startswith("merge pull request")]
-    pairs = []
-    for l in lines:
-        try:
-            h, s = l.split("\t", 1)
-        except ValueError:
-            parts = l.split(" ", 1)
-            h, s = parts[0], (parts[1] if len(parts) > 1 else "")
-        pairs.append((h, s))
+        first = sh("git", "rev-list", "--max-parents=0", "HEAD").splitlines()[0]
+        log = sh("git", "log", f"{first}..HEAD", f"--pretty=format:{fmt}")
+    pairs: List[Tuple[str, str]] = []
+    for line in log.splitlines():
+        if not line:
+            continue
+        # ignore merge noise
+        subj = line.split("\t", 1)[1] if "\t" in line else line
+        if subj.lower().startswith("merge"):
+            continue
+        commit, subject = line.split("\t", 1) if "\t" in line else (line[:40], subj)
+        pairs.append((commit, subject))
     return pairs
 
 def classify(subject: str) -> Tuple[str, str, str | None]:
@@ -57,83 +57,85 @@ def classify(subject: str) -> Tuple[str, str, str | None]:
     if not m:
         return "other", subject.strip(), None
     typ = m.group("type").lower()
-    scope = m.group("scope")
-    msg = m.group("msg").strip()
     if typ not in CC_ORDER:
         typ = "other"
-    return typ, msg, scope
+    return typ, m.group("msg").strip(), m.group("scope")
 
-def commit_link(hash_: str) -> str:
-    short = hash_[:7]
-    if REPO:
-        return f"[{short}]({GH_BASE}/{REPO}/commit/{hash_})"
-    return short
+def link_commit(h: str) -> str:
+    shash = h[:7]
+    return f"[{shash}]({GH_BASE}/{REPO}/commit/{h})" if REPO else shash
 
-def pr_link(subject: str) -> str | None:
+def link_pr(subject: str) -> str | None:
     m = PR_RE.search(subject)
-    if not m or not REPO:
+    if not (m and REPO):
         return None
     n = m.group("num")
     return f"[#{n}]({GH_BASE}/{REPO}/pull/{n})"
 
-def build_section(commits: List[Tuple[str, str]]) -> str:
-    cats: Dict[str, List[str]] = {k: [] for k in CC_ORDER}
+def build_section(commits: List[Tuple[str,str]]) -> str:
+    buckets: Dict[str, List[str]] = {k: [] for k in CC_ORDER}
     for h, s in commits:
         typ, msg, scope = classify(s)
-        pr = pr_link(s)
+        pr = link_pr(s)
         scope_txt = f"**{scope}**: " if scope else ""
-        tail = f" {pr}" if pr else ""
-        cats[typ].append(f"- {scope_txt}{msg} ({commit_link(h)}){tail}")
-
-    lines = []
+        pr_txt = f" {pr}" if pr else ""
+        buckets[typ].append(f"- {scope_txt}{msg} ({link_commit(h)}){pr_txt}")
+    lines: List[str] = []
+    titles = {
+        "feat": "Features", "fix": "Fixes", "perf": "Performance",
+        "refactor": "Refactors", "docs": "Documentation", "test": "Tests",
+        "build": "Build", "ci": "CI", "chore": "Chores", "other": "Other",
+    }
     for cat in CC_ORDER:
-        items = [i for i in cats[cat] if i]
+        items = buckets[cat]
         if not items:
             continue
-        title = {
-            "feat": "Features",
-            "fix": "Fixes",
-            "perf": "Performance",
-            "refactor": "Refactors",
-            "docs": "Documentation",
-            "test": "Tests",
-            "build": "Build",
-            "ci": "CI",
-            "chore": "Chores",
-            "other": "Other",
-        }[cat]
-        lines.append(f"### {title}")
+        lines.append(f"### {titles[cat]}")
         lines.extend(items)
-        lines.append("")  # blank line
+        lines.append("")
     return "\n".join(lines).rstrip() + ("\n" if lines else "")
 
-def render(commits: List[Tuple[str, str]]) -> str:
+def render_unreleased(commits: List[Tuple[str,str]]) -> str:
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    header = "# Changelog\n\nAll notable changes to this project will be documented in this file.\n\n"
-    unreleased = f"## [Unreleased] — {today}\n\n"
     body = build_section(commits) or "_No changes since last tag._\n"
-    return header + unreleased + body
+    return f"## [Unreleased] — {today}\n\n{body}"
 
-def update_file(text: str) -> None:
+def update_changelog(unreleased: str) -> str:
+    header = "# Changelog\n\nAll notable changes to this project will be documented in this file.\n\n"
     if CHANGELOG.exists():
         old = CHANGELOG.read_text(encoding="utf-8")
-        # Replace existing [Unreleased] section; if not present, prepend.
-        pattern = re.compile(r"^## \[Unreleased\].*?(?=^## |\Z)", flags=re.DOTALL | re.MULTILINE)
-        if pattern.search(old):
-            new = pattern.sub(text.split("## [Unreleased]")[1].join(["## [Unreleased]", ""]), old, count=1)
+        # Ensure single header at top
+        if old.startswith("# Changelog"):
+            base = old
         else:
-            new = text + "\n" + old
-        CHANGELOG.write_text(new, encoding="utf-8", newline="\n")
+            base = header + old
+        # Replace or insert Unreleased section
+        pat = re.compile(r"^## \[Unreleased\].*?(?=^## |\Z)", re.DOTALL | re.MULTILINE)
+        if pat.search(base):
+            new = pat.sub(unreleased + "\n", base, count=1)
+        else:
+            # insert after header
+            if base.startswith(header):
+                new = header + unreleased + "\n" + base[len(header):]
+            else:
+                new = unreleased + "\n" + base
+        return new
     else:
-        CHANGELOG.write_text(text, encoding="utf-8", newline="\n")
+        return header + unreleased + "\n"
 
 def main() -> int:
-    tag = last_tag()
-    commits = commits_since(tag)
-    out = render(commits)
-    update_file(out)
-    print(f"CHANGELOG updated. Last tag: {tag or 'None'}; commits counted: {len(commits)}")
-    return 0
+    try:
+        tag = last_tag()
+        commits = commits_since(tag)
+        print(f"Last_tag={tag or 'None'}; commit_count={len(commits)}")
+        unreleased = render_unreleased(commits)
+        new_text = update_changelog(unreleased)
+        CHANGELOG.write_text(new_text, encoding="utf-8", newline="\n")
+        print("CHANGELOG.md written/updated.")
+        return 0
+    except Exception as e:
+        print(f"::error::Changelog generation failed: {e}")
+        return 1
 
 if __name__ == "__main__":
     raise SystemExit(main())
