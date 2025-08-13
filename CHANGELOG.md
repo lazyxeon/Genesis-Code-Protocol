@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased] — 2025-08-13
 
 ### Documentation
+- auto-update Table Of Contents.md ([dfba678](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/dfba678aff3af4e33001e6896e947aa480db1e59))
+- auto-update Table Of Contents.md ([590c8eb](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/590c8eba66feb2f24fe11a7cc801b62889bb4712))
+- auto-update CHANGELOG.md ([d435105](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/d43510528e3d6fe3175efeb5f99e5abacaf088bf))
 - auto-update Table Of Contents.md ([565698f](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/565698fc77357ac3ffb2a0414853685af40fc29c))
 - **readme**: auto-sync repo structure ([546f769](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/546f769bcd2de8af268233c43a8055de8ece6780))
 - auto-update CHANGELOG.md ([b6cd47c](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/b6cd47c52c055f4a90036c2638039714b20b1934))
@@ -18,6 +21,11 @@ All notable changes to this project will be documented in this file.
 - **docs**: auto-sync repo structure in README ([4680a4c](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/4680a4c86f6dc230e7c5cf0e3d0ce4dcd5f43df7))
 
 ### Other
+- and rename GCP Current Version(47).md to GCP Current Version(47.1).md ([a939fff](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/a939fffff71276a068e11096a24e6307fbb62907))
+- V47.1 ([b7d9209](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/b7d9209b727c7c729602b4a2f428312b80158539))
+- README.md ([ea5d5de](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/ea5d5dea05a74ea347a60861984397d4fc567a48))
+- README.md ([35f2a1f](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/35f2a1f762b49747f14b4cedbee3dbd920e858b7))
+- README.md ([fe6473b](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/fe6473bf7706b38ffaefe83bf3178a380955fc35))
 - validate-notebooks.yml ([8bff73e](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/8bff73eb31dc3c4bdc0057973fe3d7129ad81650))
 - validate-notebooks.yml ([d1667d2](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/d1667d2a6dd70ddf485c1485c0fd8f28ecfc3c29))
 - and rename notebook-validation.yml to validate-notebooks.yml ([ee46b74](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/ee46b74231b0ad00613314e349ba84eb5d3f0884))
