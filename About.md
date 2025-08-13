@@ -37,7 +37,6 @@ GCP supports two execution modes:
 
 At each checkpoint you can respond with short commands:
 
-
 proceed 1
 branch Phase 7
 return C8.4
@@ -97,7 +96,6 @@ Objective: [success criteria].
 Constraints: [hard/soft].
 Deliverables: [code/docs/field kit/etc].
 
-
 You can switch modes at any time:
 
 switch to auto mode
@@ -116,11 +114,9 @@ Citation
 If you use GCP, please cite the repository and the specific release you adopted.
 See the root CITATION.cff (also shown via GitHub’s “Cite this repository” button).
 
-
 ### 3) Tiny header for `Charts.md` (silence MD013 there)
 
 If `Charts.md` is intentionally long-form, add a local rule waiver at the top:
-
 
 diff --git a/Charts.md b/Charts.md
 --- a/Charts.md
