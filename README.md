@@ -186,11 +186,97 @@ Open `Notebooks/` for quickstarts and full runs.
 > Do not edit between the markers.
 
 <!-- BEGIN REPO TREE -->
-
 ```text
-(First run will populate this section automatically.)
+- **CLI Bundle/**
+  - Readme.md
+  - audit\_utils.py
+  - full\_run.py
+  - gcp\_cli.py
+  - phase1.py
+  - phase6.7.py
+  - prompt\_utils.py
+  - requirements.txt
+- **Documents/**
+  - AI ChatGPT Critical Analysis GCP V45.6D.md
+  - AI ChatGPT Critical Analysis GCP V46.md
+  - AI ChatGPT Critical Analysis V47 Full Run EV issue.md
+  - AI Claude Critical Analysis GCP V45.6d.md
+  - AI Claude Critical Analysis GCP V46.md
+  - AI Claude Critical Analysis V47 full run EV issue.md
+  - AI Grok Critical Analysis GCP V45.6D.md
+  - AI Grok Critical Analysis GCP V46 .md
+  - AI Grok Critical Analysis V47 Full Run EV issue.md
+  - Citation.CFF
+  - Feature Requests.md
+  - Issue Template.md
+  - Pull Request Template.md
+  - Requirements.md
+  - Security.md
+  - Setup.py
+  - releases.md
+  - security\_report.md
+- **GRCP most recent variants/**
+  - Changelog.md
+  - Complete Master List All Revisions Full.md
+  - V09.md
+  - V11.md
+  - V12.md
+  - V20.md
+  - V22.md
+  - V23.md
+  - V30.md
+  - V33.md
+  - V34.md
+  - V35.md
+  - V36.md
+  - V38.md
+  - V39.md
+  - V40.md
+  - V41.md
+  - V42.md
+  - V43.7.md
+  - V43.md
+  - V44.1.md
+  - V44.7.md
+  - V44.8.md
+  - V44.9D.md
+  - V44.9b.md
+  - V45.1.md
+  - V45.2.md
+  - V45.3.md
+  - V45.4A.md
+  - V45.5.md
+  - V45.6.md
+  - V45.md
+  - V46.5.md
+  - V46.md
+  - V47.md
+- **Notebooks/**
+  - **Full Runs/**
+    - Known EV issue Full Run, GCPv47.md
+    - Latch Full run.md
+    - Quantum Mechanics Full Run.md
+    - Solar Energy Full Run.md
+  -  A Complete Full runs\_ Full Inventions Master List(no order).md
+  - Adaptive QoS Allocator.ipynb
+  - Alloy Perceptual Loss.py
+  - Alloyscript.py
+  - Audio Processing, v45.6.md
+  - Example Explanation.md
+  - JACCO.ipynb
+  - Latch Latent capability Harnesser.md
+  - MOSAIC.ipynb
+- **Scripts/**
+  - update\_repo\_structure.py
+- About.md
+- Charts.md
+- Code of Conduct.md
+- Contributing.md
+- GCP Current Version(47).md
+- LICENSE.md
+- README.md
+- Table Of Contents.md
 ```
-
 <!-- END REPO TREE -->
 
 ---
