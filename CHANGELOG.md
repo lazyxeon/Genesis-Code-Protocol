@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased] — 2025-08-13
 
 ### Documentation
+- auto-update CHANGELOG.md ([09b65f5](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/09b65f5e64a474402cbba8c69e8894c0276574fb))
 - auto-update CHANGELOG.md ([5c2d4d9](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/5c2d4d98586d1f6944a2261fd4d84b6f8af88aaa))
 - **readme**: auto-sync repo structure ([1fc4f17](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/1fc4f17f33d325346db8adb655e0e66de3c982b7))
 - auto-update CHANGELOG.md ([f1f5a52](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/f1f5a5241762cfc5153dc082b0ffafcd21a09c3f))
@@ -16,6 +17,7 @@ All notable changes to this project will be documented in this file.
 - auto-update CHANGELOG.md ([6ae0c76](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/6ae0c769e1f8e2877c371feeef17120476b56b8a))
 
 ### Other
+- fix_md_spacing.py ([89e8362](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/89e836280965467eec8ae65c863c793e9f933f9a))
 - About.md ([51fed75](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/51fed755514e708c165567dc51a0b817e49e95b6))
 - About.md ([21af95c](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/21af95cc9b6a21ee89f419f1e94f9ae04d64d648))
 - pull_request_template.md ([e387b48](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/e387b48429ff39bddc873bb2c7721ffaed8efe46))
