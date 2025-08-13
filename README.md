@@ -1,10 +1,4 @@
-Thanks for the confirmation! Since GCP V47.1 appears to be an internal or not-yet-public version, I couldn’t find existing web references for it. That’s totally fine—we’ll treat it as a forward-looking, internal enhancement of GCP V47.1 based on the design details you’ve provided.
 
-Here’s your updated **`README.md`** with all three updates included:
-
----
-
-```markdown
 # Genesis Code Protocol (GCP)
 
 <!-- BADGES: core repo -->
