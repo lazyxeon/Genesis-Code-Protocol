@@ -1,15 +1,36 @@
-name: Scorecard
+name: SBOM (Release)
+
 on:
-  schedule: [{cron: '0 12 * * 1'}]
-  push: {branches: [main]}
-permissions: {security-events: write, id-token: write, contents: read}
+  release:
+    types: [published]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
 jobs:
-  analysis:
+  sbom:
     runs-on: ubuntu-latest
     steps:
-      - uses: ossf/scorecard-action@v2.4.0
+      - uses: actions/checkout@v4
+
+      - name: Generate SBOM (CycloneDX JSON)
+        uses: anchore/sbom-action@v0.16.0
         with:
-          results_file: results.sarif
-          results_format: sarif
-      - uses: github/codeql-action/upload-sarif@v3
-        with: {sarif_file: results.sarif}
+          path: .
+          output-file: sbom.cdx.json
+          format: cyclonedx-json
+
+      - name: Generate SBOM (SPDX JSON)
+        uses: anchore/sbom-action@v0.16.0
+        with:
+          path: .
+          output-file: sbom.spdx.json
+          format: spdx-json
+
+      - name: Upload SBOMs to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            sbom.cdx.json
+            sbom.spdx.json
