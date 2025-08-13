@@ -25,6 +25,10 @@
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://pre-commit.com/)
 [![Type Checking: mypy](https://img.shields.io/badge/type%20checking-mypy-2A6DB2)](https://mypy.readthedocs.io/)
 [![Tests: pytest](https://img.shields.io/badge/tests-pytest-0A9EDC)](https://docs.pytest.org/)
+[![Docs](https://img.shields.io/badge/docs-mkdocs%20material-blue)](https://lazyxeon.github.io/Genesis-Code-Protocol/)
+[![Container](https://img.shields.io/badge/ghcr-image-blue)](https://ghcr.io/lazyxeon/Genesis-Code-Protocol)
+[![OpenSSF Scorecard](https://img.shields.io/badge/openssf-scorecard-blue)](https://securityscorecards.dev/viewer/?uri=github.com/lazyxeon/Genesis-Code-Protocol)
+
 
 > **Formerly:** GRCP (Genesis Recursive Code Protocol)  
 > **Status:** Active • **License:** MIT • **Language:** Python 3.10+  
