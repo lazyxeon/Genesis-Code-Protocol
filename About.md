@@ -1,39 +1,45 @@
-About
+Make About.md exactly this (wrapped lines, no angle brackets, single blanks, labeled fences):
 
-Genesis Code Protocol (GCP) is an AI-native, checkpoint-gated invention protocol. Upload the single protocol document to a capable LLM and run a session to produce field-test-ready outputs that a dev team can validate and deploy.
+# About
 
-GCP teaches an LLM how to think and build: ideate → simulate → validate → productize → assure. It emphasizes worth-it realism, statistical evidence, supply-chain integrity, and continuous evaluation after release.
+**Genesis Code Protocol (GCP)** is an AI-native, checkpoint-gated invention protocol.
+Upload the single protocol document to a capable LLM and run a session to produce
+field-test-ready outputs that a dev team can validate and deploy.
 
-Why GCP
+GCP teaches an LLM **how to think and build**: ideate → simulate → validate → productize
+→ assure. It emphasizes worth-it realism, statistical evidence, supply-chain integrity,
+and continuous evaluation after release.
 
-Evidence over vibes: expected-value modeling, worth-it scoring, Brier-scored forecasts, medians and tails (p50/p95/p99), and replication across seeds.
+## Why GCP
 
-Reality first: serviceability, compliance, TCO, and training are considered before scale.
+- Evidence over vibes: expected-value modeling, worth-it scoring, Brier-scored forecasts,
+  medians and tails (p50/p95/p99), and replication across seeds.
+- Reality first: serviceability, compliance, TCO, and training are considered before scale.
+- Safety, privacy, security, and licensing are first-class deliverables.
+- Explicit checkpoints with clear user choices and **seamless resume** at any step.
 
-Safety, privacy, security, and licensing are first-class deliverables.
+## What GCP Is (and Is Not)
 
-Explicit checkpoints with clear user choices and seamless resume at any step.
+- **Is:** A single document and prompt library any LLM can execute in chat to produce
+  auditable artifacts, ledgers, and a release package.
+- **Is:** A rigorous process with gates that can stop a run early with a justified **No-Go**
+  when the expected value is not there.
+- **Is not:** A library that automatically reaches into your repo or services; it stays
+  within the LLM’s capabilities and your provided tools.
+- **Is not:** A substitute for domain expertise, legal review, or real-world validation.
 
-What GCP Is (and Is Not)
-
-Is: A single document and prompt library any LLM can execute in chat to produce auditable artifacts, ledgers, and a release package.
-
-Is: A rigorous process with gates that can stop a run early with a justified No-Go when the expected value is not there.
-
-Is not: A library that automatically reaches into your repo or services; it stays within the LLM’s capabilities and your provided tools.
-
-Is not: A substitute for domain expertise, legal review, or real-world validation.
-
-Modes and Checkpoints
+## Modes and Checkpoints
 
 GCP supports two execution modes:
 
-Full Run Mode: The model halts at every checkpoint. It prints a brief context recap, lists next moves, and waits for your choice (Proceed, Branch, Return, End & Export).
-
-Auto Mode: The model advances by itself and only stops at critical gates or when a step requires your input. All decisions are logged to a Decision Ledger.
+- **Full Run Mode:** The model halts at **every** checkpoint. It prints a brief context
+  recap, lists next moves, and waits for your choice (Proceed, Branch, Return, End & Export).
+- **Auto Mode:** The model advances by itself and only stops at critical gates or when a step
+  requires your input. All decisions are logged to a Decision Ledger.
 
 At each checkpoint you can respond with short commands:
 
+```text
 proceed 1
 branch Phase 7
 return C8.4
@@ -67,9 +73,11 @@ R3: High/regulated. N ≥ 50, ≥ 20 seeds, FMEA/STPA/GSN/DPIA/HIL, CE on by def
 
 Artifacts and Ledgers
 
-Run, Decision, Assumption, Evidence, Benchmark, Optimization, Risk & Safety, and Compliance ledgers are produced across phases.
+Run, Decision, Assumption, Evidence, Benchmark, Optimization, Risk & Safety, and
+Compliance ledgers are produced across phases.
 
-File naming uses a short Run ID and phase markers, for example: S42_9_Benchmark_Ledger.md, S42_13_Safety_Case.md, and S42_FinalPackage.zip.
+File naming uses a short Run ID and phase markers, for example:
+S42_9_Benchmark_Ledger.md, S42_13_Safety_Case.md, and S42_FinalPackage.zip.
 
 Security, Privacy, and Licensing
 
@@ -77,18 +85,19 @@ SBOM (SPDX or CycloneDX), signatures/attestations, SAST/DAST/secret scans, and C
 
 DPIA where applicable, data minimization, retention/erasure, and re-identification checks.
 
-SPDX license identifiers; avoid incompatible copyleft in production; attribution bundles included.
+SPDX license identifiers; avoid incompatible copyleft in production; attribution bundles
+included.
 
 Quickstart (LLM-Only)
 
 Upload the protocol file to your LLM chat and run:
 
-Initiate GCP and Run Spark: <your idea>.
-Mode: <Full Run | Auto>.
-Risk Tier: <R1 | R2 | R3>.
-Objective: <success criteria>.
-Constraints: <hard/soft>.
-Deliverables: <code/docs/field kit/etc>.
+Initiate GCP and Run Spark: [your idea].
+Mode: [Full Run | Auto].
+Risk Tier: [R1 | R2 | R3].
+Objective: [success criteria].
+Constraints: [hard/soft].
+Deliverables: [code/docs/field kit/etc].
 
 
 You can switch modes at any time:
@@ -106,4 +115,21 @@ Docs site (optional): Versioned documentation if enabled with MkDocs
 
 Citation
 
-If you use GCP, please cite the repository and the specific release you adopted. See the root CITATION.cff (also shown via GitHub’s “Cite this repository” button).
+If you use GCP, please cite the repository and the specific release you adopted.
+See the root CITATION.cff (also shown via GitHub’s “Cite this repository” button).
+
+
+### 3) Tiny header for `Charts.md` (silence MD013 there)
+
+If `Charts.md` is intentionally long-form, add a local rule waiver at the top:
+
+```diff
+diff --git a/Charts.md b/Charts.md
+--- a/Charts.md
++++ b/Charts.md
+@@ -1,1 +1,4 @@
++<!-- markdownlint-disable MD013 -->
++
+ (existing content)
++
++<!-- markdownlint-enable MD013 -->
