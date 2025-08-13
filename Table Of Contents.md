@@ -10,7 +10,7 @@ This document serves as a comprehensive table of contents for the GRCP repositor
 - [GCP Current Version(47).md](./GCP%20Current%20Version(47).md) - The latest protocol version (v47).
 - [LICENSE.md](./LICENSE.md) - MIT License details.
 - [README.md](./README.md) - Main repository readme with installation and usage.
-
+- [Code of Conduct.md](./Code%20of%20Conduct.md) - Code of Conduct Details
 ## CLI Bundle
 
 Tools for command-line orchestration of GRCP.
