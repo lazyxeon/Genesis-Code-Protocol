@@ -522,6 +522,7 @@ Examples/EV_PRR_V47/
   - V45.md
   - V46.5.md
   - V46.md
+  - V47.1
   - V47.md
 - **Notebooks/**
   - **Full Runs/**
@@ -551,7 +552,7 @@ Examples/EV_PRR_V47/
 - Charts.md
 - Code of Conduct.md
 - Contributing.md
-- GCP Current Version(47).md
+- GCP Current Version(47.1).md
 - LICENSE.md
 - README.md
 - Table Of Contents.md
