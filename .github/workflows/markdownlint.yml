@@ -14,16 +14,14 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
 
+      # Keep it simple: no "config:" input here so CLI2 can auto-discover per-folder configs
       - name: Run markdownlint-cli2
-        uses: DavidAnson/markdownlint-cli2-action@v19.0.0
+        uses: DavidAnson/markdownlint-cli2-action@v19.1.0
         with:
-          # Lint everything; we’ll fine-tune rules via .markdownlint*.jsonc below
           globs: |
             **/*.md
-          # Point to repo-wide rule config:
-          config: .markdownlint.jsonc
+            #node_modules
