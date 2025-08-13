@@ -32,6 +32,19 @@
 
 **GCP** is an **AI-native invention protocol** that teaches an LLM **how to think and build**: ideate → simulate → validate → productize → assure. It’s a **single document** you can upload to any capable LLM (GPT-5, Claude, Grok, etc.). The model follows the protocol’s **phases, gates, and artifacts** to deliver a **field-test-ready** invention that a competent team can cross-validate and deploy.
 
+## 📚 GCP Wiki (V47.2)
+
+A deep, AI-native knowledge base for everything Genesis Code Protocol: how the protocol thinks, how it builds, and how to ship field-test-ready inventions with rigor.
+
+- **Home** — overview, quickstart, phase map & gates, modes (Full Run vs Auto), and checkpoint UX.  
+  👉 https://github.com/lazyxeon/Genesis-Code-Protocol/wiki
+
+- **Explanation of Protocol Components** — full breakdown of phases (−1→15), gates (C−0.5, C6.9, C7/C7.Sigma, C8.4/C8.5, C9), ledgers & artifacts, risk tiers (R1–R3), graph-enhanced reasoning, and safety/privacy/security/compliance.  
+  👉 https://github.com/lazyxeon/Genesis-Code-Protocol/wiki/Explanation-of-Protocol-Components
+
+- **Full AI Deep Dive: Repo & GCP** — AI-first tour of the repo structure, how each folder and workflow maps to GCP outputs, and how to run complete, checkpoint-gated invention cycles end-to-end.  
+  👉 https://github.com/lazyxeon/Genesis-Code-Protocol/wiki/AI-Deep-Dive-Repo-and-GCP
+
 ---
 
 ## Why GCP
