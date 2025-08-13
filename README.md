@@ -228,26 +228,6 @@ python "CLI Bundle/gcp_cli.py" --version 47.2 --prompt "Invent a streaming compr
 * **Fairness:** slice metrics and guardrails; regressions ≤ 0.5% absolute (R2/R3) unless waivered with justification.
 
 ---
-
-## Repository Structure (indicative)
-
-```text
-- CLI Bundle/
-- Documents/
-- GRCP most recent variants/
-- Notebooks/
-- Scripts/
-- docker/
-- GCP V47.2 — AI-Native Operational Manual.md
-- README.md
-- LICENSE.md
-- SECURITY.md
-- CODE_OF_CONDUCT.md
-- CONTRIBUTING.md
-```
-
-> Keep this in sync via the included automation workflows.
-
 ---
 
 ## Contributing
@@ -277,11 +257,13 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
 * **V46.5:** Continuous Assurance (Phase 14 CE), risk tiers, SPDX/SAST/DAST, SemVer/compat.
 * **V46:** Field-test hardening, reordered gates, rigorous stats, reproducible builds.
 
-```
-
-
+---
+---
 ## Repository Structure
+-Full layout of GCP Repo, auto updated via Github Workflow
 
+<details>
+  
 <!-- BEGIN REPO TREE -->
 ```text
 - **CLI Bundle/**
@@ -384,3 +366,8 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
 - Table Of Contents.md
 ```
 <!-- END REPO TREE -->
+</details>
+
+
+---
+---
