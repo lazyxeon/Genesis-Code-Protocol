@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased] — 2025-08-13
 
 ### Documentation
+- **readme**: auto-sync repo structure ([9ccebdb](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/9ccebdb96f197c6c11341beb7a64e6d232437d51))
+- **readme**: auto-sync repo structure ([58831ca](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/58831ca32476f4508852219c168a85843e14b260))
+- auto-update Table Of Contents.md ([b6ed932](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/b6ed9322a5165ba77f5abb1409d24bd399b708d9))
+- auto-update CHANGELOG.md ([c149df1](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/c149df1aa4b3de21009640d57897d9150a7f4cfc))
 - auto-update Table Of Contents.md ([023ba48](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/023ba48414d9e7d6d537362f6daaff38cd615724))
 - auto-update Table Of Contents.md ([623356a](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/623356a2303f447d9bb08e31e747fe20c51144af))
 - auto-update CHANGELOG.md ([b4828a7](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/b4828a707fb0c7dafa46a33ad386cb65b5532dd6))
@@ -25,6 +29,20 @@ All notable changes to this project will be documented in this file.
 - **docs**: auto-sync repo structure in README ([4680a4c](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/4680a4c86f6dc230e7c5cf0e3d0ce4dcd5f43df7))
 
 ### Other
+- CITATION.cff ([889ee92](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/889ee922604458ddbddc468ab6ebb2ffd2acb807))
+- Documents/Citation.CFF ([9e2c57d](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/9e2c57d93a6f8f6d2c0387201dfa1b8648dd5147))
+- sbom.yml ([590dd83](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/590dd830fd478f636b760fba14832d8e8b5ada1c))
+- scorecard.yml ([6b9ca9a](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/6b9ca9a8e0f5af43d5e287739b8b882a150c645d))
+- dependabot.yml ([06d628d](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/06d628dea72112b6032e20edf0f854ce0b7a0c20))
+- codeql.yml ([78829e9](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/78829e928d1aacc00b181cc15a7a2930405c6789))
+- release-drafter.yml ([a0ef719](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/a0ef719184b39f2230e77fd7dbedc10465072bfa))
+- CODEOWNERS ([ffd5fec](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/ffd5fec3d6bec9646a513aa4080a23861c6e0c0a))
+- Table Of Contents.md ([4e7cb55](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/4e7cb5500f253c1f863f31402c5095322081dd7f))
+- README.md ([0bc10f1](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/0bc10f12f681467c03edb5d5d75055c6957939d2))
+- README.md ([75580a5](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/75580a56a16674283b4e478d73095fdffdacb19f))
+- README.md ([5081e46](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/5081e468460830f60611be4480178a74ddc49674))
+- README.md ([87a9e88](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/87a9e886250cf378289d07de8a5d7bf72b34ca73))
+- README.md ([5d0c767](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/5d0c7679d817b2ac4f8489745b63ad009a3c4c6e))
 - and rename GCP Current Version(47.1).md to GCP Current Version(47.2).md ([3bd0acc](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/3bd0accfcd4c892fcaeac26458a22df69e4b5b25))
 - V43.md to V43.0.md ([1e4a5b4](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/1e4a5b470e49f62eaedf022fc8818db4d9c16719))
 - V45.md to V45.0.md ([777dbcf](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/777dbcf957523b717e4e44ec39cecdffcd6532b1))
