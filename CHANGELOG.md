@@ -5,6 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased] — 2025-08-13
 
 ### Documentation
+- auto-update CHANGELOG.md ([5c2d4d9](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/5c2d4d98586d1f6944a2261fd4d84b6f8af88aaa))
 - **readme**: auto-sync repo structure ([1fc4f17](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/1fc4f17f33d325346db8adb655e0e66de3c982b7))
 - auto-update CHANGELOG.md ([f1f5a52](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/f1f5a5241762cfc5153dc082b0ffafcd21a09c3f))
 - auto-update Table Of Contents.md ([f1077fe](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/f1077fe4eb8843a6e8a0374d6a9a599c65c70059))
@@ -15,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - auto-update CHANGELOG.md ([6ae0c76](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/6ae0c769e1f8e2877c371feeef17120476b56b8a))
 
 ### Other
+- About.md ([51fed75](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/51fed755514e708c165567dc51a0b817e49e95b6))
 - About.md ([21af95c](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/21af95cc9b6a21ee89f419f1e94f9ae04d64d648))
 - pull_request_template.md ([e387b48](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/e387b48429ff39bddc873bb2c7721ffaed8efe46))
 - CHANGELOG.md ([5f848fc](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/5f848fc08b3eaaaf4d89d7703f8fe76134b12024))
@@ -49,23 +51,3 @@ All notable changes to this project will be documented in this file.
 - index.md ([45b2675](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/45b2675654c8b8ea030705951df31dec3f527416))
 - mkdocs.yml ([262d0ba](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/262d0baf7f6e463426caca8634d203646ea07f34))
 
-diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 0000000..0000001 100644
---- a/CHANGELOG.md
-+++ b/CHANGELOG.md
-@@ -4,9 +4,12 @@
- (…previous entries…)
-
--### Documentation
--- **readme**: auto-sync repo s...
-+### Documentation
-+
-+- **readme**: auto-sync repo s...
-  (…more list items…)
-
--### Other
--- misc: ...
-+### Other
-+
-+- misc: ...
-  (…more list items…)
