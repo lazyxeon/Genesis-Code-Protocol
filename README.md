@@ -26,8 +26,6 @@ GCP is **LLM-agnostic** (ChatGPT, Claude, Grok, etc.) and integrates with common
 - [Key Features](#key-features)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [CLI](#cli)
-  - [Notebooks](#notebooks)
 - [How It Works (Phases & Gates)](#how-it-works-phases--gates)
 - [Risk-Tiered Lanes (V46.5+)](#risk-tiered-lanes-v465)
 - [Safety • Privacy • Security • Compliance](#safety--privacy--security--compliance)
@@ -83,20 +81,20 @@ GCP is **LLM-agnostic** (ChatGPT, Claude, Grok, etc.) and integrates with common
 ---
 
 ## Installation
-
+<details>
 ```bash
 git clone https://github.com/lazyxeon/Genesis-Code-Protocol.git
 cd Genesis-Code-Protocol
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-````
+````</details>
 
 ---
 
 ## Usage
-
-### CLI
-
+<details>
+CLI
+ 
 ```bash
 # Ironclad (V46)
 python "CLI Bundle/gcp_cli.py" --version 46 --prompt "Invent a real-time anomaly detector for time series"
@@ -106,14 +104,16 @@ python "CLI Bundle/gcp_cli.py" --version 46.5 --prompt "Design, verify, and oper
 
 # Worth-It Realism (V47)
 python "CLI Bundle/gcp_cli.py" --version 47 --prompt "Should we even build X? Evaluate + pick smallest effective intervention"
-```
+
+``` 
+
 
 **Common flags:**
 `--version {45.6D,46,46.5,47}` • `--prompt "…"` • `--risk {R1,R2,R3}` • `--output_dir ./runs/<name>` • `--notebook`
 
 ### Notebooks
 
-Open `Notebooks/` for quickstarts and full runs.
+Open `Notebooks/` for quickstarts and full runs.</details>
 
 ---
 
