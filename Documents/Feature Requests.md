@@ -1,20 +1,20 @@
 ---
-name: Feature Request
-about: Suggest an enhancement or new feature for GRCP
-title: '[FEATURE] '
+name: Feature request
+about: Suggest an idea or improvement
 labels: enhancement
-assignees: ''
-
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+**Problem / context**
+What problem does this solve? Is it worth solving (V47 Phase −1)?
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+**Proposed solution**
+What’s the smallest effective intervention (Minimal-Intervention Track)?
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+**Protocol impact**
+- Gates affected (e.g., C2, C6.9, C8.4)
+- Artifacts to update
 
-**Additional Context**
-Add any other context or screenshots about the feature request here. For new variants, include a "worth-it" assessment per v47.
+**Alternatives considered**
+Do-Nothing / Non-Tech baselines
+
+**Additional info**
