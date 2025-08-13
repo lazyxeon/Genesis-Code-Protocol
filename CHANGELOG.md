@@ -5,11 +5,19 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased] — 2025-08-13
 
 ### Documentation
+- auto-update Table Of Contents.md ([f1077fe](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/f1077fe4eb8843a6e8a0374d6a9a599c65c70059))
+- **readme**: auto-sync repo structure ([980077c](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/980077c403f90ba1d432db13b0c57292514f85f9))
+- auto-update CHANGELOG.md ([a8880af](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/a8880afa8428da29ad8d163934e027d12ed74d9a))
 - **readme**: auto-sync repo structure ([0f4120e](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/0f4120e838d196b2fbf5ef5cd754528f07a8a8c2))
 - auto-update Table Of Contents.md ([c7b4425](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/c7b44254c4b145a2928f4d59c3e7add48a6e17e9))
 - auto-update CHANGELOG.md ([6ae0c76](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/6ae0c769e1f8e2877c371feeef17120476b56b8a))
 
 ### Other
+- .markdownlint.jsonc ([b27d450](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/b27d45071ea729b73eb51a936da87dc73c813f36))
+- .markdownlint.jsonc ([f3ca637](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/f3ca6378a6bcd58c2647a3765dd6d796707d5b09))
+- .markdownlint-cli2.jsonc ([642d1c7](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/642d1c7827bf36f10b0806decb5037003e7bbef5))
+- markdownlint.yml ([dc5df54](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/dc5df548e89cfd46874d70040b3e5289906ef35e))
+- README.md ([41a18ff](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/41a18ff034d8c87071fd90669397c9d02842328d))
 - .markdownlint.jsonc ([1e1cc49](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/1e1cc4907e9c52dfa09e633ea8f092f315f87d37))
 - .markdownlint.jsonc ([293caca](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/293caca0f79bb36dbaf839b54c232af2449c0da1))
 - markdownlint.yml ([4cc6d48](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/4cc6d486aaf97bd2ce047a86a2ecd958bd027268))
