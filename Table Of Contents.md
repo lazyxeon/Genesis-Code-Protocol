@@ -101,3 +101,11 @@ Demonstration notebooks and full runs.
   - [JACCO.ipynb](./Notebooks/JACCO.ipynb) - JACCO notebook.
   - [Latch Latent capability Harnesser.md](./Notebooks/Latch%20Latent%20capability%20Harnesser.md) - Latch latent harnesser.
   - [MOSAIC.ipynb](./Notebooks/MOSAIC.ipynb) - MOSAIC notebook.
+ 
+
+ ## Scripts
+
+ Used for Github Workflows
+ 
+- [Scripts/](./Scripts/)
+  - [update_repo_structure.py](./Scripts/update_repo_structure.py)
