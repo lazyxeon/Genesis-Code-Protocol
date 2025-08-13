@@ -4,15 +4,15 @@ on:
   push:
     branches: [ "main" ]
     paths-ignore:
-      - "CHANGELOG.md"
+      - "CHANGELOG.md"                       # avoid loops from our own PRs
       - "Table Of Contents.md"
       - ".github/workflows/generate-changelog.yml"
       - ".github/workflows/update-toc-file.yml"
       - ".github/workflows/update-repo-structure.yml"
       - "README.md"
-  workflow_dispatch: {}
+  workflow_dispatch: {}                      # button to run manually
   schedule:
-    - cron: "29 3 * * *"
+    - cron: "29 3 * * *"                    # optional nightly run
 
 permissions:
   contents: write
@@ -24,49 +24,108 @@ concurrency:
 
 jobs:
   changelog:
-    if: ${{ github.actor != 'github-actions[bot]' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Show repo (debug)
-        run: |
-          pwd
-          ls -la
-          find . -maxdepth 3 -type f -name "generate_changelog.py" -print
-
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Generate CHANGELOG.md (handles Scripts/ vs scripts/)
-        id: gen
-        env:
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_SERVER_URL: ${{ github.server_url }}
+      - name: Generate/refresh CHANGELOG.md (inline)
         run: |
-          set -euo pipefail
-          if [ -f "Scripts/generate_changelog.py" ]; then
-            PY="Scripts/generate_changelog.py"
-          elif [ -f "scripts/generate_changelog.py" ]; then
-            PY="scripts/generate_changelog.py"
-          else
-            echo "::error::generate_changelog.py not found in Scripts/ or scripts/"
-            exit 1
-          fi
-          python -V
-          python "$PY"
-          echo "changed=$(git status --porcelain | grep -c '^ M CHANGELOG.md' || true)" >> "$GITHUB_OUTPUT"
+          python - <<'PY'
+          from __future__ import annotations
+          import os, re, subprocess
+          from pathlib import Path
+          from datetime import datetime, timezone
+          ROOT = Path(".").resolve()
+          CHANGELOG = ROOT / "CHANGELOG.md"
+          REPO = os.getenv("GITHUB_REPOSITORY","")
+          GH_BASE = os.getenv("GITHUB_SERVER_URL","https://github.com").rstrip("/")
+          CC_ORDER = ["feat","fix","perf","refactor","docs","test","build","ci","chore","other"]
+          HEAD_RE = re.compile(r"^(?P<type>[a-z]+)(\((?P<scope>[^)]+)\))?[: ]\s*(?P<msg>.+)$", re.I)
+          PR_RE = re.compile(r"\(#(?P<num>\d+)\)")
+
+          def sh(*args:str)->str:
+            return subprocess.check_output(args).decode("utf-8","replace").strip()
+
+          def last_tag():
+            try: return sh("git","describe","--tags","--abbrev=0")
+            except subprocess.CalledProcessError: return None
+
+          def commits_since(tag):
+            fmt = "%H%x09%s"
+            if tag:
+              log = sh("git","log",f"{tag}..HEAD",f"--pretty=format:{fmt}")
+            else:
+              first = sh("git","rev-list","--max-parents=0","HEAD").splitlines()[0]
+              log = sh("git","log",f"{first}..HEAD",f"--pretty=format:{fmt}")
+            pairs=[]
+            for line in log.splitlines():
+              if not line: continue
+              h, s = line.split("\t",1) if "\t" in line else (line[:40],line)
+              if s.lower().startswith("merge"): continue
+              pairs.append((h,s))
+            return pairs
+
+          def classify(subject):
+            m = HEAD_RE.match(subject)
+            if not m: return "other", subject.strip(), None
+            typ = m.group("type").lower()
+            if typ not in CC_ORDER: typ="other"
+            return typ, m.group("msg").strip(), m.group("scope")
+
+          def link_commit(h):
+            short = h[:7]; 
+            return f"[{short}]({GH_BASE}/{REPO}/commit/{h})" if REPO else short
+
+          def link_pr(s):
+            m = PR_RE.search(s)
+            return f"[#{m.group('num')}]({GH_BASE}/{REPO}/pull/{m.group('num')})" if (m and REPO) else None
+
+          def build_section(commits):
+            buckets = {k:[] for k in CC_ORDER}
+            for h,s in commits:
+              typ,msg,scope = classify(s)
+              pr = link_pr(s); scope_txt = f"**{scope}**: " if scope else ""; pr_txt = f" {pr}" if pr else ""
+              buckets[typ].append(f"- {scope_txt}{msg} ({link_commit(h)}){pr_txt}")
+            titles = {"feat":"Features","fix":"Fixes","perf":"Performance","refactor":"Refactors","docs":"Documentation",
+                      "test":"Tests","build":"Build","ci":"CI","chore":"Chores","other":"Other"}
+            lines=[]
+            for cat in CC_ORDER:
+              items=buckets[cat]
+              if not items: continue
+              lines.append(f"### {titles[cat]}"); lines.extend(items); lines.append("")
+            return "\n".join(lines).rstrip()+("\n" if lines else "")
+
+          tag = last_tag()
+          commits = commits_since(tag)
+          print(f"Last_tag={tag or 'None'}; commit_count={len(commits)}")
+          today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          unreleased = f"## [Unreleased] — {today}\n\n" + (build_section(commits) or "_No changes since last tag._\n")
+
+          header = "# Changelog\n\nAll notable changes to this project will be documented in this file.\n\n"
+          if CHANGELOG.exists():
+            old = CHANGELOG.read_text(encoding="utf-8")
+            base = old if old.startswith("# Changelog") else header + old
+            pat = re.compile(r"^## \[Unreleased\].*?(?=^## |\Z)", re.S|re.M)
+            new = pat.sub(unreleased+"\n", base, 1) if pat.search(base) else header + unreleased + "\n" + base[len(header):]
+          else:
+            new = header + unreleased + "\n"
+          CHANGELOG.write_text(new, encoding="utf-8", newline="\n")
+          print("CHANGELOG.md written/updated.")
+          PY
 
       - name: Show diff (debug)
         run: |
+          git status
           git --no-pager diff -- CHANGELOG.md || true
 
       - name: Create PR with changes
-        if: steps.gen.outputs.changed != '0'
         uses: peter-evans/create-pull-request@v6
         with:
           branch: chore/update-changelog
@@ -74,6 +133,6 @@ jobs:
           commit-message: "docs: auto-update CHANGELOG.md"
           body: |
             This PR updates **CHANGELOG.md** from git history since the last tag.
-            Generated by `generate_changelog.py`.
+            Generated inline by the workflow.
           labels: documentation
           signoff: true
