@@ -6,12 +6,16 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  contents: write  # For release creation
+
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Create Release
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -24,11 +28,12 @@ jobs:
           draft: true
           prerelease: false
       - name: Upload Assets
+        if: steps.create_release.outputs.id
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./GRCP most recent variants/V47.md
+          asset_path: "./GRCP most recent variants/V47.md"
           asset_name: GRCP_v47.md
           asset_content_type: text/markdown
