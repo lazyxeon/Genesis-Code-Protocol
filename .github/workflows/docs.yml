@@ -1,0 +1,40 @@
+name: Docs (MkDocs → GitHub Pages)
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "mkdocs.yml"
+      - "docs/**"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure Git user for gh-deploy
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: mkdocs-${{ runner.os }}-${{ hashFiles('**/mkdocs.yml') }}
+          restore-keys: mkdocs-${{ runner.os }}-
+
+      - name: Install MkDocs Material
+        run: pip install mkdocs-material
+
+      - name: Deploy
+        run: mkdocs gh-deploy --force
