@@ -1,0 +1,28 @@
+name: "🔎 Protocol Review"
+description: Request a review of a phase/gate or checkpointing UX
+title: "[Review]: Phase/Gate "
+labels: [review]
+body:
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - Phase -1 (Worth-It)
+        - Phase 0 (Domain)
+        - Phase 1 (Baselines)
+        - Phase 2 (Design)
+        - Phase 3 (Prototype)
+        - Phase 4 (Adversarial)
+        - Phase 5 (Quality)
+        - Phase 6 (Benchmark)
+        - Phase 8.4 / 8.5 (Simplicity/Optimization)
+        - Phase 9 (Release)
+        - Phase 10 (Continuous Assurance)
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence / Artifacts
+      description: Link to artifacts, ledgers, stats, SBOMs, etc.
