@@ -1,0 +1,24 @@
+# Use Python 3.10 slim as base image for lightweight build
+FROM python:3.10-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies (e.g., for pyspark, matplotlib, etc.)
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements file first to leverage Docker cache
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the entire repo content
+COPY . .
+
+# Ensure CLI Bundle directory is correctly referenced
+WORKDIR /app/CLI Bundle
+
+# Command to run the CLI (adjust arguments as needed)
+CMD ["python", "gcp_cli.py", "--help"]
