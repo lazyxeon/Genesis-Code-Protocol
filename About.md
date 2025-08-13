@@ -1,48 +1,117 @@
- <!-- markdownlint-disable MD013 -->
- # About
+```markdown
+# About
 
- (…existing content; no other changes…)
+**Genesis Code Protocol (GCP)** is an AI-native, checkpoint-gated invention protocol.
+Upload the single protocol document to a capable LLM and run a full session to produce
+field-test-ready outputs that a dev team can validate and deploy.
 
+GCP teaches an LLM **how to think and build**: ideate → simulate → validate → productize
+→ assure. It emphasizes worth-it realism, statistical evidence, supply-chain integrity,
+and continuous evaluation after release.
 
+## Why GCP
 
-# About GRCP: Genesis Recursive Code Protocol
+- Evidence over vibes: expected value modeling, worth-it scoring, Brier-scored forecasts,
+  medians and tails (p50/p95/p99), and replication across seeds.
+- Reality first: serviceability, compliance, TCO, and training considered before scale.
+- Safety, privacy, security, and licensing are first-class deliverables, not afterthoughts.
+- Explicit checkpoints with clear user choices and **seamless resume** at any step.
 
-🧬 **Why I Built GRCP**
+## What GCP Is (and Is Not)
 
-In a world obsessed with AI-generated code, I paused and asked:  
-“What if AI could truly *invent* — not just replicate or automate, but discover, refine, and validate breakthroughs?”
+- **Is:** A single document and set of prompts that any LLM can execute in chat to produce
+  auditable artifacts, ledgers, and a release package.
+- **Is:** A rigorous process with gates that can stop a run early with a justified **No-Go**
+  when the expected value is not there.
+- **Is not:** A library that automatically reaches into your repo or services. It stays within
+  the LLM’s capabilities and your provided tools or code.
+- **Is not:** A substitute for domain expertise, legal review, or real-world validation.
 
-The Genesis Recursive Code Protocol (GRCP) — originally Genesis Code Protocol (GCP) — emerged from that challenge. It's not a gimmick or a prompt hack; it's a structured, AI-native framework designed to orchestrate invention from ideation to field-ready deployment.
+## Modes and Checkpoints
 
-Over months of iterative development and testing with leading LLMs like GPT, Claude, and Grok, I've evolved GRCP into a robust system that mimics human scientific rigor while leveraging AI's speed and scale. From early recursive editions to the latest v47 "Worth-It Realism" variant, it now incorporates problem worthiness assessments, risk-tiered execution, ethical safeguards, and continuous assurance — ensuring inventions are not only novel but practical, ethical, and impactful.
+GCP supports two execution modes:
 
-Key principles that define GRCP:
+- **Full Run Mode:** The model halts at **every** checkpoint. It prints a brief context recap,
+  lists next moves, and waits for your choice (Proceed, Branch, Return, End & Export).
+- **Auto Mode:** The model advances by itself and only stops at critical gates or when a step
+  requires your input. All decisions are logged to a Decision Ledger.
 
-🔁 **Recursive & Adaptive**: Loops back to refine ideas via benchmarks, mutations, and Tree-of-Thought (ToT) exploration.  
-🧪 **Scientific & Empirical**: Executes code, simulates scenarios, debates alternatives, and audits against real-world SOTA baselines.  
-🧠 **Socratic & Collaborative**: Simulates dual-scientist critiques, peer reviews, and ontological boundary checks to foster deep reasoning.  
-📊 **Grounded & Realistic**: Prioritizes "worth-it" problems with expected-value models (EVM), non-tech alternatives, and field-testing readiness.  
-⚖️ **Ethical & Governed**: Built-in proxies for emergence, fairness deltas, personhood risks, SBOM/provenance, and continuous monitoring with auto-rollbacks.
+At each checkpoint you can respond with short commands, for example:
 
-And now?  
-It's fully open source under the MIT license.  
-Clone it, run it, mutate it — or contribute to its evolution.  
+```
 
-This isn't magic or hype.  
-It's a forge for forging the future.
+proceed 1
+branch Phase 7
+return C8.4
+end & export
 
-## Who Is This For?
+```
 
-- **AI Researchers & Developers**: Push LLMs beyond generation into autonomous invention and R&D.  
-- **Code Inventors & Toolmakers**: Create novel algorithms, languages (like AlloyScript), or systems (e.g., EV charging optimizers) with built-in validation.  
-- **Innovators in Emerging Fields**: Tackle quantum-inspired tools, multimodal agents, or sustainable tech with ethical guardrails.  
-- **Thinkers Tired of Superficial AI**: Anyone seeking intent-driven creation over quick fixes — from hobbyists to enterprise teams.  
+## Phases and Gates (V47.2)
 
-I built the protocol I wished existed when I started experimenting with AI-led innovation. Now, as of August 12, 2025, with variants spanning recursive emergence to realism-focused governance, it's ready for you to wield.
+- Phase −1: Worth-It Discovery Sprint → **C−0.5** (“Should we even try?”)
+- Phase 0–4: Opportunity, context, constraints, and hypothesis branching
+- Phase 5–8: Architecture, simulation, refinement, and system integration
+- Phase 9: Validation and benchmarking → **C7 / C7.Sigma**
+- Phase 10: **C8.4** (Simplicity) then **C8.5** (Optimization)
+- Phase 11: Productization and packaging → **C6.9** (Field realism & adoption)
+- Phase 12–13: Documentation, safety case, and signed release → **C9**
+- Phase 14–15: Continuous evaluation, archival, and postmortem
 
-Now it's yours.  
+## Risk-Tiered Rigor
 
-— LazyXeon
+- **R1:** Low risk. N ≥ 15, ≥ 5 seeds, integrity-lite.
+- **R2:** Moderate risk. N ≥ 30, ≥ 10 seeds, full integrity, SBOM/signing.
+- **R3:** High/regulated. N ≥ 50, ≥ 20 seeds, FMEA/STPA/GSN/DPIA/HIL, CE on by default.
 
-+
-+<!-- markdownlint-enable MD013 -->
+## Artifacts and Ledgers
+
+- Run, Decision, Assumption, Evidence, Benchmark, Optimization, Risk & Safety, and Compliance
+  ledgers are produced across phases.
+- File naming uses a short Run ID and phase markers, for example:
+  `S42_9_Benchmark_Ledger.md`, `S42_13_Safety_Case.md`, and `S42_FinalPackage.zip`.
+
+## Security, Privacy, and Licensing
+
+- SBOM (SPDX or CycloneDX), signatures/attestations, SAST/DAST/secret scans, and CVE gates.
+- DPIA where applicable, data minimization, retention/erasure, and re-identification checks.
+- SPDX license identifiers; avoid incompatible copyleft in production; attribution bundles included.
+
+## Quickstart (LLM-Only)
+
+Upload the protocol file to your LLM chat and run:
+
+```
+
+Initiate GCP and Run Spark: <your idea>.
+Mode: \<Full Run | Auto>.
+Risk Tier: \<R1 | R2 | R3>.
+Objective: <success criteria>.
+Constraints: \<hard/soft>.
+Deliverables: \<code/docs/field kit/etc>.
+
+```
+
+Then follow the checkpoint prompts. You can switch modes at any time:
+
+```
+
+switch to auto mode
+switch to full run mode
+
+```
+
+## Learn More
+
+- **README:** Repository overview and status
+- **Wiki:** Phases, gates, modes, artifacts, and the full methods guide
+- **Docs site (optional):** Versioned documentation if enabled with MkDocs
+
+## Citation
+
+If you use GCP, please cite the repository and the specific release you adopted. See the
+root `CITATION.cff` (also shown via GitHub’s “Cite this repository” button).
+
+```
+
+If you want different sections (e.g., a brief history or credits), tell me the headings and I’ll add them while keeping the linter happy.
