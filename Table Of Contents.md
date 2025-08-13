@@ -1,18 +1,5 @@
 # Table of Contents for Genesis Code Protocol (GCP)
 
-## 📚 GCP Wiki (V47.2)
-
-A deep, AI-native knowledge base for everything Genesis Code Protocol: how the protocol thinks, how it builds, and how to ship field-test-ready inventions with rigor.
-
-- **Home** —   
- https://github.com/lazyxeon/Genesis-Code-Protocol/wiki
-
-- **Explanation of Protocol Components** —
- https://github.com/lazyxeon/Genesis-Code-Protocol/wiki/Explanation-of-Protocol-Components
-
-- **Full AI Deep Dive: Repo & GCP** —
- https://github.com/lazyxeon/Genesis-Code-Protocol/wiki/AI-Deep-Dive-Repo-and-GCP
-
 This document is auto-generated. Links are relative to the repo. Updated as of August 13, 2025 (UTC).
 
 ## Root
@@ -33,12 +20,17 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
     - [Python-CI.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/Python-CI.yml)
     - [auto-release.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/auto-release.yml)
     - [cliff.toml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/cliff.toml)
+    - [codeql.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/codeql.yml)
     - [docker-build.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/docker-build.yml)
     - [generate-changelog.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/generate-changelog.yml)
+    - [release-drafter.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/release-drafter.yml)
+    - [sbom.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/sbom.yml)
+    - [scorecard.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/scorecard.yml)
     - [security-scan.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/security-scan.yml)
     - [update-repo-structure.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/update-repo-structure.yml)
     - [update-toc-file.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/update-toc-file.yml)
     - [validate-notebooks.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/validate-notebooks.yml)
+  - [dependabot.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/dependabot.yml)
 
 ## CLI Bundle
 
