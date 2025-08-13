@@ -11,11 +11,8 @@ on:
 
 permissions:
   contents: read
-  packages: write   # needed for ghcr.io
-  id-token: write   # enables keyless signing / attestations down the line
-
-env:
-  IMAGE_NAME: ghcr.io/${{ github.repository }}
+  packages: write
+  id-token: write
 
 jobs:
   build:
@@ -36,8 +33,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set lowercase image name
+        run: |
+          echo "IMAGE_NAME=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_ENV"
+
       - name: Build & push (multi-arch) with attestations
-        id: build
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -46,8 +46,6 @@ jobs:
           tags: |
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:${{ github.sha }}
-          labels: |
-            org.opencontainers.image.source=${{ github.repositoryUrl }}
           provenance: mode=max
           attests: |
             type=provenance,mode=max
