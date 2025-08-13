@@ -378,6 +378,7 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
   - .dockerignore
   - Dockerfile
   - requirements.txt
+- .markdownlint-cli2.jsonc
 - .markdownlint.jsonc
 - About.md
 - CHANGELOG.md
