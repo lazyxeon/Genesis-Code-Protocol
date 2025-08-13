@@ -371,6 +371,7 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
   - Latch Latent capability Harnesser.md
   - MOSAIC.ipynb
 - **Scripts/**
+  - fix\_md\_spacing.py
   - generate\_changelog.py
   - generate\_repo\_toc.py
   - update\_repo\_structure.py
