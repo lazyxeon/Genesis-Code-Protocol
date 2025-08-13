@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased] — 2025-08-13
 
 ### Documentation
+- **readme**: auto-sync repo structure ([5130188](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/5130188c04b41f74028daf599449033324693a10))
+- auto-update CHANGELOG.md ([d2a9dba](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/d2a9dbaa2daaefa53d13bc44a541cc12ce5f3ec5))
 - auto-update Table Of Contents.md ([2edbb6a](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/2edbb6a23a86c717462f5815675d2e1f99c87120))
 - auto-update CHANGELOG.md ([b5a49bf](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/b5a49bf66c42a82fff5beb683fa9bb80628379a7))
 - **readme**: auto-sync repo structure ([9ccebdb](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/9ccebdb96f197c6c11341beb7a64e6d232437d51))
@@ -31,10 +33,14 @@ All notable changes to this project will be documented in this file.
 - **docs**: auto-sync repo structure in README ([4680a4c](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/4680a4c86f6dc230e7c5cf0e3d0ce4dcd5f43df7))
 
 ### Other
+- release-drafter.yml ([9c44107](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/9c44107413cb5d40f7fa7d1f558de4cf6feb8188))
+- release-drafter.yml ([05e2ea9](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/05e2ea9cdabfd3299a08958d8db83a24d9217312))
+- .github/workflows/release-drafter.yml ([9431070](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/9431070b842c42d03a732442a5a7f18d5fcdff3d))
 - CITATION.cff ([889ee92](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/889ee922604458ddbddc468ab6ebb2ffd2acb807))
 - Documents/Citation.CFF ([9e2c57d](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/9e2c57d93a6f8f6d2c0387201dfa1b8648dd5147))
 - sbom.yml ([590dd83](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/590dd830fd478f636b760fba14832d8e8b5ada1c))
 - scorecard.yml ([6b9ca9a](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/6b9ca9a8e0f5af43d5e287739b8b882a150c645d))
+- peter-evans/create-pull-request from 6 to 7 ([c0aaef1](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/c0aaef15a0391a6b6e2fd35e6dd9b52acae70796))
 - actions/checkout from 4 to 5 ([e042eb5](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/e042eb50b2c5e07631ecd8279661682ec2b30b51))
 - dependabot.yml ([06d628d](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/06d628dea72112b6032e20edf0f854ce0b7a0c20))
 - codeql.yml ([78829e9](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/78829e928d1aacc00b181cc15a7a2930405c6789))
