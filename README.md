@@ -8,6 +8,8 @@
 ![Last Commit](https://img.shields.io/github/last-commit/lazyxeon/Genesis-Code-Protocol)
 ![CI](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/Python-CI.yml/badge.svg)
 ![Security Scan](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/security-scan.yml/badge.svg)
+![Repo Tree Sync](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml/badge.svg?branch=main)
+
 
 > **Formerly:** GRCP (Genesis Recursive Code Protocol)  
 > **Status:** Active (Aug 2025) • **License:** MIT • **Language:** Python 3.10+
