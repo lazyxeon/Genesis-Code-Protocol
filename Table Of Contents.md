@@ -1,5 +1,18 @@
 # Table of Contents for Genesis Code Protocol (GCP)
 
+## 📚 GCP Wiki (V47.2)
+
+A deep, AI-native knowledge base for everything Genesis Code Protocol: how the protocol thinks, how it builds, and how to ship field-test-ready inventions with rigor.
+
+- **Home** —   
+ https://github.com/lazyxeon/Genesis-Code-Protocol/wiki
+
+- **Explanation of Protocol Components** —
+ https://github.com/lazyxeon/Genesis-Code-Protocol/wiki/Explanation-of-Protocol-Components
+
+- **Full AI Deep Dive: Repo & GCP** —
+ https://github.com/lazyxeon/Genesis-Code-Protocol/wiki/AI-Deep-Dive-Repo-and-GCP
+
 This document is auto-generated. Links are relative to the repo. Updated as of August 13, 2025 (UTC).
 
 ## Root
