@@ -138,6 +138,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 
 ## Scripts
 
+  - [fix_md_spacing.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Scripts/fix_md_spacing.py)
   - [generate_changelog.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Scripts/generate_changelog.py)
   - [generate_repo_toc.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Scripts/generate_repo_toc.py)
   - [update_repo_structure.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Scripts/update_repo_structure.py)
