@@ -517,6 +517,10 @@ Examples/EV_PRR_V47/
 - **Scripts/**
   - generate\_repo\_toc.py
   - update\_repo\_structure.py
+- **docker/**
+  - .dockerignore
+  - Dockerfile
+  - requirements.txt
 - About.md
 - Charts.md
 - Code of Conduct.md
