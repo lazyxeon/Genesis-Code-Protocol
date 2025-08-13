@@ -169,14 +169,262 @@ Open `Notebooks/` for quickstarts and full runs.</details>
 
 ## Example End-to-End (V47 + Spark)
 
-* **Problem:** long waits & failed sessions at public DC fast chargers.
-* **Phase −1:** proved value vs Do-Nothing & Non-Tech; passed **C−0.5** (pilot in California).
-* **Solution:** **Predict → Route → (Soft) Reserve** with Spark Structured Streaming + Delta.
+distilled the full V47 run into an end-to-end, runnable example with commands, artifacts, KPIs, and gates.
 
-  * Ingest OCPP/network feeds + AFDC metadata + traffic/weather/events.
-  * Predict per-site **wait + failure risk**; start advisory routing; optionally enable soft holds.
-  * **Canaries:** prediction error, feed freshness, reservation uptake → **auto-rollback** to advisory-only.
-  * **Fairness:** slice deltas; constraints prevent starving rural/low-income regions.
+
+
+# End-to-End Example (V47): EV Fast-Charging — Predict → Route → (Soft) Reserve
+<details>
+**Edition:** GCP **V47 — Worth-It Realism**
+**Track:** Spark + Delta Lake • Kafka (ingest) • FastAPI (serve)
+**Scope:** California pilot corridors (I-5 / I-80)
+**Provenance:** Summarized from the “GCP V47 Known EV issue Full Run” document&#x20;
+
+---
+
+## 1) Problem & Goal (Phase −1: Worth-It)
+
+**Pain:** Public DC fast charging (DCFC) suffers long queues and failed sessions during peaks → time loss, anxiety, lower EV satisfaction/adoption.
+**Goal:** Cut **p95 wait** and **failed attempts** by predicting per-site wait/failure risk, then **advising routes** and optionally **holding soft time windows** across nearby sites.
+
+**Baselines considered**
+
+* **Do-Nothing:** “just go to nearest” (status quo)
+* **Non-Tech:** marshal queues + signage/alerts
+* **Tech (PRR):** Predict → Route → (Soft) Reserve
+
+**Gate C−0.5 — Should we even try?**
+Worth-It Score ≈ **0.76** → **PASS** (R2 pilot). Rationale: credible pain; CA data mandates enable real-time substrate; expected value positive even under conservative uptake.&#x20;
+
+---
+
+## 2) System at a Glance
+
+**Ingest → Lakehouse → Models → Serving → CE (Phase 10)**
+
+* **Data**: Station metadata (AFDC), real-time availability (network/OCPP), traffic, weather, events.
+* **Spark Structured Streaming** to **Delta Lake**: bronze (raw) → silver (normalized) → gold (features/labels, predictions).
+* **Models**: Day-one baseline = **historical quantiles blended with M/M/c queueing prior**; iterative upgrades (GBDT/CatBoost on Spark).
+* **Serving**: **FastAPI** `/predict`, `/route`, `/hold` (soft reservations with bounded overbooking).
+* **Ops**: Canary metrics + **auto-rollback** to advisory-only; dashboards for error, fairness deltas, utilization.&#x20;
+
+---
+
+## 3) KPIs, Targets, and Gates
+
+* **Primary KPI:** p95 wait (minutes/arrival) — **target ≤ 10 min** at pilot sites during peak windows (90-day avg).
+* **Secondary:** failed attempts %, reroute burden, fairness deltas (rural/low-income), prediction error tails.
+* **Falsification (V47):** if p95 wait not improved by **≥30%** vs matched baseline corridors in **≤60 days** → **STOP / pivot to Minimal-Intervention**.
+* **Risk tier:** **R2** (moderate). **Phase 10** CE on from day one.&#x20;
+
+---
+
+## 4) Data Inputs (pilot)
+
+* **AFDC Station Locator** (IDs, operator, location, ports, max kW, connector mix).
+* **Network status / OCPP** (per-port states, faults, price if available).
+* **Traffic / Weather / Events** mapped to nearest stations.
+* **(Optional)** anonymized app pings for ground-truth waits.&#x20;
+
+---
+
+## 5) Delta Tables (DDL sketch)
+
+```sql
+-- Bronze
+CREATE TABLE bronze.ocpp_status_raw (
+  ingest_ts TIMESTAMP, payload STRING, source STRING, kafka_offset BIGINT
+) USING DELTA;
+
+-- Silver
+CREATE TABLE silver.port_status (
+  obs_ts TIMESTAMP, station_id STRING, port_id STRING, connector_type STRING,
+  status STRING, error_code STRING, power_kw DOUBLE, price_cents_kwh DOUBLE, source STRING
+) USING DELTA;
+
+-- Gold (features → predictions)
+CREATE TABLE gold.site_timeslice_features (
+  ts_5m TIMESTAMP, station_id STRING,
+  busy_ports INT, total_ports INT, faults INT, last_change_secs INT,
+  arrivals_5m INT, departures_5m INT, traffic_speed DOUBLE,
+  weather_bucket STRING, event_flag INT, util_15m DOUBLE,
+  prior_wait_p50 DOUBLE, prior_wait_p95 DOUBLE, label_wait_minutes DOUBLE
+) USING DELTA;
+
+CREATE TABLE gold.predictions (
+  ts_5m TIMESTAMP, station_id STRING,
+  y_wait_min DOUBLE, y_wait_lo DOUBLE, y_wait_hi DOUBLE,
+  fail_prob DOUBLE, model_version STRING
+) USING DELTA;
+```
+
+> Bronze streams from Kafka; silver normalizes OCPP/vendor JSON; gold builds features/labels and writes predictions.&#x20;
+
+---
+
+## 6) Spark Jobs (skeletons)
+
+**Bronze ingest (OCPP)**
+
+```python
+# ocpp_ingest.py
+df = (spark.readStream.format("kafka")
+      .option("kafka.bootstrap.servers", "<broker>")
+      .option("subscribe", "ocpp_status_raw")
+      .option("startingOffsets", "latest").load())
+bronze = df.selectExpr("timestamp as ingest_ts","CAST(value AS STRING) payload",
+                       "CAST(topic AS STRING) source","offset as kafka_offset")
+(bronze.writeStream.format("delta")
+ .option("checkpointLocation","s3://…/chk/bronze/ocpp")
+ .outputMode("append").start("s3://…/delta/bronze/ocpp_status_raw"))
+```
+
+**Silver normalize**
+
+```python
+# status_unify.py (parse payload → silver.port_status)
+# expect fields: stationId, connectorId, status, errorCode, timestamp, powerKW, priceCentsKwh
+```
+
+**Gold features & labels**
+
+```python
+# features_labels.py (rollups to 5-min windows, joins traffic/weather/events)
+# computes busy_ports/total_ports/faults/arrivals/departures/etc. → gold.site_timeslice_features
+```
+
+**Predictions**
+
+```python
+# predict_baseline.py (quantiles + M/M/c prior → y_wait_min/lo/hi, fail_prob) → gold.predictions
+```
+
+All four can run on Spark 3.5+ with Delta 3+.&#x20;
+
+---
+
+## 7) Day-One Baseline (robust & transparent)
+
+* **Quantile table** by station × hour-of-week (p50/p80/p95).
+* **Queueing prior (M/M/c)** from current load (arrivals/departures/ports).
+* **Blend** (e.g., 70/30) for **y\_wait\_min**, with **y\_wait\_lo/hi** bounds; **fail\_prob** via simple fault features.
+* Conservative behavior near saturation to avoid “confidently wrong” spikes.&#x20;
+
+---
+
+## 8) Minimal Serving API (FastAPI)
+
+```python
+# app.py (sketch)
+@app.get("/predict")  # ?station_id=...
+def predict(station_id: str):  # returns y_wait_min/lo/hi + fail_prob + ts
+    ...
+@app.get("/route")   # advisory routing (v0); soft holds in v1
+def route(...): ...
+@app.post("/hold")   # soft time-window reservation with bounded overbooking
+def hold(...): ...
+```
+
+Latency target: **< 2s P95** per query. Soft holds are optional; advisory-only is the **Minimal-Intervention** fallback.&#x20;
+
+---
+
+## 9) A/B Design & Canary Rollback
+
+**Experiment arms (corridor-paired):**
+
+* **Control:** nearest-charger maps
+* **Treatment A:** advisory with predicted waits
+* **Treatment B:** advisory + soft holds (bounded overbooking)
+
+**Canaries (auto-rollback):**
+
+* Prediction error: **MAE > 5 min** or **p95 error > 12 min** → revert to advisory-only
+* Reservation uptake: **< 15%** w/o benefit → disable holds
+* Feed freshness: **> 60s** sustained gap → switch to cached/historical baseline&#x20;
+
+---
+
+## 10) Fairness • Privacy • Compliance
+
+* **Fairness:** publish regional improvements; block expansion if any protected slice regresses **> 0.5%**.
+* **Privacy:** station-level + aggregates only; no PII.
+* **Compliance:** SBOM, SPDX, signatures/attestations at **C9**; abide by CA real-time data & uptime rules.&#x20;
+
+---
+
+## 11) Ops & Costs (pilot order-of-magnitude)
+
+* **Cluster:** 1 driver (8 vCPU/32 GB), 6 workers (16 vCPU/64 GB), autoscale 3–10.
+* **Storage:** Delta in object store; 30-day hot, 180-day warm.
+* **90-day budget:** target **< \$100k** (compute + storage + APIs).&#x20;
+
+---
+
+## 12) Quickstart (commands)
+
+```bash
+# 1) Set Spark/Delta runtime and env (cloud of your choice)
+export KAFKA_BOOTSTRAP=<broker>
+export DELTA_ROOT=s3://your-bucket/delta
+export CHK_ROOT=s3://your-bucket/chk
+
+# 2) Create tables (adjust storage URIs)
+spark-sql -f sql/ddl_delta_e2e.sql
+
+# 3) Start streams (bronze → silver → gold)
+spark-submit jobs/ocpp_ingest.py
+spark-submit jobs/status_unify.py
+spark-submit jobs/features_labels.py
+spark-submit jobs/predict_baseline.py
+
+# 4) Serve API (FastAPI) reading gold.predictions
+uvicorn app:app --host 0.0.0.0 --port 8080
+```
+
+---
+
+## 13) Minimal Folder Scaffold (suggested)
+
+```text
+Examples/EV_PRR_V47/
+├─ sql/
+│  └─ ddl_delta_e2e.sql
+├─ jobs/
+│  ├─ ocpp_ingest.py
+│  ├─ status_unify.py
+│  ├─ features_labels.py
+│  └─ predict_baseline.py
+├─ app.py
+└─ README.md   ← this file
+```
+
+---
+
+## 14) Gates Recap (this example)
+
+* **C−0.5 (Worth-It):** **PASS** (R2 pilot)
+* **C0 (Eligibility):** **PASS** (Domain Profile, Four-Fit, assumptions, budgets)
+* **C6.9 (Field Realism & Adoption):** Checked pre-scale (serviceability, compliance, TCO, training)
+* **C7 / C7.Sigma:** Stats/replication/tails for model promotions
+* **C9:** Release with SBOM & signing; **Phase 10** Continuous Evaluation active&#x20;
+
+---
+
+## 15) Next 48 Hours
+
+1. Secure CA network feeds (real-time availability), confirm AFDC API keys.
+2. Stand up bronze/silver streams; verify station cross-refs.
+3. Ship `/predict` baseline; wire advisory routing in app (feature flag).
+4. Launch A/B on two corridors; enable canaries + auto-rollback.
+5. Premortem & red-team pass before enabling soft holds.&#x20;
+
+---
+
+> **Note:** This example is intentionally conservative and **Minimal-Intervention** friendly. If predictions don’t deliver measurable benefit fast, the system stays at advisory-only while non-tech ops (signage/alerts) carry near-term relief.&#x20;
+</details>
+
+
 
 ---
 
