@@ -377,13 +377,14 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
   - .dockerignore
   - Dockerfile
   - requirements.txt
+- .markdownlint.jsonc
 - About.md
 - CHANGELOG.md
 - CITATION.cff
 - Charts.md
 - Code of Conduct.md
 - Contributing.md
-- GCP Current Version(47.2).md
+- GCP Current Version(47.2). AI-Native Operational Manual.md
 - LICENSE.md
 - README.md
 - Table Of Contents.md
