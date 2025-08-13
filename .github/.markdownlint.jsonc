@@ -1,0 +1,11 @@
+{
+  "default": true,
+  // MD041: Do not require a top-level H1 in PR/issue templates
+  "MD041": false,
+  // Keep these relaxed for templates that start with comments/checkboxes
+  "MD022": { "lines_above": 1, "lines_below": 1 },
+  // If your template intentionally omits blank lines around lists, disable:
+  // "MD032": false
+  // If the template has long lines by design, uncomment to relax:
+  // "MD013": false
+}
