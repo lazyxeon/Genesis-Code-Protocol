@@ -4,11 +4,16 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'Dockerfile'
-      - '.dockerignore'
-      - 'requirements.txt'
-      - 'CLI Bundle/**'
+      - 'docker/**'
       - '.github/workflows/docker-build.yml'
+      - 'CLI Bundle/**'
+      - 'requirements.txt'
+  pull_request:
+    paths:
+      - 'docker/**'
+      - '.github/workflows/docker-build.yml'
+      - 'CLI Bundle/**'
+      - 'requirements.txt'
   workflow_dispatch:
 
 permissions:
@@ -18,20 +23,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+      - uses: actions/checkout@v5
 
       - name: Set up Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build (no push)
+      - name: Build image (no push)
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./Dockerfile
+          file: docker/Dockerfile
           push: false
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          tags: local/gcp-protocol:latest
