@@ -1,15 +1,4 @@
-.git
-.github
-__pycache__/
+# docker/.dockerignore
+# Keep this minimal; root .dockerignore handles big folders.
 *.pyc
-*.pyo
-*.pyd
-*.swp
-*.swo
-*.log
-.venv/
-venv/
-dist/
-build/
-node_modules/
-**/.ipynb_checkpoints/
+__pycache__/
