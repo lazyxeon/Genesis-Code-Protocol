@@ -12,6 +12,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 - [GCP Current Version(47.2). AI-Native Operational Manual.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Current%20Version%2847.2%29.%20AI-Native%20Operational%20Manual.md)
 - [LICENSE.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/LICENSE.md)
 - [README.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/README.md)
+- [SECURITY.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/SECURITY.md)
 - [Table Of Contents.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Table%20Of%20Contents.md)
 - [mkdocs.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/mkdocs.yml)
 
