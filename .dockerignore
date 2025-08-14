@@ -1,16 +1,20 @@
-# .dockerignore (root)
+# VCS & CI
 .git
 .github
-**/__pycache__/
-**/*.pyc
-**/.ipynb_checkpoints/
 
-Notebooks/
+# Python cruft
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pytest_cache/
+*.egg-info/
+
+# Not needed in image
 Documents/
-GRCP most recent variants/
-Scripts/
+Notebooks/
+*.md
 Charts.md
-*.ipynb
-*.pdf
-*.zip
+About.md
+mkdocs.yml
 dist/
