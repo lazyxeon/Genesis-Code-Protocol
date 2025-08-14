@@ -6,28 +6,41 @@ FROM python:3.11-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_DEFAULT_TIMEOUT=60
 
 WORKDIR /app
 
-# System deps often needed for building wheels (cryptography, uvloop, etc.)
-# Add others here if logs later complain (e.g., libpq-dev for psycopg)
+# 🧰 Native build deps commonly required by Python packages
+# - build-essential/pkg-config: compile wheels when needed
+# - libffi/openssl: cryptography, cffi
+# - libxml2/libxslt/zlib/jpeg/png: lxml, pillow
+# - libpq: psycopg2
+# - libmagic: python-magic/filetype
+# - libsndfile/ffmpeg: audio libs
+# Add others later if logs complain (e.g., libcurl4-openssl-dev, libopencv-dev)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git ca-certificates build-essential \
+    git ca-certificates curl pkg-config build-essential \
     libffi-dev libssl-dev \
-    && rm -rf /var/lib/apt/lists/*
+    libxml2-dev libxslt1-dev zlib1g-dev \
+    libjpeg-dev libpng-dev \
+    libpq-dev \
+    libmagic-dev \
+    libsndfile1-dev ffmpeg \
+ && rm -rf /var/lib/apt/lists/*
 
-# Copy the entire repo so requirements can reference local paths / -e .
-# (What gets sent is controlled by your .dockerignore)
+# Use .dockerignore to keep the context lean; copy full repo so "-e ." or local paths work
 COPY . /app
 
-# Show which requirements file we will use (helps debugging paths)
-RUN test -f "CLI Bundle/requirements.txt" && echo "Found: CLI Bundle/requirements.txt" || ls -la "CLI Bundle" || true
+# Show presence of requirements file (useful in logs when path contains spaces)
+RUN test -f "CLI Bundle/requirements.txt" && echo "Found: CLI Bundle/requirements.txt" || (echo "Missing requirements file" && ls -la "/app/CLI Bundle" && false)
 
-# Upgrade pip/setuptools/wheel (reduces build failures), then install
-# Use quotes because the path contains a space.
-RUN python -m pip install --upgrade pip setuptools wheel && \
-    pip install --no-cache-dir -r "CLI Bundle/requirements.txt" --verbose
+# Upgrade tooling (reduces build failures)
+RUN python -m pip install --upgrade pip setuptools wheel
 
-# Default entrypoint: run the CLI (quotes for the space in path)
+# ✅ Install Python deps; prefer prebuilt wheels when available to avoid compiling
+# The JSON-quoted path handles the space in "CLI Bundle"
+RUN pip install --no-cache-dir --prefer-binary -r "CLI Bundle/requirements.txt" -vv
+
+# Default entrypoint to your CLI (quotes for the path with a space)
 ENTRYPOINT ["python", "/app/CLI Bundle/gcp_cli.py"]
