@@ -35,12 +35,10 @@ COPY . /app
 # Show presence of requirements file (useful in logs when path contains spaces)
 RUN test -f "CLI Bundle/requirements.txt" && echo "Found: CLI Bundle/requirements.txt" || (echo "Missing requirements file" && ls -la "/app/CLI Bundle" && false)
 
-# Upgrade tooling (reduces build failures)
-RUN python -m pip install --upgrade pip setuptools wheel
-
-# ✅ Install Python deps; prefer prebuilt wheels when available to avoid compiling
-# The JSON-quoted path handles the space in "CLI Bundle"
-RUN pip install --no-cache-dir --prefer-binary -r "CLI Bundle/requirements.txt" -vv
+# Replace your existing pip install line with this two-step sanitize + install
+RUN awk '{ if ($0 ~ /^[[:space:]]*[0-9]+\./) { print "# " $0 } else { print $0 } }' \
+      "CLI Bundle/requirements.txt" > /tmp/requirements.sanitized.txt && \
+    pip install --no-cache-dir --prefer-binary -r /tmp/requirements.sanitized.txt -vv
 
 # Default entrypoint to your CLI (quotes for the path with a space)
 ENTRYPOINT ["python", "/app/CLI Bundle/gcp_cli.py"]
