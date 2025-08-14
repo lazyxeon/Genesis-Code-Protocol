@@ -392,6 +392,7 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
 - GCP Current Version(47.2). AI-Native Operational Manual.md
 - LICENSE.md
 - README.md
+- SECURITY.md
 - Table Of Contents.md
 - mkdocs.yml
 ```
