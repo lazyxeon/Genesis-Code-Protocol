@@ -293,7 +293,6 @@ Table of Contents →
 <details> <summary>Expand tree</summary>
   
   <!-- BEGIN REPO TREE -->
-
 ```text
 - **.devcontainer/**
   - devcontainer.json
@@ -394,12 +393,11 @@ Table of Contents →
 - Charts.md
 - Code of Conduct.md
 - Contributing.md
-- GCP Current Version(47.2). AI-Native Operational Manual.md
+- GCP Current Version(48). AI-Native Operational Manual.md
 - LICENSE.md
 - README.md
 - SECURITY.md
 - Table Of Contents.md
 - mkdocs.yml
 ```
-
 <!-- END REPO TREE --></details>
