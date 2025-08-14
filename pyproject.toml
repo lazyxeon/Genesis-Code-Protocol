@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "genesis-code-protocol"
+version = "0.0.1"
+description = "GCP – AI-native invention protocol & CLI"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "lazyxeon" }]
+classifiers = ["Programming Language :: Python :: 3"]
+
+dependencies = [
+  # put real runtime deps here
+]
+
+[project.scripts]
+gcp = "CLI Bundle.gcp_cli:main"  # create a main() in gcp_cli.py
+
+[tool.hatch.build.targets.wheel]
+packages = ["CLI Bundle"]
