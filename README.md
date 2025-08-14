@@ -400,5 +400,6 @@ Table of Contents →
 - SECURITY.md
 - Table Of Contents.md
 - mkdocs.yml
+- requirements.txt
 ```
 <!-- END REPO TREE --></details>
