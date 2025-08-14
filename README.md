@@ -235,6 +235,7 @@ Security: SBOM (SPDX), signatures/attestations, SAST/DAST/secret scans, CVE gate
 Licensing: SPDX identifiers; block incompatible copyleft in prod; attribution bundle.
 
 Fairness: slice metrics & guardrails; regressions ≤ 0.5% absolute (R2/R3) unless dual-signed waiver.
+
 ---
 📚 GCP Wiki
 
@@ -249,23 +250,27 @@ Explanation of Protocol Components: phases (−0.8→15), gates, ledgers, tiers,
 AI Deep Dive: Repo & GCP: how folders/workflows map to protocol outputs; end-to-end runs
 
 👉 https://github.com/lazyxeon/Genesis-Code-Protocol/wiki/AI-Deep-Dive-Repo-and-GCP
+
 ---
 Contributing
 
 See CONTRIBUTING.md and CODE_OF_CONDUCT.md. Conventional Commits + SemVer preferred. Please include tests/docs and security considerations with PRs.
+
 ---
 Security Policy
 
 Use GitHub’s Private Vulnerability Reporting (Security → “Report a vulnerability”). See SECURITY.md for triage/embargo and keys.
+
 ---
 License & Disclaimer
 
 MIT — see Documents/LICENSE.md.
 
 GCP is a research-grade protocol. Outcomes depend on model capability, tools, and data access. Follow applicable laws/ethics and your org’s privacy/security standards.
+
 ---
 Changelog (highlights)
----
+
 V48: TRIZ/ARIZ (−0.8), C-K (−0.5A), Futures/Morph (2.5), Red-Team (4.A), War-Game (6.5), Devastation (13.5), Adversary (14.5); expanded ledgers & packaging.
 
 V47.2: Dual modes (Full Run/Auto), universal checkpoint banners, renumbered flow.
@@ -277,13 +282,14 @@ V47.0: Worth-It Realism (Phase −1, C−0.5, Minimal-Intervention, C6.9, foreca
 V46.5: Continuous Assurance (Phase 14 CE), risk tiers, SPDX/SAST/DAST, SemVer/compat.
 
 V46: Field-test hardening, reordered gates, rigorous stats, reproducible builds.
+
 ---
 Repository Structure
----
-Full layout of GCP repo (auto-updated via workflow).
----
-Table of Contents →
 
+Full layout of GCP repo (auto-updated via workflow).
+
+Table of Contents →
+---
 <details> <summary>Expand tree</summary>
   
   <!-- BEGIN REPO TREE -->
