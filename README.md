@@ -390,4 +390,116 @@ Table of Contents →
 - SECURITY.md
 - Table Of Contents.md
 - mkdocs.yml
-</details> <!-- markdownlint-enable MD013 -->
+Repo Structure
+  
+  <!-- BEGIN REPO TREE -->
+
+```text
+- **.devcontainer/**
+  - devcontainer.json
+- **CLI Bundle/**
+  - Readme.md
+  - audit\_utils.py
+  - full\_run.py
+  - gcp\_cli.py
+  - phase1.py
+  - phase6.7.py
+  - prompt\_utils.py
+  - requirements.txt
+- **Documents/**
+  - **protocol/**
+    - overview
+  - AI ChatGPT Critical Analysis GCP V45.6D.md
+  - AI ChatGPT Critical Analysis GCP V46.md
+  - AI ChatGPT Critical Analysis V47 Full Run EV issue.md
+  - AI Claude Critical Analysis GCP V45.6d.md
+  - AI Claude Critical Analysis GCP V46.md
+  - AI Claude Critical Analysis V47 full run EV issue.md
+  - AI Grok Critical Analysis GCP V45.6D.md
+  - AI Grok Critical Analysis GCP V46 .md
+  - AI Grok Critical Analysis V47 Full Run EV issue.md
+  - Feature Requests.md
+  - Issue Template.md
+  - Pull Request Template.md
+  - Requirements.md
+  - Security.md
+  - Setup.py
+  - index.md
+  - releases.md
+  - security\_report.md
+- **GRCP most recent variants/**
+  - Changelog.md
+  - Complete Master List All Revisions Full.md
+  - V09.md
+  - V11.md
+  - V20.md
+  - V22.md
+  - V23.md
+  - V30.md
+  - V34.md
+  - V35.md
+  - V36.md
+  - V40.md
+  - V41.md
+  - V42.md
+  - V43.0.md
+  - V43.6.md
+  - V43.7.md
+  - V44.1.md
+  - V44.7.md
+  - V44.8.md
+  - V44.9b.md
+  - V44.9d.md
+  - V45.0.md
+  - V45.1.md
+  - V45.2.md
+  - V45.3.md
+  - V45.4A.md
+  - V45.5.md
+  - V45.6.md
+  - V46.0.md
+  - V46.5.md
+  - V47.0.md
+  - V47.1.md
+  - V47.2.md
+  - V48.0.md
+- **Notebooks/**
+  - **Full Runs/**
+    - Known EV issue Full Run, GCPv47.md
+    - Latch Full run.md
+    - Quantum Mechanics Full Run.md
+    - Solar Energy Full Run.md
+  -  A Complete Full runs\_ Full Inventions Master List(no order).md
+  - Adaptive QoS Allocator.ipynb
+  - Alloy Perceptual Loss.py
+  - Alloyscript.py
+  - Audio Processing, v45.6.md
+  - Example Explanation.md
+  - JACCO.ipynb
+  - Latch Latent capability Harnesser.md
+  - MOSAIC.ipynb
+- **Scripts/**
+  - fix\_md\_spacing.py
+  - generate\_changelog.py
+  - generate\_repo\_toc.py
+  - update\_repo\_structure.py
+- **docker/**
+  - .dockerignore
+  - Dockerfile
+  - requirements.txt
+- .dockerignore
+- About.md
+- CHANGELOG.md
+- CITATION.cff
+- Charts.md
+- Code of Conduct.md
+- Contributing.md
+- GCP Current Version(47.2). AI-Native Operational Manual.md
+- LICENSE.md
+- README.md
+- SECURITY.md
+- Table Of Contents.md
+- mkdocs.yml
+```
+
+<!-- END REPO TREE --></details>
