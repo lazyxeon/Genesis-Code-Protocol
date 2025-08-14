@@ -1,18 +1,15 @@
-name: Build & Push GHCR image
+# .github/workflows/ghcr-build.yml
+name: Build & Push (GHCR)
 
 on:
   push:
     branches: [ "main" ]
-    paths-ignore:
-      - "docs/**"
-      - "mkdocs.yml"
-      - "**/*.md"
-  workflow_dispatch: {}
+  workflow_dispatch:
 
 permissions:
   contents: read
   packages: write
-  id-token: write
+  id-token: write  # optional for attestations
 
 jobs:
   build:
@@ -23,7 +20,7 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
-      - name: Set up Docker Buildx
+      - name: Set up Buildx
         uses: docker/setup-buildx-action@v3
 
       - name: Login to GHCR
@@ -33,10 +30,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set lowercase image name
-        run: echo "IMAGE_NAME=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_ENV"
+      - name: Compute image name (lowercase)
+        id: vars
+        run: echo "image=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
 
-      - name: Build & push (multi-arch) with attestations
+      - name: Build & Push
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -44,9 +42,9 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ env.IMAGE_NAME }}:latest
-            ${{ env.IMAGE_NAME }}:${{ github.sha }}
+            ${{ steps.vars.outputs.image }}:latest
+            ${{ steps.vars.outputs.image }}:${{ github.sha }}
           provenance: mode=max
-          attests: |
-            type=provenance,mode=max
-            type=sbom
+          attests: type=sbom
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
