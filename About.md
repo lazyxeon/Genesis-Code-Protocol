@@ -55,10 +55,15 @@ end & export
 Upload the protocol file to your LLM chat and run:
 
 Initiate GCP and Run Spark: your idea.
+
 Mode: Full Run | Auto.
+
 Risk Tier: R1 | R2 | R3.
+
 Objective: success criteria.
+
 Constraints: hard/soft.
+
 Deliverables: code/docs/field kit/etc.
 
 You can switch modes at any time:
