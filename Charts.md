@@ -1,7 +1,5 @@
 # GCP Charts and Graphs Overview
 
-<!-- markdownlint-disable MD013 -->
-
 This document provides a visual and tabular overview of the Genesis Code Protocol (GCP) evolution, key versions, feature additions, and notable inventions. It uses Markdown tables for data presentation and Mermaid diagrams for graphs/charts, which GitHub renders natively. All information is derived from protocol variants and full-run demonstrations through **V48** (as of August 14, 2025).
 
 ## Table of Contents
@@ -34,7 +32,7 @@ V46.5	Continuous assurance	Phase 14 CE; risk tiers; SPDX/SAST/DAST; SemVer/compa
 V47	Worth-It realism	Phase −1 + C−0.5; Minimal-Intervention; C6.9; forecasts/Brier	Worth-It gates; adoption/TCO	Spark/Delta example
 V47.1	Checkpoint-Gate UX	Explicit stop/summary/options; deterministic branching	User-first checkpointing	—
 V47.2	Dual-mode + renumbered flow	Full Run / Auto modes; universal checkpoint banners; graph-enhanced reasoning	Conditional stops in Auto Mode	—
-V48	Pre-execution + adversarial + ops hardening	TRIZ/ARIZ (−0.8), C-K (−0.5A), Futures/Morph (2.5), Red-Team (4.A), War-Game (6.5), Devastation (13.5), Adversary (14.5)	Devastation must PASS before C9; post-deploy shadowing	Expanded ledgers & manifest
+V48	Pre-execution + adversarial + ops hardening	TRIZ/ARIZ (−0.8), C-K (−0.5A), Futures/Morph (2.5), Red-Team (4.A), War-Game (6.5), Devastation (13.5), Adversary (14.5)	Devastation PASS before C9; post-deploy shadowing	Expanded ledgers/manifest
 
 Invention Metrics Overview
 Example efforts from demonstrations (bars represent relative duration/effort order, not dates).
@@ -54,8 +52,6 @@ gantt
     section Quantum Harnesser
     Optimization Speedup    :c1, 2025-05-01, 35d
     Autonomy Increase       :c2, after c1, 10d
-(Illustrative: AlloyScript emphasized efficiency; EV runs targeted wait/failure reductions.)
-
 Protocol Workflow Flowchart
 V48 workflow with pre-execution reasoning and adversarial phases.
 
@@ -99,21 +95,15 @@ pie title Invention Impact Breakdown (Illustrative)
 Risk-Tier Distribution (v46+)
 Example mapping of typical tiers by domain (illustrative).
 
-mermaid
-Copy
-Edit
-flowchart LR
-    A[AlloyScript] -->|R1| R1[(1)]
-    B[EV Charging] -->|R2| R2[(2)]
-    C[Quantum Optimizer] -->|R3| R3[(3)]
-    D[Solar Energy] -->|R2| R2
+Domain	Typical Tier
+AlloyScript	R1
+EV Charging	R2
+Quantum Optimizer	R3
+Solar Energy	R2
+
 Ethical Safeguard Metrics
 Invention	Ontological Proxy Score	Fairness Delta	Personhood Risk Flag	Ethical Alignment
 AlloyScript	0.84	N/A (Lang)	Low	0.92
 EV Charging Optimizer	N/A	0.05 (Rural)	N/A	0.85
 Quantum Harnesser	0.75	N/A	Medium	0.88
 Adaptive QoS Allocator	0.80	0.03	Low	0.90
-
-Values indicative from runs/demos; use your run ledgers for exact metrics.
-
-<!-- markdownlint-enable MD013 -->
