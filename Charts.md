@@ -2,7 +2,7 @@
 
 <!-- markdownlint-disable MD013 -->
 
-This document provides a visual and tabular overview of the Genesis Code Protocol (GCP) evolution, key versions, feature additions, and notable inventions. It uses Markdown tables for data presentation and Mermaid diagrams for graphs/charts, which GitHub renders natively. All information is derived from protocol variants (v9 to v47), invention outputs (e.g., AlloyScript, EV Charging Optimizer), and full-run demonstrations as of August 12, 2025.
+This document provides a visual and tabular overview of the Genesis Code Protocol (GCP) evolution, key versions, feature additions, and notable inventions. It uses Markdown tables for data presentation and Mermaid diagrams for graphs/charts, which GitHub renders natively. All information is derived from protocol variants and full-run demonstrations through **V48** (as of August 14, 2025).
 
 ## Table of Contents
 
@@ -16,116 +16,104 @@ This document provides a visual and tabular overview of the Genesis Code Protoco
 
 ## Protocol Evolution Timeline
 
-The following Mermaid timeline chart shows the progression of GCP versions, highlighting key editions and release milestones based on documented changelogs and PDFs.
+> High-level progression of major editions (condensed).
 
 ```mermaid
-timeline
-    title GCP Version Timeline (as of August 12, 2025)
-    v9 : Recursive Emergence Edition : Introduced AdaptiveTopoNet, SpiralSync™, ontological proxies
-    v10 : Agentic Quantum Edition : Added AgenticQuantumNet, quantum-inspired search
-    v11 : Neuroscience-MultiModal Fusion : Integrated neuroscience principles, multimodal data
-    v43.7 : REA Edition : Refined mutations, real-world applications
-    v45.6 : Performance-First Edition : Anti-over-engineering gates, targeted optimizations
-    v46 : IRONCLAD FIELD-TEST Edition : Field-readiness, SBOM/provenance, safety deliverables
-    v47 : WORTH-IT REALISM Edition : Problem worth-it sprints, EVM, continuous assurance
-```
+flowchart LR
+    A[v45.6D<br/>Agentic/Enterprise] --> B[V46<br/>Field-Test Hardening]
+    B --> C[V46.5<br/>Continuous Assurance]
+    C --> D[V47<br/>Worth-It Realism]
+    D --> E[V47.1<br/>Checkpoint UX]
+    E --> F[V47.2<br/>Dual-Mode + Renumbering]
+    F --> G[V48<br/>TRIZ/ARIZ, C-K, Futures/Morph, 4.A/6.5/13.5/14.5]
+Version Feature Comparison
+Version	Core Focus	Key Additions	Safeguards/Realism	Tooling/Scale
+v45.6D	Agentic multimodal	SBOM/signing intro; enterprise docs	—	CLI, notebooks
+V46	Field-test hardening	Reordered gates; tight C7; reproducible builds	Supply-chain integrity	Perf Pareto
+V46.5	Continuous assurance	Phase 14 CE; risk tiers; SPDX/SAST/DAST; SemVer/compat	Canary/shadow/drift/TTL	CE workflows
+V47	Worth-It realism	Phase −1 + C−0.5; Minimal-Intervention; C6.9; forecasts/Brier	Worth-It gates; adoption/TCO	Spark/Delta example
+V47.1	Checkpoint-Gate UX	Explicit stop/summary/options; deterministic branching	User-first checkpointing	—
+V47.2	Dual-mode + renumbered flow	Full Run / Auto modes; universal checkpoint banners; graph-enhanced reasoning	Conditional stops in Auto Mode	—
+V48	Pre-execution + adversarial + ops hardening	TRIZ/ARIZ (−0.8), C-K (−0.5A), Futures/Morph (2.5), Red-Team (4.A), War-Game (6.5), Devastation (13.5), Adversary (14.5)	Devastation must PASS before C9; post-deploy shadowing	Expanded ledgers & manifest
 
-## Version Feature Comparison
+Invention Metrics Overview
+Example efforts from demonstrations (bars represent relative duration/effort order, not dates).
 
-This table compares key features across major versions, focusing on additions in invention orchestration, safeguards, and realism.
-
-| Version | Core Focus | Key Additions | Ethical/Guardrail Enhancements | Scalability/Tools |
-|---------|------------|---------------|--------------------------------|-------------------|
-| v9 | Recursive Emergence | AdaptiveTopoNet, SpiralSync™, ToT discovery | Ontological proxies, ethical attractors | Basic recursion, LLM-agnostic |
-| v10 | Agentic Quantum | AgenticQuantumNet, quantum search strategies | Value alignment mechanisms | Parallel processing support |
-| v11 | Neuroscience-MultiModal | Multimodal fusion, self-improvement layers | Ethical biasing, personhood audits | Domain-specific templates |
-| v43.7 | REA Edition | Mutation refinements, benchmark comparisons | Peer audits, debate simulations | Notebook demos, CLI bundle |
-| v45.6 | Performance-First | Simplicity reviews, optimization protocols | Anti-over-engineering gates | Profiling tools, dependency checks |
-| v46 | IRONCLAD FIELD-TEST | Field-readiness, governance with teeth | Safety deliverables (FMEA, DPIA), provenance | Risk-tiered lanes, SBOM integration |
-| v47 | WORTH-IT REALISM | Problem discovery sprints, EVM | Continuous assurance, premortem canaries | Realism-compiler, auto-rollbacks, Spark integration |
-
-## Invention Metrics Overview
-
-Based on invention outputs (e.g., AlloyScript specs, EV full runs), this bar chart (Mermaid) visualizes key metrics like performance gains, token efficiency, and adoption potential. Metrics are aspirational/validated from protocol runs.
-
-```mermaid
+mermaid
+Copy
+Edit
 gantt
-    title Invention Metrics Overview
+    title Invention Metrics Overview (Illustrative)
     dateFormat  YYYY-MM-DD
     section AlloyScript
-    Performance Gain :a1, 2025-01-01, 30d
-    Token Efficiency :a2, after a1, 20d
+    Performance Gain        :a1, 2025-01-01, 30d
+    Token Efficiency        :a2, after a1, 20d
     section EV Charging Optimizer
-    Wait Time Reduction :b1, 2025-03-01, 25d
-    Failure Rate Drop :b2, after b1, 15d
+    Wait Time Reduction     :b1, 2025-03-01, 25d
+    Failure Rate Drop       :b2, after b1, 15d
     section Quantum Harnesser
-    Optimization Speedup :c1, 2025-05-01, 35d
-    Autonomy Increase :c2, after c1, 10d
-```
+    Optimization Speedup    :c1, 2025-05-01, 35d
+    Autonomy Increase       :c2, after c1, 10d
+(Illustrative: AlloyScript emphasized efficiency; EV runs targeted wait/failure reductions.)
 
-(Note: Bars represent relative improvements; e.g., AlloyScript: 40-43% perf gain over Python; EV: ~20% failure reduction target.)
+Protocol Workflow Flowchart
+V48 workflow with pre-execution reasoning and adversarial phases.
 
-## Protocol Workflow Flowchart
-
-A high-level flowchart of the GCP workflow, incorporating v47's realism phases (e.g., Phase -1 for worth-it assessment).
-
-```mermaid
+mermaid
+Copy
+Edit
 flowchart TD
-    A["Start: Invention Prompt"] --> B["Phase -1: Problem Discovery and Worth-It Sprint"]
-    B -->|Worth-It Score >= 0.7| C["Phase 0: Domain Profile and Risk Tier"]
-    C --> D["Discovery and Ideation (ToT)"]
-    D --> E["Refinement and Debate"]
-    E --> F["Synthesis and Simulation"]
-    F --> G["Validation and Benchmarking"]
-    G --> H["Audit and Governance"]
-    H --> I["Productization and Deployment"]
-    I --> J["Continuous Assurance and Monitoring"]
-    J -->|Recursion Needed| D
-    J --> K["End: Field-Ready Output"]
-    B -->|Fail Gate| L["Stop or Pivot to Non-Tech"]
-```
-
-## Invention Impact Breakdown
-
-Pie chart (Mermaid) showing the distribution of impact areas across notable inventions (e.g., efficiency, ethics, scalability).
-
-```mermaid
-pie title Invention Impact Breakdown
+    S["Start: Spark Prompt"] --> P0_8["Phase -0.8: TRIZ/ARIZ Contradictions"]
+    P0_8 --> P0_5A["Phase -0.5A: C-K Drift Check"]
+    P0_5A --> P1M["Phase -1: Worth-It Sprint"]
+    P1M --> P0["Phase 0: Mode & Opportunity"]
+    P0 --> P1["Phase 1: Context & Precedents"]
+    P1 --> P2["Phase 2: Influence Harvesting"]
+    P2 --> P2_5["Phase 2.5: Futures & Morph Space"]
+    P2_5 --> P3["Phase 3: Constraints & Envelope"]
+    P3 --> P4["Phase 4: Hypotheses & Branch Tree"]
+    P4 --> P4A["Phase 4.A: Red-Team Attack"]
+    P4A --> P5["Phase 5: Architecture Draft"]
+    P5 --> P6["Phase 6: Simulation"]
+    P6 --> P6_5["Phase 6.5: Multi-Agent War Game"]
+    P6_5 --> P7["Phase 7: Refinement"]
+    P7 --> P8["Phase 8: Integration"]
+    P8 --> P9["Phase 9: Validation (C7/C7.Sigma)"]
+    P9 --> P10["Phase 10: C8.4 Simplicity → C8.5 Optimization"]
+    P10 --> P11["Phase 11: Productization (C6.9)"]
+    P11 --> P12["Phase 12: Documentation (C12.1)"]
+    P12 --> P13_5["Phase 13.5: Devastation Protocol"]
+    P13_5 --> P13["Phase 13: Safety Case & C9 Signed"]
+    P13 --> P14["Phase 14: Continuous Evaluation"]
+    P14 --> P14_5["Phase 14.5: Adversary Shadowing"]
+    P14_5 --> P15["Phase 15: Archival & Postmortem"]
+Invention Impact Breakdown
+mermaid
+Copy
+Edit
+pie title Invention Impact Breakdown (Illustrative)
     "Performance/Efficiency" : 40
     "Ethical/Safety Alignment" : 25
     "Scalability/Realism" : 20
     "Novelty/Innovation" : 15
-```
+Risk-Tier Distribution (v46+)
+Example mapping of typical tiers by domain (illustrative).
 
-(Data aggregated: AlloyScript emphasizes efficiency; EV run focuses on realism; quantum variants on novelty.)
+mermaid
+Copy
+Edit
+flowchart LR
+    A[AlloyScript] -->|R1| R1[(1)]
+    B[EV Charging] -->|R2| R2[(2)]
+    C[Quantum Optimizer] -->|R3| R3[(3)]
+    D[Solar Energy] -->|R2| R2
+Ethical Safeguard Metrics
+Invention	Ontological Proxy Score	Fairness Delta	Personhood Risk Flag	Ethical Alignment
+AlloyScript	0.84	N/A (Lang)	Low	0.92
+EV Charging Optimizer	N/A	0.05 (Rural)	N/A	0.85
+Quantum Harnesser	0.75	N/A	Medium	0.88
+Adaptive QoS Allocator	0.80	0.03	Low	0.90
 
-## Risk-Tier Distribution (v46+)
-
-For v46 and v47, protocols use risk tiers (R1 low, R2 moderate, R3 high). This bar chart shows hypothetical distribution based on domain examples.
-
-```mermaid
-xychart-beta
-    title "Risk-Tier Usage in GRCP Runs"
-    x-axis ["AlloyScript", "EV Charging", "Quantum Optimizer", "Solar Energy"]
-    y-axis "Risk Tier (R1=1, R2=2, R3=3)" 1 --> 3
-    bar [1, 2, 3, 2]
-```
-
-(Higher tiers for safety-critical like quantum; EV as R2 for regulatory compliance.)
-
-## Ethical Safeguard Metrics
-
-Table summarizing ethical metrics from protocol outputs, such as proxy scores and fairness deltas.
-
-| Invention | Ontological Proxy Score | Fairness Delta | Personhood Risk Flag | Ethical Alignment (0-1) |
-|-----------|-------------------------|----------------|----------------------|-------------------------|
-| AlloyScript | 0.84 | N/A (Lang) | Low | 0.92 |
-| EV Charging Optimizer | N/A | 0.05 (Rural Skew) | N/A | 0.85 |
-| Quantum Harnesser | 0.75 | N/A | Medium | 0.88 |
-| Adaptive QoS Allocator | 0.80 | 0.03 | Low | 0.90 |
-
-(From PDFs: Scores ensure boundaries; e.g., >0.8 triggers audits.)
-
-This overview can be expanded with additional data from future runs. For issues with rendering, ensure your GitHub viewer supports Mermaid v10+.
+Values indicative from runs/demos; use your run ledgers for exact metrics.
 
 <!-- markdownlint-enable MD013 -->
