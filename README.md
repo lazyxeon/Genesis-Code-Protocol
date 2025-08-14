@@ -393,6 +393,7 @@ Table of Contents →
 - Charts.md
 - Code of Conduct.md
 - Contributing.md
+- Dockerfile
 - GCP Current Version(48). AI-Native Operational Manual.md
 - LICENSE.md
 - README.md
