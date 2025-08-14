@@ -1,11 +1,15 @@
-# .dockerignore
+# .dockerignore (root)
 .git
 .github
 **/__pycache__/
 **/*.pyc
 **/.ipynb_checkpoints/
+
 Notebooks/
 Documents/
+GRCP most recent variants/
+Scripts/
+Charts.md
 *.ipynb
 *.pdf
 *.zip
