@@ -1,6 +1,6 @@
 # Table of Contents for Genesis Code Protocol (GCP)
 
-This document is auto-generated. Links are relative to the repo. Updated as of August 13, 2025 (UTC).
+This document is auto-generated. Links are relative to the repo. Updated as of August 14, 2025 (UTC).
 
 ## Root
 
