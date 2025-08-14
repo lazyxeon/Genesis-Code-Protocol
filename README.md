@@ -210,11 +210,11 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
 The protocol runs entirely in chat. CLI/Notebooks here are accelerators.
-
+---
 Usage (Optional CLI)
 
 python "CLI Bundle/gcp_cli.py" --version 48 --prompt "Invent a streaming compression algorithm with field test"
-
+---
 Version Matrix
 Edition	Focus	Key Additions
 v45.6D	Agentic multimodal, enterprise scaffolding	SBOM/signing intro; enterprise docs
@@ -235,34 +235,37 @@ Security: SBOM (SPDX), signatures/attestations, SAST/DAST/secret scans, CVE gate
 Licensing: SPDX identifiers; block incompatible copyleft in prod; attribution bundle.
 
 Fairness: slice metrics & guardrails; regressions ≤ 0.5% absolute (R2/R3) unless dual-signed waiver.
-
+---
 📚 GCP Wiki
 
 Home: overview, quickstart, phases/gates, modes, checkpoint UX
+
 👉 https://github.com/lazyxeon/Genesis-Code-Protocol/wiki
 
 Explanation of Protocol Components: phases (−0.8→15), gates, ledgers, tiers, safety/compliance
+
 👉 https://github.com/lazyxeon/Genesis-Code-Protocol/wiki/Explanation-of-Protocol-Components
 
 AI Deep Dive: Repo & GCP: how folders/workflows map to protocol outputs; end-to-end runs
-👉 https://github.com/lazyxeon/Genesis-Code-Protocol/wiki/AI-Deep-Dive-Repo-and-GCP
 
+👉 https://github.com/lazyxeon/Genesis-Code-Protocol/wiki/AI-Deep-Dive-Repo-and-GCP
+---
 Contributing
 
 See CONTRIBUTING.md and CODE_OF_CONDUCT.md. Conventional Commits + SemVer preferred. Please include tests/docs and security considerations with PRs.
-
+---
 Security Policy
 
 Use GitHub’s Private Vulnerability Reporting (Security → “Report a vulnerability”). See SECURITY.md for triage/embargo and keys.
-
+---
 License & Disclaimer
 
 MIT — see Documents/LICENSE.md.
 
 GCP is a research-grade protocol. Outcomes depend on model capability, tools, and data access. Follow applicable laws/ethics and your org’s privacy/security standards.
-
+---
 Changelog (highlights)
-
+---
 V48: TRIZ/ARIZ (−0.8), C-K (−0.5A), Futures/Morph (2.5), Red-Team (4.A), War-Game (6.5), Devastation (13.5), Adversary (14.5); expanded ledgers & packaging.
 
 V47.2: Dual modes (Full Run/Auto), universal checkpoint banners, renumbered flow.
@@ -274,123 +277,14 @@ V47.0: Worth-It Realism (Phase −1, C−0.5, Minimal-Intervention, C6.9, foreca
 V46.5: Continuous Assurance (Phase 14 CE), risk tiers, SPDX/SAST/DAST, SemVer/compat.
 
 V46: Field-test hardening, reordered gates, rigorous stats, reproducible builds.
-
+---
 Repository Structure
-
-Repository Structure
-
+---
 Full layout of GCP repo (auto-updated via workflow).
-
+---
 Table of Contents →
 
 <details> <summary>Expand tree</summary>
-
-- **.devcontainer/**
-  - devcontainer.json
-- **CLI Bundle/**
-  - Readme.md
-  - audit_utils.py
-  - full_run.py
-  - gcp_cli.py
-  - phase1.py
-  - phase6.7.py
-  - prompt_utils.py
-  - requirements.txt
-- **Documents/**
-  - **protocol/**
-    - overview
-  - AI ChatGPT Critical Analysis GCP V45.6D.md
-  - AI ChatGPT Critical Analysis GCP V46.md
-  - AI ChatGPT Critical Analysis V47 Full Run EV issue.md
-  - AI Claude Critical Analysis GCP V45.6d.md
-  - AI Claude Critical Analysis GCP V46.md
-  - AI Claude Critical Analysis V47 full run EV issue.md
-  - AI Grok Critical Analysis GCP V45.6D.md
-  - AI Grok Critical Analysis GCP V46 .md
-  - AI Grok Critical Analysis V47 Full Run EV issue.md
-  - Feature Requests.md
-  - Issue Template.md
-  - Pull Request Template.md
-  - Requirements.md
-  - Security.md
-  - Setup.py
-  - index.md
-  - releases.md
-  - security_report.md
-- **GRCP most recent variants/**
-  - Changelog.md
-  - Complete Master List All Revisions Full.md
-  - V09.md
-  - V11.md
-  - V20.md
-  - V22.md
-  - V23.md
-  - V30.md
-  - V34.md
-  - V35.md
-  - V36.md
-  - V40.md
-  - V41.md
-  - V42.md
-  - V43.0.md
-  - V43.6.md
-  - V43.7.md
-  - V44.1.md
-  - V44.7.md
-  - V44.8.md
-  - V44.9b.md
-  - V44.9d.md
-  - V45.0.md
-  - V45.1.md
-  - V45.2.md
-  - V45.3.md
-  - V45.4A.md
-  - V45.5.md
-  - V45.6.md
-  - V46.0.md
-  - V46.5.md
-  - V47.0.md
-  - V47.1.md
-  - V47.2.md
-  - V48.0.md
-- **Notebooks/**
-  - **Full Runs/**
-    - Known EV issue Full Run, GCPv47.md
-    - Latch Full run.md
-    - Quantum Mechanics Full Run.md
-    - Solar Energy Full Run.md
-  -  A Complete Full runs_ Full Inventions Master List(no order).md
-  - Adaptive QoS Allocator.ipynb
-  - Alloy Perceptual Loss.py
-  - Alloyscript.py
-  - Audio Processing, v45.6.md
-  - Example Explanation.md
-  - JACCO.ipynb
-  - Latch Latent capability Harnesser.md
-  - MOSAIC.ipynb
-- **Scripts/**
-  - fix_md_spacing.py
-  - generate_changelog.py
-  - generate_repo_toc.py
-  - update_repo_structure.py
-- **docker/**
-  - .dockerignore
-  - Dockerfile
-  - requirements.txt
-- .dockerignore
-- About.md
-- CHANGELOG.md
-- CITATION.cff
-- Charts.md
-- Code of Conduct.md
-- Contributing.md
-- GCP Current Version(47.2). AI-Native Operational Manual.md
-- LICENSE.md
-- README.md
-- SECURITY.md
-- Table Of Contents.md
-- mkdocs.yml
-Repo Structure
   
   <!-- BEGIN REPO TREE -->
 
