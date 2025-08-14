@@ -283,7 +283,7 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
 ## Repository Structure
 -Full layout of GCP Repo, auto updated via Github Workflow
 
-- [Table Of Contents.md](/home/runner/work/Genesis-Code-Protocol/Table%20Of%20Contents.md)
+[Table of Contents →](./Table%20Of%20Contents.md)
 
 <details>
   
