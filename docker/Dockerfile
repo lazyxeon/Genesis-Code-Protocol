@@ -26,15 +26,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY . /app
 
 # Sanity check: the path contains a space; verify it exists
-RUN test -f "CLI Bundle/requirements.txt" || (echo "Missing: CLI Bundle/requirements.txt" && ls -la "CLI Bundle" && false)
+RUN test -f "CLI%20Bundle/requirements.txt" || (echo "Missing: CLI%20Bundle/requirements.txt" && ls -la "CLI%20Bundle" && false)
 
 # Defensive: sanitize numbered/prose lines in requirements to avoid pip parse errors
 RUN awk '{ if ($0 ~ /^[[:space:]]*[0-9]+\./) { print "# " $0 } else { print $0 } }' \
-      "CLI Bundle/requirements.txt" > /tmp/requirements.sanitized.txt
+      "CLI%20Bundle/requirements.txt" > /tmp/requirements.sanitized.txt
 
 # Upgrade tooling, then install deps (prefer wheels)
 RUN python -m pip install --upgrade pip setuptools wheel && \
     pip install --no-cache-dir --prefer-binary -r /tmp/requirements.sanitized.txt -vv
 
 # Entry: run the CLI (quotes handle the space in folder name)
-ENTRYPOINT ["python", "/app/CLI Bundle/gcp_cli.py"]
+ENTRYPOINT ["python", "/app/CLI%20Bundle/gcp_cli.py"]
