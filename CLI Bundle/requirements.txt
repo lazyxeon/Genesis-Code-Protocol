@@ -10,4 +10,4 @@ sys
 Run GRCP protocols via CLI.
 
 ```bash
-python gcp_cli.py [Openai, Anthropic, xai]
+python gcp_cli.py
