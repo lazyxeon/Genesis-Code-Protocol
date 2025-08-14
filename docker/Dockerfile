@@ -1,4 +1,18 @@
-# .github/workflows/ghcr-build.yml
+- name: Debug context
+        run: |
+          pwd && ls -la
+          echo "Dockerfile path:" && git ls-files | grep -i dockerfile || true
+          cat Dockerfile 2>/dev/null || true
+
+      - name: Build (no push) with verbose logs
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true              # build to local docker w/o pushing
+          file: Dockerfile        # adjust if needed
+          no-cache: true
+          provenance: false
+
 name: Build & Push (GHCR)
 
 on:
