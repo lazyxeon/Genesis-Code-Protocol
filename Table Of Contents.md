@@ -9,7 +9,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 - [Charts.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Charts.md)
 - [Code of Conduct.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Code%20of%20Conduct.md)
 - [Contributing.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Contributing.md)
-- [GCP Current Version(47.2). AI-Native Operational Manual.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Current%20Version%2847.2%29.%20AI-Native%20Operational%20Manual.md)
+- [GCP Current Version(48). AI-Native Operational Manual.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Current%20Version%2848%29.%20AI-Native%20Operational%20Manual.md)
 - [LICENSE.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/LICENSE.md)
 - [README.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/README.md)
 - [SECURITY.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/SECURITY.md)
