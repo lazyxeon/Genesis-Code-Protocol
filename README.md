@@ -327,27 +327,24 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
   - Complete Master List All Revisions Full.md
   - V09.md
   - V11.md
-  - V12.md
   - V20.md
   - V22.md
   - V23.md
   - V30.md
-  - V33.md
   - V34.md
   - V35.md
   - V36.md
-  - V38.md
-  - V39.md
   - V40.md
   - V41.md
   - V42.md
   - V43.0.md
+  - V43.6.md
   - V43.7.md
   - V44.1.md
   - V44.7.md
   - V44.8.md
-  - V44.9D.md
   - V44.9b.md
+  - V44.9d.md
   - V45.0.md
   - V45.1.md
   - V45.2.md
@@ -360,6 +357,7 @@ GCP is a research-grade protocol. Outcomes depend on model capability, tools, an
   - V47.0.md
   - V47.1.md
   - V47.2.md
+  - V48.0.md
 - **Notebooks/**
   - **Full Runs/**
     - Known EV issue Full Run, GCPv47.md
