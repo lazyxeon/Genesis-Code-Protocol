@@ -5,14 +5,14 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="grcp",
+    name="gcp",
     version="47.0.0",
     author="LazyXeon",
     author_email="lazyxeon@example.com",  # Replace with actual email
-    description="Genesis Recursive Code Protocol: AI-native invention framework",
+    description="Genesis Code Protocol: AI-native invention framework",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/lazyxeon/Genesis-Recursive-Code-Protocol-",
+    url="https://github.com/lazyxeon/Genesis-Code-Protocol-",
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
