@@ -1,0 +1,12 @@
+# .dockerignore
+.git
+.github
+**/__pycache__/
+**/*.pyc
+**/.ipynb_checkpoints/
+Notebooks/
+Documents/
+*.ipynb
+*.pdf
+*.zip
+dist/
