@@ -21,8 +21,11 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 ## .github
 
   - **ISSUE_TEMPLATE/**
+    - [bug_report.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/bug_report.md)
     - [bug_report.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/bug_report.yml)
     - [config.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/config.yml)
+    - [custom.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/custom.md)
+    - [feature_request.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/feature_request.md)
     - [feature_request.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/feature_request.yml)
     - [new_full_run.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/new_full_run.yml)
     - [protocol_review.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/protocol_review.yml)
