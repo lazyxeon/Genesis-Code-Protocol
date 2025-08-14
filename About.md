@@ -50,21 +50,16 @@ end & export
 * **R2:** Moderate risk. N ≥ 30, seeds ≥ 10, full integrity, SBOM and signing.
 * **R3:** High or regulated. N ≥ 50, seeds ≥ 20, FMEA/STPA/GSN/DPIA/HIL, CE on by default.
 
-## Artifacts and Ledgers
-
-* Run, Decision, Assumption, Evidence, Benchmark, Optimization, Risk and Safety, and Compliance ledgers.
-* Example names: `S42_9_Benchmark_Ledger.md`, `S42_13_Safety_Case.md`, `S42_FinalPackage.zip`.
-
 ## Quickstart (LLM-Only)
 
 Upload the protocol file to your LLM chat and run:
 
-Initiate GCP and Run Spark: [your idea].
-Mode: [Full Run | Auto].
-Risk Tier: [R1 | R2 | R3].
-Objective: [success criteria].
-Constraints: [hard/soft].
-Deliverables: [code/docs/field kit/etc].
+Initiate GCP and Run Spark: your idea.
+Mode: Full Run | Auto.
+Risk Tier: R1 | R2 | R3.
+Objective: success criteria.
+Constraints: hard/soft.
+Deliverables: code/docs/field kit/etc.
 
 You can switch modes at any time:
 
@@ -75,4 +70,3 @@ switch to full run mode
 
 * README: repository overview and status
 * Wiki: phases, gates, modes, artifacts, and methods guide
-* Docs site (if enabled): versioned documentation and search
