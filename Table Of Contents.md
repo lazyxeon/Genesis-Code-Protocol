@@ -39,6 +39,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
     - [docs.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/docs.yml)
     - [generate-changelog.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/generate-changelog.yml)
     - [ghcr-build.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/ghcr-build.yml)
+    - [release-bundle.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/release-bundle.yml)
     - [release-drafter.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/release-drafter.yml)
     - [sbom.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/sbom.yml)
     - [scorecards.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/scorecards.yml)
