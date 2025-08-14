@@ -2,11 +2,13 @@
 name: Docker Debug Build
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      BUILDKIT_PROGRESS: plain
     steps:
       - uses: actions/checkout@v4
 
