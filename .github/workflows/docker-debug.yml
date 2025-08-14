@@ -1,0 +1,35 @@
+# .github/workflows/docker-debug.yml
+name: Docker Debug Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "docker/Dockerfile"
+      - "CLI Bundle/**"
+      - ".dockerignore"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show context
+        run: |
+          ls -la
+          ls -la "CLI Bundle" || true
+          echo "---- docker/Dockerfile (head) ----"
+          sed -n '1,80p' docker/Dockerfile
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build (no push)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/Dockerfile
+          load: true
+          tags: local/gcp-protocol:debug
