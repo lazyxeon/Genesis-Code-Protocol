@@ -1,8 +1,8 @@
-# GRCP Charts and Graphs Overview
+# GCP Charts and Graphs Overview
 
 <!-- markdownlint-disable MD013 -->
 
-This document provides a visual and tabular overview of the Genesis Recursive Code Protocol (GRCP) evolution, key versions, feature additions, and notable inventions. It uses Markdown tables for data presentation and Mermaid diagrams for graphs/charts, which GitHub renders natively. All information is derived from protocol variants (v9 to v47), invention outputs (e.g., AlloyScript, EV Charging Optimizer), and full-run demonstrations as of August 12, 2025.
+This document provides a visual and tabular overview of the Genesis Code Protocol (GCP) evolution, key versions, feature additions, and notable inventions. It uses Markdown tables for data presentation and Mermaid diagrams for graphs/charts, which GitHub renders natively. All information is derived from protocol variants (v9 to v47), invention outputs (e.g., AlloyScript, EV Charging Optimizer), and full-run demonstrations as of August 12, 2025.
 
 ## Table of Contents
 
@@ -16,11 +16,11 @@ This document provides a visual and tabular overview of the Genesis Recursive Co
 
 ## Protocol Evolution Timeline
 
-The following Mermaid timeline chart shows the progression of GRCP versions, highlighting key editions and release milestones based on documented changelogs and PDFs.
+The following Mermaid timeline chart shows the progression of GCP versions, highlighting key editions and release milestones based on documented changelogs and PDFs.
 
 ```mermaid
 timeline
-    title GRCP Version Timeline (as of August 12, 2025)
+    title GCP Version Timeline (as of August 12, 2025)
     v9 : Recursive Emergence Edition : Introduced AdaptiveTopoNet, SpiralSync™, ontological proxies
     v10 : Agentic Quantum Edition : Added AgenticQuantumNet, quantum-inspired search
     v11 : Neuroscience-MultiModal Fusion : Integrated neuroscience principles, multimodal data
@@ -67,7 +67,7 @@ gantt
 
 ## Protocol Workflow Flowchart
 
-A high-level flowchart of the GRCP workflow, incorporating v47's realism phases (e.g., Phase -1 for worth-it assessment).
+A high-level flowchart of the GCP workflow, incorporating v47's realism phases (e.g., Phase -1 for worth-it assessment).
 
 ```mermaid
 flowchart TD
