@@ -6,7 +6,7 @@ requests>=2.32.3
 numpy>=1.26.4
 pandas>=2.2.2
 
-# Reuse the repo-wide dependencies for the CLI:
+# Reuse the repo-wide requirements; add CLI-only extras here if you need.
 -r ../requirements.txt
 
 # Add CLI-only extras below if needed, e.g.:
