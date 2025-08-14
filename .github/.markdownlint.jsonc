@@ -1,8 +1,0 @@
-{
-  "default": true,
-  // Templates often start with comments/checkboxes; allow no H1 at top
-  "MD041": false,
-
-  // If your templates also have long lines by design, uncomment:
-  // "MD013": false
-}
