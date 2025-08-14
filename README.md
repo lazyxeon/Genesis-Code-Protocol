@@ -1,5 +1,7 @@
 # Genesis Code Protocol (GCP) — V48
 
+<!-- markdownlint-disable MD013 -->
+
 <!-- CORE BADGES -->
 [![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen)](./Documents/LICENSE.md)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
@@ -11,7 +13,7 @@
 [![Code Size](https://img.shields.io/github/languages/code-size/lazyxeon/Genesis-Code-Protocol)](https://github.com/lazyxeon/Genesis-Code-Protocol)
 [![Contributors](https://img.shields.io/github/contributors/lazyxeon/Genesis-Code-Protocol)](https://github.com/lazyxeon/Genesis-Code-Protocol/graphs/contributors)
 
-<!-- CI / AUTOMATION BADGES (adjust workflow names if needed) -->
+<!-- CI / AUTOMATION BADGES -->
 [![Python CI](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/Python-CI.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/Python-CI.yml)
 [![Security Scan](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/security-scan.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/security-scan.yml)
 [![Repo Tree Sync](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml)
@@ -48,23 +50,25 @@
 
 ---
 
-## What’s New — **V48**
+## What’s New — V48
 
-**Based on the V48 Operational Manual** (standalone PDF you can upload to any LLM):
+- **Pre-execution reasoning:**  
+  **Phase −0.8** TRIZ/ARIZ *Contradiction Resolution* and **Phase −0.5A** C-K *Concept–Knowledge Drift* checks de-risk design before Phase −1.
 
-- **Pre-execution reasoning added:**  
-  **Phase −0.8** TRIZ/ARIZ *Contradiction Resolution* and **Phase −0.5A** C-K *Concept–Knowledge Drift* checks to de-risk design before Phase −1.
 - **Exploration depth:**  
   **Phase 2.5** *Futures & Morph Space* (2×2 scenarios + morphological analysis) with selections locked at **C2.5**.
+
 - **Adversarial rigor:**  
   **Phase 4.A** *Red-Team Hypothesis Attack* (C4.A), **Phase 6.5** *Multi-Agent War Game* (C6.5), and **Phase 13.5** *Devastation Protocol* (must PASS before **C9**).
+
 - **Operations security:**  
   **Phase 14.5** *Continuous Adversary Shadowing* post-deploy.
+
 - **Artifacts expanded:**  
-  New ledgers: **CONTRADICTION_LEDGER**, **C_K_LEDGER**, **MORPH_FUTURES_LEDGER**, **ADVERSARY_LEDGER**.  
-  Updated manifest schema and directory layout.
-- **Checkpoint UX preserved & refined:**  
-  **Full Run** (stop at every gate) and **Auto Mode** (stop only when required), with universal banner and one-line commands.
+  New ledgers: **CONTRADICTION_LEDGER**, **C_K_LEDGER**, **MORPH_FUTURES_LEDGER**, **ADVERSARY_LEDGER**. Updated manifest schema and layout.
+
+- **Checkpoint UX refined:**  
+  **Full Run** (stop at every gate) and **Auto Mode** (stop only when required), with universal banner and single-line commands.
 
 ---
 
@@ -72,31 +76,31 @@
 
 1. **Upload** the **“GCP V48 — AI-Native Operational Manual”** (PDF) to your LLM chat.
 
-2. **Prompt**:
-
+2. **Prompt:**
+   
 Initiate GCP and Run Spark: <your idea>.
-Mode: <Full Run | Auto>.
-Risk Tier: <R1 | R2 | R3>.
-Objective: <success criteria>.
-Constraints: <hard/soft>.
-Deliverables: <code/docs/field kit/etc>.
 
-markdown
-Copy
-Edit
+Mode: <Full Run | Auto>.
+
+Risk Tier: <R1 | R2 | R3>.
+
+Objective: <success criteria>.
+
+Constraints: <hard/soft>.
+
+Deliverables: <code/docs/field kit/etc>.
 
 3. **At each ⛔ CHECKPOINT**, respond with:
 
 proceed 1
+
 branch Phase <n>
+
 return C#.#
+
 end & export
 
-markdown
-Copy
-Edit
-
-> You can switch anytime: `switch to auto mode` or `switch to full run mode`.
+> Switch anytime: `switch to auto mode` or `switch to full run mode`.
 
 ---
 
@@ -122,12 +126,12 @@ Edit
 - **6.5** Multi-Agent War Game → **C6.5**
 - **7** Iterative Refinement & Convergence → **C7.1**
 - **8** Integration & System Assembly → **C8.1**
-- **9** Validation & Benchmarking → **C7** / **C7.Sigma**
+- **9** Validation & Benchmarking → **C7 / C7.Sigma**
 - **10** Simplicity **C8.4** → Optimization **C8.5**
 - **11** Productization & Packaging → **C6.9**
 - **12** Documentation & Handoff → **C12.1**
 - **13** Deployment Readiness & Safety Case → **C9** *(requires **C13.5** PASS)*
-- **13.5** Devastation Protocol (Red-Team Gauntlet) → **C13.5**
+- **13.5** Devastation Protocol → **C13.5**
 - **14** Continuous Evaluation (canary/shadow/drift/TTL) → **C14.1**
 - **14.5** Continuous Adversary Shadowing → **C14.5**
 - **15** Archival, Export, Postmortem → **C15.1**
@@ -136,7 +140,7 @@ Edit
 
 ---
 
-## Universal Checkpoint Banner (Verbatim)
+## Universal Checkpoint Banner
 
 ⛔ CHECKPOINT C#.# — <Name>
 
@@ -161,54 +165,56 @@ Return to C#.# — <reason>
 End & export — <manifest name>
 
 How to respond:
+
 proceed 1
+
 branch Phase <n>
+
 return C#.#
+
 end & export
 
 [Mode: Full Run | Auto]
-[Auto Mode Active: AI will choose option <x> unless overridden]
 
-yaml
-Copy
-Edit
+[Auto Mode Active: AI will choose option <x> unless overridden]
 
 ---
 
 ## Risk-Tiered Lanes (R1–R3)
 
-| Tier  | Typical Use               | Rigor                                                                 |
-|------|----------------------------|-----------------------------------------------------------------------|
-| R1   | Low risk / low impact      | N≥15 reps; ≥5 seeds; integrity-lite                                   |
-| R2   | Moderate                   | N≥30; ≥10 seeds; full integrity; SBOM/signing; SemVer compatibility   |
-| R3   | High/regulated             | N≥50; ≥20 seeds; FMEA/STPA/GSN/DPIA/HIL; CE on by default             |
+| Tier | Typical Use               | Rigor                                                                 |
+| ---- | ------------------------- | --------------------------------------------------------------------- |
+| R1   | Low risk / low impact     | N≥15 reps; ≥5 seeds; integrity-lite                                   |
+| R2   | Moderate                  | N≥30; ≥10 seeds; full integrity; SBOM/signing; SemVer compatibility   |
+| R3   | High/regulated            | N≥50; ≥20 seeds; FMEA/STPA/GSN/DPIA/HIL; CE on by default             |
 
 ---
 
 ## Artifacts & Packaging (V48)
 
-- **Run ID:** `S48` (short alphanumeric).
-- **Naming:** `RunID_Phase.Subphase_Artifact_Short.ext` (e.g., `S48_6_Simulation_Ledger.md`).
+- **Run ID:** `S48` (short alphanumeric)
+- **Naming:** `RunID_Phase.Subphase_Artifact_Short.ext`  
+  Example: `S48_6_Simulation_Ledger.md`
 - **Primary ledgers:**  
   RUN_LEDGER • DECISION_LEDGER • ASSUMPTION_LEDGER • EVIDENCE_LEDGER • BENCHMARK_LEDGER • OPTIMIZATION_LEDGER • RISK_SAFETY_LEDGER • COMPLIANCE_LEDGER • **CONTRADICTION_LEDGER** • **C_K_LEDGER** • **MORPH_FUTURES_LEDGER** • **ADVERSARY_LEDGER**
-- **Final export:** `RunID_FinalPackage.zip` (with manifest + checksums).
+- **Final export:** `RunID_FinalPackage.zip` (manifest + checksums)
 
 ---
 
 ## Installation (Optional Tooling)
 
-```bash
+    ```bash
 git clone https://github.com/lazyxeon/Genesis-Code-Protocol.git
 cd Genesis-Code-Protocol
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-The protocol itself runs entirely in chat. CLI/Notebooks here are accelerators.
+
+The protocol runs entirely in chat. CLI/Notebooks here are accelerators.
 
 Usage (Optional CLI)
-bash
-Copy
-Edit
+
 python "CLI Bundle/gcp_cli.py" --version 48 --prompt "Invent a streaming compression algorithm with field test"
+
 Version Matrix
 Edition	Focus	Key Additions
 v45.6D	Agentic multimodal, enterprise scaffolding	SBOM/signing intro; enterprise docs
@@ -218,8 +224,8 @@ V47	Worth-It realism	Phase −1 + C−0.5; Minimal-Intervention; C6.9; forecasts
 V47.1	Checkpoint-Gate UX	Explicit stop/summary/options; deterministic branching
 V47.2	Dual-mode + renumbered flow	Full Run / Auto modes; universal checkpoint banners; graph-enhanced reasoning
 V48	Pre-execution + adversarial + ops hardening	TRIZ/ARIZ, C-K, Futures/Morph; Red-Team (4.A), War-Game (6.5), Devastation (13.5), Adversary (14.5)
-
 Safety • Privacy • Security • Compliance
+
 Safety: misuse/adversarial tests; hazards; Red-Team memos; Devastation Protocol required before C9 (R2+).
 
 Privacy: minimization; retention/erasure; DPIA where applicable; re-id checks.
@@ -231,6 +237,7 @@ Licensing: SPDX identifiers; block incompatible copyleft in prod; attribution bu
 Fairness: slice metrics & guardrails; regressions ≤ 0.5% absolute (R2/R3) unless dual-signed waiver.
 
 📚 GCP Wiki
+
 Home: overview, quickstart, phases/gates, modes, checkpoint UX
 👉 https://github.com/lazyxeon/Genesis-Code-Protocol/wiki
 
@@ -241,16 +248,21 @@ AI Deep Dive: Repo & GCP: how folders/workflows map to protocol outputs; end-to-
 👉 https://github.com/lazyxeon/Genesis-Code-Protocol/wiki/AI-Deep-Dive-Repo-and-GCP
 
 Contributing
+
 See CONTRIBUTING.md and CODE_OF_CONDUCT.md. Conventional Commits + SemVer preferred. Please include tests/docs and security considerations with PRs.
 
 Security Policy
+
 Use GitHub’s Private Vulnerability Reporting (Security → “Report a vulnerability”). See SECURITY.md for triage/embargo and keys.
 
 License & Disclaimer
+
 MIT — see Documents/LICENSE.md.
+
 GCP is a research-grade protocol. Outcomes depend on model capability, tools, and data access. Follow applicable laws/ethics and your org’s privacy/security standards.
 
 Changelog (highlights)
+
 V48: TRIZ/ARIZ (−0.8), C-K (−0.5A), Futures/Morph (2.5), Red-Team (4.A), War-Game (6.5), Devastation (13.5), Adversary (14.5); expanded ledgers & packaging.
 
 V47.2: Dual modes (Full Run/Auto), universal checkpoint banners, renumbered flow.
@@ -264,14 +276,15 @@ V46.5: Continuous Assurance (Phase 14 CE), risk tiers, SPDX/SAST/DAST, SemVer/co
 V46: Field-test hardening, reordered gates, rigorous stats, reproducible builds.
 
 Repository Structure
+
+Repository Structure
+
 Full layout of GCP repo (auto-updated via workflow).
 
 Table of Contents →
 
-<details>
-text
-Copy
-Edit
+<details> <summary>Expand tree</summary>
+
 - **.devcontainer/**
   - devcontainer.json
 - **CLI Bundle/**
@@ -377,11 +390,10 @@ Edit
 - SECURITY.md
 - Table Of Contents.md
 - mkdocs.yml
+Repo Structure
+  
+  <!-- BEGIN REPO TREE -->
 
-
-## Repository Structure
-
-<!-- BEGIN REPO TREE -->
 ```text
 - **.devcontainer/**
   - devcontainer.json
@@ -489,4 +501,5 @@ Edit
 - Table Of Contents.md
 - mkdocs.yml
 ```
-<!-- END REPO TREE -->
+
+<!-- END REPO TREE --></details>
