@@ -3,12 +3,6 @@ name: Docker Debug Build
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
-    paths:
-      - "docker/Dockerfile"
-      - "CLI Bundle/**"
-      - ".dockerignore"
 
 jobs:
   build:
@@ -18,13 +12,13 @@ jobs:
 
       - name: Show context
         run: |
-          ls -la
+          pwd && ls -la
+          echo "---- head of docker/Dockerfile ----"
+          sed -n '1,120p' docker/Dockerfile || true
+          echo "---- check requirements file ----"
           ls -la "CLI Bundle" || true
-          echo "---- docker/Dockerfile (head) ----"
-          sed -n '1,80p' docker/Dockerfile
 
-      - name: Set up Buildx
-        uses: docker/setup-buildx-action@v3
+      - uses: docker/setup-buildx-action@v3
 
       - name: Build (no push)
         uses: docker/build-push-action@v6
@@ -33,3 +27,4 @@ jobs:
           file: docker/Dockerfile
           load: true
           tags: local/gcp-protocol:debug
+          no-cache: true
