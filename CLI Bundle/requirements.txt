@@ -1,13 +1,16 @@
-argparse==1.4.0
-subprocess
-os
-sys
+# Core CLI/runtime deps (safe across Linux runners)
+click>=8.1.7
+rich>=13.7.1
+pyyaml>=6.0.1
+requests>=2.32.3
+numpy>=1.26.4
+pandas>=2.2.2
 
-## Usage
-
-### Main CLI: gcp_cli.py
-
-Run GRCP protocols via CLI.
-
-```bash
-python gcp_cli.py
+# Optional — enable as needed (uncomment to use)
+# pyspark==3.5.1              # Spark (CPU)
+# delta-spark==3.2.0          # Delta Lake (match to Spark 3.5.x)
+# fastapi>=0.111.0            # if you run the example API
+# uvicorn[standard]>=0.30.0   # if you run the example API
+# scikit-learn>=1.5.1         # if you do ML baselines
+# networkx>=3.3               # if using graph-enhanced reasoning in code
+# matplotlib>=3.9.0           # if plotting in CLI/notebooks
