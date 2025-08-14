@@ -1,13 +1,13 @@
-# Requirements for Running GRCP (Genesis Recursive Code Protocol)
+# Requirements for Running GCP (Genesis Code Protocol)
 
-This document outlines the core requirements for running the GRCP, with a focus on v47 ("Worth-It Realism Edition"). GRCP is primarily an LLM-interpreted framework, meaning the protocol logic is executed by pasting or feeding the protocol content (e.g., from `GCP V47 — WORTH-IT REALISM EDITION.md`) into a capable large language model (LLM). The LLM handles orchestration, phase progression, recursion, and invention generation.
+This document outlines the core requirements for running the GCP, with a focus on v47 ("Worth-It Realism Edition"). GCP is primarily an LLM-interpreted framework, meaning the protocol logic is executed by pasting or feeding the protocol content (e.g., from `GCP V47 — WORTH-IT REALISM EDITION.md`) into a capable large language model (LLM). The LLM handles orchestration, phase progression, recursion, and invention generation.
 
 However, to support auxiliary tools, simulations, benchmarking, and real-time features (e.g., Apache Spark integration in v47 for streaming applications like EV charging optimization), additional dependencies are recommended. These are optional for basic runs but essential for full functionality, such as code execution, data processing, and continuous assurance.
 
 ## Core Requirements
 
 ### LLM Capabilities
-GRCP v47 requires an LLM with:
+GCP v47 requires an LLM with:
 - **Strong Reasoning and Tool-Calling**: Supports structured phase progression, Tree-of-Thought (ToT) ideation, debate simulation, and recursion. Models like Grok 4, GPT-5 (or equivalent), Claude 3.5, or similar are ideal.
 - **Long Context Handling**: Processes large protocol documents (~10k+ tokens) without truncation.
 - **Code Generation and Execution**: Capable of writing, simulating, and validating code (e.g., Python for benchmarks).
@@ -15,7 +15,7 @@ GRCP v47 requires an LLM with:
 - **API or Interface Access**: For advanced runs, use LLMs with tool integration (e.g., web search, code interpreter) to enhance discovery and validation phases.
 
 **Recommended LLMs**:
-- **Grok 4 (xAI)**: Optimized for GRCP due to native tool support and reasoning depth. Access via grok.com or X apps (PremiumPlus required for full quotas).
+- **Grok 4 (xAI)**: Optimized for GCP due to native tool support and reasoning depth. Access via grok.com or X apps (PremiumPlus required for full quotas).
 - **GPT-5 (OpenAI)**: Excellent for orchestration; use via ChatGPT or API.
 - **Claude 3.5 (Anthropic)**: Strong in ethical alignment and debate simulation.
 - **Other**: Any LLM supporting tool access (e.g., Llama 3 via Groq or Hugging Face).
@@ -30,7 +30,7 @@ No additional software is strictly required for LLM-only runs, but for reproduci
 
 ## Auxiliary Dependencies
 
-These Python packages support simulations, benchmarking, data processing, and tools referenced in GRCP (e.g., for v47's Spark integration, ethical audits, or invention validation). Install via `pip install -r requirements.txt` in the repo root.
+These Python packages support simulations, benchmarking, data processing, and tools referenced in GCP (e.g., for v47's Spark integration, ethical audits, or invention validation). Install via `pip install -r requirements.txt` in the repo root.
 
 ### requirements.txt Content
 ```
@@ -63,8 +63,8 @@ pygame>=2.6.0  # Game dev prototypes
 
 1. **Clone the Repo**:
    ```
-   git clone https://github.com/lazyxeon/Genesis-Recursive-Code-Protocol-.git
-   cd Genesis-Recursive-Code-Protocol-
+   git clone https://github.com/lazyxeon/Genesis-Code-Protocol-.git
+   cd Genesis-Code-Protocol-
    ```
 
 2. **Install Dependencies** (optional but recommended):
@@ -73,7 +73,7 @@ pygame>=2.6.0  # Game dev prototypes
    ```
 
 3. **Prepare Protocol File**:
-   - Navigate to `GRCP most recent variants/` and select `GCP V47 — WORTH-IT REALISM EDITION.md`.
+   - Navigate to `GCP most recent variants/` and select `GCP V47 — WORTH-IT REALISM EDITION.md`.
    - Copy the content into your LLM (e.g., Grok chat).
 
 4. **Run a Basic Protocol**:
