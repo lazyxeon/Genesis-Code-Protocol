@@ -368,6 +368,7 @@ Table of Contents →
     - Latch Full run.md
     - Quantum Mechanics Full Run.md
     - Solar Energy Full Run.md
+    - V48 Full Run.md
   -  A Complete Full runs\_ Full Inventions Master List(no order).md
   - Adaptive QoS Allocator.ipynb
   - Alloy Perceptual Loss.py
@@ -396,6 +397,7 @@ Table of Contents →
 - Dockerfile
 - GCP Current Version(48). AI-Native Operational Manual.md
 - LICENSE.md
+- ModuLift\_v0.1\_release.zip
 - README.md
 - SECURITY.md
 - Table Of Contents.md
