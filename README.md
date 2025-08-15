@@ -1,49 +1,63 @@
 # Genesis Code Protocol (GCP) — V49
 
 <!-- CORE BADGES -->
-[![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen)](./Documents/LICENSE.md)
-![Python](https://img.shields.io/badge/python-3.10%2B-blue)
-[![Stars](https://img.shields.io/github/stars/lazyxeon/Genesis-Code-Protocol?style=flat)](https://github.com/lazyxeon/Genesis-Code-Protocol/stargazers)
-[![Forks](https://img.shields.io/github/forks/lazyxeon/Genesis-Code-Protocol?style=flat)](https://github.com/lazyxeon/Genesis-Code-Protocol/network/members)
-[![Issues](https://img.shields.io/github/issues/lazyxeon/Genesis-Code-Protocol)](https://github.com/lazyxeon/Genesis-Code-Protocol/issues)
-[![Pull Requests](https://img.shields.io/github/issues-pr/lazyxeon/Genesis-Code-Protocol)](https://github.com/lazyxeon/Genesis-Code-Protocol/pulls)
-[![Last Commit](https://img.shields.io/github/last-commit/lazyxeon/Genesis-Code-Protocol)](https://github.com/lazyxeon/Genesis-Code-Protocol/commits/main)
-[![Code Size](https://img.shields.io/github/languages/code-size/lazyxeon/Genesis-Code-Protocol)](https://github.com/lazyxeon/Genesis-Code-Protocol)
-[![Contributors](https://img.shields.io/github/contributors/lazyxeon/Genesis-Code-Protocol)](https://github.com/lazyxeon/Genesis-Code-Protocol/graphs/contributors)
+<!-- =======================
+      GCP V49 — BADGES (for-the-badge)
+======================== -->
 
-<!-- CI / AUTOMATION BADGES -->
-[![Python CI](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/Python-CI.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/Python-CI.yml)
-[![Security Scan](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/security-scan.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/security-scan.yml)
-[![Repo Tree Sync](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml)
-[![Top-Level ToC](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-toc-file.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-toc-file.yml)
-[![Changelog](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/generate-changelog.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/generate-changelog.yml)
-[![Notebooks](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/validate-notebooks.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/validate-notebooks.yml)
-[![Docker Build](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docker-build.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docker-build.yml)
+<!-- CORE -->
+[![License: MIT](https://img.shields.io/github/license/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](./LICENSE.md)
+[![Release](https://img.shields.io/github/v/release/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/releases/latest)
+![Status](https://img.shields.io/badge/status-ACTIVE-success?style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white&style=for-the-badge)
+
+<!-- REPO METRICS -->
+[![Stars](https://img.shields.io/github/stars/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/stargazers)
+[![Forks](https://img.shields.io/github/forks/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/network/members)
+[![Issues](https://img.shields.io/github/issues/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/issues)
+[![PRs](https://img.shields.io/github/issues-pr/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/pulls)
+[![Last Commit](https://img.shields.io/github/last-commit/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/commits/main)
+[![Code Size](https://img.shields.io/github/languages/code-size/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol)
+[![Contributors](https://img.shields.io/github/contributors/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/graphs/contributors)
+
+<!-- CI / AUTOMATION (Shields workflow status so we get uniform style) -->
+[![CI: Python](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/Python-CI.yml?branch=main&label=CI%3A%20Python&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/Python-CI.yml)
+[![Security Scan](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/security-scan.yml?branch=main&label=Security%20Scan&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/security-scan.yml)
+[![Repo Tree Sync](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/update-repo-structure.yml?branch=main&label=Repo%20Tree%20Sync&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml)
+[![Top-Level ToC](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/update-toc-file.yml?branch=main&label=Top-Level%20ToC&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-toc-file.yml)
+[![Changelog](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/generate-changelog.yml?branch=main&label=Changelog&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/generate-changelog.yml)
+[![Notebooks](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/validate-notebooks.yml?branch=main&label=Notebooks&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/validate-notebooks.yml)
+[![Docker Build](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/docker-build.yml?branch=main&label=Docker%20Build&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docker-build.yml)
 
 <!-- QUALITY / STYLE -->
-[![Code Style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://black.readthedocs.io/)
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://pre-commit.com/)
-[![Type Checking: mypy](https://img.shields.io/badge/type%20checking-mypy-2A6DB2)](https://mypy.readthedocs.io/)
-[![Tests: pytest](https://img.shields.io/badge/tests-pytest-0A9EDC)](https://docs.pytest.org/)
-[![Docs](https://img.shields.io/badge/docs-mkdocs%20material-blue)](https://lazyxeon.github.io/Genesis-Code-Protocol/)
-[![Container](https://img.shields.io/badge/ghcr-image-blue)](https://ghcr.io/lazyxeon/Genesis-Code-Protocol)
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/lazyxeon/Genesis-Code-Protocol/badge)](https://scorecard.dev/viewer/?uri=github.com/lazyxeon/Genesis-Code-Protocol)
-[![Release](https://img.shields.io/github/v/release/lazyxeon/Genesis-Code-Protocol)](https://github.com/lazyxeon/Genesis-Code-Protocol/releases/latest)
+[![Code Style: Black](https://img.shields.io/badge/Code%20Style-black-000000?style=for-the-badge)](https://black.readthedocs.io/)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=for-the-badge)](https://pre-commit.com/)
+[![Type Checking: mypy](https://img.shields.io/badge/Type%20Checking-mypy-2A6DB2?style=for-the-badge)](https://mypy.readthedocs.io/)
+[![Tests: pytest](https://img.shields.io/badge/Tests-pytest-0A9EDC?logo=pytest&logoColor=white&style=for-the-badge)](https://docs.pytest.org/)
+[![Docs](https://img.shields.io/badge/Docs-MkDocs%20Material-000000?logo=mkdocs&logoColor=white&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/wiki)
+[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/lazyxeon/Genesis-Code-Protocol?label=openssf%20scorecard&style=for-the-badge)](https://api.securityscorecards.dev/projects/github.com/lazyxeon/Genesis-Code-Protocol)
 
-<!-- Tech stack badges -->
-[![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white&style=for-the-badge)
-[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white&style=for-the-badge)
+<!-- COMMUNITY -->
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=for-the-badge)](./Contributing.md)
+[![Code of Conduct](https://img.shields.io/badge/Code%20of%20Conduct-enforced-important?style=for-the-badge)](./Code%20of%20Conduct.md)
+[![Discussions](https://img.shields.io/badge/GitHub-Discussions-222222?logo=github&logoColor=white&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/discussions)
+[![Keep a Changelog](https://img.shields.io/badge/Changelog-Keep%20a%20Changelog-%23E05735?style=for-the-badge)](./CHANGELOG.md)
+[![Conventional Commits](https://img.shields.io/badge/commits-Conventional-%23FE5196?style=for-the-badge)](https://www.conventionalcommits.org/en/v1.0.0/)
+[![Semantic Versioning](https://img.shields.io/badge/semver-2.0.0-blue?style=for-the-badge)](https://semver.org/)
 
-[![Apache Spark](https://img.shields.io/badge/Apache%20Spark-Structured%20Streaming-FDEE21?logo=apachespark&logoColor=black&style=for-the-badge)](https://spark.apache.org/)    [![Delta Lake](https://img.shields.io/badge/Delta%20Lake-Lakehouse-1F6FEB?style=for-the-badge)](https://delta.io/)
+<!-- TECH STACK (for-the-badge) -->
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white&style=for-the-badge)](#)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white&style=for-the-badge)](#)
+[![CMake](https://img.shields.io/badge/CMake-Build-064F8C?logo=cmake&logoColor=white&style=for-the-badge)](#)
+[![Dockerfile](https://img.shields.io/badge/Dockerfile-Container-2496ED?logo=docker&logoColor=white&style=for-the-badge)](#)
+[![Shell](https://img.shields.io/badge/Shell-Scripts-4EAA25?logo=gnubash&logoColor=white&style=for-the-badge)](#)
+[![PowerShell](https://img.shields.io/badge/PowerShell-Scripts-5391FE?logo=powershell&logoColor=white&style=for-the-badge)](#)
 
-[![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker&logoColor=white&style=for-the-badge)       [![Dev Containers](https://img.shields.io/badge/Dev%20Containers-Ready-2B2F77?logo=visualstudiocode&logoColor=white&style=for-the-badge)](https://code.visualstudio.com/docs/devcontainers/tutorial)
-[![Docs: MkDocs Material](https://img.shields.io/badge/Docs-MkDocs%20Material-000000?logo=mkdocs&logoColor=white&style=for-the-badge)](https://squidfunk.github.io/mkdocs-material/)
+<!-- Auto-updating repo language stats (also in for-the-badge style) -->
+[![Top language](https://img.shields.io/github/languages/top/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol)
+[![Language count](https://img.shields.io/github/languages/count/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol)
 
-[![CI: GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions)   [![SBOM / SPDX](https://img.shields.io/badge/SBOM-SPDX-009639?logo=spdx&logoColor=white&style=for-the-badge)](https://spdx.dev/learn/overview/)
-[![CITATION.cff](https://img.shields.io/badge/Citation-CITATION.cff-2962FF?style=for-the-badge)](./CITATION.cff)
 
-<!-- Auto-updating language stats -->
-[![Top language](https://img.shields.io/github/languages/top/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol)    [![Language count](https://img.shields.io/github/languages/count/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol)
 
 > **Formerly:** GRCP (Genesis Recursive Code Protocol)  
 > **Status:** Active • **License:** MIT • **Language:** Python 3.10+  
