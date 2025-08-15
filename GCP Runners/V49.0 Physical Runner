@@ -1,0 +1,37 @@
+Physical Runner — Auto‑Seeded Templates
+02_data/input_specs/TOLERANCE_STACK.csv
+assembly,feature,nominal,lower,upper,method,ppk_target,notes
+11_product/BOM/BOM.csv
+part_no,rev,description,qty,uom,unit_cost,currency,lifecycle,status,alt_parts,notes
+11_product/AVL/AVL.csv
+part_no,vendor,mfr_pn,lead_time_days,moq,rohs,reach,alt_vendors,source_risk
+06_evidence/stats/CAE_SUMMARY.md
+# CAE Summary (FEA/CFD/Thermal/EMI)
+
+## Model Setup
+- Mesh density, material models, BCs
+
+## Results & Margins
+- Stress/deflection vs limits
+- Thermal vs limits
+
+## Assumptions & Limitations
+- Validation plan
+12_field_kit/runbooks/ASSEMBLY_SOP.md
+# Assembly SOP
+
+## Tools & Fixtures
+- List, calibration check
+
+## Steps
+1) ... 2) ... 3) ...
+
+## Quality Checks (GR&R)
+- Measurement method & acceptance
+07_ledgers/DFMEA_PFMEA_LEDGER.md
+| id | function | failure_mode | effects | severity | occurrence | detection | RPN | mitigation | owner | status |
+|----|----------|--------------|---------|----------|------------|----------|-----|------------|-------|--------|
+07_ledgers/TEST_FIXTURE_LEDGER.md
+| fixture_id | purpose | calibration | GR&R | maint_cycle | owner | status |
+|------------|---------|------------|------|-------------|-------|--------|
+
