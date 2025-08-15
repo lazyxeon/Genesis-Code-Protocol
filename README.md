@@ -59,7 +59,7 @@
 
 
 
-> **Formerly:** GCP (Genesis Recursive Code Protocol)  
+> **GCP:** (Genesis Recursive Code Protocol)  
 > **Status:** Active • **License:** MIT • **Language:** Python 3.10+  
 > **Edition:** **V49** (successor to V48; see CHANGELOG for deltas)
 
