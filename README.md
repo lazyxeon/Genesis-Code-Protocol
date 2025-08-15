@@ -171,3 +171,131 @@ Examples:
 ## Version Matrix (Historic Highlights)
 
 See **CHANGELOG** for details: v45.6D → V46 → V46.5 → V47 → V47.1 → V47.2 → **V48** → **V49**.
+
+
+## Repository Structure
+
+<!-- BEGIN REPO TREE -->
+```text
+- **.devcontainer/**
+  - devcontainer.json
+- **CLI Bundle/**
+  - Readme.md
+  - audit\_utils.py
+  - full\_run.py
+  - gcp\_cli.py
+  - phase1.py
+  - phase6.7.py
+  - prompt\_utils.py
+  - requirements.txt
+- **Documents/**
+  - **protocol/**
+    - overview
+  - AI ChatGPT Critical Analysis GCP V45.6D.md
+  - AI ChatGPT Critical Analysis GCP V46.md
+  - AI ChatGPT Critical Analysis V47 Full Run EV issue.md
+  - AI Claude Critical Analysis GCP V45.6d.md
+  - AI Claude Critical Analysis GCP V46.md
+  - AI Claude Critical Analysis V47 full run EV issue.md
+  - AI Grok Critical Analysis GCP V45.6D.md
+  - AI Grok Critical Analysis GCP V46 .md
+  - AI Grok Critical Analysis V47 Full Run EV issue.md
+  - Feature Requests.md
+  - Issue Template.md
+  - Pull Request Template.md
+  - Requirements.md
+  - Security.md
+  - Setup.py
+  - index.md
+  - releases.md
+  - security\_report.md
+- **GCP Runners/**
+  - V49.0 Agriculture & Environmental MVR Runner.md
+  - V49.0 Code Runner.md
+  - V49.0 Finance & FinTech Runner.md
+  - V49.0 Industrial & Utilities OT Runner.md
+  - V49.0 Life Sciences Runner.md
+  - V49.0 Master Runner.md
+  - V49.0 Mobility & Autonomy Runner.md
+  - V49.0 Physical Runner.md
+  - V49.0 Theory Runner.md
+- **GCP-All-Variants/**
+  - Changelog.md
+  - Changelog\_P2.md
+  - V09.md
+  - V11.md
+  - V20.md
+  - V22.md
+  - V23.md
+  - V30.md
+  - V34.md
+  - V35.md
+  - V36.md
+  - V40.md
+  - V41.md
+  - V42.md
+  - V43.0.md
+  - V43.6.md
+  - V43.7.md
+  - V44.1.md
+  - V44.7.md
+  - V44.8.md
+  - V44.9b.md
+  - V44.9d.md
+  - V45.0.md
+  - V45.1.md
+  - V45.2.md
+  - V45.3.md
+  - V45.4A.md
+  - V45.5.md
+  - V45.6.md
+  - V46.0.md
+  - V46.5.md
+  - V47.0.md
+  - V47.1.md
+  - V47.2.md
+  - V48.0.md
+  - V49.0.md
+- **Images/**
+  - ledgers\_table.png
+- **Notebooks/**
+  - **Full Runs/**
+    - Known EV issue Full Run, GCPv47.md
+    - Latch Full run.md
+    - Quantum Mechanics Full Run.md
+    - Solar Energy Full Run.md
+    - V48 Full Run.md
+  - Adaptive QoS Allocator.ipynb
+  - Alloy Perceptual Loss.py
+  - Alloyscript.py
+  - Audio Processing, v45.6.md
+  - Example Explanation.md
+  - JACCO.ipynb
+  - Latch Latent capability Harnesser.md
+  - MOSAIC.ipynb
+- **Scripts/**
+  - fix\_md\_spacing.py
+  - generate\_changelog.py
+  - generate\_repo\_toc.py
+  - update\_repo\_structure.py
+- **docker/**
+  - .dockerignore
+  - Dockerfile
+  - requirements.txt
+- .dockerignore
+- About.md
+- CHANGELOG.md
+- CITATION.cff
+- Charts.md
+- Code of Conduct.md
+- Contributing.md
+- Dockerfile
+- GCP Current Version(49). AI-Native Operational Manual.md
+- LICENSE.md
+- README.md
+- SECURITY.md
+- Table Of Contents.md
+- mkdocs.yml
+- requirements.txt
+```
+<!-- END REPO TREE -->
