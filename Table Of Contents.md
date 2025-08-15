@@ -87,7 +87,6 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 ## GCP-All-Variants
 
   - [Changelog.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/Changelog.md)
-  - [Complete Master List All Revisions Full.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/Complete%20Master%20List%20All%20Revisions%20Full.md)
   - [V09.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V09.md)
   - [V11.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V11.md)
   - [V20.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V20.md)
@@ -130,7 +129,6 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
     - [Quantum Mechanics Full Run.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/Quantum%20Mechanics%20Full%20Run.md)
     - [Solar Energy Full Run.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/Solar%20Energy%20Full%20Run.md)
     - [V48 Full Run.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/V48%20Full%20Run.md)
-  - [ A Complete Full runs_ Full Inventions Master List(no order).md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/%20A%20Complete%20Full%20runs_%20Full%20Inventions%20Master%20List%28no%20order%29.md)
   - [Adaptive QoS Allocator.ipynb](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Adaptive%20QoS%20Allocator.ipynb)
   - [Alloy Perceptual Loss.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Alloy%20Perceptual%20Loss.py)
   - [Alloyscript.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Alloyscript.py)
