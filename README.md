@@ -326,7 +326,7 @@ Table of Contents →
   - index.md
   - releases.md
   - security\_report.md
-- **GRCP most recent variants/**
+- **GCP-All-Variants/**
   - Changelog.md
   - Complete Master List All Revisions Full.md
   - V09.md
