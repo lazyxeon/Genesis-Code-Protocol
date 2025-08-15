@@ -106,8 +106,7 @@ Edit
 | C14.5  | Continuous Adversary Shadowing                   |
 | C15.1  | Archival / Export / Postmortem                   |
 
-## Phase Map
-![Phase Map](./images/gcp_v49_phase_map.png)
+<img width="2379" height="1580" alt="gcp_v49_phase_map" src="https://github.com/user-attachments/assets/23c2f82f-2433-4c7b-963c-8f3951b52109" />
 
 ---
 
@@ -148,8 +147,7 @@ yaml
 Copy
 Edit
 
-## Universal Gate Decision Card (Auto Mode UX)
-![Gate UX](./images/gcp_v49_gate_ux.png)
+<img width="8761" height="7061" alt="gcp_v49_gate_ux" src="https://github.com/user-attachments/assets/732d83b4-434e-4853-8e36-3bd3a6774a8c" />
 
 ---
 
@@ -172,8 +170,7 @@ Attach only what you need. Aliases are case/space tolerant.
 - `medical-ai` ⇒ `[Code, LifeSci]`  
 - `industrial-robotics` ⇒ `[OT, Mobility]`
 
-## Runner System & Alias Examples
-![Runners](./images/gcp_v49_runners.png)
+<img width="1979" height="1979" alt="gcp_v49_runners" src="https://github.com/user-attachments/assets/819f6fc4-d491-4d20-a410-a1368813d5c1" />
 
 ---
 
@@ -218,8 +215,7 @@ yaml
 Copy
 Edit
 
-## Auto-seeded Templates by Runner (selected)
-![Templates](./images/gcp_v49_templates_tree.png)
+<img width="2379" height="1580" alt="gcp_v49_templates_tree" src="https://github.com/user-attachments/assets/744821b2-d7b1-42ac-b793-2c2944001ef1" />
 
 ---
 
@@ -241,8 +237,7 @@ yaml
 Copy
 Edit
 
-## Evidence TTL (Continuous Evaluation cadence)
-![Evidence TTL](./images/gcp_v49_evidence_ttl.png)
+<img width="1979" height="680" alt="gcp_v49_evidence_ttl" src="https://github.com/user-attachments/assets/1d3e4539-7a10-4fb2-b316-3b97fc1f76ad" />
 
 ---
 
@@ -255,7 +250,6 @@ Edit
 | Repro (base) | `REPRO_PROTOCOL.md`, `REPRO_RESULTS.csv`, `ENV_LOCKFILE.yml`                                   |
 | Export       | Release pack + SBOM/signing + docs    
 
-## Packaging & Ledgers (snapshot)
-![Ledgers](./images/gcp_v49_ledgers_table.png)
+<img width="2379" height="860" alt="gcp_v49_ledgers_table" src="https://github.com/user-attachments/assets/d7abd4c2-012f-4407-a1a5-7a13c6e70c3f" />
 
 ---
