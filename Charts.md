@@ -147,7 +147,8 @@ yaml
 Copy
 Edit
 
-<img width="8761" height="7061" alt="gcp_v49_gate_ux" src="https://github.com/user-attachments/assets/732d83b4-434e-4853-8e36-3bd3a6774a8c" />
+<img width="1779" height="1580" alt="gcp_v49_gate_ux (1)" src="https://github.com/user-attachments/assets/e21483e9-ec97-40e9-8c00-d3ca49042aa7" />
+
 
 ---
 
