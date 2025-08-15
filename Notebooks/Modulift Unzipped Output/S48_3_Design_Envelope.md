@@ -1,0 +1,1 @@
+# Design Envelope\nConstraints, acceptance (>=10% median), CLI surface, risks.\n

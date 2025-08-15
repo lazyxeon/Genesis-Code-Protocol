@@ -1,0 +1,1 @@
+# Validation & Benchmarking (C7)\nAttach medians from CI artifacts and compute deltas.\nDate: 2025-08-14\n

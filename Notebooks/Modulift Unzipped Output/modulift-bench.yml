@@ -1,0 +1,42 @@
+name: ModuLift Bench
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - "cmake/modulift/**"
+      - "CMakeLists.txt"
+      - "scripts/**"
+
+jobs:
+  bench-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        compiler: [clang++, g++]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Ninja
+        run: sudo apt-get update && sudo apt-get install -y ninja-build
+      - name: Set compiler
+        run: echo "CXX=${{ matrix.compiler }}" >> $GITHUB_ENV
+      - name: Run bench (7 runs)
+        run: bash scripts/bench_build.sh 7 | tee bench_linux_${{ matrix.compiler }}.txt
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with: { name: linux-${{ matrix.compiler }}, path: bench_linux_${{ matrix.compiler }}.txt }
+
+  bench-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Ninja
+        run: choco install ninja -y
+      - name: VS DevCmd
+        uses: ilammy/msvc-dev-cmd@v1
+      - name: Run bench (7 runs, MSVC)
+        shell: pwsh
+        run: ./scripts/bench_build.ps1 -Runs 7 | Tee-Object bench_windows_msvc.txt
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with: { name: windows-msvc, path: bench_windows_msvc.txt }

@@ -1,0 +1,1 @@
+# Functional Plan\nBench harness, metrics, env matrix; failure modes.\n

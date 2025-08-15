@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.28)
+project(modulift_demo LANGUAGES CXX)
+
+option(MODULIFT_ENABLE "Enable ModuLift header-units/modules glue" ON)
+
+add_library(my_lib src/lib.cpp)
+add_executable(my_app src/main.cpp)
+target_link_libraries(my_app PRIVATE my_lib)
+
+if(MODULIFT_ENABLE)
+  include(cmake/modulift/enable-named-modules.cmake)
+  if (MSVC)
+    include(cmake/modulift/hu-msvc.cmake)
+    modulift_target_use_hus(my_lib)
+    modulift_target_use_hus(my_app)
+  elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    include(cmake/modulift/hu-clang-gcc.cmake)
+    modulift_target_use_hus(my_lib)
+    modulift_target_use_hus(my_app)
+  endif()
+endif()

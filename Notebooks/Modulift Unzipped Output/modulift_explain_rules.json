@@ -1,0 +1,14 @@
+[
+  {
+    "match": "error: no matching function for call to '([A-Za-z0-9_:]+)'",
+    "hint": "No overload matches. Check argument types, implicit conversions, or add a constrained overload for $1."
+  },
+  {
+    "match": "note: candidate template ignored: substitution failure.*requires.*constraints not satisfied",
+    "hint": "Concept/constraint failed. Show the requires-clause and the first failing requirement; try a simpler iterator/category or add a model."
+  },
+  {
+    "match": "error C\\\\d+:.*'std::.*': is inaccessible",
+    "hint": "Access issue. Ensure correct header import as a header unit, or include order. Check macro guards leaking into the header."
+  }
+]
