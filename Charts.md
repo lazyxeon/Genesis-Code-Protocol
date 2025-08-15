@@ -1,7 +1,5 @@
 # Charts & Graphs
 
-This page uses plain Markdown tables and ASCII diagrams so it renders reliably on GitHub.
-
 ---
 
 ## 1) Phase Map (V49, linear view)
@@ -108,6 +106,9 @@ Edit
 | C14.5  | Continuous Adversary Shadowing                   |
 | C15.1  | Archival / Export / Postmortem                   |
 
+## Phase Map
+![Phase Map](./images/gcp_v49_phase_map.png)
+
 ---
 
 ## 2) Universal Gate Decision Card (Auto-Mode UX)
@@ -147,6 +148,9 @@ yaml
 Copy
 Edit
 
+## Universal Gate Decision Card (Auto Mode UX)
+![Gate UX](./images/gcp_v49_gate_ux.png)
+
 ---
 
 ## 3) Runner System & Alias Map (reference)
@@ -167,6 +171,9 @@ Attach only what you need. Aliases are case/space tolerant.
 **Alias bundles (examples)**  
 - `medical-ai` ⇒ `[Code, LifeSci]`  
 - `industrial-robotics` ⇒ `[OT, Mobility]`
+
+## Runner System & Alias Examples
+![Runners](./images/gcp_v49_runners.png)
 
 ---
 
@@ -211,6 +218,9 @@ yaml
 Copy
 Edit
 
+## Auto-seeded Templates by Runner (selected)
+![Templates](./images/gcp_v49_templates_tree.png)
+
 ---
 
 ## 5) Evidence TTL (Continuous Evaluation cadence)
@@ -231,6 +241,9 @@ yaml
 Copy
 Edit
 
+## Evidence TTL (Continuous Evaluation cadence)
+![Evidence TTL](./images/gcp_v49_evidence_ttl.png)
+
 ---
 
 ## 6) Packaging & Ledgers (snapshot)
@@ -241,3 +254,8 @@ Edit
 | Naming       | `RunID_Phase.Subphase_Artifact_Short.ext`                                                      |
 | Repro (base) | `REPRO_PROTOCOL.md`, `REPRO_RESULTS.csv`, `ENV_LOCKFILE.yml`                                   |
 | Export       | Release pack + SBOM/signing + docs    
+
+## Packaging & Ledgers (snapshot)
+![Ledgers](./images/gcp_v49_ledgers_table.png)
+
+---
