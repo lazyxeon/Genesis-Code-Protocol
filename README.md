@@ -328,7 +328,6 @@ Table of Contents →
   - security\_report.md
 - **GCP-All-Variants/**
   - Changelog.md
-  - Complete Master List All Revisions Full.md
   - V09.md
   - V11.md
   - V20.md
@@ -369,7 +368,6 @@ Table of Contents →
     - Quantum Mechanics Full Run.md
     - Solar Energy Full Run.md
     - V48 Full Run.md
-  -  A Complete Full runs\_ Full Inventions Master List(no order).md
   - Adaptive QoS Allocator.ipynb
   - Alloy Perceptual Loss.py
   - Alloyscript.py
