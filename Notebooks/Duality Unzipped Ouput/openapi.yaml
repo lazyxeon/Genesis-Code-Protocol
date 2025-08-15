@@ -1,0 +1,28 @@
+openapi: 3.0.3
+info: { title: DUALITY Agent API, version: 0.1.0 }
+paths:
+  /health:
+    get:
+      responses:
+        '200': { description: ok }
+  /policy:
+    get:
+      responses:
+        '200': { description: current LTE/Parity/Buffer policy }
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lte_budget_mb: { type: integer }
+                parity_max_pct: { type: number }
+                jitter_hold_ms: { type: integer }
+      responses:
+        '204': { description: updated }
+  /stats:
+    get:
+      responses:
+        '200': { description: live QoE & overhead metrics }

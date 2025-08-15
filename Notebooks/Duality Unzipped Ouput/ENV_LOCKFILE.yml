@@ -1,0 +1,19 @@
+name: duality-bench
+python: "3.10"
+dependencies:
+  - numpy==1.26.4
+tools:
+  - os: linux-gnu
+  - cpu: x86_64
+repro:
+  random_seed: 7
+  duration_s: 60
+  pps: 200
+  outage_rate_per_min: 4
+  outage_min_ms: 150
+  outage_max_ms: 400
+  jitter_sigma_ms: 3
+  spike_sigma_ms: 20
+  spike_prob: 0.05
+notes: >
+  Synthetic only. Jitter p95 after buffer is an optimistic upper bound in this sim.

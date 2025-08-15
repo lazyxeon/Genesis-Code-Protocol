@@ -1,0 +1,13 @@
+family,variant,jitter_p95_ms_mean,loss_pct_mean,overhead_pct_mean,added_latency_p95_ms,accept_latency,accept_overhead,verdict
+cable_ftth_evening,baseline,13.829167015690345,1.8395833333333331,0.0,0.0,True,True,PASS
+cable_ftth_evening,duality_dual,4.440892098500626e-12,0.014583333333333334,6.789583333333333,15.0,True,True,PASS
+cable_ftth_evening,duality_single,4.440892098500626e-12,1.5925,7.000000000000002,15.0,True,True,PASS
+leo_satellite_like,baseline,54.82823465078373,0.9354166666666666,0.0,0.0,True,True,PASS
+leo_satellite_like,duality_dual,6.678960965379497,0.04541666666666667,5.8741666666666665,15.0,True,True,PASS
+leo_satellite_like,duality_single,7.323836156111655,0.8195833333333333,7.000000000000002,15.0,True,True,PASS
+rural_dsl_tails,baseline,36.1837537173239,1.7495833333333333,0.0,0.0,True,True,PASS
+rural_dsl_tails,duality_dual,4.505617946289291,0.06583333333333334,6.651666666666666,15.0,True,True,PASS
+rural_dsl_tails,duality_single,4.9723970898762415,1.52125,7.000000000000002,15.0,True,True,PASS
+wifi_contention,baseline,42.59361068914581,0.6120833333333333,0.0,0.0,True,True,PASS
+wifi_contention,duality_dual,13.924250293687582,0.19541666666666666,5.384166666666667,15.0,True,True,PASS
+wifi_contention,duality_single,14.083954518354792,0.51125,7.000000000000002,15.0,True,True,PASS

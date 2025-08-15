@@ -1,0 +1,3 @@
+lte_budget_mb: 200
+parity_max_pct: 0.10
+jitter_hold_ms: 22

@@ -1,0 +1,4 @@
+variant,buffer_ms,parity_rate,gap_ms,lte,oneline
+baseline,0,0.00,0,false,Baseline network (no mitigation)
+duality_single,15,0.07,0,false,Bounded jitter-hold + thin parity (single path)
+duality_dual,15,0.05,120,true,Bounded jitter-hold + thin parity + LTE assist (on gaps ≥120ms)

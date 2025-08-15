@@ -1,0 +1,13 @@
+[Unit]
+Description=DUALITY Agent (proto)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/duality_proto
+ExecStart=%h/duality_proto/.venv/bin/python 01_code/agent/main.py --api
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
