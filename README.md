@@ -34,20 +34,16 @@
 [![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white&style=for-the-badge)
 [![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white&style=for-the-badge)
 
-[![Apache Spark](https://img.shields.io/badge/Apache%20Spark-Structured%20Streaming-FDEE21?logo=apachespark&logoColor=black&style=for-the-badge)](https://spark.apache.org/)
-[![Delta Lake](https://img.shields.io/badge/Delta%20Lake-Lakehouse-1F6FEB?style=for-the-badge)](https://delta.io/)
+[![Apache Spark](https://img.shields.io/badge/Apache%20Spark-Structured%20Streaming-FDEE21?logo=apachespark&logoColor=black&style=for-the-badge)](https://spark.apache.org/)    [![Delta Lake](https://img.shields.io/badge/Delta%20Lake-Lakehouse-1F6FEB?style=for-the-badge)](https://delta.io/)
 
-[![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker&logoColor=white&style=for-the-badge)
-[![Dev Containers](https://img.shields.io/badge/Dev%20Containers-Ready-2B2F77?logo=visualstudiocode&logoColor=white&style=for-the-badge)](https://code.visualstudio.com/docs/devcontainers/tutorial)
+[![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?logo=docker&logoColor=white&style=for-the-badge)       [![Dev Containers](https://img.shields.io/badge/Dev%20Containers-Ready-2B2F77?logo=visualstudiocode&logoColor=white&style=for-the-badge)](https://code.visualstudio.com/docs/devcontainers/tutorial)
 [![Docs: MkDocs Material](https://img.shields.io/badge/Docs-MkDocs%20Material-000000?logo=mkdocs&logoColor=white&style=for-the-badge)](https://squidfunk.github.io/mkdocs-material/)
 
-[![CI: GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions)
-[![SBOM / SPDX](https://img.shields.io/badge/SBOM-SPDX-009639?logo=spdx&logoColor=white&style=for-the-badge)](https://spdx.dev/learn/overview/)
+[![CI: GitHub Actions](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions)   [![SBOM / SPDX](https://img.shields.io/badge/SBOM-SPDX-009639?logo=spdx&logoColor=white&style=for-the-badge)](https://spdx.dev/learn/overview/)
 [![CITATION.cff](https://img.shields.io/badge/Citation-CITATION.cff-2962FF?style=for-the-badge)](./CITATION.cff)
 
 <!-- Auto-updating language stats -->
-[![Top language](https://img.shields.io/github/languages/top/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol)
-[![Language count](https://img.shields.io/github/languages/count/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol)
+[![Top language](https://img.shields.io/github/languages/top/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol)    [![Language count](https://img.shields.io/github/languages/count/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol)
 
 > **Formerly:** GRCP (Genesis Recursive Code Protocol)  
 > **Status:** Active • **License:** MIT • **Language:** Python 3.10+  
