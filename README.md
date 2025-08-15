@@ -326,6 +326,16 @@ Table of Contents →
   - index.md
   - releases.md
   - security\_report.md
+- **GCP Runners/**
+  - V49.0 Agriculture & Environmental MVR Runner.md
+  - V49.0 Code Runner.md
+  - V49.0 Finance & FinTech Runner.md
+  - V49.0 Industrial & Utilities OT Runner.md
+  - V49.0 Life Sciences Runner.md
+  - V49.0 Master Runner.md
+  - V49.0 Mobility & Autonomy Runner.md
+  - V49.0 Physical Runner.md
+  - V49.0 Theory Runner.md
 - **GCP-All-Variants/**
   - Changelog.md
   - V09.md
@@ -361,6 +371,7 @@ Table of Contents →
   - V47.1.md
   - V47.2.md
   - V48.0.md
+  - V49.0.md
 - **Notebooks/**
   - **Full Runs/**
     - Known EV issue Full Run, GCPv47.md
@@ -393,9 +404,8 @@ Table of Contents →
 - Code of Conduct.md
 - Contributing.md
 - Dockerfile
-- GCP Current Version(48). AI-Native Operational Manual.md
+- GCP Current Version(49). AI-Native Operational Manual.md
 - LICENSE.md
-- ModuLift\_v0.1\_release.zip
 - README.md
 - SECURITY.md
 - Table Of Contents.md
