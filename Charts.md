@@ -1,4 +1,4 @@
-# Charts & Graphs (V49 — Mermaid-Free)
+# Charts & Graphs
 
 This page uses plain Markdown tables and ASCII diagrams so it renders reliably on GitHub.
 
