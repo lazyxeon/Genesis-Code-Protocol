@@ -1,6 +1,6 @@
 # Requirements for Running GCP (Genesis Code Protocol)
 
-This document outlines the core requirements for running the GCP, with a focus on v48 ("Worth-It Realism Edition"). GCP is primarily an LLM-interpreted framework, meaning the protocol logic is executed by pasting or feeding the protocol content (e.g., from `GCP V48 — WORTH-IT REALISM EDITION.md`) into a capable large language model (LLM). The LLM handles orchestration, phase progression, recursion, and invention generation.
+This document outlines the core requirements for running the GCP, with a focus on v48. GCP is primarily an LLM-interpreted framework, meaning the protocol logic is executed by pasting or feeding the protocol content (e.g., from `GCP V48.md`) into a capable large language model (LLM). The LLM handles orchestration, phase progression, recursion, and invention generation.
 
 However, to support auxiliary tools, simulations, benchmarking, and real-time features (e.g., Apache Spark integration in v48 for streaming applications like EV charging optimization), additional dependencies are recommended. These are optional for basic runs but essential for full functionality, such as code execution, data processing, and continuous assurance.
 
@@ -21,7 +21,7 @@ GCP v48 requires an LLM with:
 - **Other**: Any LLM supporting tool access (e.g., Llama 3 via Groq or Hugging Face).
 
 **Usage with LLM**:
-1. Load the protocol file (e.g., `GCP V48 — WORTH-IT REALISM EDITION.md`) into your LLM interface.
+1. Load the protocol file (e.g., `GCP V48.md`) into your LLM interface.
 2. Start with a prompt like: "Run GCP v48 with risk tier R2: [Your invention goal, e.g., 'Invent a real-time EV charging queue optimizer']. Assess worth-it and proceed phase-by-phase."
 3. Confirm progress (e.g., reply "Y" at gates) and handle outputs (e.g., generated code, benchmarks).
 4. For realism features: Include EVM assessments and non-tech alternatives in prompts.
@@ -73,7 +73,7 @@ pygame>=2.6.0  # Game dev prototypes
    ```
 
 3. **Prepare Protocol File**:
-   - Navigate to `GCP most recent variants/` and select `GCP V48 — WORTH-IT REALISM EDITION.md`.
+   - Navigate to `GCP most recent variants/` and select `GCP V48.md`.
    - Copy the content into your LLM (e.g., Grok chat).
 
 4. **Run a Basic Protocol**:
