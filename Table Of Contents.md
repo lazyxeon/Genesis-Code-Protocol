@@ -1,6 +1,6 @@
 # Table of Contents for Genesis Code Protocol (GCP)
 
-This document is auto-generated. Links are relative to the repo. Updated as of August 15, 2025 (UTC).
+This document is auto-generated. Links are relative to the repo. Updated as of August 16, 2025 (UTC).
 
 ## Root
 
@@ -134,9 +134,6 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
   - [V47.2.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V47.2.md)
   - [V48.0.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V48.0.md)
   - [V49.0.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V49.0.md)
-
-## Images
-
 
 ## Notebooks
 
