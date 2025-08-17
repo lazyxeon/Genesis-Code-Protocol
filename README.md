@@ -49,7 +49,7 @@ Deliverables: <code/docs/field kit/etc>.
 attach runner <Code|Physical|Theory|OT|Mobility|LifeSci|AgMRV|FinTech>
 ```
 ---
-Universal commands
+## Universal commands
 
 proceed 1
 branch Phase <n>
@@ -62,7 +62,7 @@ set auto_gate_preview = on|off
 Phase Map & Gates (V49)
 See Charts & Diagrams for the full mermaid diagrams.
 
-Pre-Execution
+## Pre-Execution
 
 −0.8 TRIZ/ARIZ → C−0.8
 
@@ -70,16 +70,16 @@ Pre-Execution
 
 −1 Worth-It Sprint → C−0.5
 
-Core
+# Core
 0 → C0.1 • 1 → C1.1 • 2 → C2.1 • 2.5 → C2.5 • 3 → C3.1 • 4 → C4.1 • 4.A → C4.A • 5 → C5.1 • 6 → C6.1 • 6.5 → C6.5 • 7 → C7.1 • 9 → C7 / C7.Sigma / C7.Repro • 10 → C8.4 → C8.5 • 11 (+11.3) → C6.9 • 12 → C12.1 • 13.5 → C13.5 • 13 → C9 • 14 → C14.1 • 14.5 → C14.5 • 15 → C15.1
 
-Risk-Tiered Lanes
+# Risk-Tiered Lanes
 Tier	Typical use	Rigor
 R1	Low risk	N≥15; seeds≥5; integrity-lite
 R2	Moderate	N≥30; seeds≥10; full integrity; SBOM/signing
 R3	High/regulated	N≥50; seeds≥20; FMEA/STPA/GSN/DPIA/HIL; CE default
 
-Runner System (Optional)
+## Runner System (Optional)
 Attach only what you need. Aliases are case/space tolerant.
 
 Code (code, dev, ml, ai, agent, sdk, cli, api)
@@ -98,7 +98,7 @@ AgMRV (agriculture, mrv)
 
 FinTech (fintech, trading, risk)
 
-Repo Structure (top-level)
+## Repo Structure (top-level)
 <details>
 
 ├─ About.md
@@ -115,11 +115,11 @@ Repo Structure (top-level)
 └─ .github/workflows/
 </details>
 
-Contributing
+# Contributing
 See Contributing. Use conventional commits and keep ledgers updated.
 
-Security
+# Security
 See Security Policy to report vulnerabilities.
 
-License
+# License
 MIT — see LICENSE.md.
