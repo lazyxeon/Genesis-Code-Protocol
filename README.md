@@ -47,11 +47,10 @@ Constraints: <hard/soft>.
 Deliverables: <code/docs/field kit/etc>.
 # Optional:
 attach runner <Code|Physical|Theory|OT|Mobility|LifeSci|AgMRV|FinTech>
+```
+---
 Universal commands
 
-text
-Copy
-Edit
 proceed 1
 branch Phase <n>
 return C#.#
