@@ -1,8 +1,4 @@
 ---
-
-## `About.md`
-
----
 # About
 
 **Genesis Code Protocol (GCP)** is an **AI-native, checkpoint-gated invention protocol** that guides capable LLMs to produce **auditable, field-test-ready outputs**. It operationalizes **ideate → simulate → validate → productize → assure** and is designed to render cleanly under GitHub-Flavored Markdown. :contentReference[oaicite:2]{index=2}
