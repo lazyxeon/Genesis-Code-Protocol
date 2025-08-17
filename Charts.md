@@ -29,76 +29,29 @@ flowchart TD
   B14 --> B145["14.5 Continuous Adversary Shadowing → C14.5"]
   B145 --> B15["15 Archival / Export / Postmortem → C15.1"]
 ```
+---
+---
 
-Checkpoints quick index
-Code	Name
-C-0.8	TRIZ/ARIZ
-C-0.5A	C-K drift check
-C-0.5	Worth-It decision
-C0.1	Opportunity & Mode / Runner
-C1.1	Context & Precedents
-C2.1	Influence harvesting
-C2.5	Futures & Morph space
-C3.1	Constraints & Envelope
-C4.1	Hypotheses & Branch tree
-C4.A	Red-Team attack
-C5.1	Conceptual modeling & architecture
-C6.1	Simulation & functional modeling
-C6.5	Multi-Agent War Game
-C7	Validation (core)
-C7.Sigma	Statistical sufficiency
-C7.Repro	Reproducibility gate
-C8.4	Simplicity
-C8.5	Optimization
-C6.9	Productization packaging
-C12.1	Documentation & Handoff
-C13.5	Devastation protocol
-C9	Deployment readiness & safety case
-C14.1	Continuous Evaluation
-C14.5	Continuous Adversary Shadowing
-C15.1	Archival / Export / Postmortem
-
-2) Universal Gate Decision Card (Auto-Mode UX)
 ```mermaid
-Copy
-Edit
-flowchart TD
-  S0["Auto Mode ON"] --> S1["Print Gate Decision Card"]
-  S1 --> Q{"User override?"}
-  Q -- "Yes" --> U1["Execute user choice"]
-  Q -- "No"  --> A1["Execute AI recommendation"]
-  U1 --> L1["Log to DECISION_LEDGER"] --> N1["Next checkpoint"]
-  A1 --> L1
-Gate Decision Card fields
+flowchart LR
+  S["Auto Mode"] --> C["Gate Decision Card"]
+  C --> Q{User override?}
+  Q -- Yes --> U["Execute user choice"]
+  Q -- No  --> A["Execute AI pick"]
+  U --> L["Log → DECISION_LEDGER"] --> N["Next checkpoint"]
+  A --> L
 ```
 
-```markdown
-Field	Meaning
-Options	Proceed / Branch Phase N / Return C#.# / End & export
-Descriptions	1-line summaries
-AI Recommendation	Pick + short why
-Confidence	0–1 or Low/Med/High
-Cost/Time	Rough magnitude
-Risk	Key downside(s)
+---
 
-Auto-mode knobs (protocol commands)
+Fields (short)
 
-text
-Copy
-Edit
-switch to Full Run | switch to Auto
-set auto_gate_verbosity = full|brief
-set auto_gate_preview = on|off
-3) Runner System & Alias Map (reference)
-Attach only what you need. Aliases are case/space tolerant.
+Options: Proceed / Branch / Return / End
 
-Runner	Purpose (short)	Example aliases
-Code	SW/ML/Agents/SDK/CLI/API	code, dev, ml, ai, agent, sdk, cli, api
-Physical	Hardware/Mechatronics/EE/ME/Embedded	hardware, mechanical, electrical, embedded_hw
-Theory	Axioms/conjectures/proofs	theory, math, formal, proof
-OT	Industrial/Utilities PLC-SCADA-DCS	industrial, utilities, plc, scada, dcs, 61131, 62443, nerc
-Mobility	Auto/Aero/Robotics safety	auto, aero, robot, autosar, do-178c/254
-LifeSci	Validation/QMS docs	vmp, urs, fs, csv
-AgMRV	Agriculture MRV	agriculture, mrv
-FinTech	Finance/risk	fintech, trading, risk
-```
+Rec: AI pick + reason
+
+Conf: 0–1 or Low/Med/High
+
+Cost/Time: S / M / L
+
+Risk: key downside
