@@ -41,6 +41,7 @@ Objective: <clear success criteria>.
 Constraints: <hard/soft>; License: MIT; No PII in logs.
 Deliverables: <explicit artifacts>.
 ```
+
 ---
 
 ## Universal commands
