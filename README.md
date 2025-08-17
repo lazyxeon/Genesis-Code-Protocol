@@ -1,4 +1,4 @@
-# Genesis Code Protocol (GCP) — V49
+# Genesis Code Protocol (GCP) — V49 Flagship
 
 [![License: MIT](https://img.shields.io/github/license/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](./LICENSE.md)
 [![Release](https://img.shields.io/github/v/release/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/releases/latest)
@@ -20,106 +20,83 @@
 [![Notebooks](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/validate-notebooks.yml?branch=main&label=Notebooks&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/validate-notebooks.yml)
 [![Docker Build](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/docker-build.yml?branch=main&label=Docker%20Build&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docker-build.yml)
 
-> **GCP** is an **AI-native, checkpoint-gated invention protocol**. It guides capable LLMs to produce **auditable, field-test-ready** outputs by operationalizing **ideate → simulate → validate → productize → assure**. Runs in chat; CLI/notebooks/CI are optional accelerators. See **[About](./About.md)**.  
-*(Format conforms to GitHub-Flavored Markdown & GitHub README guidance.)*
+> **GCP V49 Flagship** is an **AI-native, checkpoint-gated invention protocol** that a capable LLM can run end-to-end to turn a *Spark* into a **signed, auditable Invention Package** with evidence, provenance, and a verifiable export. Humans may intervene at “Human-Required” gates; the protocol assumes autonomous execution. See **[About](./About.md)** and **[Charts](./Charts.md)**.  *(Rev: 2025-08-17)*
 
-**Quick nav:** [What’s New](#whats-new--v49) • [Quick Start](#quick-start) • [Runners](#runner-system-optional) • [Phase Map](#phase-map--gates-v49) • [Charts](./Charts.md) • [Contributing](#contributing) • [Security](#security) • [License](#license)
-
----
-
-# What’s New — V49
-- **Auto-Mode Gate Decision Card** prints full options + short descriptions + AI recommendation (configurable verbosity).
-- **Runner System** (Code, Physical, Theory, OT, Mobility, LifeSci, AgMRV, FinTech) adds role packs, artifacts, micro-gates.
-- **Alias System** for human-friendly runner names.
-- **C7.Repro** with `REPRO_PROTOCOL.md`, `REPRO_RESULTS.csv`, `ENV_LOCKFILE.yml`.
-- **11.3 IP & Disclosure** added pre-packaging.
-- **Evidence TTL defaults** by risk tier (managed in `15_ce/PLAN.md`).
+**Quick nav:** [What’s New](#whats-new) • [Quick Start](#quick-start) • [Phase Map](#phase-map) • [Runners](#runners-optional) • [Repo Structure](#repo-structure) • [Contributing](#contributing) • [License](#license)
 
 ---
 
-# Quick Start
-```text
-Initiate GCP and Run Spark: <your idea>.
-Mode: <Full Run | Auto>.
-Risk Tier: <R1 | R2 | R3>.
-Objective: <success criteria>.
-Constraints: <hard/soft>.
-Deliverables: <code/docs/field kit/etc>.
-# Optional:
-attach runner <Code|Physical|Theory|OT|Mobility|LifeSci|AgMRV|FinTech>
-```
----
-## Universal commands
+## What’s New
+- **Phases −1..16 preserved**; **Gate_Signals.json** schema stable.  
+- **Runner / Cartridge APIs** unchanged; additions are additive-only.  
+- **Rehydration Test** + **Exit Wizard (XW)** export path clarified.  :contentReference[oaicite:5]{index=5}
 
+---
+
+## Quick Start
+Paste this into chat to start a run (Flagship bootstrap, simplified):
+
+Initiate GCP V49 for Spark: <your idea>.
+Mode: <Full-Run | Auto>; Risk: <R1 | R2 | R3>.
+Runner: <optional>; Cartridges: <optional>.
+Constraints: license=MIT; no PII in logs.
+Objective: <clear success criteria>.
+Deliverables: <explicit artifacts>.
+
+markdown
+Copy
+Edit
+
+**Universal commands**
 proceed 1
 branch Phase <n>
 return C#.#
 end & export
-# Mode/verbosity
 switch to Full Run | switch to Auto
 set auto_gate_verbosity = full|brief
 set auto_gate_preview = on|off
-Phase Map & Gates (V49)
-See Charts & Diagrams for the full mermaid diagrams.
 
-## Pre-Execution
+yaml
+Copy
+Edit
+(See Flagship sections **0–3, 14** for the full bootstrap, roles, and phases overview.) :contentReference[oaicite:6]{index=6}
 
-−0.8 TRIZ/ARIZ → C−0.8
+---
 
-−0.5A C-K Drift → C−0.5A
+## Phase Map
+See **[Charts.md](./Charts.md)** for the GitHub-rendered Mermaid diagrams (Flowchart only). :contentReference[oaicite:7]{index=7}
 
-−1 Worth-It Sprint → C−0.5
+---
 
-## Core
-0 → C0.1 • 1 → C1.1 • 2 → C2.1 • 2.5 → C2.5 • 3 → C3.1 • 4 → C4.1 • 4.A → C4.A • 5 → C5.1 • 6 → C6.1 • 6.5 → C6.5 • 7 → C7.1 • 9 → C7 / C7.Sigma / C7.Repro • 10 → C8.4 → C8.5 • 11 (+11.3) → C6.9 • 12 → C12.1 • 13.5 → C13.5 • 13 → C9 • 14 → C14.1 • 14.5 → C14.5 • 15 → C15.1
+## Runners (optional)
+Attach domain-specific **Runners** when needed (e.g., Code, Hardware, LifeSci, AgMRV, Space, Deep-Sea, Exotics). Runners add micro-gates, artifacts, standards, and role packs; they inherit the Flagship rubric (observability, SBOM/provenance, adversarial/metamorphic tests, novelty scoring, rehydration). :contentReference[oaicite:8]{index=8}
 
-# Risk-Tiered Lanes
-Tier	Typical use	Rigor
-R1	Low risk	N≥15; seeds≥5; integrity-lite
-R2	Moderate	N≥30; seeds≥10; full integrity; SBOM/signing
-R3	High/regulated	N≥50; seeds≥20; FMEA/STPA/GSN/DPIA/HIL; CE default
+Attach example:
+attach runner code
 
-# Runner System (Optional)
-Attach only what you need. Aliases are case/space tolerant.
+yaml
+Copy
+Edit
+Runner schemas and examples live in the **Master Runners Codex — Flagship Edition**. :contentReference[oaicite:9]{index=9}
 
-Code (code, dev, ml, ai, agent, sdk, cli, api)
+---
 
-Physical (hardware, mechanical, electrical, embedded_hw)
+## Repo Structure
+Top-level (repo mode):
 
-Theory (theory, math, formal, proof)
+agents/ memory/ tools/ novelty/ redteam/ metamorphic/ observability/
+Policies/ SLOs/ SBOM/ provenance/ Evidence_Log/ Rehydration_Test/
+Audit_Package/ XW/ INDEX.md MANIFEST.json Gate_Signals.json
 
-OT (industrial, utilities, plc, scada, dcs, 61131, 62443, nerc)
+yaml
+Copy
+Edit
+When file I/O isn’t available, artifacts are emitted inline with `BEGIN ARTIFACT:<path> ... END ARTIFACT`. :contentReference[oaicite:10]{index=10}
 
-Mobility (auto, aero, robot, autosar, do-178c/254)
-
-LifeSci (vmp, urs, fs, csv)
-
-AgMRV (agriculture, mrv)
-
-FinTech (fintech, trading, risk)
-
-# Repo Structure (top-level)
-<details>
-
-├─ About.md
-├─ Charts.md
-├─ README.md
-├─ CHANGELOG.md
-├─ SECURITY.md
-├─ Table Of Contents.md
-├─ GCP-All-Variants/
-├─ GCP Runners/
-├─ Notebooks/
-├─ Scripts/
-├─ docker/
-└─ .github/workflows/
-</details>
+---
 
 ## Contributing
-See Contributing. Use conventional commits and keep ledgers updated.
-
-## Security
-See Security Policy to report vulnerabilities.
+Use small PRs, conventional commits, and keep ledgers/indexes current. Additions must respect gates and the Flagship rubric. :contentReference[oaicite:11]{index=11}
 
 ## License
-MIT — see LICENSE.md.
+MIT — see **[LICENSE.md](./LICENSE.md)**.
