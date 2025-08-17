@@ -1,6 +1,6 @@
 # Table of Contents for Genesis Code Protocol (GCP)
 
-This document is auto-generated. Links are relative to the repo. Updated as of August 16, 2025 (UTC).
+This document is auto-generated. Links are relative to the repo. Updated as of August 17, 2025 (UTC).
 
 ## Root
 
@@ -9,7 +9,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 - [Charts.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Charts.md)
 - [Code of Conduct.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Code%20of%20Conduct.md)
 - [Contributing.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Contributing.md)
-- [GCP Current Version(49). AI-Native Operational Manual.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Current%20Version%2849%29.%20AI-Native%20Operational%20Manual.md)
+- [GCP Current Version(49 Flagship Edition). AI-Native Operational Manual.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Current%20Version%2849%20Flagship%20Edition%29.%20AI-Native%20Operational%20Manual.md)
 - [LICENSE.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/LICENSE.md)
 - [README.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/README.md)
 - [SECURITY.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/SECURITY.md)
@@ -86,12 +86,27 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 
 ## GCP Runners
 
+  - [A V49.0 Master Runners Codex: Flagship Edition.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/A%20V49.0%20Master%20Runners%20Codex%3A%20Flagship%20Edition.md)
+  - [Archaeology_History Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Archaeology_History%20Runner.md)
+  - [Culinary Cartridge.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Culinary%20Cartridge.md)
+  - [Deep Sea Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Deep%20Sea%20Runner.md)
+  - [Education Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Education%20Runner.md)
+  - [Energy_Power Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Energy_Power%20Runner.md)
+  - [Entertainment Cartridge.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Entertainment%20Cartridge.md)
+  - [Exotics Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Exotics%20Runner.md)
+  - [Humanitarian_Disaster Relief Cartridge.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Humanitarian_Disaster%20Relief%20Cartridge.md)
+  - [Infrastructure Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Infrastructure%20Runner.md)
+  - [Legal Cartridge.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Legal%20Cartridge.md)
+  - [Political Systems Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Political%20Systems%20Runner.md)
+  - [Public Programs_Policy Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Public%20Programs_Policy%20Runner.md)
+  - [Spaceflight_Aerospace Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Spaceflight_Aerospace%20Runner.md)
+  - [Sports_Athletics Cartridge.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Sports_Athletics%20Cartridge.md)
+  - [Theology Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Theology%20Runner.md)
   - [V49.0 Agriculture & Environmental MVR Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/V49.0%20Agriculture%20%26%20Environmental%20MVR%20Runner.md)
   - [V49.0 Code Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/V49.0%20Code%20Runner.md)
   - [V49.0 Finance & FinTech Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/V49.0%20Finance%20%26%20FinTech%20Runner.md)
   - [V49.0 Industrial & Utilities OT Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/V49.0%20Industrial%20%26%20Utilities%20OT%20Runner.md)
   - [V49.0 Life Sciences Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/V49.0%20Life%20Sciences%20Runner.md)
-  - [V49.0 Master Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/V49.0%20Master%20Runner.md)
   - [V49.0 Mobility & Autonomy Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/V49.0%20Mobility%20%26%20Autonomy%20Runner.md)
   - [V49.0 Physical Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/V49.0%20Physical%20Runner.md)
   - [V49.0 Theory Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/V49.0%20Theory%20Runner.md)
@@ -100,6 +115,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 
   - [Changelog.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/Changelog.md)
   - [Changelog_P2.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/Changelog_P2.md)
+  - [GCP V49 Flagship Edition.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/GCP%20V49%20Flagship%20Edition.md)
   - [V09.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V09.md)
   - [V11.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V11.md)
   - [V20.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V20.md)
