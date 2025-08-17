@@ -144,29 +144,28 @@ Home: overview, quickstart, phases/gates, modes, checkpoint UX
   - security\_report.md
 - **GCP Runners/**
   - A V49.0 Master Runners Codex: Flagship Edition.md
+  - Agriculture & Environmental MVR Runner.md
   - Archaeology\_History Runner.md
+  - Code Runner.md
   - Culinary Cartridge.md
+  - Cybersecurity Runner.md
   - Deep Sea Runner.md
   - Education Runner.md
   - Energy\_Power Runner.md
   - Entertainment Cartridge.md
   - Exotics Runner.md
+  - Finance & FinTech Runner.md
   - Humanitarian\_Disaster Relief Cartridge.md
+  - Industrial & Utilities OT Runner.md
   - Infrastructure Runner.md
   - Legal Cartridge.md
+  - Life Sciences Runner.md
+  - Physical Runner.md
   - Political Systems Runner.md
   - Public Programs\_Policy Runner.md
   - Spaceflight\_Aerospace Runner.md
   - Sports\_Athletics Cartridge.md
   - Theology Runner.md
-  - V49.0 Agriculture & Environmental MVR Runner.md
-  - V49.0 Code Runner.md
-  - V49.0 Finance & FinTech Runner.md
-  - V49.0 Industrial & Utilities OT Runner.md
-  - V49.0 Life Sciences Runner.md
-  - V49.0 Mobility & Autonomy Runner.md
-  - V49.0 Physical Runner.md
-  - V49.0 Theory Runner.md
 - **GCP-All-Variants/**
   - Changelog.md
   - Changelog\_P2.md
