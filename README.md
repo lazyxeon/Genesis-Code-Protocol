@@ -1,37 +1,53 @@
 # Genesis Code Protocol (GCP) — V49 Flagship
 
 [![License: MIT](https://img.shields.io/github/license/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](./LICENSE.md)
+[![Release](https://img.shields.io/github/v/release/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/releases/latest)
 [![Stars](https://img.shields.io/github/stars/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/stargazers)
 [![Issues](https://img.shields.io/github/issues/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/issues)
+[![PRs](https://img.shields.io/github/issues-pr/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/pulls)
+[![Last Commit](https://img.shields.io/github/last-commit/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/commits/main)
+[![Code Size](https://img.shields.io/github/languages/code-size/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol)
+[![Contributors](https://img.shields.io/github/contributors/lazyxeon/Genesis-Code-Protocol?style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/graphs/contributors)
 
-> **GCP V49 Flagship** is an **AI-native, checkpoint-gated invention protocol** that a capable LLM can run end-to-end to turn a *Spark* into a **signed, auditable Invention Package** with evidence, provenance, and a verifiable export. Humans may intervene at “Human-Required” gates; the protocol assumes autonomous execution. See **[About](./About.md)** and **[Charts](./Charts.md)**.  *(Rev: 2025-08-17)*
+[![CI: Python](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/Python-CI.yml?branch=main&label=CI%3A%20Python&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/Python-CI.yml)
+[![Security Scan](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/security-scan.yml?branch=main&label=Security%20Scan&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/security-scan.yml)
+[![Repo Tree Sync](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/update-repo-structure.yml?branch=main&label=Repo%20Tree%20Sync&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml)
+[![Top-Level ToC](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/update-toc-file.yml?branch=main&label=Top%20Level%20ToC&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-toc-file.yml)
+[![Changelog](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/generate-changelog.yml?branch=main&label=Changelog&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/generate-changelog.yml)
+[![Notebooks](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/validate-notebooks.yml?branch=main&label=Notebooks&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/validate-notebooks.yml)
+[![Docker Build](https://img.shields.io/github/actions/workflow/status/lazyxeon/Genesis-Code-Protocol/docker-build.yml?branch=main&label=Docker%20Build&logo=githubactions&style=for-the-badge)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docker-build.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/lazyxeon/Genesis-Code-Protocol/badge?style=for-the-badge)](https://scorecard.dev/viewer/?uri=github.com/lazyxeon/Genesis-Code-Protocol)
 
-**Quick nav:** [What’s New](#whats-new) • [Quick Start](#quick-start) • [Phase Map](#phase-map) • [Runners](#runners-optional) • [Repo Structure](#repo-structure) • [Contributing](#contributing) • [License](#license)
+> **GCP V49 Flagship** — an **AI-native, checkpoint-gated invention protocol**. A capable LLM can run it end-to-end to turn a Spark into a **signed, auditable Invention Package** with evidence, provenance, and a verifiable **Exit Wizard** export. Humans may intervene at **Human-Required** gates.
+
+**Quick nav:** [What’s New](#whats-new) • [Quick Start](#quick-start) • [Phase Map](#phase-map--gates) • [Runners](#runners--cartridges-optional) • [Auto ToC](#auto-generated-table-of-contents) • [Auto Repo Tree](#auto-generated-repository-tree) • [Security](#security--provenance) • [License](#license)
 
 ---
 
 ## What’s New
-- **Phases −1..16 preserved**; **Gate_Signals.json** schema stable.  
-- **Runner / Cartridge APIs** unchanged; additions are additive-only.  
-- **Rehydration Test** + **Exit Wizard (XW)** export path clarified.  :contentReference[oaicite:5]{index=5}
+- **Phases −1..16** (incl. **XW Exit Wizard**) retained; additive updates only.
+- **Runner / Cartridge APIs** stable (additive schema).
+- **Rehydration Test** clarified; **Gate_Signals.json** unchanged.
 
 ---
 
 ## Quick Start
-Paste this into chat to start a run (Flagship bootstrap, simplified):
 
+```text
 Initiate GCP V49 for Spark: <your idea>.
 Mode: <Full-Run | Auto>; Risk: <R1 | R2 | R3>.
-Runner: <optional>; Cartridges: <optional>.
-Constraints: license=MIT; no PII in logs.
+Runner(s): <optional>; Cartridge(s): <optional>.
 Objective: <clear success criteria>.
+Constraints: <hard/soft>; License: MIT; No PII in logs.
 Deliverables: <explicit artifacts>.
+```
+---
 
-markdown
+## Universal commands
+
+text
 Copy
 Edit
-
-**Universal commands**
 proceed 1
 branch Phase <n>
 return C#.#
@@ -40,47 +56,69 @@ switch to Full Run | switch to Auto
 set auto_gate_verbosity = full|brief
 set auto_gate_preview = on|off
 
-yaml
-Copy
-Edit
-(See Flagship sections **0–3, 14** for the full bootstrap, roles, and phases overview.) :contentReference[oaicite:6]{index=6}
-
 ---
 
-## Phase Map
-See **[Charts.md](./Charts.md)** for the GitHub-rendered Mermaid diagrams (Flowchart only). :contentReference[oaicite:7]{index=7}
+## Phase Map & Gates
+See Charts.md for GitHub-rendered Mermaid flowcharts (linear map + Gate Decision).
 
----
-
-## Runners (optional)
-Attach domain-specific **Runners** when needed (e.g., Code, Hardware, LifeSci, AgMRV, Space, Deep-Sea, Exotics). Runners add micro-gates, artifacts, standards, and role packs; they inherit the Flagship rubric (observability, SBOM/provenance, adversarial/metamorphic tests, novelty scoring, rehydration). :contentReference[oaicite:8]{index=8}
+Runners & Cartridges (optional)
+Attach domain Runners and Cartridges when needed (e.g., Code, Hardware, LifeSci, AgMRV, Space, Deep-Sea, Exotics). They add micro-gates, artifacts, standards, adversarial/metamorphic tests, novelty thresholds, observability, supply-chain/provenance, rehydration, and export rules.
+Reference: Master Runners Codex — Flagship Edition.
 
 Attach example:
+```text
 attach runner code
+attach cartridge <name>
+```
 
-yaml
-Copy
-Edit
-Runner schemas and examples live in the **Master Runners Codex — Flagship Edition**. :contentReference[oaicite:9]{index=9}
+# Artifacts & Ledgers (Flagship set)
+
+### Evidence & Claims: 
+Evidence_Index.jsonl, ClaimGraph.json, Source_Reliability.csv
+
+### Reproducibility: 
+REPRO_PROTOCOL.md, REPRO_RESULTS.csv, ENV_LOCKFILE.yml
+
+### Provenance:
+SBOM/AI-BOM, signatures, attestations
+
+### Gate Signals: 
+Gate_Signals.json (allow|deny|needs-human)
+
+### Indexes:
+INDEX.md, MANIFEST.json
+
+### Export:
+XW/ (ZIP/PDF-A with receipts)
+
+# 📚 GCP Wiki
+
+Home: overview, quickstart, phases/gates, modes, checkpoint UX
+
+👉 https://github.com/lazyxeon/Genesis-Code-Protocol/wiki
 
 ---
+# Auto-Generated Repository Tree
+   Full Overview of Repo Structure
+<details> <summary>Expand Repo Tree</summary>
 
-## Repo Structure
-Top-level (repo mode):
+<!-- BEGIN REPO TREE -->
 
-agents/ memory/ tools/ novelty/ redteam/ metamorphic/ observability/
-Policies/ SLOs/ SBOM/ provenance/ Evidence_Log/ Rehydration_Test/
-Audit_Package/ XW/ INDEX.md MANIFEST.json Gate_Signals.json
+<!-- END REPO TREE -->
+</details>
 
-yaml
-Copy
-Edit
-When file I/O isn’t available, artifacts are emitted inline with `BEGIN ARTIFACT:<path> ... END ARTIFACT`. :contentReference[oaicite:10]{index=10}
+## Security & Provenance
+OpenSSF Scorecard (action + badge).
 
----
+SBOM / signing / provenance artifacts included in release bundles.
+
+## Security policy: see SECURITY.md.
 
 ## Contributing
-Use small PRs, conventional commits, and keep ledgers/indexes current. Additions must respect gates and the Flagship rubric. :contentReference[oaicite:11]{index=11}
+Use small PRs, conventional commits, and keep ledgers/indexes current. See Contributing.md and Code of Conduct.
 
 ## License
-MIT — see **[LICENSE.md](./LICENSE.md)**.
+MIT — see LICENSE.md.
+
+## Cite
+Add CITATION.cff so others can cite the project correctly.
