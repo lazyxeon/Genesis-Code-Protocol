@@ -46,9 +46,7 @@ Deliverables: <explicit artifacts>.
 
 ## Universal commands
 
-text
-Copy
-Edit
+```text
 proceed 1
 branch Phase <n>
 return C#.#
@@ -56,13 +54,16 @@ end & export
 switch to Full Run | switch to Auto
 set auto_gate_verbosity = full|brief
 set auto_gate_preview = on|off
+```
 
 ---
 
 ## Phase Map & Gates
 See Charts.md for GitHub-rendered Mermaid flowcharts (linear map + Gate Decision).
 
-Runners & Cartridges (optional)
+---
+
+## Runners & Cartridges (optional)
 Attach domain Runners and Cartridges when needed (e.g., Code, Hardware, LifeSci, AgMRV, Space, Deep-Sea, Exotics). They add micro-gates, artifacts, standards, adversarial/metamorphic tests, novelty thresholds, observability, supply-chain/provenance, rehydration, and export rules.
 Reference: Master Runners Codex — Flagship Edition.
 
@@ -71,6 +72,8 @@ Attach example:
 attach runner code
 attach cartridge <name>
 ```
+
+---
 
 # Artifacts & Ledgers (Flagship set)
 
@@ -92,6 +95,8 @@ INDEX.md, MANIFEST.json
 ### Export:
 XW/ (ZIP/PDF-A with receipts)
 
+---
+
 # 📚 GCP Wiki
 
 Home: overview, quickstart, phases/gates, modes, checkpoint UX
@@ -107,6 +112,8 @@ Home: overview, quickstart, phases/gates, modes, checkpoint UX
 
 <!-- END REPO TREE -->
 </details>
+
+---
 
 ## Security & Provenance
 OpenSSF Scorecard (action + badge).
