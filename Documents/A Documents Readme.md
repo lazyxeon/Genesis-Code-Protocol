@@ -1,5 +1,3 @@
----
-
 Documents Folder Overview
 
 This folder contains meta‑documentation for the Genesis Code Protocol (GCP).  It houses critical analyses of various GCP editions by ChatGPT, Claude and Grok models, plus contribution templates, requirements, security policies and release notes.  Use this README as a guide to what each file covers.
