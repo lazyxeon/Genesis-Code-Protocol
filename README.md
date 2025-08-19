@@ -230,6 +230,7 @@ Home: overview, quickstart, phases/gates, modes, checkpoint UX
     - sim\_duality.py
     - sqm\_duality.conf
   - **Full Runs/**
+    - **Flagship Full Runs/**
     - High Speed Internet Issue V49 Full Run.md
     - Known EV issue Full Run, GCPv47.md
     - Latch Full run.md
