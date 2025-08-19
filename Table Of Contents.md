@@ -64,7 +64,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 
 ## Documents
 
-  - **protocol/**
+  - [A Documents Readme.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/A%20Documents%20Readme.md)
   - [AI ChatGPT Critical Analysis GCP V45.6D.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20ChatGPT%20Critical%20Analysis%20GCP%20V45.6D.md)
   - [AI ChatGPT Critical Analysis GCP V46.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20ChatGPT%20Critical%20Analysis%20GCP%20V46.md)
   - [AI ChatGPT Critical Analysis V47 Full Run EV issue.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20ChatGPT%20Critical%20Analysis%20V47%20Full%20Run%20EV%20issue.md)
@@ -170,6 +170,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
     - [sim_duality.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/sim_duality.py)
   - **Full Runs/**
     - **Flagship Full Runs/**
+    - [A FR Readme.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/A%20FR%20Readme.md)
     - [High Speed Internet Issue V49 Full Run.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/High%20Speed%20Internet%20Issue%20V49%20Full%20Run.md)
     - [Known EV issue Full Run, GCPv47.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/Known%20EV%20issue%20Full%20Run%2C%20GCPv47.md)
     - [Latch Full run.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/Latch%20Full%20run.md)
@@ -194,13 +195,13 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
     - [S48_9_Validation_Template.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/S48_9_Validation_Template.md)
     - [modulift-bench.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/modulift-bench.yml)
     - [modulift_explain.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/modulift_explain.py)
-  - [A Example Explanation.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/A%20Example%20Explanation.md)
+  - [A Notebook Readme.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/A%20Notebook%20Readme.md)
   - [Adaptive QoS Allocator.ipynb](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Adaptive%20QoS%20Allocator.ipynb)
   - [Alloy Perceptual Loss.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Alloy%20Perceptual%20Loss.py)
   - [Alloyscript.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Alloyscript.py)
-  - [Audio Processing, v45.6.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Audio%20Processing%2C%20v45.6.md)
+  - [Audio Processing.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Audio%20Processing.md)
   - [JACCO.ipynb](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/JACCO.ipynb)
-  - [Latch Latent capability Harnesser.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Latch%20Latent%20capability%20Harnesser.md)
+  - [Latch LCH.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Latch%20LCH.md)
   - [MOSAIC.ipynb](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/MOSAIC.ipynb)
 
 ## Scripts
