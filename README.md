@@ -20,7 +20,7 @@
 
 > **GCP V49 Flagship** — an **AI-native, checkpoint-gated invention protocol**. A capable LLM can run it end-to-end to turn a Spark into a **signed, auditable Invention Package** with evidence, provenance, and a verifiable **Exit Wizard** export. Humans may intervene at **Human-Required** gates.
 
-**Quick nav:** [What’s New](#whats-new) • [Quick Start](#quick-start) • [Phase Map](#phase-map--gates) • [Runners](#runners--cartridges-optional) • [Auto ToC](#auto-generated-table-of-contents) • [Auto Repo Tree](#auto-generated-repository-tree) • [Security](#security--provenance) • [License](#license)
+**Quick nav:** [What’s New](#whats-new) • [Quick Start](#quick-start) • [Phase Map](#phase-map--gates) • [Runners](#runners--cartridges-optional) • [Auto Repo Tree](#auto-generated-repository-tree) • [Security](#security--provenance) • [License](#license)
 
 ---
 
@@ -28,6 +28,12 @@
 - **Phases −1..16** (incl. **XW Exit Wizard**) retained; additive updates only.
 - **Runner / Cartridge APIs** stable (additive schema).
 - **Rehydration Test** clarified; **Gate_Signals.json** unchanged.
+
+---
+
+# Important Updates
+-Grok4 and Claude Opus 4 struggle to run Flagship.
+-ChatGPT5 Runs Flagship seamlessly.
 
 ---
 
