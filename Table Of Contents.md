@@ -1,6 +1,6 @@
 # Table of Contents for Genesis Code Protocol (GCP)
 
-This document is auto-generated. Links are relative to the repo. Updated as of August 17, 2025 (UTC).
+This document is auto-generated. Links are relative to the repo. Updated as of August 19, 2025 (UTC).
 
 ## Root
 
@@ -169,6 +169,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
     - [policy.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/policy.py)
     - [sim_duality.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/sim_duality.py)
   - **Full Runs/**
+    - **Flagship Full Runs/**
     - [High Speed Internet Issue V49 Full Run.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/High%20Speed%20Internet%20Issue%20V49%20Full%20Run.md)
     - [Known EV issue Full Run, GCPv47.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/Known%20EV%20issue%20Full%20Run%2C%20GCPv47.md)
     - [Latch Full run.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/Latch%20Full%20run.md)
