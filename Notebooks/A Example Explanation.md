@@ -71,11 +71,48 @@ Each example showcases a different pathway of invention using the GCP v43.7 REA 
 
 ---
 
-**📁 Folder Location:**  
-`Notebooks/Examples/`
 
-**🛠️ Usage Instructions:**
-1. Clone the repo  
-2. Open any `.ipynb` in [Google Colab](https://colab.research.google.com/) or Jupyter  
-3. Follow inline cells to understand GCP phase alignment and outcomes  
-4. Use each notebook as a launchpad for new inventions
+📂 Duality Unzipped Output
+
+Duality is a synthetic quality‑of‑experience (QoE) suite that generates network traces with jitter spikes and micro‑outages, then compares a baseline network against two mitigation variants.  The main folder contains:
+
+Documentation & ledgers – A README.md explains that Duality evaluates a baseline, a single‑path variant with a bounded jitter‑hold buffer and thin parity coding, and a dual‑path variant that adds LTE assistance.  BENCHMARK_LEDGER.md notes that benchmarks are produced via make bench and saved under 04_benchmarks/results/, while DECISION_LEDGER.md records a Phase‑10 decision to scaffold proto stubs for agents, relay and OpenWRT bench.
+
+Datasets & results – S49_6_Param_Sweep.csv defines the variants and parameters used during benchmarks; for example, the baseline has no mitigation, whereas the single‑path and dual‑path variants add buffering, parity coding and LTE assist on large gaps.  S49_extended_details (1).csv and S49_extended_summary (1).csv contain detailed and aggregated metrics.  The summary shows that across multiple network families the Duality variants dramatically reduce jitter and packet‑loss while keeping overhead reasonable.
+
+Code & configuration – Python modules (adaptive_controller.py, dataplane.py, flow_classifier.py, sim_duality.py), a service unit (duality-agent.service), and an openapi.yaml describe the implementation.  The environment lockfile, makefile, policy configuration and shell scripts (setup_duality.sh) set up and run the benchmarks.
+
+
+Invention: Duality is an adaptive buffering and parity‑coding scheme for real‑time traffic.  The single‑path mode adds a jitter‑hold buffer and low‑overhead parity coding to smooth micro‑outages, while the dual‑path mode splits traffic across primary and LTE‑assisted paths; it enables the system to survive longer gaps (≥120 ms) by pulling from the LTE path.  Benchmarks show that Duality variants lower 95th‑percentile jitter and loss across cable, satellite, DSL and Wi‑Fi scenarios.
+
+📂 Modulift Unzipped Output
+
+ModuLift v0.1 is a C++ build‑system accelerator that makes it easy to adopt C++20 header‑units and named modules.  The folder includes:
+
+Guide & references – README_MODULIFT_v0.1.md introduces ModuLift as a drop‑in, no‑rewrite accelerator that enables header‑units on MSVC/Clang/GCC and opportunistically enables named modules when supported.  It also ships a diagnostics explainer and a benchmark harness to measure p50 build‑time deltas.  The README explains that current CMake releases lack header‑unit support, so ModuLift drives header‑units via compiler flags while using CMake’s module scanning for named modules and gives a five‑step quick‑start (copy wiring, toggle a CMake option, list high‑payoff headers, build and benchmark).  A section describes what you get—how header‑units are produced and consumed for MSVC, Clang and GCC, how named modules are enabled via CMake ≥3.28, and how an “explain mode” converts template‑error diagnostics into actionable hints.  REFERENCES.md links to CMake, compiler and Microsoft blog posts on modules.
+
+Design artifacts – A series of numbered markdown files summarise different planning aspects.
+
+Context Dossier – notes that CMake 3.28+ supports named modules while header‑units must be driven via the compilers.
+
+Influence Matrix – mentions bridging header‑units, dependency scanning, diagnostics UX and IFC caching.
+
+Design Envelope, Branch Tree & Architecture Blueprint – outline constraints, acceptance criteria, CLI surface and risks, state that the project is “HU first” with optional named‑module stubs, and list core modules such as EnvProbe, DepScan, HU/NM generators, an explain‑mode and an apply/revert mechanism.
+
+Functional Plan & Red‑Team Findings – describe a benchmark harness, environment matrix and failure modes and record that generator‑gate behaviour was honoured and clang‑scan‑deps fallback handled properly.
+
+Validation Template – instructs teams to attach median build metrics from CI and compute deltas, with a date stamp.
+
+C‑K Drift, TRIZ Contradictions & Worth‑It Report – check that the concept stays grounded in current compilers and CMake realities, articulate contradictions (e.g., faster builds without rewrites, leveraging modules despite uneven tooling, clearer diagnostics without compiler patches) and confirm the “GO” decision because conservative header‑unit gains justify the effort.
+
+Simplicity Audit & Optimization Ledger – stress minimal header‑unit sets and enabling named modules only when supported and suggest profiling headers by fan‑out and parse cost while caching interface units.
+
+
+Build scripts & code – CMake build files (CMakeLists.txt, enable‑named‑modules.cmake, hu‑clang‑gcc.cmake, hu‑msvc.cmake), benchmarking scripts (bench_build.sh, bench_build.ps1), sample C++ sources (lib.cpp, main.cpp, math.hpp, util.hpp) and configuration files (modulift-bench.yml, headers.cmake) demonstrate how to wire ModuLift into a project.  A Python script (modulift_explain.py) and rules file provide the diagnostics explainer.
+
+
+Invention: ModuLift offers a drop‑in method to adopt C++20 header units today and automatically transition to named modules when the toolchain supports them.  It wraps compiler flags and prebuilds interface units to provide header‑unit benefits without rewriting source code, uses CMake scanning to enable named modules when available, adds an “explain mode” that converts template errors into actionable hints, and provides a benchmark harness and CI workflow to measure build‑time improvements.
+
+
+
+
