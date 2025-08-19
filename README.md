@@ -32,8 +32,8 @@
 ---
 
 # Important Updates
--Grok4 and Claude Opus 4 struggle to run Flagship.
--ChatGPT5 Runs Flagship seamlessly.
+- **Grok4** and **Claude Opus 4** struggle to run Flagship.
+- **ChatGPT5** Runs Flagship seamlessly.
 
 ---
 
