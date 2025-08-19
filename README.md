@@ -123,12 +123,15 @@ Home: overview, quickstart, phases/gates, modes, checkpoint UX
   - requirements.txt
 - **Documents/**
   - A Documents Readme.md
+  - AI ChatGPT Critical Analysis Flagship GCP V49.md
   - AI ChatGPT Critical Analysis GCP V45.6D.md
   - AI ChatGPT Critical Analysis GCP V46.md
   - AI ChatGPT Critical Analysis V47 Full Run EV issue.md
+  - AI Claude Critical Analysis Flagship GCP V49.md
   - AI Claude Critical Analysis GCP V45.6d.md
   - AI Claude Critical Analysis GCP V46.md
   - AI Claude Critical Analysis V47 full run EV issue.md
+  - AI Grok Critical Analysis Flagship GCPV49.md
   - AI Grok Critical Analysis GCP V45.6D.md
   - AI Grok Critical Analysis GCP V46 .md
   - AI Grok Critical Analysis V47 Full Run EV issue.md
