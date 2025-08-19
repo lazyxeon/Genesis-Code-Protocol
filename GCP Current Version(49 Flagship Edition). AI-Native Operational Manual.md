@@ -732,38 +732,66 @@ Rehydration pass required; bundle signed & indexed.
 
 
 
-Phase 16 — Exit Wizard (XW) — Export & Transparency
-Purpose
- Export human-readable & machine-verifiable packages.
-Outputs (via XW/selection.dsl)
-ZIP of selected artifacts or PDF/A binder with linked INDEX.md
+Phase 16 — Exit Wizard (Final Release & Source Bundle)
 
+Purpose:
+Produce and publish a fully verified, versioned **Source Release Bundle** as the final artifact, enabling downstream developers to *rehydrate*, inspect, and verify LYRA’s design and supply-chain integrity.
 
-MANIFEST.json (digests, signatures)
+ Step: XW-16.1 — SemVer Release with Source Bundle
 
+**Must do:**  
+- Tag the release with a valid **SemVer 2.0.0** version (e.g., `v1.0.0`) 1.
+- Attach a source bundle: `lyra-exit-bundle-<SEMVER>.zip` containing:
+  - Full runnable MVP/reference implementation
+  - `rehydrate.sh`
+  - DX demo (failing sample, quick-fix demo, vet/fix outputs, OTel trace)
+  - README, CHANGELOG.md (Keep a Changelog), release notes
+  - SBOMs: **CycloneDX (ECMA-424 v1.6)** & **SPDX 3.x (ISO/IEC 5962)**
+  - In-toto attestations with **SLSA v1** provenance 2
+  - **Sigstore Rekor** inclusion proof for the bundle
+  - **RFC 3161** timestamp on the export manifest
+- Release notes MUST follow **Conventional Commits** and be formatted as **Keep a Changelog** 3.
 
-Timestamp receipts (RFC-3161) and transparency-log receipts (e.g., rekor)
+Step: XW-16.2 — CI Enforcement & Gate Check
+Before publishing:
 
+- `rehydrate.sh` must reproduce the DX demo and exit cleanly.
+- CI must verify:
+  - SBOMs parse/validate (CycloneDX & SPDX)
+  - In-toto / SLSA provenance attestations verify
+  - Rekor inclusion proof verifies
+  - RFC 3161 timestamp verifies the export manifest
+- Lint commit history follows **Conventional Commits**
+- CHANGELOG.md adheres to **Keep a Changelog** format
+- Source bundle includes OTel “exception” event trace in DX logs
 
-Optional verbatim transcript (chunked + hashed)
+Step: XW-16.3 — Release Publication
 
+- Automatically create a GitHub (or relevant host) release for `<SEMVER>`
+- Attach `lyra-exit-bundle-<SEMVER>.zip`
+- Mark as latest stable release
+- Ensure users downstream can download and verify all the above
 
-Auto-badges stamped in INDEX.md: Rehydration ✅, Provenance ✅, SBOM ✅
+---
 
+Why These Standards Matter
 
-selection.dsl grammar (subset)
-BEGIN ARTIFACT:XW/selection.dsl
- export {
- include ["INDEX.md","MANIFEST.json","Evidence_Log/","SBOM/","provenance/","Policies/","metamorphic/","tests/","Audit_Package/"];
- redact ["Evidence_Log/raw_data/"];
- format "zip"; # or "pdfa"
- sign true;
- timestamp true;
- transparency_log true;
- }
- END ARTIFACT
-Gate 16
-Export produced; signatures & receipts present; badges applied.
+- **SemVer** ensures version numbers carry meaning about API compatibility. 4  
+- **Conventional Commits** and **Keep a Changelog** make release history and new changes transparent to devs. 5  
+- **SBOMs (CycloneDX & SPDX)** provide machine-readable inventory and licensing clarity. 6  
+- **in-toto + SLSA v1** elevate provenance trust through structured attestations. 7  
+- **Sigstore Rekor** gives immutable, public record proofs for artifacts.  
+- **RFC 3161 timestamps** provide third-party time validation for exports.
+
+---
+
+ Summary Table (Exit Wizard Integration)
+
+| Wizard Step                  | Description                                                                 |
+|-----------------------------|-----------------------------------------------------------------------------|
+| XW-16.1 — Source Release     | SemVer tag → source bundle + artifacts                                     |
+| XW-16.2 — CI Verification    | Checks: rehydrate, SBOM, provenance, timestamp                            |
+| XW-16.3 — Publish Release    | Create release + attach bundle + notify devs                              |
 
 
 
