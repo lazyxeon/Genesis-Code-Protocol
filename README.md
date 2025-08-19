@@ -32,8 +32,9 @@
 ---
 
 # Important Updates
-- **Grok4** and **Claude Opus 4** struggle to run Flagship.
-- **ChatGPT5** Runs Flagship seamlessly.
+- **Grok4** and **Claude Opus 4** Struggle to run Flagship. **Claude** more so than **Grok**
+- **ChatGPT5** Runs Flagship Seamlessly.
+- **Gemini 2.5** Runs Flagship Very Well
 
 ---
 
