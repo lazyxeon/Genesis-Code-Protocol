@@ -122,8 +122,7 @@ Home: overview, quickstart, phases/gates, modes, checkpoint UX
   - prompt\_utils.py
   - requirements.txt
 - **Documents/**
-  - **protocol/**
-    - overview
+  - A Documents Readme.md
   - AI ChatGPT Critical Analysis GCP V45.6D.md
   - AI ChatGPT Critical Analysis GCP V46.md
   - AI ChatGPT Critical Analysis V47 Full Run EV issue.md
@@ -231,6 +230,7 @@ Home: overview, quickstart, phases/gates, modes, checkpoint UX
     - sqm\_duality.conf
   - **Full Runs/**
     - **Flagship Full Runs/**
+    - A FR Readme.md
     - High Speed Internet Issue V49 Full Run.md
     - Known EV issue Full Run, GCPv47.md
     - Latch Full run.md
@@ -267,13 +267,13 @@ Home: overview, quickstart, phases/gates, modes, checkpoint UX
     - modulift\_explain.py
     - modulift\_explain\_rules.json
     - util.hpp
-  - A Example Explanation.md
+  - A Notebook Readme.md
   - Adaptive QoS Allocator.ipynb
   - Alloy Perceptual Loss.py
   - Alloyscript.py
-  - Audio Processing, v45.6.md
+  - Audio Processing.md
   - JACCO.ipynb
-  - Latch Latent capability Harnesser.md
+  - Latch LCH.md
   - MOSAIC.ipynb
 - **Scripts/**
   - fix\_md\_spacing.py
