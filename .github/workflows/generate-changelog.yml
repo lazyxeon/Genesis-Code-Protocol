@@ -108,7 +108,7 @@ jobs:
         run: python Scripts/fix_md_spacing.py
 
       - name: Commit updated CHANGELOG
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: "chore(changelog): update and normalize spacing"
           file_pattern: CHANGELOG.md
