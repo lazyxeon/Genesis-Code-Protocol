@@ -1,3 +1,0 @@
-# Protocol Overview
-
-GCP is a single-document protocol that guides an LLM to produce **field-test-ready** inventions with rigorous gates, artifacts, and continuous assurance. It supports **Full-Run** (stop at every gate) and **Auto-Mode** (LLM proceeds except where human choice is required), with explicit **Checkpoint Gate** UX.
