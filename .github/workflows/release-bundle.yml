@@ -1,22 +1,38 @@
-permissions: read-all
+name: Release Bundle
+
+on:
+  release:
+    types: [created]
+
+# Default read-only permissions.
+permissions:
+  contents: read
+
 jobs:
   bundle:
+    # Needs write permission to upload assets to the release.
     permissions:
-      contents: write   # needed to upload assets
+      contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
       - name: Prepare staging
+        env:
+          TAG: ${{ github.ref_name }}
         run: |
-          # ... existing commands ...
+          set -euo pipefail
+          rm -rf dist
+          mkdir -p dist
+          # Create a field kit zip containing key project directories.
+          zip -r "dist/GCP_${TAG}_Field_Kit.zip" "CLI Bundle" "Documents" "Scripts" -x "*.git*" "*.github*"
       - name: SBOM (SPDX)
-        uses: anchore/sbom-action@<commit-sha>
+        uses: anchore/sbom-action@e8d2a6937ecead383dfe75190d104edd1f9c5751
         with:
           path: .
           format: spdx-json
           output-file: dist/sbom.spdx.json
       - name: SBOM (CycloneDX)
-        uses: anchore/sbom-action@<commit-sha>
+        uses: anchore/sbom-action@e8d2a6937ecead383dfe75190d104edd1f9c5751
         with:
           path: .
           format: cyclonedx-json
@@ -27,12 +43,12 @@ jobs:
           cd dist
           sha256sum * > SHA256SUMS.txt
       - name: Upload bundle to release
-        uses: softprops/action-gh-release@<commit-sha>
+        uses: softprops/action-gh-release@72f2c25fcb47643c292f7107632f7a47c1df5cd8
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
-            dist/GCP_${{ env.TAG }}_Field_Kit.zip
+            dist/GCP_${{ github.ref_name }}_Field_Kit.zip
             dist/sbom.spdx.json
             dist/sbom.cdx.json
             dist/SHA256SUMS.txt
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
