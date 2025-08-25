@@ -2,8 +2,6 @@
 name: Security Scan
 
 on:
-permissions:
-  contents: read
 
   push:
     branches: [main]
@@ -12,6 +10,9 @@ permissions:
   schedule:
     - cron: '0 0 * * 0'  # Weekly
 
+permissions:
+  contents: read
+  
 jobs:
   scan:
     runs-on: ubuntu-latest
