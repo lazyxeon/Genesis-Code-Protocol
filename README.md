@@ -119,7 +119,7 @@ See `SECURITY.md` for the security policy and supply‑chain controls. V50 conti
 
 ## Version Matrix (Historic Highlights)
 
-See **CHANGELOG** for details: v45.6D → V46 → V46.5 → V47 → V47.1 → V47.2 → **V48** → **V49**.
+See **CHANGELOG** for details: v45.6D → V46 → V46.5 → V47 → V47.1 → V47.2 → **V48** → **V49** → **V50**.
 
 ---
 
