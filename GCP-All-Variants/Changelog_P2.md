@@ -1,8 +1,5 @@
----
-
 ## `CHANGELOG.md`
 
-```markdown
 # Changelog
 
 All notable changes to this project are documented here. Earlier history (v9 → v45.6D) was compiled previously and is summarized below.
