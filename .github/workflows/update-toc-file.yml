@@ -1,15 +1,5 @@
 name: Update Top-Level TOC file
 
-permissions: read-all
-jobs:
-  build-toc:
-    permissions:
-      contents: write
-      pull-requests: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-
 on:
   push:
     branches: [ "main" ]
@@ -20,9 +10,9 @@ on:
   schedule:
     - cron: "21 3 * * *"
 
+# Default read-only permissions.
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 concurrency:
   group: toc-file
@@ -30,17 +20,18 @@ concurrency:
 
 jobs:
   build-toc:
+    # Needs write permissions to update the TOC and open a PR.
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         with:
           fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.11'
-
       - name: Generate "Table Of Contents.md" (inline)
         run: |
           python - <<'PY'
@@ -55,7 +46,7 @@ jobs:
 
           EXCLUDE_DIRS = {".git","__pycache__",".mypy_cache",".pytest_cache",".venv","venv","node_modules","dist","build",".idea",".vscode"}
           EXCLUDE_FILES = {".DS_Store"}
-          ALLOW_EXTS = {".md",".py",".ipynb",".yml",".yaml",".toml"}  # tweak as needed
+          ALLOW_EXTS = {".md",".py",".ipynb",".yml",".yaml",".toml"}
           MAX_DEPTH = 2
           MAX_ITEMS = 100
           FOLDERS_FIRST = True
@@ -63,8 +54,10 @@ jobs:
           INTRO = "This document is auto-generated. Links are relative to the repo. Updated as of {DATE}."
 
           def list_dir(path:Path):
-            try: names = sorted(os.listdir(path))
-            except Exception: return [],[]
+            try:
+              names = sorted(os.listdir(path))
+            except Exception:
+              return [],[]
             dirs, files = [],[]
             for n in names:
               if n in EXCLUDE_FILES: continue
@@ -72,7 +65,8 @@ jobs:
               if p.is_dir():
                 if n not in EXCLUDE_DIRS: dirs.append(p)
               else:
-                if (ALLOW_EXTS is None) or (p.suffix.lower() in ALLOW_EXTS): files.append(p)
+                if (ALLOW_EXTS is None) or (p.suffix.lower() in ALLOW_EXTS):
+                  files.append(p)
             return dirs, files
 
           def rel_link(p:Path)->str:
@@ -102,7 +96,6 @@ jobs:
 
           now = datetime.now(timezone.utc).strftime("%B %d, %Y (UTC)")
           parts = [f"# {TITLE}","\n"+INTRO.format(DATE=now)+"\n"]
-
           # Root files
           _, root_files = list_dir(ROOT)
           if root_files:
@@ -110,25 +103,21 @@ jobs:
             for f in root_files:
               parts.append(f"- {rel_link(f)}")
             parts.append("")
-
           # One section per top-level dir
           top_dirs, _ = list_dir(ROOT)
           for d in top_dirs:
             parts.append(f"## {d.name}\n")
             parts.extend(build_section(d, depth=1))
             parts.append("")
-
           TOC.write_text("\n".join(parts).strip()+"\n", encoding="utf-8", newline="\n")
           print(f"Wrote {TOC}")
           PY
-
       - name: Show diff (debug)
         run: |
           git status
           git --no-pager diff -- "Table Of Contents.md" || true
-
       - name: Create PR with changes
-        uses: peter-evans/create-pull-request@<commit-sha>
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         with:
           branch: chore/update-top-level-toc
           title: "chore(docs): refresh Table Of Contents.md"
