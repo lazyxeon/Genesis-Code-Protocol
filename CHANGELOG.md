@@ -99,6 +99,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Delete Documents/Setup.py
+- chore(changelog): update and normalize spacing
 - Update generate_repo_toc.py
 - Update Setup.py
 - chore(changelog): update and normalize spacing
