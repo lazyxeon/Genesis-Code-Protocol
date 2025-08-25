@@ -1,5 +1,15 @@
 name: Update Repo Structure
 
+permissions: read-all
+jobs:
+  update:
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+    
 on:
   push:
     branches: [ "main" ]
@@ -122,15 +132,12 @@ jobs:
           print(f"Top_level_entries={len(entries)}")
           print(f"Changed={changed}")
           PY
-
+  # ... existing Python code to patch README ...
       - name: Create PR with changes
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@<commit-sha>
         with:
           branch: chore/update-repo-structure
           title: "chore(docs): sync Repository Structure in README"
           commit-message: "docs(readme): auto-sync repo structure"
-          body: |
-            This PR updates the auto-generated **Repository Structure** section in `README.md`.
-            The content between the markers is created inline by the workflow.
           labels: documentation
           signoff: true
