@@ -97,6 +97,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update docs.yml
+- chore(changelog): update and normalize spacing
 - Update codeql.yml
 - chore(changelog): update and normalize spacing
 - Update release-drafter.yml
