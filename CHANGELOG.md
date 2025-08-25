@@ -2,6 +2,7 @@
 
 ### Documentation
 - docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md
 - docs(readme): auto-sync repo structure
 - docs: auto-update Table Of Contents.md
 - docs(readme): auto-sync repo structure
@@ -97,6 +98,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Merge pull request #105 from lazyxeon/chore/update-top-level-toc
+- chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
 - Update scorecards.yml
 - chore(changelog): update and normalize spacing
