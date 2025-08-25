@@ -1,30 +1,16 @@
-name-template: "v$RESOLVED_VERSION"
-tag-template: "v$RESOLVED_VERSION"
-categories:
-  - title: "✨ Features"
-    labels: ["feature","enhancement"]
-  - title: "🐞 Fixes"
-    labels: ["bug","fix","bugfix"]
-  - title: "🧰 Maintenance"
-    labels: ["chore","refactor","docs"]
-  - title: "🔐 Security"
-    labels: ["security"]
-change-template: "- $TITLE @$AUTHOR (#$NUMBER)"
-version-resolver:
-  major:
-    labels: ["major"]
-  minor:
-    labels: ["minor"]
-  patch:
-    labels: ["patch"]
-  default: patch
-template: |
-  ## Changes
-  $CHANGES
-autolabeler:
-  - label: "docs"
-    files: ["**/*.md","mkdocs.yml","docs/**"]
-  - label: "security"
-    title: "/(CVE|security)/i"
-  - label: "chore"
-    files: ["**/*.yml",".github/**"]
+permissions: read-all  # deny write access by default
+
+jobs:
+  update_release_draft:
+    # Only this job needs write permissions for the release and pull request
+    permissions:
+      contents: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Draft release notes
+        # Pin third-party action to a specific commit SHA (replace with real SHA)
+        uses: release-drafter/release-drafter@93a22f86bb189f3c450631e8d012e5d208a6446b
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
