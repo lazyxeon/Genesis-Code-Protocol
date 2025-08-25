@@ -137,7 +137,8 @@ See [About.md](./About.md) for core principles and additional context.
 
 📚 GCP Wiki
 <details>
-```
+```text
+ 
 Quick‑Start – how to initiate a GCP run (LLM‑only or via the CLI).
 Phase‑Map‑and‑Gates – overview of phases and the gate decision flow.
 Gate‑Decision‑Card – fields and options for gate decisions.
@@ -155,6 +156,7 @@ Master‑Runners‑Codex‑V50 – summary of V50 runner contracts.
 Cartridges‑Pack‑V50 – summary of V50 cartridge modules.
 GCP V49 Flagship Edition – Details of V49 Flagship Edition.
 GCP V49 ‐ Summarized – Summary of V49 Flagship Edition
+
 ```</details>
 
 👉 https://github.com/lazyxeon/Genesis-Code-Protocol/wiki
