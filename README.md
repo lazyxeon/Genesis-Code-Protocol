@@ -109,6 +109,20 @@ See `SECURITY.md` for the security policy and supply‑chain controls. V50 conti
 
 ---
 
+## Docs
+
+- **About** → [About.md](./About.md)  
+- **Charts & Graphs** → [Charts.md](./Charts.md)  
+- **Changelog** → [CHANGELOG.md](./CHANGELOG.md)
+
+---
+
+## Version Matrix (Historic Highlights)
+
+See **CHANGELOG** for details: v45.6D → V46 → V46.5 → V47 → V47.1 → V47.2 → **V48** → **V49**.
+
+---
+
 ## License
 
 MIT — see `LICENSE.md`.
@@ -127,6 +141,7 @@ Home: overview, quickstart, phases/gates, modes, checkpoint UX
 
 👉 https://github.com/lazyxeon/Genesis-Code-Protocol/wiki
 
+---
 
 # **Repository Structure**
 
