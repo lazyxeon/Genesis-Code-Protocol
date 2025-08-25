@@ -1,26 +1,28 @@
-name: Draft a new release
+name: Release Drafter
 
 on:
-  pull_request_target:
-    types: [opened, reopened, synchronize, edited]
   push:
     branches:
       - main
+  pull_request:
+    types: [closed]
+  workflow_dispatch:
+
+# Default read-only permissions.
+permissions:
+  contents: read
 
 jobs:
   update_release_draft:
+    # Needs write permissions for release notes and PR labels.
     permissions:
       contents: write
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - name: Draft release notes
-        uses: release-drafter/release-drafter@v6.1.0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+      # Use a stable release tag for the release drafter action.  Pinning to a
+      # known tag ensures the action is available.
+      - uses: release-drafter/release-drafter@v6.1.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-  template: |
-  CHANGES
-
-  CONTRIBUTORS
