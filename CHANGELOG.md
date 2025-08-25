@@ -97,6 +97,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update ghcr-build.yml
+- chore(changelog): update and normalize spacing
 - Update generate-changelog.yml
 - Update docs.yml
 - Update docker-debug.yml
