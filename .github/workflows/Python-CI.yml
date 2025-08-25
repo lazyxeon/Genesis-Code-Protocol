@@ -1,14 +1,14 @@
-# .github/workflows/python-ci.yml
+# .github/workflows/Python-CI.yml
 name: Python CI
 
 on:
   push:
     branches: [main]
-    paths-ignore: ['**/*.md', '**/*.ipynb']  # Ignore docs/notebooks
+    paths-ignore: ['**/*.md', '**/*.ipynb']
   pull_request:
     branches: [main]
 
-    permissions:
+permissions:
   contents: read
 
 jobs:
@@ -26,7 +26,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install flake8
       - name: Lint with Flake8
-        continue-on-error: true  # Allow warnings; fail only on critical
+        continue-on-error: true
         run: |
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics || true
           flake8 . --count --max-complexity=10 --max-line-length=127 --statistics || true
