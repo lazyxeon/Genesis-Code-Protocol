@@ -61,14 +61,12 @@ FOLDERS_FIRST: bool = True
 # DESCRIPTIONS = {"docs": "Project documentation"}
 DESCRIPTIONS: dict[str, str] = {}
 
-
 def _urlencode_path(path: Path) -> str:
     """Return a URL‑encoded relative path for linking in markdown."""
     rel = path.relative_to(ROOT)
     # Use quote to percent‑encode special characters.  Do not encode path
     # separators (``/``) so that GitHub can interpret the path correctly.
     return quote(str(rel), safe="/")
-
 
 def _write_entry(path: Path, depth: int, lines: list[str]) -> None:
     """Append a markdown list entry for ``path`` at the given depth."""
@@ -82,7 +80,6 @@ def _write_entry(path: Path, depth: int, lines: list[str]) -> None:
     if desc:
         entry += f" – {desc}"
     lines.append(entry)
-
 
 def _traverse_dir(dir_path: Path, depth: int, lines: list[str]) -> None:
     """Recursively walk ``dir_path`` and collect TOC lines."""
@@ -110,7 +107,6 @@ def _traverse_dir(dir_path: Path, depth: int, lines: list[str]) -> None:
         if is_dir:
             _traverse_dir(child, depth + 1, lines)
 
-
 def generate_toc() -> list[str]:
     """Return a list of lines comprising the generated TOC."""
     lines: list[str] = []
@@ -122,12 +118,10 @@ def generate_toc() -> list[str]:
     _traverse_dir(ROOT, 0, lines)
     return lines
 
-
 def main() -> None:
     lines = generate_toc()
     TOC_FILE.write_text("\n".join(lines), encoding="utf-8")
     print(f"Wrote table of contents to {TOC_FILE.relative_to(ROOT)} with {len(lines)} entries.")
-
 
 if __name__ == "__main__":
     sys.exit(main())
