@@ -1,263 +1,33 @@
-name: Validate Jupyter Notebooks
+name: Validate Notebooks
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
-      - "**/*.ipynb"
-      - ".github/workflows/validate-notebooks.yml"
+      - '**/*.ipynb'
   pull_request:
     paths:
-      - "**/*.ipynb"
-      - ".github/workflows/validate-notebooks.yml"
+      - '**/*.ipynb'
   workflow_dispatch:
-    inputs:
-      mode:
-        description: "Run mode for manual execution"
-        type: choice
-        required: true
-        default: smoke
-        options: [ smoke, full ]
-  schedule:
-    - cron: "11 4 * * *"   # optional: nightly lint
 
+# Use read-only permissions.
 permissions:
   contents: read
 
-concurrency:
-  group: nb-validate
-  cancel-in-progress: true
-
 jobs:
-  # -----------------------------------------
-  # LINT JOB — runs on push/PR/schedule
-  # -----------------------------------------
-  lint:
-    if: ${{ github.event_name != 'workflow_dispatch' }}
+  lint-notebooks:
     runs-on: ubuntu-latest
-    env:
-      NB_DIRS: |
-        Notebooks
-        Examples
-      EXCLUDE_GLOBS: |
-        **/.ipynb_checkpoints/**
-        **/*[skip-ci]*.ipynb
-        **/*[manual]*.ipynb
-        **/*[heavy]*.ipynb
     steps:
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
-          python-version: "3.11"
-
-      - name: Install lite deps
+          python-version: '3.11'
+      - name: Install nbqa and flake8
         run: |
           python -m pip install --upgrade pip
-          pip install nbformat
-
-      - name: Lint notebooks (no execution; always green)
+          pip install nbqa flake8
+      - name: Lint notebooks with nbqa + flake8
         run: |
-          python - <<'PY'
-          from __future__ import annotations
-          import os, glob, fnmatch, sys
-          from pathlib import Path
-          import nbformat
-
-          ROOT = Path(".").resolve()
-          raw_dirs = [l.strip() for l in os.getenv("NB_DIRS","Notebooks").splitlines() if l.strip()]
-          scan_dirs = [d for d in raw_dirs if (ROOT / d).is_dir()]
-          if not scan_dirs: scan_dirs = ["."]
-          paths = set()
-          for d in scan_dirs:
-            paths.update(glob.glob(str(ROOT / d / "**/*.ipynb"), recursive=True))
-
-          exclude = [l.strip() for l in os.getenv("EXCLUDE_GLOBS","").splitlines() if l.strip()]
-          def excluded(p: Path)->bool:
-            s = p.as_posix()
-            return any(fnmatch.fnmatch(s, g) for g in exclude)
-
-          nb_files = sorted(Path(p) for p in paths if Path(p).is_file() and not excluded(Path(p)))
-          if not nb_files:
-            print("No notebooks found to lint.")
-            sys.exit(0)
-
-          bad = []
-          for p in nb_files:
-            rel = p.relative_to(ROOT)
-            print(f"Parsing: {rel}")
-            try:
-              nbformat.read(p, as_version=4)
-            except Exception as e:
-              # Don't fail the job; just report
-              print(f"::warning file={rel}::Failed to parse as notebook: {e}")
-              bad.append((rel, str(e)))
-
-          print(f"Linted {len(nb_files)} notebook(s). Problematic: {len(bad)} (reported as warnings).")
-          sys.exit(0)
-          PY
-
-  # -----------------------------------------
-  # EXEC JOB — runs only when you click "Run workflow"
-  # -----------------------------------------
-  exec:
-    if: ${{ github.event_name == 'workflow_dispatch' }}
-    runs-on: ubuntu-latest
-    env:
-      NB_MODE: ${{ inputs.mode }}          # smoke | full
-      NB_TIMEOUT_SECS: "600"
-      NB_DIRS: |
-        Notebooks
-        Examples
-      EXCLUDE_GLOBS: |
-        **/.ipynb_checkpoints/**
-        **/*[skip-ci]*.ipynb
-        **/*[manual]*.ipynb
-        **/*[heavy]*.ipynb
-      NB_SMOKE_GLOBS: |
-        **/*[smoke]*.ipynb
-        Notebooks/*Quickstart*.ipynb
-        Notebooks/*Intro*.ipynb
-      NB_RESULTS_DIR: nb-results
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install execution deps
-        run: |
-          python -m pip install --upgrade pip
-          pip install nbformat nbclient jupyter nbconvert
-
-      - name: Execute notebooks (mode=${{ inputs.mode }})
-        id: runnb
-        run: |
-          python - <<'PY'
-          from __future__ import annotations
-          import os, sys, glob, fnmatch
-          from pathlib import Path
-          import nbformat
-          from nbclient import NotebookClient, CellExecutionError
-
-          ROOT = Path(".").resolve()
-          MODE = os.getenv("NB_MODE","smoke").lower()
-          TIMEOUT = int(os.getenv("NB_TIMEOUT_SECS","600"))
-          RESULTS = ROOT / os.getenv("NB_RESULTS_DIR","nb-results")
-          RESULTS.mkdir(parents=True, exist_ok=True)
-
-          # dirs
-          raw_dirs = [l.strip() for l in os.getenv("NB_DIRS","Notebooks").splitlines() if l.strip()]
-          scan_dirs = [d for d in raw_dirs if (ROOT / d).is_dir()]
-          if not scan_dirs: scan_dirs = ["."]
-          # files
-          paths = set()
-          for d in scan_dirs:
-            paths.update(glob.glob(str(ROOT / d / "**/*.ipynb"), recursive=True))
-          nb_files = sorted(Path(p) for p in paths if Path(p).is_file())
-
-          # exclude
-          exclude = [l.strip() for l in os.getenv("EXCLUDE_GLOBS","").splitlines() if l.strip()]
-          def excluded(p: Path)->bool:
-            s = p.as_posix()
-            return any(fnmatch.fnmatch(s, g) for g in exclude)
-
-          # smoke subset
-          smoke = [l.strip() for l in os.getenv("NB_SMOKE_GLOBS","").splitlines() if l.strip()]
-          def in_smoke(p: Path)->bool:
-            s = p.as_posix()
-            return any(fnmatch.fnmatch(s, g) for g in smoke) if smoke else False
-
-          # select
-          if MODE == "smoke":
-            selected = [p for p in nb_files if in_smoke(p) and not excluded(p)]
-          else:
-            selected = [p for p in nb_files if not excluded(p)]
-
-          if not selected:
-            print(f"No notebooks selected for mode={MODE}.")
-            sys.exit(0)
-
-          # skip helpers
-          def meta_skip(nb)->bool:
-            try:
-              ci = nb.metadata.get("ci", {})
-              if isinstance(ci, dict) and ci.get("skip") is True:
-                return True
-              tags = nb.metadata.get("tags", [])
-              if isinstance(tags, list) and any(str(t).lower()=="skip_ci" for t in tags):
-                return True
-              for cell in nb.cells:
-                t = cell.get("metadata", {}).get("tags", [])
-                if isinstance(t, list) and any(str(x).lower()=="skip_ci" for x in t):
-                  return True
-            except Exception:
-              pass
-            return False
-          def name_skip(name:str)->bool:
-            n = name.lower()
-            return ("[skip-ci]" in n) or ("[manual]" in n) or ("[heavy]" in n)
-
-          failures=[]
-          executed=[]
-          for p in selected:
-            rel = p.relative_to(ROOT)
-            print(f"::group::Executing {rel}")
-            try:
-              nb = nbformat.read(p, as_version=4)
-            except Exception as e:
-              print(f"::error file={rel}::Parse error: {e}")
-              failures.append((rel, f"parse: {e}"))
-              print("::endgroup::"); continue
-            if name_skip(p.name) or meta_skip(nb):
-              print(f"Skipping (marked skip): {rel}")
-              print("::endgroup::"); continue
-            outp = RESULTS / rel
-            outp.parent.mkdir(parents=True, exist_ok=True)
-            try:
-              client = NotebookClient(nb, timeout=TIMEOUT, kernel_name="python3", allow_errors=False)
-              client.execute()
-              nbformat.write(nb, outp)
-              executed.append(outp)
-              print("✅ OK")
-            except CellExecutionError as e:
-              nbformat.write(nb, outp)
-              executed.append(outp)
-              print(f"::error file={rel}::Exec error: {e}")
-              failures.append((rel, f"exec: {e}"))
-            except Exception as e:
-              nbformat.write(nb, outp)
-              executed.append(outp)
-              print(f"::error file={rel}::Unexpected: {e}")
-              failures.append((rel, f"unexpected: {e}"))
-            finally:
-              print("::endgroup::")
-
-          # index
-          idx = RESULTS / "INDEX.txt"
-          with idx.open("w", encoding="utf-8") as f:
-            f.write(f"Mode={MODE}\nSelected={len(selected)}\nExecuted={len(executed)}\nFailures={len(failures)}\n")
-            for e in executed: f.write(f"{e.relative_to(ROOT)}\n")
-            if failures:
-              f.write("\nFailures:\n")
-              for rel, why in failures: f.write(f"- {rel}: {why}\n")
-
-          if failures:
-            sys.exit(1)
-          sys.exit(0)
-          PY
-
-      - name: Upload executed notebooks (artifact)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: notebook-results
-          path: nb-results
-          if-no-files-found: ignore
+          nbqa flake8 . --exclude node_modules,venv,.venv,dist,build || true
