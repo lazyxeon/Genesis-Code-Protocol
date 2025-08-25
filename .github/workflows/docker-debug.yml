@@ -4,7 +4,7 @@ name: Docker Debug Build
 on:
   workflow_dispatch: {}
 
-  permissions:
+permissions:
   contents: read
 
 jobs:
@@ -14,7 +14,6 @@ jobs:
       BUILDKIT_PROGRESS: plain
     steps:
       - uses: actions/checkout@v5
-
       - name: Show context
         run: |
           pwd && ls -la
@@ -22,9 +21,7 @@ jobs:
           sed -n '1,120p' docker/Dockerfile || true
           echo "---- check requirements file ----"
           ls -la "CLI Bundle" || true
-
       - uses: docker/setup-buildx-action@v3
-
       - name: Build (no push)
         uses: docker/build-push-action@v6
         with:
