@@ -97,6 +97,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update update-repo-structure.yml
+- chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
 - Update scorecards.yml
 - chore(changelog): update and normalize spacing
