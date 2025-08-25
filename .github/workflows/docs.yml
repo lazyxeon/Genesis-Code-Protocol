@@ -8,33 +8,32 @@ on:
       - "docs/**"
   workflow_dispatch: {}
 
+# Use read-only permissions at the workflow level.
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build-and-deploy:
+    # This job needs write permissions to push to gh-pages branch.
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
       - name: Configure Git user for gh-deploy
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.x'
-
       - name: Cache pip
-        uses: actions/cache@v4
+        uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809
         with:
           path: ~/.cache/pip
           key: mkdocs-${{ runner.os }}-${{ hashFiles('**/mkdocs.yml') }}
           restore-keys: mkdocs-${{ runner.os }}-
-
       - name: Install MkDocs Material
         run: pip install mkdocs-material
-
       - name: Deploy
         run: mkdocs gh-deploy --force
