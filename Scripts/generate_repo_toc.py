@@ -25,6 +25,7 @@ import sys
 from pathlib import Path
 from datetime import datetime, timezone
 from urllib.parse import quote
+from typing import Optional  # <--- Added for type hint compatibility
 
 # Determine the repository root.  ``__file__`` refers to this script.
 ROOT = Path(__file__).resolve().parents[1]
@@ -43,7 +44,7 @@ EXCLUDE_DIRS: set[str] = {
 EXCLUDE_FILES: set[str] = {".DS_Store"}
 
 # Allowed file extensions.  Set to ``None`` to include all files.
-ALLOW_EXTS: set[str] | None = {
+ALLOW_EXTS: Optional[set[str]] = {
     ".md", ".py", ".ipynb", ".yml", ".yaml", ".toml",
 }
 
