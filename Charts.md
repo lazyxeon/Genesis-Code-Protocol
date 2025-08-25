@@ -52,4 +52,10 @@ flowchart LR
 - **Rec:** AI pick + reason
 - **Conf:** 0–1 or Low/Med/High
 - **Cost/Time:** S / M / L
-- **Risk:** key downside
+- **Risk:** key downside<img width="1024" height="1024" alt="ChatGPT Image Aug 25, 2025, 01_43_51 PM" src="https://github.com/user-attachments/assets/72bef619-14d6-4a6e-88d8-82952421c24e" />
+
+<img width="1024" heigh<img width="1024" height="1536" alt="ChatGPT Image Aug 25, 2025, 01_46_41 PM" src="https://github.com/user-attachments/assets/86051f94-b2a4-4e70-8098-5beed9e020c6" />
+t="1536" alt="ChatGPT Image Aug 25, 2025, 01_14_48 PM" src="https://github.com/user-attachments/assets/5e8d3c00-2ed0-447a-8626-462e56fc1201" />
+<img width="1024" height="1024" alt="ChatGPT Image Aug<img width="1536" height="1024" alt="ChatGPT Image Aug 25, 2025, 01_42_51 PM" src="https://github.com/user-attachments/assets/8847c2f4-5559-4e71-a2e7-b43c03024549" />
+ 25, 2025, 01_16_36 PM" src="https://github.com/user-attachments/assets/6f1b0cc7-7358-4598-ae4a-6bc0df5406e3" /><img width="1536" height="1024" alt="ChatGPT Image Aug 25, 2025, 01_22_56 PM" src="https://github.com/user-attachments/assets/a4c9eca0-c2ae-4cae-af7c-842c58a0b671" />
+
