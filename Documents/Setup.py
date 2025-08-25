@@ -1,8 +1,10 @@
 from pathlib import Path
 from setuptools import setup, find_packages
 
-# Read the README file for the long description
-readme_path = Path(__file__).resolve().parent / "README.md"
+# Read the README file for the long description.  This resolves the path
+# relative to this file so that running setup from another directory still
+# finds the documentation.
+readme_path = Path(__file__).resolve().parents[1] / "README.md"
 long_description = ""
 if readme_path.is_file():
     long_description = readme_path.read_text(encoding="utf-8")
@@ -19,15 +21,15 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        # Updated minimum versions to patch known vulnerabilities
-        "transformers>=4.38.0",  # fixes deserialization and ReDoS issues
-        "torch>=2.6.0",          # fixes heap overflow and RCE issues
+        # Minimum versions are set to address known security vulnerabilities.
+        "transformers>=4.38.0",
+        "torch>=2.6.0",
         "scipy>=1.10.0",
         "numpy>=1.23.0",
         "pandas>=1.5.0",
         "matplotlib>=3.6.0",
-        "jupyterlab>=4.2.5",    # fixes DOM-clobbering/CSRF leak issues
-        "notebook>=7.2.2",      # fixes HTML injection vulnerability
+        "jupyterlab>=4.2.5",
+        "notebook>=7.2.2",
         "pyspark>=3.5.0",
         "sympy>=1.12.0",
         "networkx>=3.3",
