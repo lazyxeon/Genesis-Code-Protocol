@@ -1,6 +1,6 @@
 # Table of Contents for Genesis Code Protocol (GCP)
 
-This document is auto-generated. Links are relative to the repo. Updated as of August 19, 2025 (UTC).
+This document is auto-generated. Links are relative to the repo. Updated as of August 25, 2025 (UTC).
 
 ## Root
 
@@ -9,7 +9,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 - [Charts.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Charts.md)
 - [Code of Conduct.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Code%20of%20Conduct.md)
 - [Contributing.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Contributing.md)
-- [GCP Current Version(49 Flagship Edition). AI-Native Operational Manual.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Current%20Version%2849%20Flagship%20Edition%29.%20AI-Native%20Operational%20Manual.md)
+- [GCP Current Version(V50 Flagship Edition).md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Current%20Version%28V50%20Flagship%20Edition%29.md)
 - [LICENSE.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/LICENSE.md)
 - [README.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/README.md)
 - [SECURITY.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/SECURITY.md)
@@ -79,16 +79,21 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
   - [AI Grok Critical Analysis V47 Full Run EV issue.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20Grok%20Critical%20Analysis%20V47%20Full%20Run%20EV%20issue.md)
   - [Feature Requests.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Feature%20Requests.md)
   - [Issue Template.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Issue%20Template.md)
+  - [Operations Manual.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Operations%20Manual.md)
   - [Pull Request Template.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Pull%20Request%20Template.md)
   - [Requirements.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Requirements.md)
   - [Security.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Security.md)
   - [Setup.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Setup.py)
+  - [Theoretical Soundness Analysis.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Theoretical%20Soundness%20Analysis.md)
   - [index.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/index.md)
   - [releases.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/releases.md)
   - [security_report.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/security_report.md)
 
 ## GCP Runners
 
+  - **GCP V50 Supplemental Docs/**
+    - [GCP V50 Cartridges Pack.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/GCP%20V50%20Supplemental%20Docs/GCP%20V50%20Cartridges%20Pack.md)
+    - [GCP V50 Master Runners Codex.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/GCP%20V50%20Supplemental%20Docs/GCP%20V50%20Master%20Runners%20Codex.md)
   - [A V49.0 Master Runners Codex: Flagship Edition.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/A%20V49.0%20Master%20Runners%20Codex%3A%20Flagship%20Edition.md)
   - [Agriculture & Environmental MVR Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Agriculture%20%26%20Environmental%20MVR%20Runner.md)
   - [Archaeology_History Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Archaeology_History%20Runner.md)
@@ -117,7 +122,6 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 
   - [Changelog.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/Changelog.md)
   - [Changelog_P2.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/Changelog_P2.md)
-  - [GCP V49 Flagship Edition.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/GCP%20V49%20Flagship%20Edition.md)
   - [V09.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V09.md)
   - [V11.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V11.md)
   - [V20.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V20.md)
@@ -152,6 +156,8 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
   - [V47.2.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V47.2.md)
   - [V48.0.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V48.0.md)
   - [V49.0.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V49.0.md)
+  - [V49.1 Flagship Edition.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V49.1%20Flagship%20Edition.md)
+  - [V50.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V50.md)
 
 ## Notebooks
 
