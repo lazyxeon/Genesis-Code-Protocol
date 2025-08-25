@@ -2,6 +2,9 @@
 name: Python CI
 
 on:
+permissions:
+  contents: read
+
   push:
     branches: [main]
     paths-ignore: ['**/*.md', '**/*.ipynb']  # Ignore docs/notebooks
