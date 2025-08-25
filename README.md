@@ -114,7 +114,7 @@ See `SECURITY.md` for the security policy and supply‑chain controls. V50 conti
 - **About** → [About.md](./About.md)  
 - **Charts & Graphs** → [Charts.md](./Charts.md)  
 - **Changelog** → [CHANGELOG.md](./CHANGELOG.md)
-
+- **Roadmap** → [Roadmap.md](./Roadmap.md)
 ---
 
 ## Version Matrix (Historic Highlights)
