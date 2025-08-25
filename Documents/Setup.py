@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from pathlib import Path
 from setuptools import setup, find_packages
 
@@ -14,7 +15,10 @@ setup(
     version="47.0.0",
     author="LazyXeon",
     author_email="lazyxeon@example.com",
-    description="Genesis Code Protocol: AI‑native invention framework",
+    # Avoid non-ASCII characters (e.g. non-breaking hyphens) in descriptions to
+    # ensure static analysis tools like CodeQL can parse this file.  Use
+    # standard ASCII hyphens instead of fancy hyphens.
+    description="Genesis Code Protocol: AI-native invention framework",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/lazyxeon/Genesis-Code-Protocol",
