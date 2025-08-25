@@ -97,6 +97,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update Setup.py
+- chore(changelog): update and normalize spacing
 - Create roadmap.md
 - chore(changelog): update and normalize spacing
 - Create index.md
