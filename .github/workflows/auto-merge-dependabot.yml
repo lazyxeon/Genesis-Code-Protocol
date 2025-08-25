@@ -1,21 +1,29 @@
-name: Auto‑merge Dependabot PRs
+name: Auto-merge Dependabot PRs
+
 on:
   pull_request:
     branches: [main]
     types: [opened, synchronize]
+
+# Restrict default token permissions to read-only at the workflow level.
+permissions:
+  contents: read
+
 jobs:
   merge:
+    # Only run this job if the actor is dependabot.
     if: github.actor == 'dependabot[bot]'
-permissions:
+    # This job needs permission to write to contents and pull-requests to merge.
+    permissions:
       contents: write
-      pull_requests: write
-    runs_on: ubuntu-latest
+      pull-requests: write
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v6
+      - name: Merge dependabot PR
+        uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410
         with:
           script: |
             const pr = context.payload.pull_request;
-            // merge with squash once all checks have passed
             await github.rest.pulls.merge({
               owner: context.repo.owner,
               repo: context.repo.repo,
