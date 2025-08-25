@@ -97,6 +97,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update Python-CI.yml
+- chore(changelog): update and normalize spacing
 - Update docs.yml
 - chore(changelog): update and normalize spacing
 - Update codeql.yml
