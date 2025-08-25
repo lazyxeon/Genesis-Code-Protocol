@@ -99,6 +99,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update validate-notebooks.yml
+- chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
 - Update docs.yml
 - Update release-drafter.yml
