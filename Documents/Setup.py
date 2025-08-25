@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 # Read the README file for the long description.  This resolves the path
 # relative to this file so that running setup from another directory still
 # finds the documentation.
-readme_path = Path(__file__).resolve().parents[1] / "README.md"
+readme_path = Path(__file__).resolve().parent / "README.md"
 long_description = ""
 if readme_path.is_file():
     long_description = readme_path.read_text(encoding="utf-8")
