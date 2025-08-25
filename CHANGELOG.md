@@ -97,6 +97,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update release-bundle.yml
+- chore(changelog): update and normalize spacing
 - Update Python-CI.yml
 - chore(changelog): update and normalize spacing
 - Update ghcr-build.yml
