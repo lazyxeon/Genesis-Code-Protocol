@@ -33,6 +33,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
     - [protocol_review.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/protocol_review.yml)
   - **workflows/**
     - [Python-CI.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/Python-CI.yml)
+    - [auto-merge-dependabot.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/auto-merge-dependabot.yml)
     - [auto-release.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/auto-release.yml)
     - [cliff.toml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/cliff.toml)
     - [codeql.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/codeql.yml)
