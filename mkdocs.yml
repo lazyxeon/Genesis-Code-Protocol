@@ -1,38 +1,7 @@
-site_name: Genesis Code Protocol (GCP)
-site_description: "LLM-native invention protocol — ideate → simulate → validate → ship"
-repo_url: https://github.com/lazyxeon/Genesis-Code-Protocol
+asite_name: Genesis Code Protocol
 theme:
   name: material
-  features:
-    - navigation.instant
-    - navigation.tracking
-    - content.tabs.link
-    - toc.integrate
-    - content.code.copy
-  palette:
-    - scheme: default
-      primary: indigo
-      accent: blue
+  language: en
 nav:
   - Home: index.md
-  - Protocol:
-      - Overview: protocol/overview.md
-      - Phases & Gates: protocol/phases-and-gates.md
-      - Risk Tiers: protocol/risk-tiers.md
-      - Safety & Compliance: protocol/safety-compliance.md
-  - How-To:
-      - Run a Full GCP Session: howto/run-session.md
-      - Checkpointing UX: howto/checkpointing.md
-      - Spark Examples: howto/spark-examples.md
-  - Reference:
-      - Prompts: reference/prompts.md
-      - Artifacts & Ledgers: reference/artifacts.md
-      - APIs & CLIs: reference/apis-clis.md
-markdown_extensions:
-  - admonition
-  - attr_list
-  - def_list
-  - footnotes
-  - md_in_html
-  - toc:
-      permalink: true
+  - Roadmap: roadmap.md
