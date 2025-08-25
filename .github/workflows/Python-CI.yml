@@ -3,10 +3,14 @@ name: Python CI
 on:
   push:
     branches: [main]
-    paths-ignore: ['**/*.md', '**/*.ipynb']
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.ipynb'
   pull_request:
     branches: [main]
 
+# By default, use read‑only permissions.  The job does not need to write
+# to the repository.
 permissions:
   contents: read
 
@@ -25,10 +29,10 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install flake8
       - name: Lint with Flake8
-        continue-on-error: true
         run: |
+          # show errors but continue, so that linting does not stop the workflow
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics || true
           flake8 . --count --max-complexity=10 --max-line-length=127 --statistics || true
       - name: Run tests
         run: |
-          if command -v unittest; then python -m unittest discover -v; else echo "No tests found; skipping."; fi
+          if [ -d "tests" ] && [ "$(ls -A tests)" ]; then python -m pytest -v; else echo 'No tests found.'; fi
