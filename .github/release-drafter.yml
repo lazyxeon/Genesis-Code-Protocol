@@ -1,16 +1,39 @@
-permissions: read-all  # deny write access by default
+# Release Drafter configuration
 
-jobs:
-  update_release_draft:
-    # Only this job needs write permissions for the release and pull request
-    permissions:
-      contents: write
-      pull-requests: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - name: Draft release notes
-        # Pin third-party action to a specific commit SHA (replace with real SHA)
-        uses: release-drafter/release-drafter@93a22f86bb189f3c450631e8d012e5d208a6446b
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+# Determine the version numbers and tags based on semantic versioning.
+name-template: 'v${{version}}'
+tag-template: 'v${{version}}'
+
+# Categorise pull requests based on labels.  Each category is rendered as
+# a section in the release notes.  Uncategorised PRs are collected under
+# "Miscellaneous" automatically by the action.
+categories:
+  - title: '🚀 Features'
+    labels:
+      - enhancement
+      - feature
+  - title: '🛠️ Fixes'
+    labels:
+      - bug
+      - fix
+  - title: '📝 Documentation'
+    labels:
+      - documentation
+  - title: '🧰 Maintenance'
+    labels:
+      - chore
+      - cleanup
+
+# Format each change entry.  The template variables `CONTRIBUTOR`, `TITLE`,
+# `PR_NUMBER` and `PR_URL` are provided by the release-drafter action.
+change-template: '- ${{CONTRIBUTOR}}: ${{TITLE}} in [#${{PR_NUMBER}}](${{PR_URL}})'
+
+# Overall release notes template.  The `CHANGELOG` and `CONTRIBUTORS`
+# placeholders will be replaced with the formatted list of changes and
+# contributors.
+template: |
+  ## What's Changed
+  ${{CHANGELOG}}
+
+  ## Contributors
+  ${{CONTRIBUTORS}}
