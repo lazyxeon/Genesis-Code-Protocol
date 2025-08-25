@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Script to generate a repository Table Of Contents (TOC).
 
 This utility walks the project directory tree and writes a
-``Table Of Contents.md`` file at the repository root.  The TOC uses a
-bullet‑list style with relative links that are URL‑encoded, so the links
+``Table Of Contents.md`` file at the repository root.  The TOC uses a
+bullet-list style with relative links that are URL-encoded, so the links
 will work when viewed in GitHub.  You can configure which file
 extensions are included, limit the depth of recursion, and supply
 custom descriptions for particular entries.
@@ -15,7 +16,7 @@ repository:
     python Scripts/generate_repo_toc.py
 
 The script always writes the TOC file.  It can be invoked via a CI
-workflow to keep the TOC up‑to‑date automatically.
+workflow to keep the TOC up-to-date automatically.
 """
 
 from __future__ import annotations
@@ -29,7 +30,7 @@ from urllib.parse import quote
 ROOT = Path(__file__).resolve().parents[1]
 
 # Name of the markdown file to write relative to the root
-TOC_FILE = ROOT / "Table Of Contents.md"
+TOC_FILE = ROOT / "Table Of Contents.md"
 
 # ---------------- Configuration ----------------
 # Names of directories to exclude from traversal
