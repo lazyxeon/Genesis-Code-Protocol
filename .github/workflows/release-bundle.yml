@@ -1,80 +1,33 @@
-name: Release Bundle (Field Kit + SBOM + Checksums)
-
-on:
-  release:
-    types: [published]
-
-permissions:
-  contents: write  # needed to upload assets to the release
-
+permissions: read-all
 jobs:
   bundle:
+    permissions:
+      contents: write   # needed to upload assets
     runs-on: ubuntu-latest
-
-    env:
-      TAG: ${{ github.event.release.tag_name }}
-      VERSION: ${{ github.event.release.tag_name }}  # often like v47.2
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-
+      - uses: actions/checkout@v5
       - name: Prepare staging
         run: |
-          set -euo pipefail
-          mkdir -p dist/field-kit
-
-          # Include the protocol docs (both MD + PDF if present)
-          shopt -s nullglob
-          cp -v "GCP Current Version"*.md dist/field-kit/ 2>/dev/null || true
-          cp -v *V*.pdf dist/field-kit/ 2>/dev/null || true
-
-          # Always include key repo docs
-          cp -v README.md LICENSE*.md dist/field-kit/ 2>/dev/null || true
-          cp -v About.md dist/field-kit/ 2>/dev/null || true
-
-          # Include common folders if they exist
-          for d in "CLI Bundle" Documents Notebooks docker prompts; do
-            if [ -d "$d" ]; then
-              mkdir -p "dist/field-kit/$d"
-              cp -R "$d"/. "dist/field-kit/$d"/
-            fi
-          done
-
-          # Optional: include a version marker file
-          printf "Release: %s\nDate: %s\n" "$TAG" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > dist/field-kit/RELEASE.info
-
-      - name: Zip Field Kit
-        run: |
-          set -euo pipefail
-          cd dist
-          zip -r "GCP_${TAG}_Field_Kit.zip" field-kit
-          ls -lh
-
-      # Generate SBOMs (SPDX + CycloneDX) into dist/
+          # ... existing commands ...
       - name: SBOM (SPDX)
-        uses: anchore/sbom-action@v0
+        uses: anchore/sbom-action@<commit-sha>
         with:
           path: .
           format: spdx-json
           output-file: dist/sbom.spdx.json
-
       - name: SBOM (CycloneDX)
-        uses: anchore/sbom-action@v0
+        uses: anchore/sbom-action@<commit-sha>
         with:
           path: .
           format: cyclonedx-json
           output-file: dist/sbom.cdx.json
-
       - name: SHA-256 checksums
         run: |
           set -euo pipefail
           cd dist
           sha256sum * > SHA256SUMS.txt
-          cat SHA256SUMS.txt
-
-      - name: Upload bundle to the same Release
-        uses: softprops/action-gh-release@v2
+      - name: Upload bundle to release
+        uses: softprops/action-gh-release@<commit-sha>
         with:
           files: |
             dist/GCP_${{ env.TAG }}_Field_Kit.zip
