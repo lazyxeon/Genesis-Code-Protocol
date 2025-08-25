@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -72,7 +71,7 @@ def _urlencode_path(path):
 
 def _write_entry(path, depth, lines):
     """Append a markdown list entry for ``path`` at the given depth."""
-    indent = "  " * depth
+    indent = "    " * depth
     name = path.name
     link = _urlencode_path(path)
     entry = f"{indent}- [{name}]({link})"
