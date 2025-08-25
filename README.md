@@ -125,13 +125,13 @@ See **CHANGELOG** for details: v45.6D → V46 → V46.5 → V47 → V47.1 → V4
 
 ## License
 
-MIT — see `LICENSE.md`.
+MIT — see [License.md](./License.md) .
 
 ---
 
 ## About
 
-See `About.md` for core principles and additional context.
+See [About.md](./About.md) for core principles and additional context.
 
 ---
 
