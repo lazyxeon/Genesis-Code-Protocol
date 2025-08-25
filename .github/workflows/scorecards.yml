@@ -2,42 +2,32 @@ name: OpenSSF Scorecard
 
 on:
   schedule:
-    - cron: '27 5 * * 1'  # weekly
-  push:
-    branches: [ "main" ]
+    # Run Scorecard weekly at 02:00 UTC on Sundays
+    - cron: "0 2 * * 0"
   workflow_dispatch:
 
-# Do NOT grant write perms at the workflow level when publishing results.
-permissions: read-all
+# Grant read access by default. Scorecard requires id-token and security-events
+# permissions at the job level for uploading SARIF results.
+permissions:
+  contents: read
 
 jobs:
-  analysis:
-    # Scorecard v2 requires id-token: write at the JOB level when publish_results: true
+  analyze:
+    runs-on: ubuntu-latest
     permissions:
       contents: read
-      security-events: write   # for SARIF upload
-      id-token: write          # for OIDC when publishing results
-    runs-on: ubuntu-latest
-
+      id-token: write
+      security-events: write
+      actions: read
     steps:
-      - name: Harden runner
-        uses: step-security/harden-runner@v2
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+      - name: Run OpenSSF Scorecard
+        uses: ossf/scorecard-action@9c5a5773a477a6918c1b33cd94e587f3a6316d94
         with:
-          egress-policy: audit
-
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          persist-credentials: false
-
-      - name: Run Scorecard
-        uses: ossf/scorecard-action@v2.4.2
-        with:
-          results_file: results.sarif
-          results_format: sarif
+          results_file: scorecard-results.sarif
           publish_results: true
-
-      - name: Upload SARIF to Code Scanning
-        uses: github/codeql-action/upload-sarif@v3
+      - name: Upload Scorecard results
+        uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: results.sarif
+          sarif_file: scorecard-results.sarif
