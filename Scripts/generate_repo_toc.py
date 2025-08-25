@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Script to generate a repository Table Of Contents (TOC).
+Script to generate a repository Table Of Contents (TOC).
 
 This utility walks the project directory tree and writes a
 ``Table Of Contents.md`` file at the repository root.  The TOC uses a
@@ -19,8 +19,6 @@ The script always writes the TOC file.  It can be invoked via a CI
 workflow to keep the TOC up-to-date automatically.
 """
 
-from __future__ import annotations
-
 import sys
 from pathlib import Path
 from datetime import datetime, timezone
@@ -34,44 +32,44 @@ TOC_FILE = ROOT / "Table Of Contents.md"
 
 # ---------------- Configuration ----------------
 # Names of directories to exclude from traversal
-EXCLUDE_DIRS: set[str] = {
+EXCLUDE_DIRS = {
     ".git", "__pycache__", ".mypy_cache", ".pytest_cache",
     ".venv", "venv", "node_modules", "dist", "build", ".idea", ".vscode",
 }
 
 # Filenames to exclude
-EXCLUDE_FILES: set[str] = {".DS_Store"}
+EXCLUDE_FILES = {".DS_Store"}
 
 # Allowed file extensions.  Set to ``None`` to include all files.
-ALLOW_EXTS: set[str] | None = {
+ALLOW_EXTS = {
     ".md", ".py", ".ipynb", ".yml", ".yaml", ".toml",
 }
 
-# Maximum directory depth to traverse (0 = only top‑level).  Increase to
+# Maximum directory depth to traverse (0 = only top-level).  Increase to
 # include nested subdirectories.
-MAX_DEPTH: int = 2
+MAX_DEPTH = 2
 
 # Maximum number of items per directory.  Long lists are truncated.
-MAX_ITEMS_PER_DIR: int = 100
+MAX_ITEMS_PER_DIR = 100
 
 # Whether to list folders before files in the TOC
-FOLDERS_FIRST: bool = True
+FOLDERS_FIRST = True
 
-# Optional human‑readable descriptions to append after entries.  Keys
+# Optional human-readable descriptions to append after entries.  Keys
 # should match relative paths or names.  Example:
 # DESCRIPTIONS = {"docs": "Project documentation"}
-DESCRIPTIONS: dict[str, str] = {}
+DESCRIPTIONS = {}
 
 
-def _urlencode_path(path: Path) -> str:
-    """Return a URL‑encoded relative path for linking in markdown."""
+def _urlencode_path(path):
+    """Return a URL-encoded relative path for linking in markdown."""
     rel = path.relative_to(ROOT)
-    # Use quote to percent‑encode special characters.  Do not encode path
+    # Use quote to percent-encode special characters.  Do not encode path
     # separators (``/``) so that GitHub can interpret the path correctly.
     return quote(str(rel), safe="/")
 
 
-def _write_entry(path: Path, depth: int, lines: list[str]) -> None:
+def _write_entry(path, depth, lines):
     """Append a markdown list entry for ``path`` at the given depth."""
     indent = "  " * depth
     name = path.name
@@ -81,11 +79,11 @@ def _write_entry(path: Path, depth: int, lines: list[str]) -> None:
     desc_key = str(path.relative_to(ROOT))
     desc = DESCRIPTIONS.get(desc_key) or DESCRIPTIONS.get(name)
     if desc:
-        entry += f" – {desc}"
+        entry += f" - {desc}"
     lines.append(entry)
 
 
-def _traverse_dir(dir_path: Path, depth: int, lines: list[str]) -> None:
+def _traverse_dir(dir_path, depth, lines):
     """Recursively walk ``dir_path`` and collect TOC lines."""
     if depth > MAX_DEPTH:
         return
@@ -94,7 +92,7 @@ def _traverse_dir(dir_path: Path, depth: int, lines: list[str]) -> None:
     except PermissionError:
         # Skip directories we cannot access
         return
-    entries: list[tuple[bool, Path]] = []
+    entries = []
     for child in children:
         if child.is_dir():
             if child.name in EXCLUDE_DIRS:
@@ -112,9 +110,9 @@ def _traverse_dir(dir_path: Path, depth: int, lines: list[str]) -> None:
             _traverse_dir(child, depth + 1, lines)
 
 
-def generate_toc() -> list[str]:
+def generate_toc():
     """Return a list of lines comprising the generated TOC."""
-    lines: list[str] = []
+    lines = []
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S %Z")
     lines.append("# Table Of Contents")
     lines.append("")
@@ -124,7 +122,7 @@ def generate_toc() -> list[str]:
     return lines
 
 
-def main() -> None:
+def main():
     lines = generate_toc()
     TOC_FILE.write_text("\n".join(lines), encoding="utf-8")
     print(f"Wrote table of contents to {TOC_FILE.relative_to(ROOT)} with {len(lines)} entries.")
