@@ -99,6 +99,7 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing
 - Update docs.yml
 - Update release-drafter.yml
 - Update mkdocs.yml
@@ -977,6 +978,7 @@
 - Initial commit
 
 ### Security
+- Update security-scan.yml
 - Update security-scan.yml
 - Update security-scan.yml
 - Update security-scan.yml
