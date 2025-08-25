@@ -179,6 +179,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
     - [sim_duality.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/sim_duality.py)
   - **Full Runs/**
     - **Flagship Full Runs/**
+    - **GCP V50 Full Runs/**
     - [A FR Readme.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/A%20FR%20Readme.md)
     - [High Speed Internet Issue V49 Full Run.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/High%20Speed%20Internet%20Issue%20V49%20Full%20Run.md)
     - [Known EV issue Full Run, GCPv47.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/Known%20EV%20issue%20Full%20Run%2C%20GCPv47.md)
