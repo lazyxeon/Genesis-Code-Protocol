@@ -1,14 +1,36 @@
-permissions: read-all
+name: Generate Changelog
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "**/*.py"
+      - "**/*.md"
+      - "**/*.yml"
+  workflow_dispatch: {}
+
+# Default read-only permissions.
+permissions:
+  contents: read
+
 jobs:
   changelog:
+    # Needs write permission to commit the changelog.
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      # ... steps for generating changelog ...
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Generate CHANGELOG.md
+        run: python Scripts/generate_changelog.py
       - name: Commit updated CHANGELOG
-        # Pin third-party action to commit SHA
-        uses: stefanzweifel/git-auto-commit-action@<commit-sha>
+        uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0
         with:
           commit_message: "chore(changelog): update and normalize spacing"
           file_pattern: CHANGELOG.md
