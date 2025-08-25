@@ -99,6 +99,12 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update docs.yml
+- Update release-drafter.yml
+- Update mkdocs.yml
+- Update roadmap.md
+- Update index.md
+- chore(changelog): update and normalize spacing
 - Update generate_repo_toc.py
 - chore(changelog): update and normalize spacing
 - Update Setup.py
