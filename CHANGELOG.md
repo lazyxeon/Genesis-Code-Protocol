@@ -1,57 +1,891 @@
-## Unreleased
-
-# Changelog
-
-All notable changes to this project will be documented in this file.
-
-## [Unreleased] — 2025-08-13
+# GRCP Changelog
 
 ### Documentation
-- auto-update CHANGELOG.md ([09b65f5](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/09b65f5e64a474402cbba8c69e8894c0276574fb))
-- auto-update CHANGELOG.md ([5c2d4d9](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/5c2d4d98586d1f6944a2261fd4d84b6f8af88aaa))
-- **readme**: auto-sync repo structure ([1fc4f17](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/1fc4f17f33d325346db8adb655e0e66de3c982b7))
-- auto-update CHANGELOG.md ([f1f5a52](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/f1f5a5241762cfc5153dc082b0ffafcd21a09c3f))
-- auto-update Table Of Contents.md ([f1077fe](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/f1077fe4eb8843a6e8a0374d6a9a599c65c70059))
-- **readme**: auto-sync repo structure ([980077c](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/980077c403f90ba1d432db13b0c57292514f85f9))
-- auto-update CHANGELOG.md ([a8880af](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/a8880afa8428da29ad8d163934e027d12ed74d9a))
-- **readme**: auto-sync repo structure ([0f4120e](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/0f4120e838d196b2fbf5ef5cd754528f07a8a8c2))
-- auto-update Table Of Contents.md ([c7b4425](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/c7b44254c4b145a2928f4d59c3e7add48a6e17e9))
-- auto-update CHANGELOG.md ([6ae0c76](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/6ae0c769e1f8e2877c371feeef17120476b56b8a))
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs: auto-update CHANGELOG.md
+- docs: auto-update CHANGELOG.md
+- docs: auto-update CHANGELOG.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update CHANGELOG.md
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update CHANGELOG.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs: auto-update CHANGELOG.md
+- docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md
+- docs: auto-update CHANGELOG.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update CHANGELOG.md
+- docs: auto-update Table Of Contents.md
+- docs: auto-update CHANGELOG.md
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs: auto-update CHANGELOG.md
+- docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md
+- docs: auto-update CHANGELOG.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md
+- docs: auto-update CHANGELOG.md
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update CHANGELOG.md
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
 
-### Other
-- fix_md_spacing.py ([89e8362](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/89e836280965467eec8ae65c863c793e9f933f9a))
-- About.md ([51fed75](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/51fed755514e708c165567dc51a0b817e49e95b6))
-- About.md ([21af95c](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/21af95cc9b6a21ee89f419f1e94f9ae04d64d648))
-- pull_request_template.md ([e387b48](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/e387b48429ff39bddc873bb2c7721ffaed8efe46))
-- CHANGELOG.md ([5f848fc](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/5f848fc08b3eaaaf4d89d7703f8fe76134b12024))
-- .markdownlint.jsonc ([b27d450](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/b27d45071ea729b73eb51a936da87dc73c813f36))
-- .markdownlint.jsonc ([f3ca637](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/f3ca6378a6bcd58c2647a3765dd6d796707d5b09))
-- .markdownlint-cli2.jsonc ([642d1c7](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/642d1c7827bf36f10b0806decb5037003e7bbef5))
-- markdownlint.yml ([dc5df54](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/dc5df548e89cfd46874d70040b3e5289906ef35e))
-- README.md ([41a18ff](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/41a18ff034d8c87071fd90669397c9d02842328d))
-- .markdownlint.jsonc ([1e1cc49](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/1e1cc4907e9c52dfa09e633ea8f092f315f87d37))
-- .markdownlint.jsonc ([293caca](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/293caca0f79bb36dbaf839b54c232af2449c0da1))
-- markdownlint.yml ([4cc6d48](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/4cc6d486aaf97bd2ce047a86a2ecd958bd027268))
-- scorecards.yml ([0a65e3d](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/0a65e3dd2217254d3ba56b767e12af8d054db96f))
-- GCP Current Version(47.2).md to GCP Current Version(47.2). AI-Native Operational Manual.md ([349d7fa](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/349d7faa221cc7f7c1b4cf4e349d80a7c1136abe))
-- README.md ([4f5b149](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/4f5b149dbd2739bb233bfa89214c0faa0968054a))
-- release-drafter.yml ([bafa31d](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/bafa31df74fa26612242184e7b3881e477ee4ffa))
-- release-drafter.yml ([5cc8432](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/5cc84321f17ae50e9ae16cb915fd654bae2247b5))
-- markdownlint.yml ([81e57b7](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/81e57b7302b752e00d5173e727bc01f8cdc0f9e5))
-- devcontainer.json ([3377225](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/3377225c3b1ab5bbf2b8051a0c44f5ff8bdd6a5e))
-- codeql.yml ([2912842](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/29128422f61999c976294e4de9d20afba1859756))
-- and rename scorecard.yml to scorecards.yml ([3c21869](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/3c2186935d4c94fdbcaa2acd527557d9c4ed3fa8))
-- sbom.yml ([7800520](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/7800520ca1e3f503366687b17e1b7642bdd4f42d))
-- ghcr-build.yml ([56080d0](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/56080d0461503f720ea14572a955092cabeccfa0))
-- Dockerfile ([ee27953](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/ee27953ecd7793e014cf0b03c8b5cde0e1ce6b94))
-- pull_request_template.md ([cdf646b](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/cdf646b9e5f7e428fed5c72013209fad25dcb602))
-- new_full_run.yml ([3e9badf](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/3e9badfeae256808eddf090deb44247362337deb))
-- protocol_review.yml ([eaa1eb4](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/eaa1eb4c473b6a4b826128077250bac24e0a8188))
-- feature_request.yml ([dab0872](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/dab0872d040417b19ac2932708147d142bc3b3b8))
-- bug_report.yml ([f8c20a5](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/f8c20a58766c3ce9e50015c3ae0cd114f61f6434))
-- config.yml ([70239d4](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/70239d43710303c8377c1d9361609238f9b883df))
-- docs.yml ([0a730e8](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/0a730e8acfd1e0021820b2cfa4e7008c0adf2530))
-- overview ([4f5d103](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/4f5d103b46b81229264e5e24697baef0982afca2))
-- index.md ([45b2675](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/45b2675654c8b8ea030705951df31dec3f527416))
-- mkdocs.yml ([262d0ba](https://github.com/lazyxeon/Genesis-Code-Protocol/commit/262d0baf7f6e463426caca8634d203646ea07f34))
+### Miscellaneous Tasks
+- Update generate-changelog.yml
+- Update docs.yml
+- Update docker-debug.yml
+- Update docker-build.yml
+- Update codeql.yml
+- Update auto-release.yml
+- Update auto-merge-dependabot.yml
+- Update Setup.py
+- Update generate_repo_toc.py
+- Update generate_changelog.py
+- Update auto-release.yml
+- Update update-toc-file.yml
+- Update update-repo-structure.yml
+- Update sbom.yml
+- Update generate-changelog.yml
+- Update release-drafter.yml
+- Update release-bundle.yml
+- Update release-drafter.yml
+- Update auto-merge-dependabot.yml
+- Update auto-merge-dependabot.yml
+- Update Setup.py
+- Update generate_repo_toc.py
+- Update auto-merge-dependabot.yml
+- Merge pull request #104 from lazyxeon/chore/update-top-level-toc
+- Create auto-merge-dependabot.yml
+- Update docker-debug.yml
+- Update Python-CI.yml
+- Update docker-debug.yml
+- Update Python-CI.yml
+- Update docker-debug.yml
+- Update Python-CI.yml
+- Update Setup.py
+- Merge pull request #103 from lazyxeon/chore/update-repo-structure
+- Update Charts.md
+- Update Charts.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Merge pull request #102 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #101 from lazyxeon/chore/update-repo-structure
+- Update README.md
+- Create Roadmap.md
+- Update CITATION.cff
+- Update README.md
+- Update README.md
+- Merge pull request #100 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #99 from lazyxeon/chore/update-repo-structure
+- Create Full auto spark run.md
+- Update Requirements.md
+- Update releases.md
+- Update index.md
+- Update A Documents Readme.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Merge pull request #98 from lazyxeon/chore/update-repo-structure
+- Merge pull request #97 from lazyxeon/chore/update-repo-structure
+- Merge pull request #96 from lazyxeon/chore/update-top-level-toc
+- Update Changelog_P2.md
+- Rename V49.0.1 Flagship Edition.md to V49.1 Flagship Edition.md
+- Rename V49.0 Flagship Edition.md to V49.0.1 Flagship Edition.md
+- Rename V49.1 Flagship Edition.md to V49.0 Flagship Edition.md
+- Rename V49 Flagship Edition.md to V49.1 Flagship Edition.md
+- Rename GCP V49 Flagship Edition.md to V49 Flagship Edition.md
+- Update Changelog_P2.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Create V50.md
+- Create GCP V50 Cartridges Pack.md
+- Rename GCP V50 Master Runners Codex to GCP V50 Master Runners Codex.md
+- Create GCP V50 Master Runners Codex
+- Update and rename GCP Current Version(49 Flagship Edition). AI-Native Operational Manual.md to GCP Current Version(V50 Flagship Edition).md
+- Create Operations Manual.md
+- Update Charts.md
+- Update About.md
+- Create COES v1.0.md
+- Create EMP-GMD-Resilience.md
+- Create CMAP-X.md
+- Create Theoretical Soundness Analysis.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Update A Documents Readme.md
+- Merge pull request #95 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #94 from lazyxeon/chore/update-repo-structure
+- Create AI Claude Critical Analysis Flagship GCP V49.md
+- Create AI ChatGPT Critical Analysis Flagship GCP V49.md
+- Update AI Grok Critical Analysis Flagship GCPV49.md
+- Create AI Grok Critical Analysis Flagship GCPV49.md
+- Merge pull request #92 from lazyxeon/chore/update-repo-structure
+- Merge pull request #93 from lazyxeon/chore/update-top-level-toc
+- Create A Documents Readme.md
+- Delete Documents/protocol directory
+- Rename Latch Latent capability Harnesser.md to Latch LCH.md
+- Rename Audio Processing, v45.6.md to Audio Processing.md
+- Rename A Example Explanation.md to A Notebook Readme.md
+- Update A Example Explanation.md
+- Create A FR Readme.md
+- Update A FFR Readme.md
+- Create A FFR Readme.md
+- Merge pull request #91 from lazyxeon/chore/update-repo-structure
+- Merge pull request #90 from lazyxeon/dependabot/github_actions/actions/checkout-5
+- Merge pull request #89 from lazyxeon/dependabot/github_actions/stefanzweifel/git-auto-commit-action-6
+- Merge pull request #88 from lazyxeon/chore/update-top-level-toc
+- Create NovelDesign.md
+- Create LYRA.md
+- Create APNL-RT
+- Create Poseidon Loop.md
+- Create Nitrasafe.md
+- Create AGROS.md
+- Create Helios-Arc PM Sail.md
+- Create HSO.md
+- Create Proofline.md
+- Create Payguard-DPC.md
+- Create Civic Accord Stack.md
+- Create Crisp-PCM.md
+- Create PALIMPSET.md
+- Create Gobleki-Tepe.md
+- Create FHASS.md
+- Update GCP Current Version(49 Flagship Edition). AI-Native Operational Manual.md
+- Bump actions/checkout from 4 to 5
+- Bump stefanzweifel/git-auto-commit-action from 5 to 6
+- Merge pull request #86 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #87 from lazyxeon/chore/update-repo-structure
+- Delete GCP Runners/V49.0 Theory Runner.md
+- Rename V49.0 Physical Runner.md to Physical Runner.md
+- Delete GCP Runners/Mobility & Autonomy Runner.md
+- Rename V49.0 Mobility & Autonomy Runner.md to Mobility & Autonomy Runner.md
+- Rename V49.0 Life Sciences Runner.md to Life Sciences Runner.md
+- Rename V49.0 Industrial & Utilities OT Runner.md to Industrial & Utilities OT Runner.md
+- Rename V49.0 Finance & FinTech Runner.md to Finance & FinTech Runner.md
+- Rename V49.0 Code Runner.md to Code Runner.md
+- Rename V49.0 Agriculture & Environmental MVR Runner.md to Agriculture & Environmental MVR Runner.md
+- Update Exotics Runner.md
+- Update Energy_Power Runner.md
+- Update Political Systems Runner.md
+- Update Theology Runner.md
+- Update Archaeology_History Runner.md
+- Update Infrastructure Runner.md
+- Update Public Programs_Policy Runner.md
+- Update Education Runner.md
+- Update V49.0 Finance & FinTech Runner.md
+- Update Entertainment Cartridge.md
+- Update Legal Cartridge.md
+- Update Culinary Cartridge.md
+- Update Sports_Athletics Cartridge.md
+- Update Humanitarian_Disaster Relief Cartridge.md
+- Update Spaceflight_Aerospace Runner.md
+- Update Deep Sea Runner.md
+- Update V49.0 Agriculture & Environmental MVR Runner.md
+- Update V49.0 Life Sciences Runner.md
+- Update V49.0 Physical Runner.md
+- Update V49.0 Code Runner.md
+- Merge pull request #85 from lazyxeon/chore/update-repo-structure
+- Update Charts.md
+- Update About.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Merge pull request #84 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #83 from lazyxeon/chore/update-repo-structure
+- Merge branch 'main' into chore/update-repo-structure
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Update Charts.md
+- Update About.md
+- Update About.md
+- Update About.md
+- Update README.md
+- Update README.md
+- Update and rename GCP Current Version(49). AI-Native Operational Manual.md to GCP Current Version(49 Flagship Edition). AI-Native Operational Manual.md
+- Create GCP V49 Flagship Edition.md
+- Update and rename V49.0 Master Runner.md to A V49.0 Master Runners Codex: Flagship Edition.md
+- Create Exotics Runner.md
+- Create Energy_Power Runner.md
+- Create Political Systems Runner.md
+- Create Theology Runner.md
+- Create Archaeology_History Runner.md
+- Create Infrastructure Runner.md
+- Create Public Programs_Policy Runner.md
+- Create Education Runner.md
+- Update V49.0 Finance & FinTech Runner.md
+- Create Entertainment Cartridge.md
+- Create Legal Cartridge.md
+- Create Culinary Cartridge.md
+- Create Humanitarian_Disaster Relief Cartridge.md
+- Rename Sports_Athletics Runner.md to Sports_Athletics Cartridge.md
+- Create Sports_Athletics Runner.md
+- Create Spaceflight_Aerospace Runner.md
+- Create Deep Sea Runner.md
+- Update V49.0 Agriculture & Environmental MVR Runner.md
+- Update V49.0 Life Sciences Runner.md
+- Update V49.0 Physical Runner.md
+- Update V49.0 Code Runner.md
+- Update V49.0 Master Runner.md
+- Merge pull request #82 from lazyxeon/chore/update-repo-structure
+- Merge pull request #81 from lazyxeon/chore/update-top-level-toc
+- Delete Images directory
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Merge pull request #80 from lazyxeon/chore/update-repo-structure
+- Merge pull request #79 from lazyxeon/chore/update-top-level-toc
+- Delete Notebooks/Duality Unzipped Ouput/1
+- Add files via upload
+- Create 1
+- Update High Speed Internet Issue V49 Full Run.md
+- Create High Speed Internet Issue V49 Full Run.md
+- Rename Example Explanation.md to A Example Explanation.md
+- Delete Notebooks/Modulift Unzipped Output/1
+- Add files via upload
+- Create 1
+- Update README.md
+- Update README.md
+- Merge pull request #77 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #76 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #75 from lazyxeon/chore/update-repo-structure
+- Update Charts.md
+- Update Charts.md
+- Create ledgers_table.png
+- Update Charts.md
+- Update Charts.md
+- Update Charts.md
+- Update Charts.md
+- Update Charts.md
+- Update Charts.md
+- Create Changelog_P2.md
+- Update Charts.md
+- Update About.md
+- Update README.md
+- Merge pull request #73 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #74 from lazyxeon/chore/update-repo-structure
+- Delete ModuLift_v0.1_release.zip
+- Create V49.0.md
+- Create V49.0 Finance & FinTech Runner.md
+- Create V49.0 Agriculture & Environmental MVR Runner.md
+- Create V49.0 Life Sciences Runner.md
+- Create V49.0 Mobility & Autonomy Runner.md
+- Create V49.0 Industrial & Utilities OT Runner.md
+- Rename V49.0 Theory Runner to V49.0 Theory Runner.md
+- Rename V49.0 Physical Runner to V49.0 Physical Runner.md
+- Create V49.0 Theory Runner
+- Create V49.0 Physical Runner
+- Create V49.0 Code Runner.md
+- Create V49.0 Master Runner.md
+- Update and rename GCP Current Version(48). AI-Native Operational Manual.md to GCP Current Version(49). AI-Native Operational Manual.md
+- Merge pull request #72 from lazyxeon/chore/update-repo-structure
+- Merge pull request #71 from lazyxeon/chore/update-top-level-toc
+- Update Requirements.md
+- Update Requirements.md
+- Master list too long kept crashing browser
+- Delete Notebooks/ A Complete Full runs_ Full Inventions Master List(no order).md
+- Merge pull request #70 from lazyxeon/chore/update-repo-structure
+- Merge pull request #69 from lazyxeon/chore/update-repo-structure
+- Merge pull request #68 from lazyxeon/chore/update-top-level-toc
+- Root Folder Name Change
+- Merge pull request #65 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #66 from lazyxeon/chore/update-repo-structure
+- Merge pull request #67 from lazyxeon/GCP-Output-Zip-Packages
+- Add files via upload
+- Create V48 Full Run.md
+- Delete pyproject.toml
+- Delete .github/workflows/pypi-publish.yml
+- Create pypi-publish.yml
+- Create pyproject.toml
+- Merge pull request #62 from lazyxeon/chore/update-repo-structure
+- Create requirements.txt
+- Update ghcr-build.yml
+- Update docker-build.yml
+- Update requirements.txt
+- Update Dockerfile
+- Merge pull request #61 from lazyxeon/chore/update-repo-structure
+- Update .dockerignore
+- Update ghcr-build.yml
+- Update docker-build.yml
+- Update requirements.txt
+- Create Dockerfile
+- Update Dockerfile
+- Update Dockerfile
+- Merge pull request #60 from lazyxeon/chore/update-repo-structure
+- Merge pull request #58 from lazyxeon/chore/update-repo-structure
+- Merge pull request #59 from lazyxeon/chore/update-top-level-toc
+- Update and rename GCP Current Version(47.2). AI-Native Operational Manual.md to GCP Current Version(48). AI-Native Operational Manual.md
+- Update Charts.md
+- Update Charts.md
+- Update Charts.md
+- Update About.md
+- Update README.md
+- Update README.md
+- Merge pull request #57 from lazyxeon/chore/update-repo-structure
+- Merge branch 'main' into chore/update-repo-structure
+- Update README.md
+- Update Charts.md
+- Update About.md
+- Update README.md
+- Update ghcr-build.yml
+- Update .dockerignore
+- Update .dockerignore
+- Update Dockerfile
+- Update requirements.txt
+- Update requirements.txt
+- Update Dockerfile
+- Update requirements.txt
+- Update requirements.txt
+- Update ghcr-build.yml
+- Update ghcr-build.yml
+- Update ghcr-build.yml
+- Update ghcr-build.yml
+- Update docker-debug.yml
+- Update Dockerfile
+- Merge pull request #56 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #55 from lazyxeon/chore/update-repo-structure
+- Update V45.6.md
+- Update V45.6.md
+- Update V45.5.md
+- Update V45.4A.md
+- Update V45.4A.md
+- Update V45.3.md
+- Update V45.3.md
+- Update V45.2.md
+- Update V45.1.md
+- Update V45.0.md
+- Update V44.9d.md
+- Update V44.9b.md
+- Rename V44.9c.md to V44.9b.md
+- Rename V44.9b.md to V44.9d.md
+- Rename V44.9D.md to V44.9c.md
+- Update V44.9D.md
+- Update V44.8.md
+- Update V44.7.md
+- Update V44.1.md
+- Update V43.7.md
+- Create V43.6.md
+- Update V43.0.md
+- Update V42.md
+- Update V41.md
+- Update V40.md
+- Delete GRCP most recent variants/V39.md
+- Delete GRCP most recent variants/V38.md
+- Update V36.md
+- Update V35.md
+- Update V34.md
+- Delete GRCP most recent variants/V33.md
+- Update V30.md
+- Update V23.md
+- Update V22.md
+- Update V20.md
+- Delete GRCP most recent variants/V12.md
+- Update V11.md
+- Update V09.md
+- Create V48.0.md
+- Update docker-debug.yml
+- Update Dockerfile
+- Merge pull request #54 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #53 from lazyxeon/chore/update-repo-structure
+- Update ghcr-build.yml
+- Create docker-debug.yml
+- Create .dockerignore
+- Update Dockerfile
+- Update Dockerfile
+- Update Dockerfile
+- Merge pull request #52 from lazyxeon/chore/update-top-level-toc
+- Create release-bundle.yml
+- Update README.md
+- Merge pull request #51 from lazyxeon/chore/update-repo-structure
+- Merge pull request #50 from lazyxeon/chore/update-repo-structure
+- Merge pull request #49 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #48 from lazyxeon/chore/update-top-level-toc
+- Update issue templates
+- Update Requirements.md
+- Update Setup.py
+- Update Charts.md
+- Merge pull request #47 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #46 from lazyxeon/chore/update-repo-structure
+- Delete .github/workflows/markdownlint.yml
+- Delete .github/.markdownlint.jsonc
+- Delete .markdownlint-cli2.jsonc
+- Delete .markdownlint.jsonc
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Merge pull request #45 from lazyxeon/chore/update-top-level-toc
+- Update About.md
+- Update About.md
+- Update About.md
+- Update About.md
+- Update About.md
+- Update Charts.md
+- Update README.md
+- Update markdownlint.yml
+- Update About.md
+- Update About.md
+- Update About.md
+- Update About.md
+- Update About.md
+- Update markdownlint.yml
+- Update Dockerfile
+- Update ghcr-build.yml
+- Update markdownlint.yml
+- Update About.md
+- Update ghcr-build.yml
+- chore(changelog): update and normalize spacing
+- Update generate-changelog.yml
+- Update About.md
+- Update About.md
+- Merge pull request #44 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #42 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #41 from lazyxeon/chore/update-changelog
+- Merge pull request #43 from lazyxeon/chore/update-repo-structure
+- Update generate-changelog.yml
+- Create fix_md_spacing.py
+- Merge pull request #40 from lazyxeon/chore/update-changelog
+- Update About.md
+- Merge pull request #39 from lazyxeon/chore/update-changelog
+- Update About.md
+- Update pull_request_template.md
+- Update CHANGELOG.md
+- Merge pull request #38 from lazyxeon/chore/update-repo-structure
+- Merge pull request #37 from lazyxeon/chore/update-changelog
+- Update .markdownlint.jsonc
+- Update .markdownlint.jsonc
+- Create .markdownlint-cli2.jsonc
+- Update markdownlint.yml
+- Merge pull request #36 from lazyxeon/chore/update-changelog
+- Merge pull request #35 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #34 from lazyxeon/chore/update-repo-structure
+- Update README.md
+- Create .markdownlint.jsonc
+- Create .markdownlint.jsonc
+- Update markdownlint.yml
+- Update scorecards.yml
+- Rename GCP Current Version(47.2).md to GCP Current Version(47.2). AI-Native Operational Manual.md
+- Merge pull request #32 from lazyxeon/chore/update-repo-structure
+- Merge pull request #33 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #31 from lazyxeon/chore/update-changelog
+- Update README.md
+- Update release-drafter.yml
+- Update release-drafter.yml
+- Create markdownlint.yml
+- Create devcontainer.json
+- Update codeql.yml
+- Update and rename scorecard.yml to scorecards.yml
+- Update sbom.yml
+- Create ghcr-build.yml
+- Update Dockerfile
+- Create pull_request_template.md
+- Create new_full_run.yml
+- Create protocol_review.yml
+- Create feature_request.yml
+- Create bug_report.yml
+- Create config.yml
+- Create docs.yml
+- Create overview
+- Create index.md
+- Create mkdocs.yml
+- Merge pull request #30 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #29 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #28 from lazyxeon/chore/update-changelog
+- Create release-drafter.yml
+- Create release-drafter.yml
+- Delete .github/workflows/release-drafter.yml
+- Merge pull request #27 from lazyxeon/chore/update-changelog
+- Merge pull request #26 from lazyxeon/chore/update-repo-structure
+- Merge pull request #25 from lazyxeon/dependabot/github_actions/peter-evans/create-pull-request-7
+- Merge pull request #24 from lazyxeon/dependabot/github_actions/actions/checkout-5
+- Merge pull request #23 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #22 from lazyxeon/chore/update-changelog
+- Create CITATION.cff
+- Delete Documents/Citation.CFF
+- Create sbom.yml
+- Create scorecard.yml
+- Bump peter-evans/create-pull-request from 6 to 7
+- Bump actions/checkout from 4 to 5
+- Create dependabot.yml
+- Create codeql.yml
+- Create release-drafter.yml
+- Create CODEOWNERS
+- Update Table Of Contents.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Merge pull request #21 from lazyxeon/chore/update-repo-structure
+- Update README.md
+- Update README.md
+- Merge pull request #20 from lazyxeon/chore/update-repo-structure
+- Merge pull request #19 from lazyxeon/chore/update-changelog
+- Merge pull request #18 from lazyxeon/chore/update-top-level-toc
+- Update and rename GCP Current Version(47.1).md to GCP Current Version(47.2).md
+- Rename V43.md to V43.0.md
+- Rename V45.md to V45.0.md
+- Rename V46.md to V46.0.md
+- Rename V47.md to V47.0.md
+- Rename V47.1 to V47.1.md
+- Create V47.2.md
+- Update README.md
+- Merge pull request #17 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #16 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #15 from lazyxeon/chore/update-changelog
+- Merge pull request #14 from lazyxeon/chore/update-repo-structure
+- Update and rename GCP Current Version(47).md to GCP Current Version(47.1).md
+- Create V47.1
+- Update README.md
+- Update README.md
+- Update README.md
+- Merge pull request #13 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #12 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #11 from lazyxeon/chore/update-changelog
+- Update validate-notebooks.yml
+- Update validate-notebooks.yml
+- Update and rename notebook-validation.yml to validate-notebooks.yml
+- Merge pull request #9 from lazyxeon/chore/update-top-level-toc
+- Merge pull request #10 from lazyxeon/chore/update-repo-structure
+- Merge pull request #8 from lazyxeon/chore/update-changelog
+- Merge pull request #7 from lazyxeon/chore/update-top-level-toc
+- Update update-toc-file.yml
+- Update generate-changelog.yml
+- Merge pull request #6 from lazyxeon/chore/update-repo-structure
+- Update generate-changelog.yml
+- Update generate_changelog.py
+- Update and rename auto-changelog.yml to generate-changelog.yml
+- Create generate_changelog.py
+- Merge pull request #5 from lazyxeon/chore/update-repo-structure
+- Create requirements.txt
+- Create docker-build.yml
+- Create .dockerignore
+- Create Dockerfile
+- Delete .github/workflows/Dockerfile.yml
+- Update update-toc-file.yml
+- Merge pull request #4 from lazyxeon/chore/update-repo-structure
+- Create update-toc-file.yml
+- Create generate_repo_toc.py
+- Update Table Of Contents.md
+- Update Table Of Contents.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Merge pull request #3 from lazyxeon/chore/update-repo-structure
+- Update update-repo-structure.yml
+- Update update-repo-structure.yml
+- Update update_repo_structure.py
+- Update README.md
+- Update README.md
+- Merge pull request #2 from lazyxeon/chore/update-repo-structure
+- Update README.md
+- Update update-repo-structure.yml
+- chore(docs): auto-sync repo structure in README
+- Update update_repo_structure.py
+- Update README.md
+- Update update-repo-structure.yml
+- Create update-repo-structure.yml
+- Update README.md
+- Create update_repo_structure.py
+- Create Code of Conduct.md
+- Update README.md
+- Create releases.md
+- Update Pull Request Template.md
+- Update Feature Requests.md
+- Update Issue Template.md
+- Create Citation.CFF
+- Update Contributing.md
+- Update README.md
+- Rename Complete Master List All Revisions Full to Complete Master List All Revisions Full.md
+- Create requirements.txt
+- Create Dockerfile.yml
+- Create cliff.toml
+- Delete cliff.toml
+- Create cliff.toml
+- Delete .github/workflows/Cliff.toml
+- Update auto-release.yml
+- Create Cliff.toml
+- Update notebook-validation.yml
+- Update auto-changelog.yml
+- Update Python-CI.yml
+- Create auto-release.yml
+- Create auto-changelog.yml
+- Create notebook-validation.yml
+- Create Python-CI.yml
+- Create Pull Request Template.md
+- Create Feature Requests.md
+- Create Issue Template.md
+- Create Table Of Contents.md
+- Update Setup.py
+- Update Requirements.md
+- Update Readme.md
+- Update Readme.md
+- Update requirements.txt
+- Update prompt_utils.py
+- Update audit_utils.py
+- Update phase6.7.py
+- Update phase1.py
+- Update full_run.py
+- Update requirements.txt
+- Update Readme.md
+- Update Contributing.md
+- Update About.md
+- Update About.md
+- Update Charts.md
+- Update Charts.md
+- Update Charts.md
+- Update Charts.md
+- Update LICENSE.md
+- Update README.md
+- Update README.md
+- Create AI Grok Critical Analysis V47 Full Run EV issue.md
+- Create AI ChatGPT Critical Analysis V47 Full Run EV issue.md
+- Create AI Claude Critical Analysis V47 full run EV issue.md
+- Create Known EV issue Full Run, GCPv47.md
+- Update and rename GCP Current Version(46).md to GCP Current Version(47).md
+- Create V47.md
+- Create V46.5.md
+- Rename AI ChatGPT Critical Analysis GCP V46 to AI ChatGPT Critical Analysis GCP V46.md
+- Rename AI Claude Critical Analysis GCP V46 to AI Claude Critical Analysis GCP V46.md
+- Rename AI Grok Critical Analysis GCP V46  to AI Grok Critical Analysis GCP V46 .md
+- Create AI Grok Critical Analysis GCP V46
+- Create AI ChatGPT Critical Analysis GCP V46
+- Create AI Claude Critical Analysis GCP V46
+- Update and rename GCP Current Version(45.6D).md to GCP Current Version(46).md
+- Create V46.md
+- Update GCP Current Version(45.6D).md
+- Rename Alloyscript V12.py to Alloyscript.py
+- Update  A Complete Full runs_ Full Inventions Master List(no order).md
+- Create Audio Processing, v45.6.md
+- Update AI Claude Critical Analysis GCP V45.6d.md
+- Update GCP Current Version(45.6D).md
+- Update README.md
+- Update README.md
+- Update README.md
+- Rename AI ChatGPT Critical Analysis GCP V4d.md to AI ChatGPT Critical Analysis GCP V45.6D.md
+- Create AI Grok Critical Analysis GCP V45.6D.md
+- Rename AI Claude Critical Analysis GCP V45.6d to AI Claude Critical Analysis GCP V45.6d.md
+- Rename AI ChatGPT Critical Analysis GCP V43.7 to AI ChatGPT Critical Analysis GCP V4d.md
+- Update AI ChatGPT Critical Analysis GCP V45.6d
+- Update AI Claude Critical Analysis GCP V45.6d
+- Create AI Claude Critical Analysis GCP V45.6d
+- Rename AI Critical Analysis GCP V43.7 to AI ChatGPT Critical Analysis GCP V43.7
+- Update README.md
+- Rename AI Critical Analysis GRCP to AI Critical Analysis GCP V43.7
+- Rename GCP FULL PROTOCOL.md to GCP Current Version(45.6D).md
+- Rename Complete Full runs_ Full Inventions Master List(no order).md to  A Complete Full runs_ Full Inventions Master List(no order).md
+- Rename Full runs_ Full Inventions Master List(no order).md to Complete Full runs_ Full Inventions Master List(no order).md
+- Rename V9.md to V09.md
+- Delete GRCP most recent variants/GCP V43.md
+- Delete GRCP most recent variants/GCP V42.md
+- Delete GRCP most recent variants/GCP_v43_6_Symbolic_Neutral_Full.md
+- Delete GRCP most recent variants/GCP_v43_5_FULL.md
+- Create Complete Master List All Revisions Full
+- Create Full runs_ Full Inventions Master List(no order).md
+- Create Quantum Mechanics Full Run.md
+- Create Solar Energy Full Run.md
+- Create Latch Full run.md
+- Create Latch Latent capability Harnesser.md
+- Update and rename GRCP FULL PROTOCOL.md to GCP FULL PROTOCOL.md
+- Delete GCP Iterative Versions directory
+- Create Changelog.md
+- Rename Changelog.md to Changelog.md
+- Update Changelog.md
+- Create V45.md
+- Create V45.6.md
+- Create V45.5.md
+- Create V45.4A.md
+- Create V45.3.md
+- Create V45.2.md
+- Create V45.1.md
+- Create V44.9D.md
+- Create V44.9b.md
+- Create V44.8.md
+- Create V44.7.md
+- Create V44.1.md
+- Create V43.md
+- Create V43.7.md
+- Create V42.md
+- Create V41.md
+- Create V40.md
+- Create V39.md
+- Create V38.md
+- Create V36.md
+- Create V35.md
+- Create V34.md
+- Create V33.md
+- Create V30.md
+- Create V23.md
+- Create V22.md
+- Create V20.md
+- Create V12.md
+- Create V11.md
+- Create V9.md
+- Update LICENSE.md
+- Update README.md
+- Update README.md
+- Update README.md
+- Rename LICENSE to LICENSE.md
+- Update Charts.md
+- Rename Charts.txt to Charts.md
+- Create Charts.txt
+- Delete Charts/ Mosaic directory
+- Create Charts/ Mosaic/JACCO/Apl Chart
+- Rename phase6.py to phase6.7.py
+- Add files via upload
+- Update Readme.md
+- Create Readme.md
+- Update Example Explanation.md
+- Update Example Explanation.md
+- Update Example Explanation.md
+- Rename Alloyscript V12.ipynb to Alloyscript V12.py
+- Rename Alloyscript V12  to Alloyscript V12.ipynb
+- Create Alloyscript V12
+- Create Example Explanation.md
+- Rename PROTOCOL.md to GRCP FULL PROTOCOL.md
+- Rename alloy_perceptual_loss.py to Alloy Perceptual Loss.py
+- Rename alloy_perceptual_loss.ipynb to alloy_perceptual_loss.py
+- Rename alloy_perceptual_loss.py to alloy_perceptual_loss.ipynb
+- Rename Full Code.ipynb.ipynb to MOSAIC.ipynb
+- Rename Full Code.ipynb (1).ipynb to JACCO.ipynb
+- Add files via upload
+- Update and rename Adaptive QoS Allocator.py to Adaptive QoS Allocator.ipynb
+- Delete Setup.py
+- Create Setup.py
+- Delete Requirements.txt
+- Create Requirements.md
+- Delete AI Critical Analysis of GRCP.md
+- Update AI Critical Analysis GRCP
+- Create AI Critical Analysis GRCP
+- Delete GRCP most recent variants/GRCP_v43_7_REA_Edition.md
+- Create PROTOCOL.md
+- Delete GCP Example Output Inventions directory
+- Rename Adaptive QoS Allocator.py to Adaptive QoS Allocator.py
+- Create Contributing.md
+- Update README.md
+- Update README.md
+- Update AI Critical Analysis of GRCP.md
+- Update AI Critical Analysis of GRCP.md
+- Update AI Critical Analysis of GRCP.md
+- Create AI Critical Analysis of GRCP.md
+- Create About.md
+- Create Changelog.md
+- Create MOSAIC.py
+- Create JACCO.py
+- Create Adaptive QoS Allocator.py
+- Update AlloyScript.py
+- Rename AlloyScript.ipynb to AlloyScript.py
+- Update AlloyScript.ipynb
+- Update GCP_v43_5_FULL.md
+- Rename GCP_v43_7_REA_Edition.md to GRCP_v43_7_REA_Edition.md
+- Add files via upload
+- Rename GCP v42.md to GCP V42.md
+- Update and rename GCP V43 to GCP V43.md
+- Rename GCP v42 to GCP v42.md
+- Update GCP v42
+- Create GCP V43.md
+- Create GCP v42.md
+- Rename Perceptual Loss Compression to Perceptual Loss Compression.py
+- Create Perceptual Loss Compression
+- Create AlloyScript.ipynb
+- Create Setup.py
+- Create Requirements.txt
+- Update README.md
+- Update README.md
+- Initial commit
 
+### Security
+- Update security-scan.yml
+- Update security-scan.yml
+- Update SECURITY.md
+- Create Cybersecurity Runner.md
+- Create SECURITY.md
+- Create security_report.md
+- Update Security.md
+- Update security-scan.yml
+- Create security-scan.yml
+- Update Security.md
+- Update Security.md
+- Create Security.md
+
+Generated by generate_changelog.py
