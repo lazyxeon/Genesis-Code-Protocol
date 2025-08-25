@@ -2,14 +2,14 @@
 name: Python CI
 
 on:
-permissions:
-  contents: read
-
   push:
     branches: [main]
     paths-ignore: ['**/*.md', '**/*.ipynb']  # Ignore docs/notebooks
   pull_request:
     branches: [main]
+
+    permissions:
+  contents: read
 
 jobs:
   build:
