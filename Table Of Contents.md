@@ -224,3 +224,9 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
   - [update_repo_structure.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Scripts/update_repo_structure.py)
 
 ## docker
+
+
+## docs
+
+  - [index.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/docs/index.md)
+  - [roadmap.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/docs/roadmap.md)
