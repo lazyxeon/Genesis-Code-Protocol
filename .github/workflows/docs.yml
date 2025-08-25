@@ -39,7 +39,12 @@ jobs:
           restore-keys: |
             mkdocs-${{ runner.os }}-
       - name: Install MkDocs and Material theme
+        # Pin the versions of MkDocs and the Material theme to satisfy
+        # the Scorecard "Pinned‑Dependencies" check.  mkdocs 1.5.3 and
+        # mkdocs-material 9.4.10 were current stable releases at the
+        # time of writing.  Adjust as necessary for future updates.
         run: |
-          pip install mkdocs==1.* mkdocs-material
+          python -m pip install --upgrade pip
+          pip install mkdocs==1.5.3 mkdocs-material==9.4.10
       - name: Deploy
         run: mkdocs gh-deploy --force --clean
