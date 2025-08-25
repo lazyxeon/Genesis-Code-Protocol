@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
-      - uses: release-drafter/release-drafter@93a22f86bb189f3c450631e8d012e5d208a6446b
+      # Use a stable release tag for the release drafter action.  Pinning to a
+      # known tag ensures the action is available.
+      - uses: release-drafter/release-drafter@v6.1.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
