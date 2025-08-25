@@ -75,7 +75,7 @@ Universal commands remain unchanged from V49: `proceed 1`, `branch Phase <n>`
 
 ## Phase Map
 
-See **[Charts.md](./Charts.md)  ** for a visual phase map and gate decision flow. In summary, V50 adds an initial **I‑1 Autonomous Spark Generation** phase ahead of the C‑0 ambiguity‑to‑brief phase and retains phases up to 15 Archival/Export with minor refinements.
+See **[Charts.md](./Charts.md)** for a visual phase map and gate decision flow. In summary, V50 adds an initial **I‑1 Autonomous Spark Generation** phase ahead of the C‑0 ambiguity‑to‑brief phase and retains phases up to 15 Archival/Export with minor refinements.
 
 ---
 
