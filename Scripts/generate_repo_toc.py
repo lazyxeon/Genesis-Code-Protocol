@@ -1,113 +1,134 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
-generate_repo_toc.py
+Script to generate a repository Table Of Contents (TOC).
 
-Scans the repository for README.md files and top-level directories and generates
-a simple markdown Table of Contents (REPO_TOC.md) linking to each README.
+This utility walks the project directory tree and writes a
+``Table Of Contents.md`` file at the repository root.  The TOC uses a
+bullet-list style with relative links that are URL-encoded, so the links
+will work when viewed in GitHub.  You can configure which file
+extensions are included, limit the depth of recursion, and supply
+custom descriptions for particular entries.
 
-Usage:
+To update the TOC manually run this script from any directory in the
+repository:
+
     python Scripts/generate_repo_toc.py
-    python Scripts/generate_repo_toc.py --root /path/to/repo --output REPO_TOC.md
 
-This script is intentionally defensive and easy to copy/paste.
+The script always writes the TOC file.  It can be invoked via a CI
+workflow to keep the TOC up-to-date automatically.
 """
 
 from __future__ import annotations
-import argparse
-import os
+
+import sys
 from pathlib import Path
-from typing import List
+from datetime import datetime, timezone
+from urllib.parse import quote
+
+# Determine the repository root.  ``__file__`` refers to this script.
+ROOT = Path(__file__).resolve().parents[1]
+
+# Name of the markdown file to write relative to the root
+TOC_FILE = ROOT / "Table Of Contents.md"
+
+# ---------------- Configuration ----------------
+# Names of directories to exclude from traversal
+EXCLUDE_DIRS: set[str] = {
+    ".git", "__pycache__", ".mypy_cache", ".pytest_cache",
+    ".venv", "venv", "node_modules", "dist", "build", ".idea", ".vscode",
+}
+
+# Filenames to exclude
+EXCLUDE_FILES: set[str] = {".DS_Store"}
+
+# Allowed file extensions.  Set to ``None`` to include all files.
+ALLOW_EXTS: set[str] | None = {
+    ".md", ".py", ".ipynb", ".yml", ".yaml", ".toml",
+}
+
+# Maximum directory depth to traverse (0 = only top‑level).  Increase to
+# include nested subdirectories.
+MAX_DEPTH: int = 2
+
+# Maximum number of items per directory.  Long lists are truncated.
+MAX_ITEMS_PER_DIR: int = 100
+
+# Whether to list folders before files in the TOC
+FOLDERS_FIRST: bool = True
+
+# Optional human‑readable descriptions to append after entries.  Keys
+# should match relative paths or names.  Example:
+# DESCRIPTIONS = {"docs": "Project documentation"}
+DESCRIPTIONS: dict[str, str] = {}
 
 
-IGNORED_DIRS = {".git", ".venv", "venv", "__pycache__", ".github", "node_modules"}
+def _urlencode_path(path: Path) -> str:
+    """Return a URL‑encoded relative path for linking in markdown."""
+    rel = path.relative_to(ROOT)
+    # Use quote to percent‑encode special characters.  Do not encode path
+    # separators (``/``) so that GitHub can interpret the path correctly.
+    return quote(str(rel), safe="/")
 
 
-def find_top_level_items(root: Path) -> List[Path]:
-    """Return top-level directories and files we might want to include in the TOC."""
-    items: List[Path] = []
-    for p in sorted(root.iterdir()):
-        if p.name in IGNORED_DIRS:
-            continue
-        # Include directories and top-level README.md or README files
-        if p.is_dir():
-            items.append(p)
-        elif p.is_file() and p.name.lower().startswith("readme"):
-            items.append(p)
-    return items
+def _write_entry(path: Path, depth: int, lines: list[str]) -> None:
+    """Append a markdown list entry for ``path`` at the given depth."""
+    indent = "  " * depth
+    name = path.name
+    link = _urlencode_path(path)
+    entry = f"{indent}- [{name}]({link})"
+    # Append description if provided
+    desc_key = str(path.relative_to(ROOT))
+    desc = DESCRIPTIONS.get(desc_key) or DESCRIPTIONS.get(name)
+    if desc:
+        entry += f" – {desc}"
+    lines.append(entry)
 
 
-def readme_for_dir(dir_path: Path) -> Path | None:
-    """Return README path inside a directory if present, prefer README.md."""
-    candidates = ["README.md", "README.rst", "README.txt", "README"]
-    for c in candidates:
-        cand = dir_path / c
-        if cand.exists():
-            return cand
-    return None
-
-
-def make_link(path: Path, root: Path) -> str:
-    """Generate a relative link for markdown from path to root."""
+def _traverse_dir(dir_path: Path, depth: int, lines: list[str]) -> None:
+    """Recursively walk ``dir_path`` and collect TOC lines."""
+    if depth > MAX_DEPTH:
+        return
     try:
-        rel = path.relative_to(root)
-    except Exception:
-        rel = path
-    return str(rel).replace(os.path.sep, "/")
+        children = [p for p in dir_path.iterdir() if p.name not in EXCLUDE_FILES]
+    except PermissionError:
+        # Skip directories we cannot access
+        return
+    entries: list[tuple[bool, Path]] = []
+    for child in children:
+        if child.is_dir():
+            if child.name in EXCLUDE_DIRS:
+                continue
+            entries.append((True, child))
+        else:
+            if ALLOW_EXTS is not None and child.suffix not in ALLOW_EXTS:
+                continue
+            entries.append((False, child))
+    # Optionally sort to put folders first, then sort alphabetically
+    entries.sort(key=lambda item: (not FOLDERS_FIRST or not item[0], item[1].name.lower()))
+    for is_dir, child in entries[:MAX_ITEMS_PER_DIR]:
+        _write_entry(child, depth, lines)
+        if is_dir:
+            _traverse_dir(child, depth + 1, lines)
 
 
-def generate_toc(root: Path) -> str:
-    """Create a markdown TOC string for the repository rooted at `root`."""
-    lines: List[str] = []
-    lines.append("# Repository Table of Contents")
+def generate_toc() -> list[str]:
+    """Return a list of lines comprising the generated TOC."""
+    lines: list[str] = []
+    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S %Z")
+    lines.append("# Table Of Contents")
     lines.append("")
-    top_items = find_top_level_items(root)
-
-    # If top-level README exists, put it first
-    top_readmes = [p for p in top_items if p.is_file() and p.name.lower().startswith("readme")]
-    if top_readmes:
-        for r in top_readmes:
-            lines.append(f"- [{r.name}]({make_link(r, root)})")
-        lines.append("")
-
-    # Directories and their READMEs
-    for item in top_items:
-        if item.is_dir():
-            readme = readme_for_dir(item)
-            if readme:
-                lines.append(f"- [{item.name}]({make_link(readme, root)})")
-            else:
-                # link to directory (use trailing slash to hint folder)
-                lines.append(f"- {item.name}/")
+    lines.append(f"_Generated on {timestamp}_")
     lines.append("")
-    lines.append("_Generated by Scripts/generate_repo_toc.py_")
-    return "\n".join(lines)
+    _traverse_dir(ROOT, 0, lines)
+    return lines
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Generate a repository Table of Contents")
-    parser.add_argument(
-        "--root", "-r", type=Path, default=Path.cwd(), help="Repository root directory (default: cwd)"
-    )
-    parser.add_argument(
-        "--output", "-o", type=Path, default=Path("REPO_TOC.md"), help="Output markdown file"
-    )
-    args = parser.parse_args()
-
-    root = args.root.resolve()
-    if not root.exists() or not root.is_dir():
-        print(f"Error: root path {root} does not exist or is not a directory.")
-        return 2
-
-    toc = generate_toc(root)
-    try:
-        args.output.write_text(toc, encoding="utf-8")
-        print(f"Wrote TOC to {args.output}")
-    except Exception as exc:
-        print(f"Failed to write {args.output}: {exc}")
-        return 3
-
-    return 0
+def main() -> None:
+    lines = generate_toc()
+    TOC_FILE.write_text("\n".join(lines), encoding="utf-8")
+    print(f"Wrote table of contents to {TOC_FILE.relative_to(ROOT)} with {len(lines)} entries.")
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    sys.exit(main())
