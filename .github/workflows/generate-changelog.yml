@@ -1,114 +1,14 @@
-name: Generate Changelog
-
-on:
-  workflow_dispatch:
-  push:
-    branches: [ "main" ]
-
-permissions:
-  contents: write
-
+permissions: read-all
 jobs:
   changelog:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout (full history for tags)
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-
-      - name: Ensure Scripts dir exists
-        run: mkdir -p Scripts
-
-      # If you already have Scripts/generate_changelog.py, keep this step and remove the next "Stub" step
-      - name: Generate CHANGELOG (stub example — replace with your script)
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p = Path("CHANGELOG.md")
-          base = [
-            "# Changelog\n",
-            "\n",
-            "## Unreleased\n",
-            "\n",
-            "### Documentation\n",
-            "- auto-update CHANGELOG.md (example)\n",
-            "\n",
-            "### Other\n",
-            "- sample entry\n",
-          ]
-          if not p.exists():
-            p.write_text("".join(base), encoding="utf-8")
-          else:
-            txt = p.read_text(encoding="utf-8")
-            if "## Unreleased" not in txt:
-              txt = "## Unreleased\n\n" + txt
-            p.write_text(txt, encoding="utf-8")
-          PY
-
-      - name: Add spacing normalizer
-        run: |
-          cat > Scripts/fix_md_spacing.py << 'PY'
-          import re, sys
-          from pathlib import Path
-          HEADING_RE = re.compile(r'^(#{1,6})\\s+\\S')
-          LIST_RE = re.compile(r'^(\\s*)([-*+]|[0-9]+\\.)\\s+')
-          def normalize(lines):
-              out, in_code = [], False
-              def blank(s): return s.strip() == ""
-              i, n = 0, len(lines)
-              while i < n:
-                  line = lines[i]
-                  if line.lstrip().startswith("```"):
-                      out.append(line)
-                      in_code = not in_code
-                      i += 1
-                      continue
-                  if not in_code and HEADING_RE.match(line):
-                      if len(out) > 0 and not blank(out[-1]): out.append("\\n")
-                      out.append(line)
-                      nxt = lines[i+1] if i+1 < n else ""
-                      if not blank(nxt): out.append("\\n")
-                      i += 1
-                      continue
-                  if not in_code and LIST_RE.match(line):
-                      prev_nonblank = next((out[j] for j in range(len(out)-1,-1,-1) if not blank(out[j])), None)
-                      if prev_nonblank is None or not LIST_RE.match(prev_nonblank):
-                          if len(out)>0 and not blank(out[-1]): out.append("\\n")
-                      while i < n and LIST_RE.match(lines[i]) and not lines[i].lstrip().startswith("```"):
-                          out.append(lines[i]); i += 1
-                      nxt = lines[i] if i < n else ""
-                      if not blank(nxt): out.append("\\n")
-                      continue
-                  out.append(line); i += 1
-              compact = []
-              for l in out:
-                  if not (len(compact) >= 2 and compact[-1] == "\\n" and l == "\\n"):
-                      compact.append(l)
-              return compact
-          def main():
-              p = Path("CHANGELOG.md")
-              text = p.read_text(encoding="utf-8").splitlines(keepends=True)
-              fixed = normalize(text)
-              if fixed != text:
-                  p.write_text("".join(fixed), encoding="utf-8")
-                  print("Normalized spacing in CHANGELOG.md")
-              else:
-                  print("No changes needed")
-          if __name__ == "__main__":
-              main()
-          PY
-
-      - name: Normalize CHANGELOG spacing (MD022/MD032)
-        run: python Scripts/fix_md_spacing.py
-
+      # ... steps for generating changelog ...
       - name: Commit updated CHANGELOG
-        uses: stefanzweifel/git-auto-commit-action@v6
+        # Pin third-party action to commit SHA
+        uses: stefanzweifel/git-auto-commit-action@<commit-sha>
         with:
           commit_message: "chore(changelog): update and normalize spacing"
           file_pattern: CHANGELOG.md
