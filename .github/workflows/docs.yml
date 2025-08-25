@@ -2,24 +2,28 @@ name: Docs (MkDocs → GitHub Pages)
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
     paths:
-      - "mkdocs.yml"
-      - "docs/**"
-  workflow_dispatch: {}
+      - 'mkdocs.yml'
+      - 'docs/**'
+  workflow_dispatch:
 
-# Use read-only permissions at the workflow level.
+# Use read‑only permissions at the workflow level.  Write access is
+# requested at the job level for pushing to the gh-pages branch.
 permissions:
   contents: read
 
 jobs:
   build-and-deploy:
-    # This job needs write permissions to push to gh-pages branch.
+    # This job needs write permissions to push to the gh-pages branch.
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          fetch-depth: 0
       - name: Configure Git user for gh-deploy
         run: |
           git config user.name "github-actions[bot]"
@@ -32,8 +36,10 @@ jobs:
         with:
           path: ~/.cache/pip
           key: mkdocs-${{ runner.os }}-${{ hashFiles('**/mkdocs.yml') }}
-          restore-keys: mkdocs-${{ runner.os }}-
-      - name: Install MkDocs Material
-        run: pip install mkdocs-material
+          restore-keys: |
+            mkdocs-${{ runner.os }}-
+      - name: Install MkDocs and Material theme
+        run: |
+          pip install mkdocs==1.* mkdocs-material
       - name: Deploy
-        run: mkdocs gh-deploy --force
+        run: mkdocs gh-deploy --force --clean
