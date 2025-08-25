@@ -1,36 +1,28 @@
-name: SBOM (Release)
-
-on:
-  release:
-    types: [published]
-  workflow_dispatch: {}
-
-permissions:
-  contents: write
-
+permissions: read-all
 jobs:
   sbom:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-
       - name: Generate SBOM (CycloneDX JSON)
-        uses: anchore/sbom-action@v0.16.0
+        uses: anchore/sbom-action@<commit-sha>
         with:
           path: .
           output-file: sbom.cdx.json
           format: cyclonedx-json
-
       - name: Generate SBOM (SPDX JSON)
-        uses: anchore/sbom-action@v0.16.0
+        uses: anchore/sbom-action@<commit-sha>
         with:
           path: .
           output-file: sbom.spdx.json
           format: spdx-json
-
       - name: Upload SBOMs to release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@<commit-sha>
         with:
           files: |
             sbom.cdx.json
             sbom.spdx.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
