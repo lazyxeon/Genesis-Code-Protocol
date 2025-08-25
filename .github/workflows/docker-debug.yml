@@ -2,6 +2,9 @@
 name: Docker Debug Build
 
 on:
+permissions:
+  contents: read
+
   workflow_dispatch: {}
 
 jobs:
