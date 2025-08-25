@@ -98,6 +98,21 @@
 
 ### Miscellaneous Tasks
 - Update release-drafter.yml
+- Update release-bundle.yml
+- Update Python-CI.yml
+- Update ghcr-build.yml
+- Update generate-changelog.yml
+- Update docs.yml
+- Update docker-debug.yml
+- Update docker-build.yml
+- Update codeql.yml
+- Update auto-release.yml
+- Update auto-merge-dependabot.yml
+- Update Setup.py
+- Update generate_repo_toc.py
+- Update generate_changelog.py
+- chore(changelog): update and normalize spacing
+- Update release-drafter.yml
 - chore(changelog): update and normalize spacing
 - Update release-drafter.yml
 - chore(changelog): update and normalize spacing
