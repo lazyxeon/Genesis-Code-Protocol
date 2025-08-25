@@ -2,46 +2,34 @@ name: CodeQL Analysis
 
 on:
   push:
-    branches: ["main"]
+    branches: [main]
   pull_request:
-    branches: ["main"]
+    branches: [main]
   schedule:
-    # Run CodeQL scanning weekly on Mondays at 08:00 UTC
-    - cron: "0 8 * * 1"
+    # Run weekly at 12:00 UTC on Wednesdays
+    - cron: '0 12 * * 3'
 
-# Use read‑all permissions at the workflow level so that CodeQL has access to repository
-# contents but cannot modify them unless explicitly granted at the job level.
+# Default read‑only permissions.  The job requests additional scopes for
+# uploading security analysis results.
 permissions:
   contents: read
-  security-events: write
-  actions: read
-  id-token: write
 
 jobs:
   analyze:
-    name: Analyze
     runs-on: ubuntu-latest
-    # CodeQL requires both security-events and id-token permissions at the job level.
     permissions:
       contents: read
       security-events: write
-      id-token: write
     strategy:
-      fail-fast: false
       matrix:
-        language: ["python"]
+        language: [python]
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
         with:
           languages: ${{ matrix.language }}
       - name: Autobuild
         uses: github/codeql-action/autobuild@v2
-      - name: Perform CodeQL Analysis
+      - name: Run CodeQL Analysis
         uses: github/codeql-action/analyze@v2
-        with:
-          category: "/language:${{ matrix.language }}"
