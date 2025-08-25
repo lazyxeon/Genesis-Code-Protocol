@@ -40,7 +40,7 @@
 [![Semgrep CI](https://img.shields.io/badge/Semgrep-ci--ready-blue)](https://semgrep.dev/docs/deployment/add-semgrep-to-ci)
 [![Ruff](https://img.shields.io/badge/Ruff-linting-blue)](https://docs.astral.sh/ruff/)
 
-Quick nav: [What’s New](#whats-new) • [Quick Start](#quick-start) • [Phase Map](#phase-map) • [Runners & Cartridges](#runners--cartridges) • [Artifacts](#artifacts--ledgers) • [Security](#security--provenance) • [License](#license) • [Repo Structure](# **Repository Structure**) 
+Quick nav: [What’s New](#whats-new) • [Quick Start](#quick-start) • [Phase Map](#phase-map) • [Runners & Cartridges](#runners--cartridges) • [Artifacts](#artifacts--ledgers) • [Security](#security--provenance) • [License](#license) • [Repo Structure](#Repository-Structure) •  [GCP Wiki](#GCP-Wiki)
 
 ---
 
@@ -135,7 +135,7 @@ See [About.md](./About.md) for core principles and additional context.
 
 ---
 
-# 📚 **GCP Wiki**
+#  **GCP Wiki**
 
 - Quick‑Start – how to initiate a GCP run (LLM‑only or via the CLI).
 - Phase‑Map‑and‑Gates – overview of phases and the gate decision flow.
