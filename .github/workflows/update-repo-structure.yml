@@ -1,15 +1,5 @@
 name: Update Repo Structure
 
-permissions: read-all
-jobs:
-  update:
-    permissions:
-      contents: write
-      pull-requests: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-    
 on:
   push:
     branches: [ "main" ]
@@ -17,13 +7,13 @@ on:
     paths-ignore:
       - "README.md"
       - ".github/workflows/update-repo-structure.yml"
-  workflow_dispatch: {}        # manual "Run workflow" button
+  workflow_dispatch: {}
   schedule:
-    - cron: "17 2 * * *"       # optional: daily at 02:17 UTC
+    - cron: "17 2 * * *"
 
+# Default read-only permissions.
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 concurrency:
   group: repo-structure
@@ -31,18 +21,20 @@ concurrency:
 
 jobs:
   update:
+    # Needs write permissions to push changes and open a PR.
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         with:
           fetch-depth: 0
-
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: '3.11'
-
       - name: Build repo tree and patch README (inline)
         id: patch
         run: |
@@ -125,16 +117,11 @@ jobs:
 
           pattern = re.compile(rf"({re.escape(BEGIN)})(.*?){re.escape(END)}", re.DOTALL)
           updated = pattern.sub(new_section, content, count=1)
-          changed = (updated != content)
 
           README.write_text(updated, encoding="utf-8")
-          print(f"Markers_present={has_markers}")
-          print(f"Top_level_entries={len(entries)}")
-          print(f"Changed={changed}")
           PY
-  # ... existing Python code to patch README ...
       - name: Create PR with changes
-        uses: peter-evans/create-pull-request@<commit-sha>
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         with:
           branch: chore/update-repo-structure
           title: "chore(docs): sync Repository Structure in README"
