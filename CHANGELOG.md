@@ -99,6 +99,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update mkdocs.yml
+- chore(changelog): update and normalize spacing
 - Merge pull request #106 from lazyxeon/chore/update-repo-structure
 - chore(changelog): update and normalize spacing
 - Merge pull request #105 from lazyxeon/chore/update-top-level-toc
