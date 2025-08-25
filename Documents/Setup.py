@@ -1,22 +1,24 @@
-```python
+from pathlib import Path
 from setuptools import setup, find_packages
 
-with open("README.md", "r", encoding="utf-8") as fh:
-    long_description = fh.read()
+# Resolve README relative to this file
+readme_path = Path(__file__).resolve().parent / "README.md"
+long_description = ""
+if readme_path.is_file():
+    long_description = readme_path.read_text(encoding="utf-8")
 
 setup(
     name="gcp",
     version="47.0.0",
     author="LazyXeon",
-    author_email="lazyxeon@example.com",  # Replace with actual email
-    description="Genesis Code Protocol: AI-native invention framework",
+    author_email="lazyxeon@example.com",  # update with your actual email
+    description="Genesis Code Protocol: AI‑native invention framework",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/lazyxeon/Genesis-Code-Protocol-",
+    url="https://github.com/lazyxeon/Genesis-Code-Protocol",
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        # List from requirements.txt; adjust as needed
         "transformers>=4.30.0",
         "torch>=2.0.0",
         "scipy>=1.10.0",
@@ -35,7 +37,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "grcp = CLI_Bundle.gcp_cli:main",
+            "gcp = CLI_Bundle.gcp_cli:main",
         ],
     },
     classifiers=[
@@ -45,4 +47,3 @@ setup(
     ],
     python_requires=">=3.10",
 )
-```
