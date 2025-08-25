@@ -11,6 +11,7 @@ authors:
   - name: "Grok4"
   - name: "ChatPGT 5"
   - name: "Claude 4"
+  - name: "Gemini 2.5"
 preferred-citation:
   type: software
   authors:
@@ -18,5 +19,6 @@ preferred-citation:
     - name: "Grok4"
     - name: "ChatPGT 5"
     - name: "Claude 4"
+    - name: "Gemini 2.5"
   title: "Genesis Code Protocol (GCP): Worth-It Realism Edition (V47)"
   year: 2025
