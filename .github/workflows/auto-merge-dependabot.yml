@@ -1,4 +1,3 @@
-# .github/workflows/auto-merge-dependabot.yml
 name: Auto‑merge Dependabot PRs
 on:
   pull_request:
