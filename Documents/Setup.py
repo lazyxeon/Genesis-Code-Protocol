@@ -26,7 +26,7 @@ setup(
     include_package_data=True,
     install_requires=[
         # Minimum versions are set to address known security vulnerabilities.
-        "transformers>=4.38.0",
+        "transformers>=4.53.0",
         "torch>=2.6.0",
         "scipy>=1.10.0",
         "numpy>=1.23.0",
