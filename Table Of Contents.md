@@ -12,6 +12,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 - [GCP Current Version(V50 Flagship Edition).md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Current%20Version%28V50%20Flagship%20Edition%29.md)
 - [LICENSE.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/LICENSE.md)
 - [README.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/README.md)
+- [Roadmap.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Roadmap.md)
 - [SECURITY.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/SECURITY.md)
 - [Table Of Contents.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Table%20Of%20Contents.md)
 - [mkdocs.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/mkdocs.yml)
