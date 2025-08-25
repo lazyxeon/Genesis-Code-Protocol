@@ -99,6 +99,10 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update generate_repo_toc.py
+- Update scorecards.yml
+- Update release-drafter.yml
+- chore(changelog): update and normalize spacing
 - Update Python-CI.yml
 - Update codeql.yml
 - chore(changelog): update and normalize spacing
