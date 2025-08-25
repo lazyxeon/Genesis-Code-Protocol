@@ -97,6 +97,12 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update validate-notebooks.yml
+- Update update-toc-file.yml
+- Update update-repo-structure.yml
+- Update scorecards.yml
+- Update sbom.yml
+- chore(changelog): update and normalize spacing
 - Update release-drafter.yml
 - Update release-bundle.yml
 - Update Python-CI.yml
@@ -918,6 +924,7 @@
 - Initial commit
 
 ### Security
+- Update security-scan.yml
 - Update security-scan.yml
 - Update security-scan.yml
 - Update security-scan.yml
