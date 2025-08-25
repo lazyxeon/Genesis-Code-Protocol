@@ -1,28 +1,38 @@
-permissions: read-all
+name: Generate SBOM
+
+on:
+  release:
+    types: [created]
+
+# Default read-only permissions.
+permissions:
+  contents: read
+
 jobs:
   sbom:
+    # Needs write permission to upload SBOMs to the release.
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
       - name: Generate SBOM (CycloneDX JSON)
-        uses: anchore/sbom-action@<commit-sha>
+        uses: anchore/sbom-action@e8d2a6937ecead383dfe75190d104edd1f9c5751
         with:
           path: .
           output-file: sbom.cdx.json
           format: cyclonedx-json
       - name: Generate SBOM (SPDX JSON)
-        uses: anchore/sbom-action@<commit-sha>
+        uses: anchore/sbom-action@e8d2a6937ecead383dfe75190d104edd1f9c5751
         with:
           path: .
           output-file: sbom.spdx.json
           format: spdx-json
       - name: Upload SBOMs to release
-        uses: softprops/action-gh-release@<commit-sha>
+        uses: softprops/action-gh-release@72f2c25fcb47643c292f7107632f7a47c1df5cd8
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
             sbom.cdx.json
             sbom.spdx.json
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
