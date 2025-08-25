@@ -97,6 +97,7 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing
 - Update scorecards.yml
 - chore(changelog): update and normalize spacing
 - Update sbom.yml
@@ -887,6 +888,7 @@
 - Initial commit
 
 ### Security
+- Update security-scan.yml
 - Update security-scan.yml
 - Update security-scan.yml
 - Update SECURITY.md
