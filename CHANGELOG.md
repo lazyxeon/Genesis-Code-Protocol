@@ -100,6 +100,8 @@
 - Update release-drafter.yml
 - chore(changelog): update and normalize spacing
 - Update release-drafter.yml
+- chore(changelog): update and normalize spacing
+- Update release-drafter.yml
 - Update release-drafter.yml
 - chore(changelog): update and normalize spacing
 - Update validate-notebooks.yml
