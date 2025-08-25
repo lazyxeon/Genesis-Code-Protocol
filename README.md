@@ -125,7 +125,7 @@ See **CHANGELOG** for details: v45.6D → V46 → V46.5 → V47 → V47.1 → V4
 
 ## License
 
-MIT — see [License.md](./License.md) .
+MIT — see [License.md](./LICENSE.md) .
 
 ---
 
