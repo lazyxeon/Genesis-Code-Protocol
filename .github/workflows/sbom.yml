@@ -1,9 +1,8 @@
+# .github/workflows/generate-sbom.yml
 name: Generate SBOM
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
     branches: [ "main" ]
   workflow_dispatch:
 
@@ -11,26 +10,20 @@ permissions:
   contents: read
 
 jobs:
-  generate-sbom:
-    name: Build SBOM (CycloneDX)
+  sbom:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      - uses: actions/checkout@v4
 
-      - name: Generate CycloneDX SBOM
-        uses: anchore/sbom-action@d4e4ab0d3ab35bb04c9a01d256d661a8603e54b3
+      - name: Generate SBOM (SPDX JSON) with Syft
+        uses: anchore/sbom-action@v0
         with:
           path: .
-          format: cyclonedx-json
-          output-file: sbom.cyclonedx.json
+          format: spdx-json
+          output-file: sbom.spdx.json
 
       - name: Upload SBOM artifact
-        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808
+        uses: actions/upload-artifact@v4
         with:
-          name: sbom-cyclonedx
-          path: sbom.cyclonedx.json
-
-      - name: Print summary (optional)
-        run: |
-          jq -r '.metadata.component.name, .metadata.component.version' sbom.cyclonedx.json || true
+          name: sbom-spdx
+          path: sbom.spdx.json
