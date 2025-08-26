@@ -120,6 +120,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update GitHub Actions workflow for repo structure
+- chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
 - Update SBOM workflow to use anchore/sbom-action
 - chore(changelog): update and normalize spacing
