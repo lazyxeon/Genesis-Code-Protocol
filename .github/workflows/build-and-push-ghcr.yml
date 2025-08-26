@@ -9,7 +9,6 @@ on:
 
 permissions:
   contents: read
-  packages: write
 
 concurrency:
   group: build-ghcr-${{ github.ref }}
@@ -19,9 +18,12 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     environment: production
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
 
       - name: Derive lowercase image name
         id: imagename
@@ -31,21 +33,20 @@ jobs:
           REPO="${GITHUB_REPOSITORY#*/}"
           OWNER_LC="$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')"
           REPO_LC="$(echo "$REPO" | tr '[:upper:]' '[:lower:]')"
+            # optional prefix normalization logic could go here
           IMAGE_NAME="ghcr.io/${OWNER_LC}/${REPO_LC}"
           echo "IMAGE_NAME=$IMAGE_NAME" >> "$GITHUB_ENV"
-          echo "owner=$OWNER_LC" >> "$GITHUB_OUTPUT"
-          echo "repo=$REPO_LC" >> "$GITHUB_OUTPUT"
           echo "Computed IMAGE_NAME=$IMAGE_NAME"
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@68827325e0b33abcbf29f11f31a786274ad8aa45
 
       - name: Set up Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@4c0219bdef056a7a8a8fe7571d3ecf586b5d5f67
 
       - name: Extract metadata (tags, labels)
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@96383f45573cb7a041f1da1e60c6cf7b4fbc886b
         with:
           images: ${{ env.IMAGE_NAME }}
           tags: |
@@ -56,24 +57,24 @@ jobs:
 
       - name: Login to GHCR (GITHUB_TOKEN)
         id: login
-        uses: docker/login-action@v3
+        uses: docker/login-action@2b72562106313b9847e97b3d9662a8f8e3b27370
         continue-on-error: true
         with:
-            registry: ghcr.io
-            username: ${{ github.actor }}
-            password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Fallback login with GHCR_PAT
         if: steps.login.outcome != 'success'
-        uses: docker/login-action@v3
+        uses: docker/login-action@2b72562106313b9847e97b3d9662a8f8e3b27370
         with:
-            registry: ghcr.io
-            username: ${{ github.actor }}
-            password: ${{ secrets.GHCR_PAT }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_PAT }}
 
       - name: Build & push multi-arch (registry)
         id: build-multi
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@4d947a4b4f4e1ea4060d8a732091baa76f7bfc2f
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
@@ -86,7 +87,7 @@ jobs:
 
       - name: Build local amd64 image (no push) for SBOM
         if: github.event_name != 'pull_request'
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@4d947a4b4f4e1ea4060d8a732091baa76f7bfc2f
         with:
           context: .
           push: false
@@ -96,7 +97,7 @@ jobs:
 
       - name: Generate SBOM from local image
         if: github.event_name != 'pull_request'
-        uses: anchore/sbom-action@v0
+        uses: anchore/sbom-action@d4e4ab0d3ab35bb04c9a01d256d661a8603e54b3
         with:
           image: ${{ env.IMAGE_NAME }}:sbom-temp
           format: spdx-json
@@ -104,7 +105,7 @@ jobs:
 
       - name: Upload SBOM artifact
         if: github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808
         with:
           name: sbom
           path: sbom.spdx.json
@@ -116,7 +117,7 @@ jobs:
 
       - name: Upload digest artifact
         if: github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808
         with:
           name: image-digest
           path: image-digest.txt
