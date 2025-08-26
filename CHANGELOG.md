@@ -110,6 +110,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Adjust permissions in ossf-scorecard workflow
+- chore(changelog): update and normalize spacing
 - Enhance Scorecard workflow with concurrency settings
 - chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
