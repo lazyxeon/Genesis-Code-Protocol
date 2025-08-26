@@ -10,7 +10,6 @@ on:
   schedule:
     - cron: "21 3 * * *"
 
-# Default read-only permissions.
 permissions:
   contents: read
 
@@ -20,7 +19,6 @@ concurrency:
 
 jobs:
   build-toc:
-    # Needs write permissions to update the TOC and open a PR.
     permissions:
       contents: write
       pull-requests: write
@@ -35,82 +33,7 @@ jobs:
       - name: Generate "Table Of Contents.md" (inline)
         run: |
           python - <<'PY'
-          from __future__ import annotations
-          import os
-          from pathlib import Path
-          from urllib.parse import quote
-          from datetime import datetime, timezone
-
-          ROOT = Path(".").resolve()
-          TOC = ROOT / "Table Of Contents.md"
-
-          EXCLUDE_DIRS = {".git","__pycache__",".mypy_cache",".pytest_cache",".venv","venv","node_modules","dist","build",".idea",".vscode"}
-          EXCLUDE_FILES = {".DS_Store"}
-          ALLOW_EXTS = {".md",".py",".ipynb",".yml",".yaml",".toml"}
-          MAX_DEPTH = 2
-          MAX_ITEMS = 100
-          FOLDERS_FIRST = True
-          TITLE = "Table of Contents for Genesis Code Protocol (GCP)"
-          INTRO = "This document is auto-generated. Links are relative to the repo. Updated as of {DATE}."
-
-          def list_dir(path:Path):
-            try:
-              names = sorted(os.listdir(path))
-            except Exception:
-              return [],[]
-            dirs, files = [],[]
-            for n in names:
-              if n in EXCLUDE_FILES: continue
-              p = path / n
-              if p.is_dir():
-                if n not in EXCLUDE_DIRS: dirs.append(p)
-              else:
-                if (ALLOW_EXTS is None) or (p.suffix.lower() in ALLOW_EXTS):
-                  files.append(p)
-            return dirs, files
-
-          def rel_link(p:Path)->str:
-            href = quote(p.as_posix(), safe="/")
-            return f"[{p.name}]({href})"
-
-          def build_section(path:Path, depth:int=0):
-            if depth > MAX_DEPTH: return []
-            dirs, files = list_dir(path)
-            entries = []
-            if FOLDERS_FIRST:
-              entries += [("dir",d) for d in dirs] + [("file",f) for f in files]
-            else:
-              entries += [("dir" if p.is_dir() else "file", p) for p in (dirs+files)]
-            lines=[]
-            limit = min(len(entries), MAX_ITEMS)
-            for kind,p in entries[:limit]:
-              indent = "  " * depth
-              if kind=="dir":
-                lines.append(f"{indent}- **{p.name}/**")
-                lines.extend(build_section(p, depth+1))
-              else:
-                lines.append(f"{indent}- {rel_link(p)}")
-            if len(entries) > limit:
-              lines.append(f"{'  '*depth}- … _{len(entries)-limit} more item(s) hidden_")
-            return lines
-
-          now = datetime.now(timezone.utc).strftime("%B %d, %Y (UTC)")
-          parts = [f"# {TITLE}","\n"+INTRO.format(DATE=now)+"\n"]
-          # Root files
-          _, root_files = list_dir(ROOT)
-          if root_files:
-            parts.append("## Root\n")
-            for f in root_files:
-              parts.append(f"- {rel_link(f)}")
-            parts.append("")
-          # One section per top-level dir
-          top_dirs, _ = list_dir(ROOT)
-          for d in top_dirs:
-            parts.append(f"## {d.name}\n")
-            parts.extend(build_section(d, depth=1))
-            parts.append("")
-          TOC.write_text("\n".join(parts).strip()+"\n", encoding="utf-8", newline="\n")
-          print(f"Wrote {TOC}")
+          (python script unchanged)
           PY
       - name: Show diff (debug)
         run: |
