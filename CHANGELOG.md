@@ -128,6 +128,9 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
+- Refactor TOC update workflow and remove gitsign
+- Refactor workflow to use create-pull-request action
+- Refactor changelog workflow to simplify steps
 - Refactor GHCR workflow to use env variables
 - Refactor docs.yml for GitHub Pages deployment
 - Refactor dependency submission workflow configuration
@@ -143,6 +146,12 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Enhance TOC update workflow with signing and fixes
+- Enhance update-repo-structure workflow
+- Enhance changelog workflow with gitsign support
+- Update dependency review action and add version pinning
+- Update GitHub Actions workflow for release signing (#120)
+- chore(changelog): update and normalize spacing
 - Update release workflow to include SBOM generation
 - chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
