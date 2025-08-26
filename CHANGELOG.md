@@ -106,6 +106,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Delete .github/workflows/ghcr-build.yml
+- chore(changelog): update and normalize spacing
 - Update ossf-scorecard.yml
 - chore(changelog): update and normalize spacing
 - Delete .github/workflows/scorecards.yml
