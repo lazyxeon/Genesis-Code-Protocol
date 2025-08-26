@@ -133,6 +133,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update release drafter workflow configuration
+- chore(changelog): update and normalize spacing
 - Add GitHub Actions workflow for dependency submission
 - chore(changelog): update and normalize spacing
 - Update nbconvert version in requirements.txt
