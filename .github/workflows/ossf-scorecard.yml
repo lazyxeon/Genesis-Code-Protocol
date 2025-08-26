@@ -3,27 +3,25 @@ name: OpenSSF Scorecard
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 6 * * 1"
+    - cron: '0 6 * * 1'
 
-# Least privilege globally (omit id-token here)
 permissions:
   contents: read
 
 jobs:
   analysis:
-    # Elevate only for this job because we publish results (badge)
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       security-events: write
       id-token: write
-    runs-on: ubuntu-latest
     steps:
-      - uses: ossf/scorecard-action@v2.4.0
+      - uses: ossf/scorecard-action@05b42c624433fc40578a4040d5cf5e36ddca8cde:contentReference[oaicite:14]{index=14}
         with:
           results_file: results.sarif
           results_format: sarif
           publish_results: true
       - name: Upload to code scanning
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@3c3833e0f8c1c83d449a7478aa59c036a9165498
         with:
           sarif_file: results.sarif
