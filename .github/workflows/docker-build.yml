@@ -16,7 +16,6 @@ on:
       - 'requirements.txt'
   workflow_dispatch:
 
-# Restrict default permissions.
 permissions:
   contents: read
 
