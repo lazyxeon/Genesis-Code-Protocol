@@ -10,15 +10,17 @@ on:
 
 permissions:
   contents: read
-  security-events: write
+  security-events: read
 
 jobs:
   analyze:
+    permissions:
+      contents: read
+      security-events: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
 
-      # Optional: quick tokenize gate; shows exact file/line if syntax/encoding breaks
       - name: Python tokenize gate
         run: |
           python - <<'PY'
@@ -38,10 +40,10 @@ jobs:
           print("All .py files tokenized OK")
           PY
 
-      - uses: github/codeql-action/init@v3
+      - uses: github/codeql-action/init@e2e741e6482c84b120b2c2b935e8f4a6e5fb164e
         with:
           languages: python
           tools: latest
           config-file: .github/codeql/codeql-config.yml
 
-      - uses: github/codeql-action/analyze@v3
+      - uses: github/codeql-action/analyze@e2e741e6482c84b120b2c2b935e8f4a6e5fb164e
