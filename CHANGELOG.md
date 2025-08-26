@@ -123,6 +123,7 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
+- Refactor MkDocs GitHub Actions workflow
 - Refactor GitHub Actions workflow for Docker image
 - Refactor image digest logging in workflow
 - Refactor Python CI workflow for clarity and conciseness
@@ -133,6 +134,7 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing
 - Update release drafter workflow configuration
 - chore(changelog): update and normalize spacing
 - Add GitHub Actions workflow for dependency submission
