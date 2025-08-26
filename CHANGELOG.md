@@ -124,6 +124,7 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
+- Refactor docs.yml for GitHub Pages deployment
 - Refactor dependency submission workflow configuration
 - Refactor permissions in OSSF Scorecard workflow
 - Refactor MkDocs GitHub Actions workflow
@@ -137,6 +138,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update OSSF Scorecard workflow dependencies
+- chore(changelog): update and normalize spacing
 - Update CodeQL workflow with new action versions
 - chore(changelog): update and normalize spacing
 - Modify release drafter workflow permissions and branches
