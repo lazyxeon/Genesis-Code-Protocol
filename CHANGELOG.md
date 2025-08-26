@@ -104,6 +104,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update dependabot.yml
+- chore(changelog): update and normalize spacing
 - Update sbom.yml
 - Update CODEOWNERS
 - chore(changelog): update and normalize spacing
