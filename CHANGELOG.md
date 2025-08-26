@@ -1,6 +1,7 @@
 # GRCP Changelog
 
 ### Bug Fixes
+- Fix Dockerfile syntax for FROM instruction
 - Fix syntax in sbom.yml for action references
 - Fix syntax in ossf-scorecard.yml workflow
 - Fix syntax in release-drafter workflow file
@@ -141,6 +142,9 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Modify permissions for dependency submission workflow
+- Update Dockerfile
+- chore(changelog): update and normalize spacing
 - Update GitHub Actions for documentation deployment
 - Update CodeQL action reference in workflow
 - chore(changelog): update and normalize spacing
