@@ -14,11 +14,9 @@ permissions:
 
 jobs:
   changelog:
-    # Needs write access to push a branch & open a PR, plus id-token for gitsign
     permissions:
       contents: write
       pull-requests: write
-      id-token: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
@@ -26,42 +24,21 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
-          python-version: '3.11'
+          python-version: "3.11"
+
+      # Generate CHANGELOG.md using your script
       - name: Generate CHANGELOG.md
         run: python Scripts/generate_changelog.py
 
-      # Install gitsign and add to PATH
-      - name: Install gitsign
-        run: |
-          go install github.com/sigstore/gitsign@v0.7.1
-          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
-
-      # Configure git to use gitsign for X.509 commit signing
-      - name: Configure git for commit signing
-        run: |
-          git config --local user.name "${{ github.workflow_ref }}"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local commit.gpgsign true
-          git config --local gpg.format x509
-          git config --local gpg.x509.program gitsign
-
-      # Create a new branch, sign the commit, and push to the remote
-      - name: Commit and push changelog
-        run: |
-          BRANCH="chore/update-changelog"
-          git switch --create "$BRANCH"
-          git add CHANGELOG.md
-          git commit -m "chore(changelog): update and normalize spacing" -S
-          git push --set-upstream origin "$BRANCH"
-
-      # Create a pull request using the GitHub CLI
+      # Create a pull request for the changelog update, sign commits with the GitHub Actions bot
       - name: Create Pull Request
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr create \
-            --title "chore(changelog): update changelog" \
-            --body "Automated changelog update." \
-            --head "$BRANCH" \
-            --base main \
-            --label documentation
+      # v7.0.8 pinned to commit 271a8d0340265f705b14b6d32b9829c1cb33d45e
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
+        with:
+          commit-message: "chore(changelog): update and normalize spacing"
+          branch: "chore/update-changelog"
+          title: "chore(changelog): update changelog"
+          body: "Automated changelog update."
+          labels: "documentation"
+          add-paths: "CHANGELOG.md"
+          sign-commits: true
