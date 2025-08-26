@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 # Pin to a specific digest of python:3.11-slim
-FROM python:3.11-slim@sha256:4c904a8c1ece1177ddba2e4ecc6f241577637aa1d4db448e2393ae25d800cc85:contentReference[oaicite:17]{index=17} AS runner
+FROM python:3.11-slim@sha256:4c904a8c1ece1177ddba2e4ecc6f241577637aa1d4db448e2393ae25d800cc85 AS runner
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
