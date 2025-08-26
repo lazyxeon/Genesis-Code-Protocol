@@ -26,6 +26,7 @@ jobs:
           python - <<'PY'
           import sys, tokenize, pathlib
           bad=[]
+            # Walk all Python files; fail if any cannot tokenize.
           for p in pathlib.Path('.').rglob('*.py'):
               try:
                   with open(p,'rb') as f:
