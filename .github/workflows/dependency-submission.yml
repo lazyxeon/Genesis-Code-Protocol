@@ -5,17 +5,16 @@ on:
     branches: ["main"]
   workflow_dispatch:
 
-# Minimal default permissions
 permissions:
   contents: read
 
 jobs:
   submit:
     runs-on: ubuntu-latest
+    # The dependency submission API needs write permissions on contents
     permissions:
-      contents: read        # needed to checkout code
-      security-events: write  # required by the dependency submission API
-      id-token: write       # needed for OIDC authentication
+      id-token: write
+      contents: write
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: Component detection & submit
