@@ -104,7 +104,7 @@ jobs:
 
       - name: Record image digest
         if: github.event_name != 'pull_request'
-        run: echo "Image digest: ${{ steps.build-multi.outputs.digest }}" | tee image-digest.txt
+        run: echo "Image digest:${{ steps.build-multi.outputs.digest }}" | tee image-digest.txt
 
       - name: Upload digest artifact
         if: github.event_name != 'pull_request'
