@@ -1,5 +1,4 @@
 name: OpenSSF Scorecard
-
 on:
   schedule:
     - cron: '23 5 * * 1'
@@ -25,12 +24,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+
       - name: Run Scorecard
         uses: ossf/scorecard-action@4238f373f67a4d6ab9b2f6cf0a09b7da7942d663
         with:
           results_file: results.sarif
           results_format: sarif
           publish_results: true
+
       - name: Upload SARIF to code scanning
         uses: github/codeql-action/upload-sarif@e2e741e6482c84b120b2c2b935e8f4a6e5fb164e
         with:
