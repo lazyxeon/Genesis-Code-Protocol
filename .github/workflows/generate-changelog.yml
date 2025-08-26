@@ -9,13 +9,11 @@ on:
       - "**/*.yml"
   workflow_dispatch: {}
 
-# Default read-only permissions.
 permissions:
   contents: read
 
 jobs:
   changelog:
-    # Needs write permission to commit the changelog.
     permissions:
       contents: write
     runs-on: ubuntu-latest
