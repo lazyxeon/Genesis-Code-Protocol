@@ -134,6 +134,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update CodeQL workflow for Python analysis
+- chore(changelog): update and normalize spacing
 - Update OpenSSF Scorecard workflow configuration
 - chore(changelog): update and normalize spacing
 - Update SBOM workflow to use SPDX format
