@@ -1,6 +1,5 @@
 name: Generate SBOM
 
-# Run on pushes/PRs to main (adjust branches as needed)
 on:
   push:
     branches: [ "main" ]
@@ -8,37 +7,30 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   generate-sbom:
     name: Build SBOM (CycloneDX)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install syft
-        run: |
-          set -e
-          # Install Syft (Anchore). Use install script which places binary in /usr/local/bin
-          curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
 
       - name: Generate CycloneDX SBOM
-        run: |
-          # Generate a CycloneDX JSON SBOM for the repository
-          syft packages dir:. -o cyclonedx-json > sbom.cyclonedx.json
-          ls -lah sbom.cyclonedx.json
+        uses: anchore/sbom-action@d4e4ab0d3ab35bb04c9a01d256d661a8603e54b3
+        with:
+          path: .
+          format: cyclonedx-json
+          output-file: sbom.cyclonedx.json
 
       - name: Upload SBOM artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808
         with:
           name: sbom-cyclonedx
           path: sbom.cyclonedx.json
 
-      - name: (optional) Print small summary
+      - name: Print summary (optional)
         run: |
           jq -r '.metadata.component.name, .metadata.component.version' sbom.cyclonedx.json || true
-
-# Notes:
-# - This action generates an SBOM artifact on every push/PR. You can expand to publish SBOMs to a registry,
-#   or produce additional formats (SPDX, CycloneDX XML) as needed.
-# - The workflow is intentionally minimal to keep runtime and surface area small.
