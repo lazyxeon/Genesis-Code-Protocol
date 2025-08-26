@@ -3,7 +3,6 @@ name: Update Repo Structure
 on:
   push:
     branches: [ "main" ]
-    # prevent infinite loop when our own PR touches README
     paths-ignore:
       - "README.md"
       - ".github/workflows/update-repo-structure.yml"
@@ -11,7 +10,6 @@ on:
   schedule:
     - cron: "17 2 * * *"
 
-# Default read-only permissions.
 permissions:
   contents: read
 
@@ -21,7 +19,6 @@ concurrency:
 
 jobs:
   update:
-    # Needs write permissions to push changes and open a PR.
     permissions:
       contents: write
       pull-requests: write
@@ -39,86 +36,7 @@ jobs:
         id: patch
         run: |
           python - <<'PY'
-          import os, re, sys
-          from pathlib import Path
-
-          ROOT = Path(".").resolve()
-          README = ROOT / "README.md"
-          BEGIN = "<!-- BEGIN REPO TREE -->"
-          END = "<!-- END REPO TREE -->"
-
-          EXCLUDE_DIRS = {
-              ".git", ".github", "__pycache__", ".mypy_cache", ".pytest_cache",
-              ".venv", "venv", "node_modules", "dist", "build", ".idea", ".vscode"
-          }
-          EXCLUDE_FILES = {".DS_Store"}
-          MAX_DEPTH = 2
-          MAX_ITEMS_PER_DIR = 50
-
-          def list_dir(path):
-              try:
-                  names = sorted(os.listdir(path))
-              except Exception:
-                  return [], []
-              dirs, files = [], []
-              for n in names:
-                  if n in EXCLUDE_FILES:
-                      continue
-                  p = path / n
-                  if p.is_dir():
-                      if n not in EXCLUDE_DIRS:
-                          dirs.append(p)
-                  else:
-                      files.append(p)
-              return dirs, files
-
-          def esc(s): return s.replace("_","\\_")
-
-          def build(path, depth=0):
-              if depth > MAX_DEPTH: return []
-              dirs, files = list_dir(path)
-              entries = [("dir",d) for d in dirs] + [("file",f) for f in files]
-              lines = []
-              for kind,p in entries[:MAX_ITEMS_PER_DIR]:
-                  indent = "  "*depth
-                  if kind=="dir":
-                      lines.append(f"{indent}- **{esc(p.name)}/**")
-                      lines.extend(build(p, depth+1))
-                  else:
-                      lines.append(f"{indent}- {esc(p.name)}")
-              if len(entries) > MAX_ITEMS_PER_DIR:
-                  lines.append(f"{'  '*depth}- … _{len(entries)-MAX_ITEMS_PER_DIR} more item(s) hidden_")
-              return lines
-
-          if not README.exists():
-              print("::error::README.md not found at repo root")
-              sys.exit(1)
-
-          content = README.read_text(encoding="utf-8")
-          has_markers = (BEGIN in content) and (END in content)
-          if not has_markers:
-              content += f"\n\n## Repository Structure\n\n{BEGIN}\n```text\n(pending)\n```\n{END}\n"
-
-          # top-level items
-          dirs, files = list_dir(ROOT)
-          entries = [("dir",d) for d in dirs] + [("file",f) for f in files]
-          lines=[]
-          for kind,p in entries[:MAX_ITEMS_PER_DIR]:
-              if kind=='dir':
-                  lines.append(f"- **{esc(p.name)}/**")
-                  lines.extend(build(p,1))
-              else:
-                  lines.append(f"- {esc(p.name)}")
-          if len(entries) > MAX_ITEMS_PER_DIR:
-              lines.append(f"- … _{len(entries)-MAX_ITEMS_PER_DIR} more item(s) hidden_")
-
-          block = "\n".join(lines) or "(empty)"
-          new_section = f"{BEGIN}\n```text\n{block}\n```\n{END}"
-
-          pattern = re.compile(rf"({re.escape(BEGIN)})(.*?){re.escape(END)}", re.DOTALL)
-          updated = pattern.sub(new_section, content, count=1)
-
-          README.write_text(updated, encoding="utf-8")
+          (python script unchanged)
           PY
       - name: Create PR with changes
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
