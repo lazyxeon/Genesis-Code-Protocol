@@ -1,6 +1,7 @@
 # GRCP Changelog
 
 ### Bug Fixes
+- Fix formatting in GitHub Actions workflow for docs
 - Fix indentation in auto-release workflow
 - Fix formatting issue in auto-merge workflow
 - Fix formatting issues in docker-build.yml
@@ -123,6 +124,10 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Ensure no-cache option is set for Docker build
+- Update docker-build.yml
+- Update dependency-review-action version
+- chore(changelog): update and normalize spacing
 - Add comment for Python file tokenization check
 - chore(changelog): update and normalize spacing
 - Update validate-notebooks.yml for Python setup
