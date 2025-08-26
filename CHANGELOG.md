@@ -104,6 +104,9 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update sbom.yml
+- Update CODEOWNERS
+- chore(changelog): update and normalize spacing
 - Merge pull request #115 from lazyxeon/chore/update-top-level-toc
 - chore(changelog): update and normalize spacing
 - Merge pull request #114 from lazyxeon/chore/update-repo-structure
