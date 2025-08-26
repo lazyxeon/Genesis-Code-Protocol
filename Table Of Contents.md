@@ -42,6 +42,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
     - [cliff.toml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/cliff.toml)
     - [codeql.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/codeql.yml)
     - [dependency-review.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/dependency-review.yml)
+    - [dependency-submission.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/dependency-submission.yml)
     - [docker-build.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/docker-build.yml)
     - [docker-debug.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/docker-debug.yml)
     - [docs.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/docs.yml)
