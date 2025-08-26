@@ -1,4 +1,12 @@
-# .github/CODEOWNERS
+# Global default owner
 * @lazyxeon
+
+# Docs and notebooks
 /docs/ @lazyxeon
-/.github/ @lazyxeon
+/Notebooks/ @lazyxeon
+
+# CI / workflows
+.github/workflows/ @lazyxeon
+
+# Security related files
+SECURITY.md @lazyxeon
