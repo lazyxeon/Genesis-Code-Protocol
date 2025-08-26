@@ -3,16 +3,12 @@ name: Build and Push Docker image to GHCR
 on:
   push:
     branches: [ "main" ]
-    paths-ignore:
-      - "docs/**"
-      - "**/*.md"
-      - ".github/**"
   workflow_dispatch:
 
 permissions:
   contents: read
-  packages: write       # required to push to GHCR
-  id-token: write       # provenance/attestations
+  packages: write
+  id-token: write
 
 concurrency:
   group: ghcr-${{ github.ref }}
@@ -20,14 +16,17 @@ concurrency:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE: ghcr.io/${{ lower(github.repository) }}  # do not chain env here
-
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Compute IMAGE (lowercased owner/repo)
+        shell: bash
+        run: |
+          echo "IMAGE=${REGISTRY}/${GITHUB_REPOSITORY,,}" >> "$GITHUB_ENV"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -41,7 +40,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      # docs: GHCR login w/ GITHUB_TOKEN is supported. :contentReference[oaicite:1]{index=1}
 
       - name: Docker meta
         id: meta
@@ -53,7 +51,6 @@ jobs:
             type=ref,event=tag
             type=sha
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
-      # docs: official metadata action. :contentReference[oaicite:2]{index=2}
 
       - name: Build and push
         uses: docker/build-push-action@v6
@@ -65,4 +62,3 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-      # docs: docker buildx in GHA. :contentReference[oaicite:3]{index=3}
