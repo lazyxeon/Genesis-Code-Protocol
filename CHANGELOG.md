@@ -124,6 +124,7 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
+- Refactor dependency submission workflow configuration
 - Refactor permissions in OSSF Scorecard workflow
 - Refactor MkDocs GitHub Actions workflow
 - Refactor GitHub Actions workflow for Docker image
@@ -136,6 +137,7 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing
 - Update Python-CI.yml
 - chore(changelog): update and normalize spacing
 - Merge pull request #119 from lazyxeon/chore/update-top-level-toc
