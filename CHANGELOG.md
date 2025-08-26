@@ -123,6 +123,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Add comment for Python file tokenization check
+- chore(changelog): update and normalize spacing
 - Update validate-notebooks.yml for Python setup
 - chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
