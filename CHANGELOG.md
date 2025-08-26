@@ -135,6 +135,7 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing
 - Update ossf-scorecard.yml
 - chore(changelog): update and normalize spacing
 - Update GitHub Actions workflow for GHCR
@@ -1192,6 +1193,7 @@
 - Initial commit
 
 ### Security
+- Remove security-events permission in workflow
 - Refine security scan workflow configuration
 - Update security-scan.yml
 - Update security-scan.yml
