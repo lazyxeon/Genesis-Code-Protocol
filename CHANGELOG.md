@@ -1,6 +1,8 @@
 # GRCP Changelog
 
 ### Bug Fixes
+- Fix syntax in sbom.yml for action references
+- Fix syntax in ossf-scorecard.yml workflow
 - Fix syntax in release-drafter workflow file
 - Fix formatting in cliff.toml workflow file
 - Fix formatting in security-scan.yml
@@ -139,6 +141,9 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update GitHub Actions for documentation deployment
+- Update CodeQL action reference in workflow
+- chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
 - Update GitHub Actions workflow for Docker setup
 - chore(changelog): update and normalize spacing
