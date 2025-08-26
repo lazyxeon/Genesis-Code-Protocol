@@ -134,6 +134,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Delete .github/workflows/jekyll-gh-pages.yml
+- chore(changelog): update and normalize spacing
 - Add GitHub Actions workflow for Jekyll deployment
 - chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
