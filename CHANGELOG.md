@@ -110,12 +110,14 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
+- Refactor GitHub Actions workflow for notebook validation
 - Refactor build-and-push-ghcr workflow
 - Refactor GHCR workflow to derive image name dynamically
 - Refactor GitHub Actions workflow for image handling
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing
 - Update permissions for release job in workflow
 - chore(changelog): update and normalize spacing
 - Update GitHub Actions workflow for build and push
