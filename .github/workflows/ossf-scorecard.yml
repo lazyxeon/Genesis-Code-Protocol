@@ -1,0 +1,26 @@
+name: OpenSSF Scorecard
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 6 * * 1' # weekly, adjust as needed
+jobs:
+  run-scorecard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (shallow:false for scorecard)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run OpenSSF Scorecard
+        # NOTE: pin to a commit SHA for production; replace tag with SHA if desired.
+        uses: ossf/scorecard-action@v2
+        with:
+          repo: ${{ github.repository }}
+      - name: Upload Scorecard report
+        uses: actions/upload-artifact@v4
+        with:
+          name: scorecard-report
+          path: scorecard-* || scorecard.results.json || .
