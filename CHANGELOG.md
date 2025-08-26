@@ -134,6 +134,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Modify id-token permissions in OSSF Scorecard workflow
+- chore(changelog): update and normalize spacing
 - Delete .github/workflows/jekyll-gh-pages.yml
 - chore(changelog): update and normalize spacing
 - Add GitHub Actions workflow for Jekyll deployment
