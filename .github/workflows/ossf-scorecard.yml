@@ -8,7 +8,7 @@ on:
 # Least privilege globally (omit id-token here)
 permissions:
   contents: read
-  security-events: write
+  security-events: read
 
 jobs:
   analysis:
