@@ -136,6 +136,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update Python-CI.yml
+- chore(changelog): update and normalize spacing
 - Merge pull request #119 from lazyxeon/chore/update-top-level-toc
 - chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
