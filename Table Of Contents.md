@@ -40,13 +40,16 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
     - [auto-release.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/auto-release.yml)
     - [cliff.toml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/cliff.toml)
     - [codeql.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/codeql.yml)
+    - [dependency-review.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/dependency-review.yml)
     - [docker-build.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/docker-build.yml)
     - [docker-debug.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/docker-debug.yml)
     - [docs.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/docs.yml)
     - [generate-changelog.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/generate-changelog.yml)
     - [ghcr-build.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/ghcr-build.yml)
+    - [ossf-scorecard.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/ossf-scorecard.yml)
     - [release-bundle.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/release-bundle.yml)
     - [release-drafter.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/release-drafter.yml)
+    - [release-sign.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/release-sign.yml)
     - [sbom.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/sbom.yml)
     - [scorecards.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/scorecards.yml)
     - [security-scan.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/security-scan.yml)
@@ -232,3 +235,5 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 
   - [index.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/docs/index.md)
   - [roadmap.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/docs/roadmap.md)
+
+## tools
