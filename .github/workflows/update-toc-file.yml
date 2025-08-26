@@ -22,7 +22,6 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-      id-token: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
@@ -30,48 +29,28 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
-          python-version: '3.11'
-      - name: Generate "Table Of Contents.md" (inline)
+          python-version: "3.11"
+
+      - name: Generate "Table Of Contents.md"
         run: |
-          # (inline Python unchanged from original; omitted here)
           python - <<'PY'
-          # ... original Python script ...
+          # ... your existing Python script that generates Table Of Contents.md ...
           PY
-      - name: Show diff (debug)
+
+      # Show the diff (optional for debugging)
+      - name: Show diff
         run: |
           git status
           git --no-pager diff -- "Table Of Contents.md" || true
 
-      # Install gitsign and configure git
-      - name: Install gitsign
-        run: |
-          go install github.com/sigstore/gitsign@v0.7.1
-          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
-      - name: Configure git for commit signing
-        run: |
-          git config --local user.name "${{ github.workflow_ref }}"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local commit.gpgsign true
-          git config --local gpg.format x509
-          git config --local gpg.x509.program gitsign
-
-      # Create branch, sign commit, push
-      - name: Commit and push TOC
-        run: |
-          BRANCH="chore/update-top-level-toc"
-          git switch --create "$BRANCH"
-          git add "Table Of Contents.md"
-          git commit -m "docs: auto-update Table Of Contents.md" -S
-          git push --set-upstream origin "$BRANCH"
-
-      # Create PR using gh CLI
+      # Create a PR for the TOC update
       - name: Create Pull Request
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr create \
-            --title "chore(docs): refresh Table Of Contents.md" \
-            --body "Automated TOC update." \
-            --head "$BRANCH" \
-            --base main \
-            --label documentation
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
+        with:
+          commit-message: "docs: auto-update Table Of Contents.md"
+          branch: "chore/update-top-level-toc"
+          title: "chore(docs): refresh Table Of Contents.md"
+          body: "Automated TOC update."
+          labels: "documentation"
+          add-paths: "Table Of Contents.md"
+          sign-commits: true
