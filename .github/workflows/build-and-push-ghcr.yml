@@ -15,6 +15,9 @@ concurrency:
   group: build-ghcr-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -33,12 +36,12 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-            images: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
-            tags: |
-              type=ref,event=branch
-              type=ref,event=pr
-              type=sha
-              type=raw,value=latest,enable={{is_default_branch}}
+          images: ${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha
+            type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Login to GHCR (GITHUB_TOKEN)
         id: login
@@ -57,8 +60,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_PAT }}
 
-      - name: Build and (conditionally) push
-        id: build
+      - name: Build & push multi-arch (registry)
+        id: build-multi
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -70,11 +73,22 @@ jobs:
           cache-to: type=gha,mode=max
           provenance: mode=max
 
-      - name: Generate SBOM (latest tag only, if pushed)
+      # Local single-arch build (no push) for immediate SBOM scanning (avoids registry race)
+      - name: Build local amd64 image (no push)
+        if: github.event_name != 'pull_request'
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          load: true
+          platforms: linux/amd64
+          tags: ${{ env.IMAGE_NAME }}:sbom-temp
+
+      - name: Generate SBOM from local image
         if: github.event_name != 'pull_request'
         uses: anchore/sbom-action@v0
         with:
-          image: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+          image: ${{ env.IMAGE_NAME }}:sbom-temp
           format: spdx-json
           output-file: sbom.spdx.json
 
@@ -83,4 +97,19 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: sbom
+            # If you prefer to include digest in name:
+            # name: sbom-${{ steps.build-multi.outputs.digest }}
           path: sbom.spdx.json
+
+      - name: (Optional) Tag digest file
+        if: github.event_name != 'pull_request'
+        run: |
+          echo "Image digest: ${{ steps.build-multi.outputs.digest }}" | tee image-digest.txt
+        shell: bash
+
+      - name: Upload digest artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-digest
+          path: image-digest.txt
