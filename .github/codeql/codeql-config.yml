@@ -1,0 +1,8 @@
+name: "Repo CodeQL config"
+paths:
+  - Scripts/**
+  - setup.py
+paths-ignore:
+  - Documents/**    # ignore docs tree; prevents future false positives
+  - Notebooks/**    # ignore .ipynb JSON
+  - **/*.md
