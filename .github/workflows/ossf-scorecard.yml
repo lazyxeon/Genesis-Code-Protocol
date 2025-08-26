@@ -1,4 +1,3 @@
-# .github/workflows/scorecards.yml
 name: OpenSSF Scorecard
 
 on:
@@ -6,20 +5,26 @@ on:
   schedule:
     - cron: "0 6 * * 1"
 
+# Least-privilege at the workflow level
 permissions:
   contents: read
-  id-token: write
+  id-token: read
   security-events: write
 
 jobs:
   analysis:
+    # Elevate id-token only for this job because we publish results (badge)
+    permissions:
+      id-token: write
+      contents: read
+      security-events: write
     runs-on: ubuntu-latest
     steps:
       - uses: ossf/scorecard-action@v2.4.0
         with:
           results_file: results.sarif
           results_format: sarif
-          publish_results: true
+          publish_results: true   # enables badge/results
       - name: Upload to code scanning
         uses: github/codeql-action/upload-sarif@v3
         with:
