@@ -6,17 +6,19 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+# Minimal required global permissions
 permissions:
   contents: read
   packages: write
-  id-token: write
 
 concurrency:
   group: build-ghcr-${{ github.ref }}
   cancel-in-progress: true
 
 env:
-  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}
+  # Lowercase owner/repo path for GHCR image name
+  IMAGE_REPO: ${{ toLower(format('{0}/{1}', github.repository_owner, github.event.repository.name)) }}
+  IMAGE_NAME: ghcr.io/${{ toLower(format('{0}/{1}', github.repository_owner, github.event.repository.name)) }}
 
 jobs:
   build-and-push:
@@ -67,13 +69,14 @@ jobs:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           platforms: linux/amd64,linux/arm64
+            # All tags now lowercase through env.IMAGE_NAME
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           provenance: mode=max
 
-      # Local single-arch build (no push) for immediate SBOM scanning (avoids registry race)
+      # Local single-arch build for immediate SBOM (temporary lowercase tag)
       - name: Build local amd64 image (no push)
         if: github.event_name != 'pull_request'
         uses: docker/build-push-action@v5
@@ -97,15 +100,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: sbom
-            # If you prefer to include digest in name:
-            # name: sbom-${{ steps.build-multi.outputs.digest }}
           path: sbom.spdx.json
 
-      - name: (Optional) Tag digest file
+      - name: Record image digest
         if: github.event_name != 'pull_request'
-        run: |
-          echo "Image digest: ${{ steps.build-multi.outputs.digest }}" | tee image-digest.txt
-        shell: bash
+        run: echo "Image digest: ${{ steps.build-multi.outputs.digest }}" | tee image-digest.txt
 
       - name: Upload digest artifact
         if: github.event_name != 'pull_request'
