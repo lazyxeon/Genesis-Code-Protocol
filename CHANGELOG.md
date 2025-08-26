@@ -116,6 +116,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update GitHub Actions workflow for build and push
+- chore(changelog): update and normalize spacing
 - Refine auto-merge workflow for Dependabot
 - chore(changelog): update and normalize spacing
 - Update ossf-scorecard.yml
