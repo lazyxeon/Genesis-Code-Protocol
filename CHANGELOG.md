@@ -134,6 +134,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Add GitHub Actions workflow for Jekyll deployment
+- chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
 - Update CodeQL workflow for Python analysis
 - chore(changelog): update and normalize spacing
