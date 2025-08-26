@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-# Simple grep for uses:@... without a SHA (quick audit)
-set -e
-echo "Scanning workflows for unpinned actions (tags instead of SHAs)..."
+# Simple audit script to find uses: lines in .github/workflows and flag likely unpinned actions (tags like @v, @main, @latest).
+set -euo pipefail
+echo "Scanning .github/workflows for unpinned action references..."
 grep -R --line-number "uses: .*@" .github/workflows || true
-echo "Review results and replace tags (e.g. v1) with pinned commit SHAs for higher Scorecard trust."
+echo
+echo "Recommend: replace floating tags (e.g. @v1, @v2, @main, @latest) with pinned commit SHAs (e.g. @<full-40-char-sha>) for supply-chain integrity."
