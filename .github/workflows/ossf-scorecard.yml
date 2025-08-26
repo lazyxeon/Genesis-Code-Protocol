@@ -1,26 +1,50 @@
-name: OpenSSF Scorecard
+name: OpenSSF Scorecard (CLI)
 on:
   workflow_dispatch:
   push:
     branches:
       - main
   schedule:
-    - cron: '0 6 * * 1' # weekly, adjust as needed
+    - cron: '0 6 * * 1' # weekly
+permissions:
+  contents: read
 jobs:
   run-scorecard:
+    name: Run OpenSSF Scorecard (CLI)
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout (shallow:false for scorecard)
+      - name: Checkout repository (full history)
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Run OpenSSF Scorecard
-        # NOTE: pin to a commit SHA for production; replace tag with SHA if desired.
-        uses: ossf/scorecard-action@v2
+
+      - name: Set up Go (required to install scorecard CLI)
+        uses: actions/setup-go@v4
         with:
-          repo: ${{ github.repository }}
+          go-version: '1.20' # or a later stable Go if you prefer
+
+      - name: Install Scorecard CLI
+        run: |
+          set -e
+          # Install the OSSF Scorecard CLI into $(go env GOPATH)/bin
+          GOBIN="$(go env GOPATH)/bin"
+          export PATH="$PATH:${GOBIN}"
+          go install github.com/ossf/scorecard/v4/cmd/scorecard@latest
+          echo "Installed scorecard to: $(which scorecard || true)"
+
+      - name: Run Scorecard (repository)
+        env:
+          REPO: "github.com/${{ github.repository }}"
+        run: |
+          set -e
+          # Ensure the CLI is on PATH from GOBIN
+          export PATH="$PATH:$(go env GOPATH)/bin"
+          scorecard --repo="${REPO}" --show-details --format=json > scorecard.json || true
+          # Print a short summary
+          jq -r '.[] | "\(.check_name): \(.score)"' scorecard.json || true
+
       - name: Upload Scorecard report
         uses: actions/upload-artifact@v4
         with:
           name: scorecard-report
-          path: scorecard-* || scorecard.results.json || .
+          path: scorecard.json
