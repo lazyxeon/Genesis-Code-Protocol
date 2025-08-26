@@ -36,7 +36,7 @@ jobs:
               for path, err in bad: print(f" - {path}: {err}")
               sys.exit(1)
           PY
-      - uses: github/codeql-action/init@3c3833e0f8c1c83d449a7478aa59c036a9165498:contentReference[oaicite:10]{index=10}
+      - uses: github/codeql-action/init@3c3833e0f8c1c83d449a7478aa59c036a9165498
         with:
           languages: python
           tools: latest
