@@ -1,0 +1,14 @@
+name: Dependency Review on PR
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  dependency-review:
+    name: Dependency review
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run Dependency Review
+        # NOTE: pin to a commit SHA for production; the tag below should be replaced with a pinned SHA
+        uses: github/dependency-review-action@v3
