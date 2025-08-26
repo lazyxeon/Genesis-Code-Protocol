@@ -1,6 +1,12 @@
 # GRCP Changelog
 
 ### Bug Fixes
+- Fix formatting in security-scan.yml
+- Fix formatting in sbom.yml for summary print step
+- Fix file path for release signature artifacts
+- Fix formatting in release-drafter.yml
+- Fix newline at end of release-bundle.yml
+- Fix formatting in Python-CI.yml
 - Fix formatting in OSSF Scorecard workflow
 - Fix formatting in GitHub Actions workflow for docs
 - Fix indentation in auto-release workflow
@@ -125,6 +131,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Enhance README update script for repo structure
+- chore(changelog): update and normalize spacing
 - Update commit message for CHANGELOG spacing
 - chore(changelog): update and normalize spacing
 - Ensure no-cache option is set for Docker build
