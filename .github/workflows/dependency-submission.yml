@@ -2,21 +2,23 @@ name: Automatic Dependency Submission (Python)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
-# Minimal, but enough for dependency submission
+# Minimal default permissions
 permissions:
-  contents: write           # required by the Dependency Submission REST API
-  security-events: write
-  id-token: write
+  contents: read
 
 jobs:
   submit:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read        # needed to checkout code
+      security-events: write  # required by the dependency submission API
+      id-token: write       # needed for OIDC authentication
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: Component detection & submit
-        uses: advanced-security/component-detection-dependency-submission-action@v0.1.0
+        uses: advanced-security/component-detection-dependency-submission-action@d433c2f467e149a8009c8fbce92cc708ed15ef7b:contentReference[oaicite:3]{index=3}
         with:
           filePath: .
