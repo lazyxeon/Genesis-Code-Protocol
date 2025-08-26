@@ -128,6 +128,7 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
+- Refactor GHCR workflow to use env variables
 - Refactor docs.yml for GitHub Pages deployment
 - Refactor dependency submission workflow configuration
 - Refactor permissions in OSSF Scorecard workflow
@@ -142,6 +143,7 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing
 - Modify permissions for dependency submission workflow
 - Update Dockerfile
 - chore(changelog): update and normalize spacing
