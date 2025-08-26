@@ -6,7 +6,7 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-# Global: least privilege
+# Global least privilege
 permissions:
   contents: read
   security-events: read
@@ -18,11 +18,11 @@ concurrency:
 jobs:
   scorecard:
     runs-on: ubuntu-latest
-    # Escalate only inside this job
+    # Escalate only what this job needs (now includes id-token for Sigstore/Fulcio)
     permissions:
       contents: read
       security-events: write
-      # id-token: write   # Uncomment only if you add OIDC-based actions (e.g., signing)
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
