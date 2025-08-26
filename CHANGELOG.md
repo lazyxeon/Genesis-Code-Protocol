@@ -1,6 +1,7 @@
 # GRCP Changelog
 
 ### Documentation
+- docs: auto-update Table Of Contents.md
 - docs(readme): auto-sync repo structure
 - docs: auto-update Table Of Contents.md
 - docs: auto-update Table Of Contents.md
@@ -99,6 +100,10 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Merge pull request #111 from lazyxeon/chore/update-top-level-toc
+- Update generate_repo_toc.py
+- Update generate_repo_toc.py
+- chore(changelog): update and normalize spacing
 - Update generate_repo_toc.py
 - chore(changelog): update and normalize spacing
 - Create generate_repo_toc.py
