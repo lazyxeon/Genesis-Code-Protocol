@@ -102,6 +102,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update codeql-config.yml
+- chore(changelog): update and normalize spacing
 - Update codeql.yml
 - chore(changelog): update and normalize spacing
 - Create codeql-config.yml
