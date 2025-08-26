@@ -102,6 +102,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update generate_repo_toc.py
+- chore(changelog): update and normalize spacing
 - Merge pull request #113 from lazyxeon/chore/update-repo-structure
 - chore(changelog): update and normalize spacing
 - Merge pull request #112 from lazyxeon/chore/update-top-level-toc
