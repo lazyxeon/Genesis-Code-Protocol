@@ -120,6 +120,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update TOC generation workflow permissions and script
+- chore(changelog): update and normalize spacing
 - Update GitHub Actions workflow for repo structure
 - chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
