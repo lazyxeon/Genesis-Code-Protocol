@@ -1,6 +1,7 @@
 # GRCP Changelog
 
 ### Bug Fixes
+- Fix formatting issues in docker-build.yml
 - Fix formatting in cliff.toml configuration
 - Fix formatting of image digest output
 
@@ -118,6 +119,7 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing
 - Update dependency review workflow with new permissions
 - Update CodeQL workflow permissions and actions
 - chore(changelog): update and normalize spacing
