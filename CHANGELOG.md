@@ -138,6 +138,10 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update dependency-submission.yml
+- Pin Python image and enhance dependency installation
+- Pin Python image and optimize dependency installation
+- chore(changelog): update and normalize spacing
 - Update sbom.yml
 - chore(changelog): update and normalize spacing
 - Update OSSF Scorecard workflow dependencies
