@@ -104,6 +104,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update ghcr-build.yml
+- chore(changelog): update and normalize spacing
 - Update ossf-scorecard.yml
 - Create audit-workflows.sh
 - chore(changelog): update and normalize spacing
