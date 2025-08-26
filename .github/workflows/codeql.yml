@@ -1,35 +1,47 @@
-name: CodeQL Analysis
+name: CodeQL
 
 on:
   push:
-    branches: [main]
+    branches: [ "main" ]
   pull_request:
-    branches: [main]
+    branches: [ "main" ]
   schedule:
-    # Run weekly at 12:00 UTC on Wednesdays
-    - cron: '0 12 * * 3'
+    - cron: '0 4 * * 0'
 
-# Default read‑only permissions.  The job requests additional scopes for
-# uploading security analysis results.
 permissions:
   contents: read
+  security-events: write
 
 jobs:
   analyze:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      security-events: write
-    strategy:
-      matrix:
-        language: [python]
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
+      - uses: actions/checkout@v4
+
+      # Optional: quick tokenize gate; shows exact file/line if syntax/encoding breaks
+      - name: Python tokenize gate
+        run: |
+          python - <<'PY'
+          import sys, tokenize, pathlib
+          bad=[]
+          for p in pathlib.Path('.').rglob('*.py'):
+              try:
+                  with open(p,'rb') as f:
+                      for _ in tokenize.tokenize(f.readline): pass
+              except Exception as e:
+                  bad.append((str(p), e))
+          if bad:
+              print("Syntax/encoding errors:")
+              for path, err in bad:
+                  print(f" - {path}: {err}")
+              sys.exit(1)
+          print("All .py files tokenized OK")
+          PY
+
+      - uses: github/codeql-action/init@v3
         with:
-          languages: ${{ matrix.language }}
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v2
-      - name: Run CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+          languages: python
+          tools: latest
+          config-file: .github/codeql/codeql-config.yml
+
+      - uses: github/codeql-action/analyze@v3
