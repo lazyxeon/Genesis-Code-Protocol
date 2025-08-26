@@ -1,37 +1,54 @@
 name: Sign releases with cosign
+
 on:
   release:
     types: [published]
+
 permissions:
   contents: read
+
 jobs:
   sign-release:
-    name: Sign release artifacts with cosign
+    name: Sign release artifacts with cosign (keyless)
+    permissions:
+      contents: write
+      id-token: write
     runs-on: ubuntu-latest
+    env:
+      COSIGN_EXPERIMENTAL: "true"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install cosign
-        run: |
-          curl -sSfL https://raw.githubusercontent.com/sigstore/cosign/main/install.sh | sh -s -- -b /usr/local/bin
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+
+      - name: Install cosign (keyless)
+        uses: sigstore/cosign-installer@f3e9b7d72b807f8cdb3c1e232d5a8d60061c4a09
+
       - name: Download release assets
-        uses: softprops/action-gh-release@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TAG="${{ github.event.release.tag_name }}"
+          mkdir -p artifacts
+          gh release download "$TAG" --repo "${GITHUB_REPOSITORY}" --dir artifacts
+          ls -lah artifacts
+
+      - name: Sign assets
+        run: |
+          set -euo pipefail
+          cd artifacts
+          shopt -s nullglob
+          for f in *; do
+            [ -f "$f" ] || continue
+            echo "Signing $f"
+            cosign sign-blob --yes --output-signature "$f.sig" "$f"
+          done
+          ls -lah
+
+      - name: Upload signatures
+        uses: softprops/action-gh-release@e7a8b55abb8e23f972de3b0cb6a4f5b9d1bf0f0b
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.event.release.tag_name }}
-      - name: Sign artifacts with cosign
-        env:
-          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
-        run: |
-          # For each asset you'd sign (example for a release tarball)
-          for f in *.tar.gz; do
-            cosign sign-blob --key ${COSIGN_PASSWORD} "$f" > "$f.sig" || true
-          done
-      - name: Upload signatures as release assets
-        uses: actions/upload-release-asset@v2
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: "*.sig"
-          asset_name: "signatures.tar.gz"
-          asset_content_type: application/gzip
-# NOTE: This example assumes you will store a key material or use cosign keyless flows.
-# Replace with cosign keyless workflow (OIDC) in production to avoid storing private keys in secrets.
+          files: artifacts/*.sig
