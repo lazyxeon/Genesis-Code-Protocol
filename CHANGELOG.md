@@ -112,6 +112,7 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
+- Refactor Python CI workflow for clarity and conciseness
 - Refactor GitHub Actions workflow for notebook validation
 - Refactor build-and-push-ghcr workflow
 - Refactor GHCR workflow to derive image name dynamically
@@ -119,6 +120,10 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update release drafter configuration and permissions
+- Adjust permissions and zip creation in release workflow
+- Update OpenSSF Scorecard workflow dependencies
+- chore(changelog): update and normalize spacing
 - Adjust permissions and update changelog spacing
 - chore(changelog): update and normalize spacing
 - Update docs.yml
