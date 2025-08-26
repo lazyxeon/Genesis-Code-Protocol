@@ -1,6 +1,7 @@
 # GRCP Changelog
 
 ### Bug Fixes
+- Fix formatting issue in auto-merge workflow
 - Fix formatting issues in docker-build.yml
 - Fix formatting in cliff.toml configuration
 - Fix formatting of image digest output
@@ -112,6 +113,7 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
+- Refactor image digest logging in workflow
 - Refactor Python CI workflow for clarity and conciseness
 - Refactor GitHub Actions workflow for notebook validation
 - Refactor build-and-push-ghcr workflow
@@ -120,6 +122,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Reformat requirements.txt for consistency
+- chore(changelog): update and normalize spacing
 - Update TOC generation workflow permissions and script
 - chore(changelog): update and normalize spacing
 - Update GitHub Actions workflow for repo structure
