@@ -1,9 +1,12 @@
-# .github/workflows/codeql.yml
 name: CodeQL
+
 on:
-  push: { branches: [ "main" ] }
-  pull_request: { branches: [ "main" ] }
-  schedule: [ { cron: "0 4 * * 0" } ]
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    - cron: '0 4 * * 0'
 
 permissions:
   contents: read
@@ -13,10 +16,10 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with: { python-version: '3.12' }
-
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
       - name: Python syntax & encoding check (targets known problem files)
         run: |
           python - <<'PY'
@@ -33,10 +36,8 @@ jobs:
               for path, err in bad: print(f" - {path}: {err}")
               sys.exit(1)
           PY
-
-      - uses: github/codeql-action/init@v3
+      - uses: github/codeql-action/init@3c3833e0f8c1c83d449a7478aa59c036a9165498:contentReference[oaicite:10]{index=10}
         with:
           languages: python
           tools: latest
-
-      - uses: github/codeql-action/analyze@v3
+      - uses: github/codeql-action/analyze@3c3833e0f8c1c83d449a7478aa59c036a9165498
