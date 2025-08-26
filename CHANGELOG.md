@@ -18,6 +18,7 @@
 
 ### Documentation
 - docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md
 - docs(readme): auto-sync repo structure
 - docs: auto-update Table Of Contents.md
 - docs: auto-update Table Of Contents.md
@@ -135,6 +136,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Merge pull request #119 from lazyxeon/chore/update-top-level-toc
+- chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
 - Update ossf-scorecard.yml
 - chore(changelog): update and normalize spacing
