@@ -1,4 +1,5 @@
 name: Build and Push Docker image to GHCR
+
 on:
   push:
     branches: [ main ]
@@ -6,7 +7,7 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-# Minimal required global permissions
+# Global least privilege; escalate only what's needed (packages write).
 permissions:
   contents: read
   packages: write
@@ -15,11 +16,6 @@ concurrency:
   group: build-ghcr-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  # Lowercase owner/repo path for GHCR image name
-  IMAGE_REPO: ${{ toLower(format('{0}/{1}', github.repository_owner, github.event.repository.name)) }}
-  IMAGE_NAME: ghcr.io/${{ toLower(format('{0}/{1}', github.repository_owner, github.event.repository.name)) }}
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -27,6 +23,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Derive lowercase image name
+        id: imagename
+        run: |
+          set -euo pipefail
+          OWNER="${GITHUB_REPOSITORY%%/*}"
+            # repo part after slash
+          REPO="${GITHUB_REPOSITORY#*/}"
+          # Force lowercase (POSIX tr to avoid bash-specific ${var,,})
+          OWNER_LC="$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')"
+          REPO_LC="$(echo "$REPO" | tr '[:upper:]' '[:lower:]')"
+          IMAGE_NAME="ghcr.io/${OWNER_LC}/${REPO_LC}"
+          echo "IMAGE_NAME=$IMAGE_NAME" >> "$GITHUB_ENV"
+          echo "owner=$OWNER_LC" >> "$GITHUB_OUTPUT"
+          echo "repo=$REPO_LC" >> "$GITHUB_OUTPUT"
+          echo "Computed IMAGE_NAME=$IMAGE_NAME"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -69,14 +81,13 @@ jobs:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           platforms: linux/amd64,linux/arm64
-            # All tags now lowercase through env.IMAGE_NAME
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
           provenance: mode=max
 
-      # Local single-arch build for immediate SBOM (temporary lowercase tag)
+      # Local single-arch image for immediate SBOM generation (avoid registry race, ensures lowercase tag)
       - name: Build local amd64 image (no push)
         if: github.event_name != 'pull_request'
         uses: docker/build-push-action@v5
@@ -104,7 +115,7 @@ jobs:
 
       - name: Record image digest
         if: github.event_name != 'pull_request'
-        run: echo "Image digest:${{ steps.build-multi.outputs.digest }}" | tee image-digest.txt
+        run: echo "Image digest: ${{ steps.build-multi.outputs.digest }}" | tee image-digest.txt
 
       - name: Upload digest artifact
         if: github.event_name != 'pull_request'
