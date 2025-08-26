@@ -137,6 +137,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Modify release drafter workflow permissions and branches
+- chore(changelog): update and normalize spacing
 - Update GitHub Actions workflow for Docker build
 - chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
