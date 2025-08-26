@@ -1,73 +1,31 @@
-name: OpenSSF Scorecard (CLI) - robust
+name: OpenSSF Scorecard
 on:
-  workflow_dispatch:
-  push:
-    branches:
-      - main
   schedule:
-    - cron: '0 6 * * 1' # weekly
+    - cron: '23 5 * * 1'
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
 permissions:
   contents: read
-  actions: read
+  security-events: write
+  id-token: write
+
 jobs:
-  run-scorecard:
-    name: Run OpenSSF Scorecard (CLI)
+  scorecard:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository (full history)
+      - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Run Scorecard
+        uses: ossf/scorecard-action@v2.4.0
         with:
-          fetch-depth: 0
+          results_file: results.sarif
+          results_format: sarif
+          publish_results: true
 
-      - name: Set up Go (required to install scorecard CLI)
-        uses: actions/setup-go@v4
+      - name: Upload SARIF to code scanning
+        uses: github/codeql-action/upload-sarif@v3
         with:
-          go-version: '1.20'
-
-      - name: Install Scorecard CLI (pinned fallback)
-        run: |
-          set -euo pipefail
-          # Ensure GOBIN is set and on PATH
-          GOBIN="$(go env GOPATH 2>/dev/null)/bin"
-          if [ -z "$GOBIN" ] || [ "$GOBIN" = "/bin" ]; then
-            GOBIN="$(go env GOMODCACHE 2>/dev/null || echo /tmp)/bin"
-          fi
-          mkdir -p "$GOBIN"
-          export PATH="$PATH:$GOBIN"
-          # Install scorecard CLI; pin to a stable v4 release if you prefer (replace @latest)
-          go install github.com/ossf/scorecard/v4/cmd/scorecard@latest
-          echo "scorecard installed to: $(command -v scorecard || true)"
-      - name: Verify scorecard binary
-        run: |
-          set -e
-          if ! command -v scorecard >/dev/null 2>&1; then
-            echo "scorecard not found on PATH after install; printing GOPATH and environment for debugging"
-            go env
-            exit 1
-          fi
-          scorecard --version || true
-
-      - name: Run Scorecard (repository) with token
-        env:
-          REPO: "github.com/${{ github.repository }}"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          # Ensure binary is on PATH
-          export PATH="$PATH:$(go env GOPATH 2>/dev/null)/bin"
-          # Run scorecard with an explicit token to avoid unauthenticated API rate limits
-          scorecard --repo="${REPO}" --show-details --format=json --token="${GITHUB_TOKEN}" > scorecard.json || true
-          # Sanity: print per-check scores
-          if [ -s scorecard.json ]; then
-            jq -r '.[] | "\(.check_name): \(.score)"' scorecard.json || true
-          else
-            echo "scorecard.json is missing or empty; inspect runner logs"
-            ls -lah
-            cat scorecard.json || true
-          fi
-
-      - name: Upload Scorecard report
-        uses: actions/upload-artifact@v4
-        with:
-          name: scorecard-report
-          path: scorecard.json
+          sarif_file: results.sarif
