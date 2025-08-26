@@ -1,0 +1,37 @@
+name: Sign releases with cosign
+on:
+  release:
+    types: [published]
+permissions:
+  contents: read
+jobs:
+  sign-release:
+    name: Sign release artifacts with cosign
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install cosign
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/sigstore/cosign/main/install.sh | sh -s -- -b /usr/local/bin
+      - name: Download release assets
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.event.release.tag_name }}
+      - name: Sign artifacts with cosign
+        env:
+          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+        run: |
+          # For each asset you'd sign (example for a release tarball)
+          for f in *.tar.gz; do
+            cosign sign-blob --key ${COSIGN_PASSWORD} "$f" > "$f.sig" || true
+          done
+      - name: Upload signatures as release assets
+        uses: actions/upload-release-asset@v2
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: "*.sig"
+          asset_name: "signatures.tar.gz"
+          asset_content_type: application/gzip
+# NOTE: This example assumes you will store a key material or use cosign keyless flows.
+# Replace with cosign keyless workflow (OIDC) in production to avoid storing private keys in secrets.
