@@ -106,6 +106,9 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update GitHub Actions workflow for Docker image build
+- Update audit-workflows.sh
+- chore(changelog): update and normalize spacing
 - Create build-and-push-ghcr.yml
 - chore(changelog): update and normalize spacing
 - Delete .github/workflows/ghcr-build.yml
