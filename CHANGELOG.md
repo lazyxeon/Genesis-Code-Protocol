@@ -1,6 +1,7 @@
 # GRCP Changelog
 
 ### Bug Fixes
+- Fix formatting in cliff.toml configuration
 - Fix formatting of image digest output
 
 ### Documentation
@@ -117,6 +118,9 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update dependency review workflow with new permissions
+- Update CodeQL workflow permissions and actions
+- chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
 - Update permissions for release job in workflow
 - chore(changelog): update and normalize spacing
