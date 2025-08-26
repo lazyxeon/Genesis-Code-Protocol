@@ -100,6 +100,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update setup.py
+- chore(changelog): update and normalize spacing
 - Delete Documents/Setup.py
 - chore(changelog): update and normalize spacing
 - Create setup.py
