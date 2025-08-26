@@ -1,3 +1,4 @@
+# .github/workflows/dependency-review.yml
 name: Dependency Review on PR
 
 on:
@@ -10,12 +11,13 @@ permissions:
 
 jobs:
   dependency-review:
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       pull-requests: read
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: Run Dependency Review
-        uses: actions/dependency-review-action@0c9fcb5df7be8b165e4dcb2a0256a522ec2f5dff
+        # Pin to a valid commit from v4.7.3 tag
+        uses: actions/dependency-review-action@595b5aeba73380359d98a5e087f648dbb0edce1b
