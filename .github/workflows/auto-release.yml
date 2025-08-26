@@ -5,13 +5,11 @@ on:
     tags:
       - 'v*'
 
-# Default to read-only permissions.
 permissions:
   contents: read
 
 jobs:
   release:
-    # This job needs write permissions to create a release.
     permissions:
       contents: write
     runs-on: ubuntu-latest
