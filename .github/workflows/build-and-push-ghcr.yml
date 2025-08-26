@@ -20,7 +20,8 @@ concurrency:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE: ${{ env.REGISTRY }}/${{ lower(github.repository) }}
+  IMAGE: ghcr.io/${{ lower(github.repository) }}  # do not chain env here
+
 
 jobs:
   build-and-push:
