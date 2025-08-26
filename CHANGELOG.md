@@ -1,6 +1,7 @@
 # GRCP Changelog
 
 ### Bug Fixes
+- Fix formatting in OSSF Scorecard workflow
 - Fix formatting in GitHub Actions workflow for docs
 - Fix indentation in auto-release workflow
 - Fix formatting issue in auto-merge workflow
@@ -124,6 +125,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update commit message for CHANGELOG spacing
+- chore(changelog): update and normalize spacing
 - Ensure no-cache option is set for Docker build
 - Update docker-build.yml
 - Update dependency-review-action version
