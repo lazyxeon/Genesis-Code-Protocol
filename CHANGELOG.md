@@ -104,6 +104,9 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update ossf-scorecard.yml
+- Create audit-workflows.sh
+- chore(changelog): update and normalize spacing
 - Create release-sign.yml
 - chore(changelog): update and normalize spacing
 - Create ossf-scorecard.yml
