@@ -134,6 +134,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Clarify IMAGE environment variable in workflow
+- chore(changelog): update and normalize spacing
 - Update dependency submission workflow and permissions
 - chore(changelog): update and normalize spacing
 - Modify id-token permissions in OSSF Scorecard workflow
