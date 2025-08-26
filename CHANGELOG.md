@@ -102,6 +102,9 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Create codeql-config.yml
+- Create .gitattributes
+- chore(changelog): update and normalize spacing
 - Update generate_repo_toc.py
 - chore(changelog): update and normalize spacing
 - Merge pull request #113 from lazyxeon/chore/update-repo-structure
