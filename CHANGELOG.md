@@ -106,9 +106,11 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
+- Refactor GitHub Actions workflow for image handling
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
 - Update GitHub Actions workflow for Docker image build
 - Update audit-workflows.sh
