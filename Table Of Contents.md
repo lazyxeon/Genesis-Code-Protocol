@@ -16,6 +16,7 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
 - [SECURITY.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/SECURITY.md)
 - [Table Of Contents.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Table%20Of%20Contents.md)
 - [mkdocs.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/mkdocs.yml)
+- [setup.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/setup.py)
 
 ## .devcontainer
 
@@ -85,7 +86,6 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
   - [Pull Request Template.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Pull%20Request%20Template.md)
   - [Requirements.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Requirements.md)
   - [Security.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Security.md)
-  - [Setup.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Setup.py)
   - [Theoretical Soundness Analysis.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Theoretical%20Soundness%20Analysis.md)
   - [index.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/index.md)
   - [releases.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/releases.md)
