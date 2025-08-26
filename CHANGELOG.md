@@ -143,6 +143,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update release workflow to include SBOM generation
+- chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
 - Modify permissions for dependency submission workflow
 - Update Dockerfile
