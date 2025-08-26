@@ -131,6 +131,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Enhance Table of Contents generation script
+- chore(changelog): update and normalize spacing
 - Enhance README update script for repo structure
 - chore(changelog): update and normalize spacing
 - Update commit message for CHANGELOG spacing
