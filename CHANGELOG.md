@@ -138,6 +138,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update GitHub Actions workflow for Docker setup
+- chore(changelog): update and normalize spacing
 - Update dependency-submission.yml
 - Pin Python image and enhance dependency installation
 - Pin Python image and optimize dependency installation
