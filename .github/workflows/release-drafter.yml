@@ -1,26 +1,21 @@
+# .github/workflows/release-drafter.yml
 name: Release Drafter
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    types: [closed]
+    branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write   # REQUIRED to create/update draft releases
 
 jobs:
   update_release_draft:
-    permissions:
-      contents: write
-      pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
-        with:
-          fetch-depth: 0
-      - uses: release-drafter/release-drafter@5a56e55ea7a17ea106d7ec597f1c0f8dbc3f02ac
+      - uses: release-drafter/release-drafter@v6
         with:
           config-name: release-drafter.yml
         env:
