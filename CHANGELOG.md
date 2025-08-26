@@ -134,6 +134,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update SBOM workflow to use SPDX format
+- chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
 - Update release drafter workflow configuration
 - chore(changelog): update and normalize spacing
