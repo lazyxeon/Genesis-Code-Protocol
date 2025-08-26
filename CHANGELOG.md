@@ -138,6 +138,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update sbom.yml
+- chore(changelog): update and normalize spacing
 - Update OSSF Scorecard workflow dependencies
 - chore(changelog): update and normalize spacing
 - Update CodeQL workflow with new action versions
