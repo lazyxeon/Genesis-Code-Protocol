@@ -1,6 +1,7 @@
 # GRCP Changelog
 
 ### Documentation
+- docs: auto-update Table Of Contents.md
 - docs(readme): auto-sync repo structure
 - docs(readme): auto-sync repo structure
 - docs: auto-update Table Of Contents.md
@@ -103,6 +104,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Merge pull request #115 from lazyxeon/chore/update-top-level-toc
+- chore(changelog): update and normalize spacing
 - Merge pull request #114 from lazyxeon/chore/update-repo-structure
 - chore(changelog): update and normalize spacing
 - Update codeql-config.yml
