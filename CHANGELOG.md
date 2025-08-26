@@ -2,6 +2,7 @@
 
 ### Documentation
 - docs(readme): auto-sync repo structure
+- docs(readme): auto-sync repo structure
 - docs: auto-update Table Of Contents.md
 - docs: auto-update Table Of Contents.md
 - docs(readme): auto-sync repo structure
@@ -102,6 +103,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Merge pull request #114 from lazyxeon/chore/update-repo-structure
+- chore(changelog): update and normalize spacing
 - Update codeql-config.yml
 - chore(changelog): update and normalize spacing
 - Update codeql.yml
