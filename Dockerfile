@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.7
-FROM python:3.11-slim AS runner
+# Pin to a specific digest of python:3.11-slim
+FROM python:3.11-slim@sha256:4c904a8c1ece1177ddba2e4ecc6f241577637aa1d4db448e2393ae25d800cc85:contentReference[oaicite:17]{index=17} AS runner
 
-# -- Python / pip hygiene
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
@@ -9,27 +9,22 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-# -- OS deps (minimal; add gcc/dev headers only if you need compiled wheels)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates curl && \
     rm -rf /var/lib/apt/lists/*
 
-# -- Leverage Docker layer cache: copy only requirements first
+# Install only dependencies first to leverage layer caching
 COPY requirements.txt ./requirements.txt
+RUN python -m pip install --upgrade pip==23.3.1 && \
+    pip install --require-hashes -r requirements.txt
 
-# If you decide to keep a CLI-specific requirements file later, uncomment:
-# COPY "CLI Bundle/requirements.txt" "CLI Bundle/requirements.txt"
-
-RUN python -m pip install --upgrade pip && \
-    pip install -r requirements.txt
-
-# -- Now copy the rest of the repo
+# Copy the rest of the repository
 COPY . .
 
-# -- Non-root user for runtime
+# Drop privileges for runtime
 RUN useradd -u 10001 -m appuser && chown -R appuser:appuser /app
 USER appuser
 
-# Default entrypoint: show CLI help (adjust as you wish)
+# Default entrypoint shows CLI help
 ENTRYPOINT ["python", "CLI Bundle/gcp_cli.py"]
 CMD ["--help"]
