@@ -1,9 +1,8 @@
-# .github/workflows/generate-sbom.yml
 name: Generate SBOM
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -13,17 +12,15 @@ jobs:
   sbom:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: Generate SBOM (SPDX JSON) with Syft
-        uses: anchore/sbom-action@v0
+        uses: anchore/sbom-action@da167eac915b4e86f08b264dbdbc867b61be6f0c:contentReference[oaicite:15]{index=15}
         with:
           path: .
           format: spdx-json
           output-file: sbom.spdx.json
-
       - name: Upload SBOM artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02:contentReference[oaicite:16]{index=16}
         with:
           name: sbom-spdx
           path: sbom.spdx.json
