@@ -1,6 +1,7 @@
 # GRCP Changelog
 
 ### Bug Fixes
+- Fix indentation in auto-release workflow
 - Fix formatting issue in auto-merge workflow
 - Fix formatting issues in docker-build.yml
 - Fix formatting in cliff.toml configuration
@@ -122,6 +123,7 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing
 - Reformat requirements.txt for consistency
 - chore(changelog): update and normalize spacing
 - Update TOC generation workflow permissions and script
