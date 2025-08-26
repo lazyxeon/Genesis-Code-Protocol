@@ -120,6 +120,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update SBOM workflow to use anchore/sbom-action
+- chore(changelog): update and normalize spacing
 - Update release-sign workflow for keyless signing
 - chore(changelog): update and normalize spacing
 - Update release drafter configuration and permissions
