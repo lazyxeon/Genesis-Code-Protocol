@@ -4,13 +4,11 @@ on:
   release:
     types: [created]
 
-# Default read-only permissions.
 permissions:
   contents: read
 
 jobs:
   bundle:
-    # Needs write permission to upload assets to the release.
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -23,7 +21,6 @@ jobs:
           set -euo pipefail
           rm -rf dist
           mkdir -p dist
-          # Create a field kit zip containing key project directories.
           zip -r "dist/GCP_${TAG}_Field_Kit.zip" "CLI Bundle" "Documents" "Scripts" -x "*.git*" "*.github*"
       - name: SBOM (SPDX)
         uses: anchore/sbom-action@e8d2a6937ecead383dfe75190d104edd1f9c5751
