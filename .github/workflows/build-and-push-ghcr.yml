@@ -33,7 +33,6 @@ jobs:
           REPO="${GITHUB_REPOSITORY#*/}"
           OWNER_LC="$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')"
           REPO_LC="$(echo "$REPO" | tr '[:upper:]' '[:lower:]')"
-            # optional prefix normalization logic could go here
           IMAGE_NAME="ghcr.io/${OWNER_LC}/${REPO_LC}"
           echo "IMAGE_NAME=$IMAGE_NAME" >> "$GITHUB_ENV"
           echo "Computed IMAGE_NAME=$IMAGE_NAME"
@@ -112,8 +111,7 @@ jobs:
 
       - name: Record image digest
         if: github.event_name != 'pull_request'
-        run: |
-          echo "Image digest: ${{ steps.build-multi.outputs.digest }}" | tee image-digest.txt
+        run: echo "Image digest: ${{ steps.build-multi.outputs.digest }}" | tee image-digest.txt
 
       - name: Upload digest artifact
         if: github.event_name != 'pull_request'
