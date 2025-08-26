@@ -5,11 +5,11 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 
+# Minimal, but enough for dependency submission
 permissions:
-  contents: read
-  id-token: write
+  contents: write           # required by the Dependency Submission REST API
   security-events: write
-  dependency-graph: write   # required to submit snapshots
+  id-token: write
 
 jobs:
   submit:
@@ -20,4 +20,3 @@ jobs:
         uses: advanced-security/component-detection-dependency-submission-action@v0.1.0
         with:
           filePath: .
-          # no unsupported inputs (removed fail-on-error)
