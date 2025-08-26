@@ -106,6 +106,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Update ossf-scorecard.yml
+- chore(changelog): update and normalize spacing
 - Delete .github/workflows/scorecards.yml
 - chore(changelog): update and normalize spacing
 - Merge pull request #117 from lazyxeon/chore/update-repo-structure
