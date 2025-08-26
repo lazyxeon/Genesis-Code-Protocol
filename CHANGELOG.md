@@ -116,6 +116,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Refine auto-merge workflow for Dependabot
+- chore(changelog): update and normalize spacing
 - Update ossf-scorecard.yml
 - chore(changelog): update and normalize spacing
 - Merge pull request #118 from lazyxeon/chore/update-top-level-toc
