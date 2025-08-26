@@ -3,7 +3,6 @@ name: Docker Debug Build
 on:
   workflow_dispatch: {}
 
-# Restrict default permissions.
 permissions:
   contents: read
 
