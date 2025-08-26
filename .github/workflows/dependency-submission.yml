@@ -1,0 +1,24 @@
+# .github/workflows/dependency-submission.yml
+name: Automatic Dependency Submission (Python)
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  security-events: write    # allows dependency graph updates
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Component detection & submit
+        uses: advanced-security/component-detection-dependency-submission-action@v0.0.3
+        with:
+          fail-on-error: false
+# docs: dependency submission API + component detection action. :contentReference[oaicite:4]{index=4}
