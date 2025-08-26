@@ -110,6 +110,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update GitHub Actions workflow for image build and push
+- chore(changelog): update and normalize spacing
 - Adjust permissions in ossf-scorecard workflow
 - chore(changelog): update and normalize spacing
 - Enhance Scorecard workflow with concurrency settings
