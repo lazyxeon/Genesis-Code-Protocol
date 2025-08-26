@@ -137,6 +137,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update GitHub Actions workflow for Docker build
+- chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
 - Update Python-CI.yml
 - chore(changelog): update and normalize spacing
