@@ -137,6 +137,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update CodeQL workflow with new action versions
+- chore(changelog): update and normalize spacing
 - Modify release drafter workflow permissions and branches
 - chore(changelog): update and normalize spacing
 - Update GitHub Actions workflow for Docker build
