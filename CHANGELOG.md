@@ -123,6 +123,7 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
+- Refactor permissions in OSSF Scorecard workflow
 - Refactor MkDocs GitHub Actions workflow
 - Refactor GitHub Actions workflow for Docker image
 - Refactor image digest logging in workflow
@@ -134,6 +135,7 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing
 - Clarify IMAGE environment variable in workflow
 - chore(changelog): update and normalize spacing
 - Update dependency submission workflow and permissions
