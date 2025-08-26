@@ -135,6 +135,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update GitHub Actions workflow for GHCR
+- chore(changelog): update and normalize spacing
 - Modify permissions in dependency-submission.yml
 - chore(changelog): update and normalize spacing
 - chore(changelog): update and normalize spacing
