@@ -2,6 +2,7 @@
 
 ### Documentation
 - docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md
 - docs(readme): auto-sync repo structure
 - docs(readme): auto-sync repo structure
 - docs: auto-update Table Of Contents.md
@@ -104,6 +105,9 @@
 - docs(readme): auto-sync repo structure
 
 ### Miscellaneous Tasks
+- Merge pull request #116 from lazyxeon/chore/update-top-level-toc
+- Update audit-workflows.sh
+- chore(changelog): update and normalize spacing
 - Update ghcr-build.yml
 - chore(changelog): update and normalize spacing
 - Update ossf-scorecard.yml
