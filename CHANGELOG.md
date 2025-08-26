@@ -120,6 +120,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update release-sign workflow for keyless signing
+- chore(changelog): update and normalize spacing
 - Update release drafter configuration and permissions
 - Adjust permissions and zip creation in release workflow
 - Update OpenSSF Scorecard workflow dependencies
