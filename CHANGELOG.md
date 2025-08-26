@@ -1,6 +1,7 @@
 # GRCP Changelog
 
 ### Bug Fixes
+- Fix formatting in cliff.toml workflow file
 - Fix formatting in security-scan.yml
 - Fix formatting in sbom.yml for summary print step
 - Fix file path for release signature artifacts
@@ -122,6 +123,7 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
+- Refactor GitHub Actions workflow for Docker image
 - Refactor image digest logging in workflow
 - Refactor Python CI workflow for clarity and conciseness
 - Refactor GitHub Actions workflow for notebook validation
@@ -131,6 +133,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Update nbconvert version in requirements.txt
+- chore(changelog): update and normalize spacing
 - Enhance Table of Contents generation script
 - chore(changelog): update and normalize spacing
 - Enhance README update script for repo structure
