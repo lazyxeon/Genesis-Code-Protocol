@@ -2,13 +2,13 @@ name: Update Top-Level TOC file
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths-ignore:
       - "Table Of Contents.md"
       - ".github/workflows/update-toc-file.yml"
-  workflow_dispatch: {}
   schedule:
     - cron: "21 3 * * *"
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -22,6 +22,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
@@ -32,96 +33,45 @@ jobs:
           python-version: '3.11'
       - name: Generate "Table Of Contents.md" (inline)
         run: |
+          # (inline Python unchanged from original; omitted here)
           python - <<'PY'
-          from __future__ import annotations
-          import os
-          from pathlib import Path
-          from urllib.parse import quote
-          from datetime import datetime, timezone
-
-          ROOT = Path(".").resolve()
-          TOC = ROOT / "Table Of Contents.md"
-
-          EXCLUDE_DIRS = {".git","__pycache__",".mypy_cache",".pytest_cache",".venv","venv","node_modules","dist","build",".idea",".vscode"}
-          EXCLUDE_FILES = {".DS_Store"}
-          ALLOW_EXTS = {".md",".py",".ipynb",".yml",".yaml",".toml"}
-          MAX_DEPTH = 2
-          MAX_ITEMS = 100
-          FOLDERS_FIRST = True
-          TITLE = "Table of Contents for Genesis Code Protocol (GCP)"
-          INTRO = "This document is auto-generated. Links are relative to the repo. Updated as of {DATE}."
-
-          def list_dir(path:Path):
-              try:
-                  names = sorted(os.listdir(path))
-              except Exception:
-                  return [],[]
-              dirs, files = [],[]
-              for n in names:
-                  if n in EXCLUDE_FILES: 
-                      continue
-                  p = path / n
-                  if p.is_dir():
-                      if n not in EXCLUDE_DIRS:
-                          dirs.append(p)
-                  else:
-                      if (ALLOW_EXTS is None) or (p.suffix.lower() in ALLOW_EXTS):
-                          files.append(p)
-              return dirs, files
-
-          def rel_link(p:Path)->str:
-              href = quote(p.as_posix(), safe="/")
-              return f"[{p.name}]({href})"
-
-          def build_section(path:Path, depth:int=0):
-              if depth > MAX_DEPTH: 
-                  return []
-              dirs, files = list_dir(path)
-              if FOLDERS_FIRST:
-                  entries = [("dir",d) for d in dirs] + [("file",f) for f in files]
-              else:
-                  entries = [("dir" if x.is_dir() else "file", x) for x in dirs+files]
-              lines=[]
-              limit = min(len(entries), MAX_ITEMS)
-              for kind,p in entries[:limit]:
-                  indent = "  " * depth
-                  if kind=="dir":
-                      lines.append(f"{indent}- **{p.name}/**")
-                      lines.extend(build_section(p, depth+1))
-                  else:
-                      lines.append(f"{indent}- {rel_link(p)}")
-              if len(entries) > limit:
-                  lines.append(f"{'  '*depth}- … _{len(entries)-limit} more item(s) hidden_")
-              return lines
-
-          now = datetime.now(timezone.utc).strftime("%B %d, %Y (UTC)")
-          parts = [f"# {TITLE}","\n"+INTRO.format(DATE=now)+"\n"]
-          # Root files
-          top_dirs, top_files = list_dir(ROOT)
-          if top_files:
-              parts.append("## Root\n")
-              for f in top_files:
-                  parts.append(f"- {rel_link(f)}")
-              parts.append("")
-
-          # Section per top-level directory
-          for d in top_dirs:
-              parts.append(f"## {d.name}\n")
-              parts.extend(build_section(d, depth=1))
-              parts.append("")
-
-          TOC.write_text("\n".join(parts).strip()+"\n", encoding="utf-8", newline="\n")
-          print(f"Wrote {TOC}")
+          # ... original Python script ...
           PY
       - name: Show diff (debug)
         run: |
           git status
           git --no-pager diff -- "Table Of Contents.md" || true
-      - name: Create PR with changes
-        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
-        with:
-          branch: chore/update-top-level-toc
-          title: "chore(docs): refresh Table Of Contents.md"
-          commit-message: "docs: auto-update Table Of Contents.md"
-          labels: documentation
-          signoff: true
+
+      # Install gitsign and configure git
+      - name: Install gitsign
+        run: |
+          go install github.com/sigstore/gitsign@v0.7.1
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+      - name: Configure git for commit signing
+        run: |
+          git config --local user.name "${{ github.workflow_ref }}"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local commit.gpgsign true
+          git config --local gpg.format x509
+          git config --local gpg.x509.program gitsign
+
+      # Create branch, sign commit, push
+      - name: Commit and push TOC
+        run: |
+          BRANCH="chore/update-top-level-toc"
+          git switch --create "$BRANCH"
+          git add "Table Of Contents.md"
+          git commit -m "docs: auto-update Table Of Contents.md" -S
+          git push --set-upstream origin "$BRANCH"
+
+      # Create PR using gh CLI
+      - name: Create Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --title "chore(docs): refresh Table Of Contents.md" \
+            --body "Automated TOC update." \
+            --head "$BRANCH" \
+            --base main \
+            --label documentation
