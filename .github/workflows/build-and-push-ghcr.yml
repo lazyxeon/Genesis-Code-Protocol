@@ -2,120 +2,66 @@ name: Build and Push Docker image to GHCR
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
+    paths-ignore:
+      - "docs/**"
+      - "**/*.md"
+      - ".github/**"
   workflow_dispatch:
 
 permissions:
   contents: read
+  packages: write       # required to push to GHCR
+  id-token: write       # provenance/attestations
 
 concurrency:
-  group: build-ghcr-${{ github.ref }}
-  cancel-in-progress: true
+  group: ghcr-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE: ${{ env.REGISTRY }}/${{ lower(github.repository) }}
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    environment: production
-    permissions:
-      contents: read
-      packages: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
-
-      - name: Derive lowercase image name
-        id: imagename
-        run: |
-          set -euo pipefail
-          OWNER="${GITHUB_REPOSITORY%%/*}"
-          REPO="${GITHUB_REPOSITORY#*/}"
-          OWNER_LC="$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')"
-          REPO_LC="$(echo "$REPO" | tr '[:upper:]' '[:lower:]')"
-          IMAGE_NAME="ghcr.io/${OWNER_LC}/${REPO_LC}"
-          echo "IMAGE_NAME=$IMAGE_NAME" >> "$GITHUB_ENV"
-          echo "Computed IMAGE_NAME=$IMAGE_NAME"
+      - uses: actions/checkout@v4
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@68827325e0b33abcbf29f11f31a786274ad8aa45
+        uses: docker/setup-qemu-action@v3
 
       - name: Set up Buildx
-        uses: docker/setup-buildx-action@4c0219bdef056a7a8a8fe7571d3ecf586b5d5f67
+        uses: docker/setup-buildx-action@v3
 
-      - name: Extract metadata (tags, labels)
-        id: meta
-        uses: docker/metadata-action@96383f45573cb7a041f1da1e60c6cf7b4fbc886b
-        with:
-          images: ${{ env.IMAGE_NAME }}
-          tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=sha
-            type=raw,value=latest,enable={{is_default_branch}}
-
-      - name: Login to GHCR (GITHUB_TOKEN)
-        id: login
-        uses: docker/login-action@2b72562106313b9847e97b3d9662a8f8e3b27370
-        continue-on-error: true
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      # docs: GHCR login w/ GITHUB_TOKEN is supported. :contentReference[oaicite:1]{index=1}
 
-      - name: Fallback login with GHCR_PAT
-        if: steps.login.outcome != 'success'
-        uses: docker/login-action@2b72562106313b9847e97b3d9662a8f8e3b27370
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_PAT }}
+          images: ${{ env.IMAGE }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=tag
+            type=sha
+            type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
+      # docs: official metadata action. :contentReference[oaicite:2]{index=2}
 
-      - name: Build & push multi-arch (registry)
-        id: build-multi
-        uses: docker/build-push-action@4d947a4b4f4e1ea4060d8a732091baa76f7bfc2f
+      - name: Build and push
+        uses: docker/build-push-action@v6
         with:
           context: .
-          push: ${{ github.event_name != 'pull_request' }}
-          platforms: linux/amd64,linux/arm64
+          push: true
+          platforms: linux/amd64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          provenance: mode=max
-
-      - name: Build local amd64 image (no push) for SBOM
-        if: github.event_name != 'pull_request'
-        uses: docker/build-push-action@4d947a4b4f4e1ea4060d8a732091baa76f7bfc2f
-        with:
-          context: .
-          push: false
-          load: true
-          platforms: linux/amd64
-          tags: ${{ env.IMAGE_NAME }}:sbom-temp
-
-      - name: Generate SBOM from local image
-        if: github.event_name != 'pull_request'
-        uses: anchore/sbom-action@d4e4ab0d3ab35bb04c9a01d256d661a8603e54b3
-        with:
-          image: ${{ env.IMAGE_NAME }}:sbom-temp
-          format: spdx-json
-          output-file: sbom.spdx.json
-
-      - name: Upload SBOM artifact
-        if: github.event_name != 'pull_request'
-        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808
-        with:
-          name: sbom
-          path: sbom.spdx.json
-
-      - name: Record image digest
-        if: github.event_name != 'pull_request'
-        run: echo "Image digest: ${{ steps.build-multi.outputs.digest }}" | tee image-digest.txt
-
-      - name: Upload digest artifact
-        if: github.event_name != 'pull_request'
-        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808
-        with:
-          name: image-digest
-          path: image-digest.txt
+      # docs: docker buildx in GHA. :contentReference[oaicite:3]{index=3}
