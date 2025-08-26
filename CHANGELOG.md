@@ -1,5 +1,8 @@
 # GRCP Changelog
 
+### Bug Fixes
+- Fix formatting of image digest output
+
 ### Documentation
 - docs(readme): auto-sync repo structure
 - docs: auto-update Table Of Contents.md
@@ -110,6 +113,7 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing
 - Update GitHub Actions workflow for image build and push
 - chore(changelog): update and normalize spacing
 - Adjust permissions in ossf-scorecard workflow
