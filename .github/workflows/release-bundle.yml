@@ -18,7 +18,7 @@ jobs:
       contents: write
     steps:
       # Checkout the repository at a known commit
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
 
       # Prepare a staging directory and create a ZIP of selected folders
       - name: Prepare staging
