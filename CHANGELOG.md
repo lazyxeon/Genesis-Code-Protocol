@@ -40,6 +40,7 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#244)
 - docs: auto-update Table Of Contents.md (#236)
 - docs(readme): auto-sync repo structure (#227)
 - docs: auto-update Table Of Contents.md (#226)
@@ -195,6 +196,7 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#233)
 - Clean up merge artifacts and restore tests (#240)
 - chore: update trigger all workflows action (#234)
 - chore(changelog): update and normalize spacing (#232)
