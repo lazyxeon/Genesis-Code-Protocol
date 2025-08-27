@@ -170,6 +170,7 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#174)
 - chore(changelog): update and normalize spacing (#172)
 - Configure flake8 and fix test import (#173)
 - chore(changelog): update and normalize spacing (#171)
