@@ -1,27 +1,18 @@
-<<<<<< codex/develop-and-implement-matrix-ci
-# Matrix CI Runbook
-
-1. Trigger: push to GitHub.
-2. GitHub Actions runs `matrix-ci.yml` workflow.
-3. Investigate failures by inspecting logs and artifacts.
-4. Rollback: revert commit or disable failing job.
-=======
-# Secure Repo Scorecard Remediation Runbook
+# Matrix CI Repair Runbook
 
 ## Overview
-This runbook guides operators through running and troubleshooting the automated remediation workflow that leverages StepSecurity's `secure-repo` to fix OpenSSF Scorecard vulnerabilities.
+This runbook guides operators running the `matrix-ci-repair` workflow.
 
 ## Normal Operation
-1. Ensure `SECURE_REPO_TOKEN` is set in the environment.
-2. Execute `make install` to install dependencies.
-3. Run `make test` to verify the workflow passes all gates.
-4. Deploy using `make build` and run the workflow container.
+1. Trigger the workflow via GitHub push or manual dispatch.
+2. Monitor job progress in GitHub Actions.
+3. Review the `test_report` artifact for failures.
 
 ## Troubleshooting
-- **Failure during scan**: Inspect logs for `scan_scorecard` step.
-- **Remediation issues**: Verify network access to StepSecurity and GitHub APIs.
-- **Rollback**: Execute `python -m src.rollback` to revert applied patches.
+- **Setup failures**: ensure required Python versions are installed on the runner.
+- **Lint failures**: run `make test` locally to reproduce and fix.
+- **Test failures**: inspect the report and resolve failing cases.
+- **Rollback**: revert the offending commit or disable the workflow file.
 
 ## Escalation
-Contact the DevSecOps team on call if remediation cannot be completed after one retry.
->>>>>> main
+Escalate to the DevInfra team if failures persist after two attempts or block a release.

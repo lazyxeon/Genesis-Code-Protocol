@@ -1,16 +1,15 @@
-<<<<<< codex/analyze-failing-github-workflows
-"""Contract interface checks."""
 from pathlib import Path
 
 
-def test_contract_mentions_versioning() -> None:
+def test_integration_contract_sections():
     text = Path("integration_contract.md").read_text()
-    assert "Semantic versioning" in text
-    assert "X-Request-ID" in text
-=======
-from pathlib import Path
-
-def test_contract_mentions_authentication():
-    content = Path("integration_contract.md").read_text()
-    assert "Authentication" in content
->>>>>> main
+    for section in [
+        "Interfaces",
+        "Authentication",
+        "Rate Limits",
+        "Error Shapes",
+        "Idempotency",
+        "Versioning",
+        "Compatibility Tests",
+    ]:
+        assert section in text

@@ -1,91 +1,23 @@
 risk_level: r2
 controls:
-<<<<<< codex/develop-and-implement-matrix-ci
-  - change_review: required
-  - code_signing: required
-  - dependency_scanning: required
-change_types:
-  patch:
-    reviewers: 1
-    checks: [tests, lint]
-  minor:
-    reviewers: 2
-    checks: [tests, lint, sbom]
-  major:
-    reviewers: 3
-    checks: [tests, lint, sbom, canary]
-release_policy:
-  canary: {percent: 10, duration_min: 30}
-  error_budget_guard: true
-  auto_rollback: true
-provenance:
-  attestation: cosign attest
-  signing: cosign sign
-  sbom_policy: fail_on_critical
-=======
-<<<<<< codex/analyze-failing-github-workflows
   - code_review: required
-  - security_scan: required
-change_types:
+  - secrets_scanning: enabled
+  - dependency_scanning: enabled
+change_management:
   patch:
     reviewers: 1
+    checks: ["test"]
   minor:
     reviewers: 2
-  major:
-    reviewers: 2
-    checks: ["load_test"]
-=======
-<<<<<< codex/develop-fuzzing-and-vulnerability-scanning-workflow
-  - name: code_review
-    description: All changes require peer review
-  - name: dependency_scan
-    description: SBOM and vulnerability scan on each build
-change_types:
-  patch:
-    reviewers: 1
-    checks: [test]
-  minor:
-    reviewers: 2
-    checks: [test, security]
-  major:
-    reviewers: 2
-    checks: [test, security, perf]
-release_policy:
-  canary_percent: 5
-  ramp_minutes: 30
-  error_budget_guard: 0.01
-  auto_rollback: true
-provenance:
-  attestation: cosign attest --predicate supply-chain.json
-  signing: cosign sign $IMAGE
-  sbom: syft . -o json > sbom.json
-=======
-  code_review: required
-  security_scan: required
-change_types:
-  patch:
-    reviewers: 1
-    checks: [tests]
-  minor:
-    reviewers: 2
-    checks: [tests, sbom]
+    checks: ["test", "sbom"]
   major:
     reviewers: 3
-    checks: [tests, sbom, perf]
->>>>>> main
+    checks: ["test", "sbom", "canary"]
 release_policy:
   canary_percent: 10
   error_budget_guard: 0.01
   auto_rollback: true
 provenance:
-<<<<<< codex/analyze-failing-github-workflows
   attestation: true
-  signing: sigstore
-  sbom: required
-=======
-  attestation: cosign attest
-  artifact_signing: cosign sign
+  signing: cosign
   sbom_policy: fail_on_critical
->>>>>> main
->>>>>> main
->>>>>> main
