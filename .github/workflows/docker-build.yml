@@ -5,13 +5,13 @@ on:
     paths:
       - 'docker/**'
       - '.github/workflows/docker-build.yml'
-      - 'CLI Bundle/**'
+      - 'cli_bundle/**'
       - 'requirements.txt'
   pull_request:
     paths:
       - 'docker/**'
       - '.github/workflows/docker-build.yml'
-      - 'CLI Bundle/**'
+      - 'cli_bundle/**'
       - 'requirements.txt'
   workflow_dispatch:
 

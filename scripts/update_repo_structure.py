@@ -29,8 +29,8 @@ EXCLUDE_FILES = {".DS_Store"}
 MAX_DEPTH = 2  # increase to 3+ if you want deeper trees
 MAX_ENTRIES = 500  # safety cap per directory
 
-BEGIN = "<!-- BEGIN REPO TREE -->"
-END = "<!-- END REPO TREE -->"
+BEGIN = "<!-- REPO_STRUCTURE:BEGIN -->"
+END = "<!-- REPO_STRUCTURE:END -->"
 
 
 def build_tree(root: Path, prefix: str = "", depth: int = 0) -> str:
