@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  actions: write
+  workflow: write
   contents: read
 
 jobs:
@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger all workflows
-        uses: actions/github-script@v6
+        # v6
+        uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
