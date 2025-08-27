@@ -39,6 +39,7 @@
 [![Update Repo Structure](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml)
 [![Update TOC File](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-toc-file.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-toc-file.yml)
 [![Validate Notebooks](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/validate-notebooks.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/validate-notebooks.yml)
+[![EthicalCheck-Workflow](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/ethicalcheck.yml/badge.svg)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/ethicalcheck.yml)
 
 <!-- QUALITY / STYLE -->
 [![Code Style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://black.readthedocs.io/)
