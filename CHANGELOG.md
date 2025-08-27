@@ -6,6 +6,7 @@
 
 ### Bug Fixes
 
+- Fix pre-commit and docs setup (#181)
 - Fix CI workflows (#158)
 - fix: update workflows to run repository scripts (#146)
 - fix(lint): stub lang and optional plt in Alloyscript (#140)
@@ -31,10 +32,8 @@
 
 ### Documentation
 
-<<<<<< chore/update-changelog
+- docs: auto-update Table Of Contents.md (#178)
 - docs(readme): auto-sync repo structure (#176)
-=======
->>>>>> main
 - docs: auto-update Table Of Contents.md (#175)
 - docs: refresh badge block (#170)
 - docs: auto-update Table Of Contents.md (#165)
@@ -175,6 +174,8 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#180)
+- chore(changelog): update and normalize spacing (#179)
 - chore(changelog): update and normalize spacing (#177)
 - chore(changelog): update and normalize spacing (#174)
 - chore(changelog): update and normalize spacing (#172)
