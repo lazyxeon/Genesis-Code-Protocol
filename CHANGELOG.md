@@ -45,6 +45,7 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#260)
 - docs: auto-update Table Of Contents.md (#258)
 - docs: auto-update Table Of Contents.md (#257)
 - Document versioning and request IDs (#249)
@@ -206,6 +207,7 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#259)
 - chore(changelog): update and normalize spacing (#250)
 - Add pluggy and pytest dependencies (#254)
 - Ensure pre-commit installs dependencies (#255)
