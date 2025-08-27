@@ -49,6 +49,11 @@ jobs:
       - name: Check Out Source Code
         uses: actions/checkout@v4
 
+      - name: Fortify secrets check
+        if: ${{ env.FOD_TENANT == '' || env.FOD_USER == '' || env.FOD_PAT == '' || env.SSC_URL == '' || env.SSC_TOKEN == '' || env.SC_CLIENT_AUTH_TOKEN == '' || env.DEBRICKED_TOKEN == '' }}
+        run: |
+          echo 'Skipping Fortify scan: required secrets are not configured.'
+
       # Perform SAST and/or SCA scan via Fortify on Demand/Fortify Hosted/ScanCentral SAST/Debricked. Based on
       # configuration, the Fortify GitHub Action can optionally set up the application version/release, generate
       # job summaries and Pull Request comments, and/or export SAST results to the GitHub code scanning dashboard.
