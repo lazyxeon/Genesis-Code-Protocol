@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.7
-FROM python:3.11-slim AS runner
+FROM python:3.13-slim AS runner
 
 # -- Python / pip hygiene
 ENV PYTHONDONTWRITEBYTECODE=1 \
