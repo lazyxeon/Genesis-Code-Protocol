@@ -1,9 +1,12 @@
 # GRCP Changelog
 
 ### Features
+
 - feat(cli): pass version to audit (#131)
 
 ### Bug Fixes
+
+- fix: update workflows to run repository scripts (#146)
 - fix(lint): stub lang and optional plt in Alloyscript (#140)
 - fix: normalize leading blank lines (#125)
 - Fix Dockerfile syntax for FROM instruction
@@ -26,6 +29,8 @@
 - Fix formatting of image digest output
 
 ### Documentation
+
+- docs: document current limitations (#145)
 - docs: auto-update Table Of Contents.md
 - docs: auto-update Table Of Contents.md
 - docs(readme): auto-sync repo structure
@@ -133,6 +138,8 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
+
+- Refactor codebase and fix lint issues (#143)
 - refactor: update workflows and changelog (#137)
 - Refactor TOC update workflow and remove gitsign
 - Refactor workflow to use create-pull-request action
@@ -152,6 +159,9 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+
+- ci: add pre-commit configuration (#144)
+- chore(changelog): update and normalize spacing (#142)
 - chore(changelog): update and normalize spacing (#141)
 - chore(changelog): update and normalize spacing (#139)
 - chore(changelog): update and normalize spacing (#138)
@@ -361,7 +371,7 @@
 - chore(changelog): update and normalize spacing
 - Create generate_repo_toc.py
 - chore(changelog): update and normalize spacing
-- Delete scripts/generate_repo_toc.py
+- Delete Scripts/generate_repo_toc.py
 - chore(changelog): update and normalize spacing
 - Create Setup.py
 - chore(changelog): update and normalize spacing
@@ -1090,7 +1100,7 @@
 - Update requirements.txt
 - Update prompt_utils.py
 - Update audit_utils.py
-- Update phase6_7.py
+- Update phase6.7.py
 - Update phase1.py
 - Update full_run.py
 - Update requirements.txt
@@ -1198,7 +1208,7 @@
 - Create Charts.txt
 - Delete Charts/ Mosaic directory
 - Create Charts/ Mosaic/JACCO/Apl Chart
-- Rename phase6.py to phase6_7.py
+- Rename phase6.py to phase6.7.py
 - Add files via upload
 - Update Readme.md
 - Create Readme.md
@@ -1262,6 +1272,7 @@
 - Initial commit
 
 ### Security
+
 - Remove security-events permission in workflow
 - Refine security scan workflow configuration
 - Update security-scan.yml
