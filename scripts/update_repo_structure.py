@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-import os, re, sys
+"""Update the repository README with a file tree section."""
+
+import os
+import re
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,7 +28,7 @@ def build_tree(root: Path, prefix: str = "", depth: int = 0) -> str:
         return ""
     try:
         names = sorted(os.listdir(root))[:MAX_ENTRIES]
-    except Exception:
+    except OSError:
         return ""
     lines = []
     for name in names:
@@ -43,6 +47,7 @@ def build_tree(root: Path, prefix: str = "", depth: int = 0) -> str:
     return "\n".join(l for l in lines if l)
 
 def replace_between(text: str, start: str, end: str, new_block: str) -> str:
+    """Insert ``new_block`` between ``start`` and ``end`` markers in ``text``."""
     pat = re.compile(rf"({re.escape(start)})(.*?){re.escape(end)}", re.DOTALL)
     repl = f"{start}\n```\n{new_block}\n```\n{end}"
     if pat.search(text):
@@ -51,7 +56,8 @@ def replace_between(text: str, start: str, end: str, new_block: str) -> str:
     extra = f"\n\n## Repository Structure (auto-generated)\n\n{repl}\n"
     return text + extra
 
-def main():
+def main() -> None:
+    """Regenerate the repository tree section in README.md."""
     if not README.exists():
         print("README.md not found at repo root.", file=sys.stderr)
         sys.exit(1)

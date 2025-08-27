@@ -10,7 +10,7 @@ placed in a "Miscellaneous Tasks" section.
 
 Run this script from the repository root:
 
-    python Scripts/generate_changelog.py
+    python scripts/generate_changelog.py
 """
 
 import re

@@ -60,15 +60,15 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
   - [pull_request_template.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/pull_request_template.md)
   - [release-drafter.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/release-drafter.yml)
 
-## CLI Bundle
+## cli_bundle
 
-  - [Readme.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI%20Bundle/Readme.md)
-  - [audit_utils.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI%20Bundle/audit_utils.py)
-  - [full_run.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI%20Bundle/full_run.py)
-  - [gcp_cli.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI%20Bundle/gcp_cli.py)
-  - [phase1.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI%20Bundle/phase1.py)
-  - [phase6.7.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI%20Bundle/phase6.7.py)
-  - [prompt_utils.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI%20Bundle/prompt_utils.py)
+  - [Readme.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/cli_bundle/Readme.md)
+  - [audit_utils.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/cli_bundle/audit_utils.py)
+  - [full_run.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/cli_bundle/full_run.py)
+  - [gcp_cli.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/cli_bundle/gcp_cli.py)
+  - [phase1.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/cli_bundle/phase1.py)
+  - [phase6_7.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/cli_bundle/phase6_7.py)
+  - [prompt_utils.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/cli_bundle/prompt_utils.py)
 
 ## Documents
 
@@ -221,12 +221,12 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
   - [Latch LCH.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Latch%20LCH.md)
   - [MOSAIC.ipynb](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/MOSAIC.ipynb)
 
-## Scripts
+## scripts
 
-  - [fix_md_spacing.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Scripts/fix_md_spacing.py)
-  - [generate_changelog.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Scripts/generate_changelog.py)
-  - [generate_repo_toc.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Scripts/generate_repo_toc.py)
-  - [update_repo_structure.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Scripts/update_repo_structure.py)
+  - [fix_md_spacing.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/scripts/fix_md_spacing.py)
+  - [generate_changelog.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/scripts/generate_changelog.py)
+  - [generate_repo_toc.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/scripts/generate_repo_toc.py)
+  - [update_repo_structure.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/scripts/update_repo_structure.py)
 
 ## docker
 

@@ -1,13 +1,14 @@
+"""Tests for the ``normalize_spacing`` utility."""
+
 import sys
 from pathlib import Path
 
-# Add Scripts directory to path for import
-sys.path.append(str(Path(__file__).resolve().parents[1] / "Scripts"))
-
-from fix_md_spacing import normalize_spacing
+sys.path.append(str(Path(__file__).resolve().parents[1]))  # pylint: disable=wrong-import-position
+from scripts.fix_md_spacing import normalize_spacing
 
 
-def test_code_fences_preserved():
+def test_code_fences_preserved() -> None:
+    """Ensure code fences are not altered."""
     lines = [
         "Before\n",
         "```\n",
@@ -18,7 +19,8 @@ def test_code_fences_preserved():
     assert normalize_spacing(lines) == lines
 
 
-def test_single_level_list_spacing():
+def test_single_level_list_spacing() -> None:
+    """Insert blank lines around single-level lists."""
     lines = [
         "Intro\n",
         "- item1\n",
@@ -36,7 +38,8 @@ def test_single_level_list_spacing():
     assert normalize_spacing(lines) == expected
 
 
-def test_multi_level_list_spacing():
+def test_multi_level_list_spacing() -> None:
+    """Insert blank lines around nested lists."""
     lines = [
         "Intro\n",
         "- item1\n",
@@ -56,7 +59,8 @@ def test_multi_level_list_spacing():
     assert normalize_spacing(lines) == expected
 
 
-def test_collapse_consecutive_blank_lines():
+def test_collapse_consecutive_blank_lines() -> None:
+    """Collapse runs of blank lines into a single line."""
     lines = [
         "Line1\n",
         "\n",

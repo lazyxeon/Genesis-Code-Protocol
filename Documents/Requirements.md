@@ -102,10 +102,10 @@ pytest>=7.4.0        # Testing harness for custom cartridges or runners
    - The LLM will step through the phases.  Interact by confirming decisions and providing attachments.
 
 5. **Advanced runs with CLI**:
-   - Use the script in `CLI Bundle/gcp_cli.py` for automation:
+   - Use the script in `cli_bundle/gcp_cli.py` for automation:
 
      ```bash
-     python CLI\ Bundle/gcp_cli.py --version 50 --risk-tier R2 --prompt "Your invention goal" --full-run
+     python cli_bundle/gcp_cli.py --version 50 --risk-tier R2 --prompt "Your invention goal" --full-run
      ```
 
    - The CLI generates prompts for your LLM or simulates phases directly.

@@ -357,7 +357,7 @@
 - chore(changelog): update and normalize spacing
 - Create generate_repo_toc.py
 - chore(changelog): update and normalize spacing
-- Delete Scripts/generate_repo_toc.py
+- Delete scripts/generate_repo_toc.py
 - chore(changelog): update and normalize spacing
 - Create Setup.py
 - chore(changelog): update and normalize spacing
@@ -1086,7 +1086,7 @@
 - Update requirements.txt
 - Update prompt_utils.py
 - Update audit_utils.py
-- Update phase6.7.py
+- Update phase6_7.py
 - Update phase1.py
 - Update full_run.py
 - Update requirements.txt
@@ -1194,7 +1194,7 @@
 - Create Charts.txt
 - Delete Charts/ Mosaic directory
 - Create Charts/ Mosaic/JACCO/Apl Chart
-- Rename phase6.py to phase6.7.py
+- Rename phase6.py to phase6_7.py
 - Add files via upload
 - Update Readme.md
 - Create Readme.md
