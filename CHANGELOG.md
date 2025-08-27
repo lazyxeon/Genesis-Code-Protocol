@@ -31,6 +31,7 @@
 
 ### Documentation
 
+- docs(readme): auto-sync repo structure (#161)
 - docs(readme): auto-sync repo structure (#152)
 - docs: auto-update Table Of Contents.md (#150)
 - docs(readme): auto-sync repo structure (#149)
