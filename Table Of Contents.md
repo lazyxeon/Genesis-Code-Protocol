@@ -44,6 +44,7 @@
   - cli_bundle/prompt_utils.py
   - cli_bundle/requirements.txt
 - **docs/**
+  - docs/ci-workflow-diagnoser-runbook.md
   - docs/index.md
   - docs/roadmap.md
   - docs/runbook.md
