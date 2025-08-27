@@ -25,7 +25,7 @@ jobs:
           python - <<'PY'
           import pathlib, tokenize, sys
           bad=[]
-          for p in map(pathlib.Path, ["setup.py","Scripts/generate_repo_toc.py"]):
+          for p in map(pathlib.Path, ["setup.py","scripts/generate_repo_toc.py"]):
               try:
                   with open(p, "rb") as f:
                       for _ in tokenize.tokenize(f.readline): pass
