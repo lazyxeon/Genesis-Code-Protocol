@@ -1,6 +1,7 @@
-class RetryableError(Exception):
-    """Exception indicating the operation can be retried."""
+"""Error taxonomy for workflow steps."""
 
+class RetryableError(Exception):
+    """An error indicating the step may be retried."""
 
 class TerminalError(Exception):
-    """Exception indicating the operation should not be retried."""
+    """An error indicating the workflow should halt."""

@@ -1,45 +1,29 @@
-<<<<<< codex/analyze-failing-github-workflows
-"""Ingest step for ci-workflow-diagnoser."""
+"""Ingest step: normalize input records."""
 from __future__ import annotations
 
 import argparse
 import json
-import logging
 from pathlib import Path
 from time import time
 
-from .utils import atomic_write
+from .logging_utils import get_logger
+from .errors import RetryableError
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s %(levelname)s %(message)s",
-)
-
+log = get_logger(__name__)
 
 def main(input_path: str, output_path: str) -> None:
-    """Load records from ``input_path`` and persist them to ``output_path``."""
     start = time()
-    data = json.loads(Path(input_path).read_text())
-    logging.info("records_ingested=%d", len(data.get("records", [])))
-    atomic_write(Path(output_path), json.dumps({"records": data.get("records", [])}))
-    logging.info("duration_ms=%d", int((time() - start) * 1000))
+    path = Path(input_path)
+    if not path.exists():
+        raise RetryableError(f"missing input {input_path}")
+    data = json.loads(path.read_text())
+    records = data.get("records", [])
+    Path(output_path).write_text(json.dumps({"records": records}))
+    log.info("records_ingested=%d duration_ms=%d", len(records), int((time()-start)*1000))
 
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Ingest workflow logs")
-    parser.add_argument("--input", required=True, help="Path to JSON input file")
-    parser.add_argument("--output", required=True, help="Path to write normalized output")
+if __name__ == "__main__":  # pragma: no cover
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", required=True)
+    parser.add_argument("--output", required=True)
     args = parser.parse_args()
     main(args.input, args.output)
-=======
-from .config import Config
-from .logging_utils import log
-
-
-def main(cfg: Config | None = None) -> bytes:
-    cfg = cfg or Config()
-    log("ingest.start", source=cfg.source_archive)
-    data = b"dummy"
-    log("ingest.complete", size=len(data))
-    return data
->>>>>> main

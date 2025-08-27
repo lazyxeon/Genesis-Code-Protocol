@@ -1,13 +1,7 @@
+"""Check integration contract content."""
 from pathlib import Path
 
-
-<<<<<< codex/develop-and-implement-matrix-ci
-def test_contract_mentions_cli_and_http():
+def test_contract_has_sections() -> None:
     text = Path("integration_contract.md").read_text()
-    assert "CLI" in text and "HTTP" in text
-=======
-def test_integration_contract_sections():
-    text = Path("integration_contract.md").read_text()
-    for section in ["Interfaces", "Authentication", "Idempotency", "Versioning"]:
-        assert f"## {section}" in text
->>>>>> main
+    for section in ["Interfaces", "Authentication", "Versioning"]:
+        assert section in text

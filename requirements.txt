@@ -1,2 +1,5 @@
-# Keep this file even if empty; Dockerfile COPY expects it to exist.
-# Add your real dependencies here as you evolve the CLI.
+# Runtime and test dependencies for the build pipeline.
+pydantic==2.11.7
+fastapi==0.116.1
+opentelemetry-sdk==1.36.0
+pytest==8.4.1
