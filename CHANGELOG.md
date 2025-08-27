@@ -31,6 +31,7 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#175)
 - docs: refresh badge block (#170)
 - docs: auto-update Table Of Contents.md (#165)
 - docs(readme): auto-sync repo structure (#163)
@@ -170,6 +171,7 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#174)
 - chore(changelog): update and normalize spacing (#172)
 - Configure flake8 and fix test import (#173)
 - chore(changelog): update and normalize spacing (#171)
