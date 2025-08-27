@@ -20,7 +20,13 @@ REQUIRED = [
 
 def main() -> Dict[str, str]:
     """Simulate running Fortify scan."""
-    if not all(os.getenv(k) for k in REQUIRED):
+    missing = [k for k in REQUIRED if not os.getenv(k)]
+    if missing:
+        logger.info("fortify skipped: missing %s", ",".join(missing))
         return {"status": "skipped"}
     logger.info("fortify started")
     return {"status": "ok"}
+
+
+if __name__ == "__main__":  # pragma: no cover - script mode
+    main()
