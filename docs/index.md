@@ -4,22 +4,22 @@
 
 ## Core Principles (LLM‑native)
 
-1. **Policy‑as‑Code gates** (Rego/OPA‑style patterns).  
-2. **Observability from birth** (traces/metrics/logs).  
-3. **Evidence over vibes:** Evidence Index & Claim Graph.  
-4. **Adversarial & metamorphic testing**.  
-5. **Formal constraints** (SMT/proof assistants).  
-6. **Novelty vs SOTA** with thresholds.  
-7. **Supply‑chain & provenance** (SBOM/AI‑BOM, signatures).  
-8. **Rehydration proof** (rebuild & re‑run).  
-9. **Modular orchestration** (Runners & Cartridges).  
+1. **Policy‑as‑Code gates** (Rego/OPA‑style patterns).
+2. **Observability from birth** (traces/metrics/logs).
+3. **Evidence over vibes:** Evidence Index & Claim Graph.
+4. **Adversarial & metamorphic testing**.
+5. **Formal constraints** (SMT/proof assistants).
+6. **Novelty vs SOTA** with thresholds.
+7. **Supply‑chain & provenance** (SBOM/AI‑BOM, signatures).
+8. **Rehydration proof** (rebuild & re‑run).
+9. **Modular orchestration** (Runners & Cartridges).
 10. **Export with guarantees** (Exit Wizard).
 
 ## What GCP Is / Is Not
 
-- **Is:** a deterministic, auditable protocol any major LLM can run to emit release‑grade artifacts.  
-- **Is:** gate‑driven; can **stop early** at No‑Go points.  
-- **Is not:** a repo crawler or production deployer.  
+- **Is:** a deterministic, auditable protocol any major LLM can run to emit release‑grade artifacts.
+- **Is:** gate‑driven; can **stop early** at No‑Go points.
+- **Is not:** a repo crawler or production deployer.
 - **Is not:** a substitute for domain expertise, legal review or field validation.
 
 ## Modes & Startup
@@ -54,7 +54,7 @@ Reproducibility & Evidence TTL: C7.Repro templates included. TTL: R1 = 180 da
 
 Artifacts are stored in run directories or emitted inline. Key folders include:
 
-```
+```text
 agents/  memory/  tools/  novelty/  redteam/  metamorphic/  observability/
 policies/  SLOs/  SBOM/  provenance/  Evidence_Log/  Rehydration_Test/
 Audit_Package/  XW/  INDEX.md  MANIFEST.json  Gate_Signals.json
@@ -62,8 +62,8 @@ Audit_Package/  XW/  INDEX.md  MANIFEST.json  Gate_Signals.json
 
 When file I/O is unavailable, emit artifacts inline using:
 
-```
-BEGIN ARTIFACT: 
+```text
+BEGIN ARTIFACT:
 
 END ARTIFACT
 ```
