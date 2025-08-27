@@ -1,4 +1,4 @@
-# GRCP Changelog
+# GCP Changelog
 
 ### Features
 - feat(cli): pass version to audit (#131)
@@ -154,7 +154,6 @@
 - chore(changelog): update and normalize spacing (#128)
 - chore(changelog): update and normalize spacing (#126)
 - chore: pin workflow dependencies with hashes (#127)
-- chore(changelog): update and normalize spacing (#124)
 - chore(changelog): update and normalize spacing (#123)
 - chore(changelog): update and normalize spacing (#122)
 - chore(changelog): update and normalize spacing (#121)
