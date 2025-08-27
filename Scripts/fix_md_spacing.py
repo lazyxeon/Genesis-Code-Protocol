@@ -71,10 +71,10 @@ def normalize_spacing(lines):
         out.append(line)
         i += 1
 
-    # Collapse >2 consecutive blank lines to a single blank line
+    # Collapse consecutive blank lines to a single blank line
     compact = []
     for l in out:
-        if not (len(compact) >= 2 and compact[-1] == "\n" and l == "\n"):
+        if not (compact and compact[-1] == "\n" and l == "\n"):
             compact.append(l)
     return compact
 
