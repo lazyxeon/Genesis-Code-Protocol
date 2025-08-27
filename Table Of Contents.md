@@ -13,15 +13,24 @@
 - Code of Conduct.md
 - Contributing.md
 - Dockerfile
+- EXIT_WIZARD.txt
 - GCP Current Version(V50 Flagship Edition).md
 - LICENSE.md
+- Makefile
 - README.md
 - Roadmap.md
 - SECURITY.md
 - Table Of Contents.md
+- cost_model.md
+- governance.yaml
+- integration_contract.md
 - mkdocs.yml
+- observability.yaml
+- pytest.ini
 - requirements.txt
+- security.md
 - setup.py
+- workflow_manifest.json
 - **tools/**
   - tools/audit-workflows.sh
 - **cli_bundle/**
@@ -37,8 +46,35 @@
 - **docs/**
   - docs/index.md
   - docs/roadmap.md
+  - docs/runbook.md
 - **tests/**
+  - tests/conftest.py
+  - tests/contract_test.py
+  - tests/e2e_smoke_test.py
+  - tests/perf_test.py
+  - tests/rollback_test.py
+  - tests/security_test.py
+  - tests/spec_validation_test.py
+  - tests/test_contract.py
+  - tests/test_e2e_smoke.py
   - tests/test_fix_md_spacing.py
+  - tests/test_perf.py
+  - tests/test_rollback.py
+  - tests/test_security.py
+  - tests/test_spec_validation.py
+- **src/**
+  - src/__init__.py
+  - src/config.py
+  - src/errors.py
+  - src/fuzz.py
+  - src/ingest.py
+  - src/logging_utils.py
+  - src/main.py
+  - src/remediate.py
+  - src/report.py
+  - src/rollback.py
+  - src/scan.py
+  - src/utils.py
 - **scripts/**
   - scripts/__init__.py
   - scripts/fix_md_spacing.py
