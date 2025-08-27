@@ -1,5 +1,28 @@
 risk_level: r2
 controls:
+<<<<<< codex/develop-and-implement-matrix-ci
+  - change_review: required
+  - code_signing: required
+  - dependency_scanning: required
+change_types:
+  patch:
+    reviewers: 1
+    checks: [tests, lint]
+  minor:
+    reviewers: 2
+    checks: [tests, lint, sbom]
+  major:
+    reviewers: 3
+    checks: [tests, lint, sbom, canary]
+release_policy:
+  canary: {percent: 10, duration_min: 30}
+  error_budget_guard: true
+  auto_rollback: true
+provenance:
+  attestation: cosign attest
+  signing: cosign sign
+  sbom_policy: fail_on_critical
+=======
 <<<<<< codex/analyze-failing-github-workflows
   - code_review: required
   - security_scan: required
@@ -63,5 +86,6 @@ provenance:
   attestation: cosign attest
   artifact_signing: cosign sign
   sbom_policy: fail_on_critical
+>>>>>> main
 >>>>>> main
 >>>>>> main

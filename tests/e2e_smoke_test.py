@@ -1,3 +1,10 @@
+<<<<<< codex/develop-and-implement-matrix-ci
+from matrix_ci.pipeline import run_all
+
+
+def test_run_all():
+    assert run_all() is True
+=======
 import json
 from pathlib import Path
 
@@ -12,3 +19,4 @@ def test_e2e_smoke(tmp_path, monkeypatch):
     assert Path(result).exists()
     data = json.loads(Path(result).read_text())
     assert "vulnerabilities" in data
+>>>>>> main

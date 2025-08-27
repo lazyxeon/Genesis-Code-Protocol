@@ -1,5 +1,24 @@
 {
   "$schema": "https://example.com/schemas/workflow_manifest_v1.json",
+<<<<<< codex/develop-and-implement-matrix-ci
+  "id": "bwb::matrix_ci_pipeline::v1",
+  "version": "1.0.0",
+  "business_goal": "Ensure compatibility of the codebase across Python versions using automated matrix CI testing.",
+  "value_hypothesis": "Early detection of version-specific regressions reduces production incidents and speeds release cycles.",
+  "inputs": [
+    {"name": "source", "type": "git", "source": "github", "validation": "branch_protection"}
+  ],
+  "outputs": [
+    {"name": "test_report", "type": "artifact", "retention_days": 30, "consumer": "dev_team"}
+  ],
+  "SLOs": {"latency_ms_p95": 1200, "success_rate": 0.99, "error_budget_month": 0.01},
+  "constraints": ["Pipeline runtime per job < 600s", "Use only open-source dependencies"],
+  "operational_env": "container",
+  "security": {
+    "data_classes": ["internal"],
+    "secrets": ["ENV:PYPI_TOKEN"],
+    "iam": [{"principal": "workflow-sa", "permissions": ["read:repo", "write:actions"]}],
+=======
 <<<<<< codex/analyze-failing-github-workflows
   "id": "bwb::ci-workflow-diagnoser::v1",
   "version": "1.0.0",
@@ -57,10 +76,61 @@
     "iam": [{"principal": "workflow-sa", "permissions": ["repo:write", "pull:read"]}],
 >>>>>> main
 >>>>>> main
+>>>>>> main
     "supply_chain": {"sbom": true, "signing": "sigstore", "policy": "fail_on_critical"}
   },
   "compliance": {"pii": false, "gdpr": "n/a", "sox": "n/a", "hipaa": false},
   "tooling": {
+<<<<<< codex/develop-and-implement-matrix-ci
+    "images": ["ghcr.io/org/matrix-ci:1.0.0"],
+    "runtimes": ["python3.8", "python3.9", "python3.10", "python3.11", "python3.12"],
+    "libraries": ["pytest", "opentelemetry-sdk"]
+  },
+  "steps": [
+    {
+      "name": "setup",
+      "kind": "task",
+      "entrypoint": "src/matrix_ci/pipeline.py:setup_env",
+      "contracts": {"in": ["inputs[0]"], "out": ["env_ready"]},
+      "retries": {"max": 2, "backoff": "exponential", "jitter": true},
+      "timeout_s": 60,
+      "idempotency_key": "hash(\"setup_env\")",
+      "resources": {"cpu": "250m", "mem": "256Mi"},
+      "metrics": {"counters": ["env_prepared"], "timers": ["duration_ms"]},
+      "otel_spans": ["matrix_ci.setup"]
+    },
+    {
+      "name": "lint",
+      "kind": "task",
+      "entrypoint": "src/matrix_ci/pipeline.py:run_lint",
+      "contracts": {"in": ["env_ready"], "out": ["lint_report"]},
+      "retries": {"max": 2, "backoff": "exponential", "jitter": true},
+      "timeout_s": 120,
+      "idempotency_key": "hash(\"run_lint\")",
+      "resources": {"cpu": "250m", "mem": "256Mi"},
+      "metrics": {"counters": ["lint_warnings"], "timers": ["duration_ms"]},
+      "otel_spans": ["matrix_ci.lint"]
+    },
+    {
+      "name": "test",
+      "kind": "task",
+      "entrypoint": "src/matrix_ci/pipeline.py:run_tests",
+      "contracts": {"in": ["lint_report"], "out": ["test_report"]},
+      "retries": {"max": 1, "backoff": "exponential", "jitter": true},
+      "timeout_s": 300,
+      "idempotency_key": "hash(\"run_tests\")",
+      "resources": {"cpu": "500m", "mem": "512Mi"},
+      "metrics": {"counters": ["tests_run"], "timers": ["duration_ms"]},
+      "otel_spans": ["matrix_ci.test"]
+    }
+  ],
+  "dependencies": ["github.com", "pypi.org"],
+  "runbook": "docs/runbook.md",
+  "failover": {"strategy": "brownout_then_rollback", "rpo_minutes": 5, "rto_minutes": 15},
+  "rollback": {"guard": "Gate:RISK", "actions": ["revert:workflow", "notify:dev_team"]},
+  "artifact_plan": [
+    {"path": "dist/matrix_ci_pipeline-bundle.zip", "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]}
+=======
 <<<<<< codex/analyze-failing-github-workflows
     "images": ["ghcr.io/org/ci-workflow-diagnoser:1.0.0"],
     "runtimes": ["python3.11"],
@@ -183,6 +253,7 @@
       "path": "dist/secure-repo-scorecard-remediation-bundle.zip",
       "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]
     }
+>>>>>> main
 >>>>>> main
 >>>>>> main
   ]
