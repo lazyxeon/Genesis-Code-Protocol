@@ -5,7 +5,8 @@
   "business_goal": "Run EthicalCheck, Fortify, and Codacy scans to detect security issues before merge",
   "value_hypothesis": "Automated security scanning reduces vulnerabilities and improves compliance posture",
   "inputs": [
-    {"name": "repository", "type": "text", "source": "api", "validation": "<owner>/<repo>"}
+    {"name": "repository", "type": "text", "source": "api", "validation": "<owner>/<repo>"},
+    {"name": "mock_run", "type": "text", "source": "manual", "validation": "true|false"}
   ],
   "outputs": [
     {"name": "scan_report", "type": "json", "retention_days": 90, "consumer": "security-team"}

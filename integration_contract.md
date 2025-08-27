@@ -23,6 +23,16 @@ Messages on `security-scan` queue follow schema:
 }
 ```
 
+### GitHub Actions
+Manual dispatch enables mock runs via GitHub's API:
+```bash
+curl -X POST \
+  -H "Authorization: Bearer <token>" \
+  https://api.github.com/repos/<owner>/<repo>/actions/workflows/security-scan.yml/dispatches \
+  -d '{"ref":"main","inputs":{"mock":"true"}}'
+```
+Setting `mock=true` runs the workflow without executing scanners while verifying configuration.
+
 ## Authentication
 - CLI/HTTP/Queue: Bearer token via `GITHUB_TOKEN` or OIDC.
 - Rate limit: 60 req/min per repo.
