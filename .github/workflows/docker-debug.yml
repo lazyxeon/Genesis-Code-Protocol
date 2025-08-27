@@ -3,11 +3,12 @@ name: Docker Debug Build
 on:
   workflow_dispatch: {}
 
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   build:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     env:
       BUILDKIT_PROGRESS: plain
