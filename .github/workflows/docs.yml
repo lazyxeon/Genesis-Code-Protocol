@@ -27,7 +27,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: |
-          python -m pip install --upgrade pip
+          python -m pip install --upgrade pip==23.3.1
           pip install --require-hashes -r .github/workflows/docs-requirements.txt
       - run: mkdocs build --strict --site-dir site
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b
