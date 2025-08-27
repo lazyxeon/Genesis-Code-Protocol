@@ -6,7 +6,7 @@ from pathlib import Path
 sys.path.append(
     str(Path(__file__).resolve().parents[1])
 )  # pylint: disable=wrong-import-position
-from scripts.fix_md_spacing import normalize_spacing
+from scripts.fix_md_spacing import normalize_spacing  # noqa: E402
 
 
 def test_code_fences_preserved() -> None:
