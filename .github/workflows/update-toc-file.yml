@@ -33,9 +33,8 @@ jobs:
 
       - name: Generate "Table Of Contents.md"
         run: |
-          python - <<'PY'
-          # ... your existing Python script that generates Table Of Contents.md ...
-          PY
+          python scripts/generate_repo_toc.py
+          python scripts/fix_md_spacing.py "Table Of Contents.md"
 
       # Show the diff (optional for debugging)
       - name: Show diff

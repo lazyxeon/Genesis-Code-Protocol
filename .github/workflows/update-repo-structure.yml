@@ -33,9 +33,8 @@ jobs:
 
       - name: Build repo tree and patch README
         run: |
-          python - <<'PY'
-          # ... your existing Python script that updates README.md ...
-          PY
+          python scripts/update_repo_structure.py
+          python scripts/fix_md_spacing.py README.md
 
       # Create a PR for the README update
       - name: Create Pull Request

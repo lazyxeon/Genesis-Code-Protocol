@@ -28,7 +28,9 @@ jobs:
 
       # Generate CHANGELOG.md using your script
       - name: Generate CHANGELOG.md
-        run: python Scripts/generate_changelog.py
+        run: |
+          python scripts/generate_changelog.py
+          python scripts/fix_md_spacing.py CHANGELOG.md
 
       # Create a pull request for the changelog update, sign commits with the GitHub Actions bot
       - name: Create Pull Request
