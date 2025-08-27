@@ -1,50 +1,47 @@
-# Integration Contract: github-actions-stability
+# Integration Contract: security-scan-workflow
 
 ## Interfaces
 
 ### CLI
-
 ```bash
 python -m src.main --repo <owner/repo>
 ```
 
 ### HTTP
-
-`POST /stability` with body `{ "repo": "owner/repo" }`
+`POST /security/scan` with body `{ "repo": "owner/repo" }`
 
 ### Webhook
-
-GitHub `workflow_run` events trigger analysis.
+GitHub `workflow_run` events trigger scanning.
 
 ### Queue
-
-Messages on `gha-stability` queue follow schema:
-
+Messages on `security-scan` queue follow schema:
 ```json
 {
   "repo": "owner/repo",
-  "branch": "main",
   "commit": "sha",
-  "action": "analyze"
+  "action": "scan"
 }
 ```
 
 ## Authentication
-
-- CLI/HTTP/Queue: Bearer token via `GITHUB_TOKEN`.
-- All requests must include an `X-Request-ID` header.
+- CLI/HTTP/Queue: Bearer token via `GITHUB_TOKEN` or OIDC.
 - Rate limit: 60 req/min per repo.
+- All requests must include `X-Request-ID` header.
 
 Error shape:
-
 ```json
-{ "error": "string", "retry": true }
+{"error": "string", "request_id": "uuid"}
 ```
 
 ## Idempotency
-
-Idempotency key = SHA256 of repo and commit. Duplicate keys are ignored.
+- Idempotency key is the commit SHA.
+- Re-sending with same key overwrites previous results.
 
 ## Versioning
+- Semantic versioning (`1.0.0`).
+- Deprecation window: 90 days after minor release.
+- Backward compatibility tests verify previous contract versions.
 
-Semantic versioning with 6-month deprecation window. Backward compatibility tests run via `tests/test_contract.py`.
+## Compatibility Tests
+- `tests/contract_test.py` exercises authentication and idempotency.
+- CI runs these on every pull request.

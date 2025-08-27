@@ -1,20 +1,19 @@
 traces:
-  service_name: github-actions-stability
+  service_name: security-scan-workflow
   spans:
-    bwb.ingest: {parent: root, children: [bwb.fuzz]}
-    bwb.fuzz: {parent: bwb.ingest, children: [bwb.scan]}
-    bwb.scan: {parent: bwb.fuzz, children: [bwb.report]}
-    bwb.report: {parent: bwb.scan}
+    bwb.ethicalcheck: {parent: root, children: [bwb.fortify]}
+    bwb.fortify: {parent: bwb.ethicalcheck, children: [bwb.codacy]}
+    bwb.codacy: {parent: bwb.fortify}
 metrics:
   counters:
-    runs_fetched:
+    ethicalcheck_runs:
       unit: runs
       cardinality: low
-    workflows_scanned:
-      unit: workflows
+    fortify_runs:
+      unit: runs
       cardinality: low
-    reports_generated:
-      unit: reports
+    codacy_runs:
+      unit: runs
       cardinality: low
   timers:
     duration_ms:
@@ -27,13 +26,13 @@ logs:
 code_snippets:
   python: |
     from opentelemetry import trace
-    tracer = trace.get_tracer("github-actions-stability")
-    with tracer.start_as_current_span("bwb.ingest"):
+    tracer = trace.get_tracer("security-scan-workflow")
+    with tracer.start_as_current_span("bwb.ethicalcheck"):
         ...
   node: |
     const { trace } = require("@opentelemetry/api");
-    const tracer = trace.getTracer("github-actions-stability");
-    tracer.startActiveSpan("bwb.ingest", span => {
+    const tracer = trace.getTracer("security-scan-workflow");
+    tracer.startActiveSpan("bwb.ethicalcheck", span => {
       // ...
       span.end();
     });

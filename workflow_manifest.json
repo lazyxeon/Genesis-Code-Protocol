@@ -1,85 +1,73 @@
 {
   "$schema": "https://example.com/schemas/workflow_manifest_v1.json",
-  "id": "bwb::github-actions-stability::v1",
+  "id": "bwb::security-scan-workflow::v1",
   "version": "1.0.0",
-  "business_goal": "Detect and report failing GitHub Actions workflows across branches",
-  "value_hypothesis": "Reduced CI failures and faster merge cycles through early detection of unstable pipelines",
+  "business_goal": "Run EthicalCheck, Fortify, and Codacy scans to detect security issues before merge",
+  "value_hypothesis": "Automated security scanning reduces vulnerabilities and improves compliance posture",
   "inputs": [
     {"name": "repository", "type": "text", "source": "api", "validation": "<owner>/<repo>"}
   ],
   "outputs": [
-    {"name": "stability_report", "type": "json", "retention_days": 90, "consumer": "devops"}
+    {"name": "scan_report", "type": "json", "retention_days": 90, "consumer": "security-team"}
   ],
   "SLOs": {"latency_ms_p95": 1200, "success_rate": 0.99, "error_budget_month": 0.01},
-  "constraints": ["must run on ubuntu-latest", "avoid secrets exposure"],
+  "constraints": ["reuse existing infrastructure", "avoid branch conflicts"],
   "operational_env": "container",
   "security": {
     "data_classes": ["internal"],
-    "secrets": ["ENV:GITHUB_TOKEN"],
-    "iam": [{"principal": "workflow-sa", "permissions": ["read:repo-status"]}],
+    "secrets": ["ENV:CODACY_PROJECT_TOKEN", "ENV:FOD_TENANT", "ENV:FOD_USER", "ENV:FOD_PAT", "ENV:SSC_TOKEN", "ENV:SC_CLIENT_AUTH_TOKEN", "ENV:DEBRICKED_TOKEN"],
+    "iam": [{"principal": "workflow-sa", "permissions": ["security-events:write", "contents:read"]}],
     "supply_chain": {"sbom": true, "signing": "sigstore", "policy": "fail_on_critical"}
   },
   "compliance": {"pii": false, "gdpr": "n/a", "sox": "n/a", "hipaa": false},
   "tooling": {
-    "images": ["ghcr.io/org/github-actions-stability:1.0.0"],
+    "images": ["ghcr.io/org/security-scan-workflow:1.0.0"],
     "runtimes": ["python3.11"],
-    "libraries": ["requests", "pytest", "opentelemetry-sdk"]
+    "libraries": ["pydantic", "pytest", "opentelemetry-sdk"]
   },
   "steps": [
     {
-      "name": "ingest",
+      "name": "ethicalcheck",
       "kind": "task",
-      "entrypoint": "src/ingest.py:main",
-      "contracts": {"in": ["inputs[*]"], "out": ["raw_runs"]},
-      "retries": {"max": 3, "backoff": "exponential", "jitter": true},
+      "entrypoint": "src/ethicalcheck.py:main",
+      "contracts": {"in": ["inputs[*]"], "out": ["ethicalcheck_result"]},
+      "retries": {"max": 1, "backoff": "exponential", "jitter": true},
       "timeout_s": 60,
       "idempotency_key": "hash(input)",
-      "resources": {"cpu": "500m", "mem": "512Mi"},
-      "metrics": {"counters": ["runs_fetched"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.ingest"]
-    },
-    {
-      "name": "fuzz",
-      "kind": "task",
-      "entrypoint": "src/fuzz.py:main",
-      "contracts": {"in": ["raw_runs"], "out": ["fuzzed_runs"]},
-      "retries": {"max": 3, "backoff": "exponential", "jitter": true},
-      "timeout_s": 30,
-      "idempotency_key": "hash(input)",
       "resources": {"cpu": "200m", "mem": "256Mi"},
-      "metrics": {"counters": ["cases_processed"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.fuzz"]
+      "metrics": {"counters": ["ethicalcheck_runs"], "timers": ["duration_ms"]},
+      "otel_spans": ["bwb.ethicalcheck"]
     },
     {
-      "name": "scan",
+      "name": "fortify",
       "kind": "task",
-      "entrypoint": "src/scan.py:main",
-      "contracts": {"in": ["fuzzed_runs"], "out": ["analysis"]},
-      "retries": {"max": 3, "backoff": "exponential", "jitter": true},
+      "entrypoint": "src/fortify.py:main",
+      "contracts": {"in": ["ethicalcheck_result"], "out": ["fortify_result"]},
+      "retries": {"max": 1, "backoff": "exponential", "jitter": true},
+      "timeout_s": 300,
+      "idempotency_key": "hash(input)",
+      "resources": {"cpu": "500m", "mem": "512Mi"},
+      "metrics": {"counters": ["fortify_runs"], "timers": ["duration_ms"]},
+      "otel_spans": ["bwb.fortify"]
+    },
+    {
+      "name": "codacy",
+      "kind": "task",
+      "entrypoint": "src/codacy.py:main",
+      "contracts": {"in": ["fortify_result"], "out": ["scan_report"]},
+      "retries": {"max": 1, "backoff": "exponential", "jitter": true},
       "timeout_s": 60,
       "idempotency_key": "hash(input)",
-      "resources": {"cpu": "500m", "mem": "512Mi"},
-      "metrics": {"counters": ["workflows_scanned"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.scan"]
-    },
-    {
-      "name": "report",
-      "kind": "task",
-      "entrypoint": "src/report.py:main",
-      "contracts": {"in": ["analysis"], "out": ["stability_report"]},
-      "retries": {"max": 3, "backoff": "exponential", "jitter": true},
-      "timeout_s": 30,
-      "idempotency_key": "hash(input)",
       "resources": {"cpu": "200m", "mem": "256Mi"},
-      "metrics": {"counters": ["reports_generated"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.report"]
+      "metrics": {"counters": ["codacy_runs"], "timers": ["duration_ms"]},
+      "otel_spans": ["bwb.codacy"]
     }
   ],
   "dependencies": ["https://api.github.com"],
   "runbook": "docs/runbook.md",
   "failover": {"strategy": "brownout_then_rollback", "rpo_minutes": 5, "rto_minutes": 15},
-  "rollback": {"guard": "Gate:RISK", "actions": ["revert:deployment", "restore:db_snapshot_t-1"]},
+  "rollback": {"guard": "Gate:RISK", "actions": ["revert:deployment", "restore:scan_cache"]},
   "artifact_plan": [
-    {"path": "dist/github-actions-stability-bundle.zip", "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]}
+    {"path": "dist/security-scan-workflow-bundle.zip", "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]}
   ]
 }

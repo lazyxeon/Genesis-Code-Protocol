@@ -3,3 +3,5 @@
 
 pluggy>=1.5
 pytest>=8
+pydantic>=2
+opentelemetry-sdk>=1.25
