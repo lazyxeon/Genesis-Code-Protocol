@@ -1,36 +1,85 @@
 {
   "$schema": "https://example.com/schemas/workflow_manifest_v1.json",
-  "id": "bwb::secure-repo-scorecard-remediation::v1",
+  "id": "bwb::github-actions-stability::v1",
   "version": "1.0.0",
-  "business_goal": "Automatically scan repositories and produce remediation reports",
-  "value_hypothesis": "Improved security posture through automated analysis",
-  "inputs": [],
-  "outputs": [],
+  "business_goal": "Detect and report failing GitHub Actions workflows across branches",
+  "value_hypothesis": "Reduced CI failures and faster merge cycles through early detection of unstable pipelines",
+  "inputs": [
+    {"name": "repository", "type": "text", "source": "api", "validation": "<owner>/<repo>"}
+  ],
+  "outputs": [
+    {"name": "stability_report", "type": "json", "retention_days": 90, "consumer": "devops"}
+  ],
   "SLOs": {"latency_ms_p95": 1200, "success_rate": 0.99, "error_budget_month": 0.01},
-  "constraints": [],
+  "constraints": ["must run on ubuntu-latest", "avoid secrets exposure"],
   "operational_env": "container",
   "security": {
     "data_classes": ["internal"],
-    "secrets": ["ENV:SECURE_REPO_TOKEN"],
-    "iam": [],
+    "secrets": ["ENV:GITHUB_TOKEN"],
+    "iam": [{"principal": "workflow-sa", "permissions": ["read:repo-status"]}],
     "supply_chain": {"sbom": true, "signing": "sigstore", "policy": "fail_on_critical"}
   },
-  "compliance": {},
+  "compliance": {"pii": false, "gdpr": "n/a", "sox": "n/a", "hipaa": false},
   "tooling": {
-    "images": [],
+    "images": ["ghcr.io/org/github-actions-stability:1.0.0"],
     "runtimes": ["python3.11"],
-    "libraries": []
+    "libraries": ["requests", "pytest", "opentelemetry-sdk"]
   },
   "steps": [
-    {"name": "ingest", "kind": "task", "entrypoint": "src/ingest.py:main"},
-    {"name": "scan", "kind": "task", "entrypoint": "src/scan.py:main"},
-    {"name": "report", "kind": "task", "entrypoint": "src/report.py:main"}
+    {
+      "name": "ingest",
+      "kind": "task",
+      "entrypoint": "src/ingest.py:main",
+      "contracts": {"in": ["inputs[*]"], "out": ["raw_runs"]},
+      "retries": {"max": 3, "backoff": "exponential", "jitter": true},
+      "timeout_s": 60,
+      "idempotency_key": "hash(input)",
+      "resources": {"cpu": "500m", "mem": "512Mi"},
+      "metrics": {"counters": ["runs_fetched"], "timers": ["duration_ms"]},
+      "otel_spans": ["bwb.ingest"]
+    },
+    {
+      "name": "fuzz",
+      "kind": "task",
+      "entrypoint": "src/fuzz.py:main",
+      "contracts": {"in": ["raw_runs"], "out": ["fuzzed_runs"]},
+      "retries": {"max": 3, "backoff": "exponential", "jitter": true},
+      "timeout_s": 30,
+      "idempotency_key": "hash(input)",
+      "resources": {"cpu": "200m", "mem": "256Mi"},
+      "metrics": {"counters": ["cases_processed"], "timers": ["duration_ms"]},
+      "otel_spans": ["bwb.fuzz"]
+    },
+    {
+      "name": "scan",
+      "kind": "task",
+      "entrypoint": "src/scan.py:main",
+      "contracts": {"in": ["fuzzed_runs"], "out": ["analysis"]},
+      "retries": {"max": 3, "backoff": "exponential", "jitter": true},
+      "timeout_s": 60,
+      "idempotency_key": "hash(input)",
+      "resources": {"cpu": "500m", "mem": "512Mi"},
+      "metrics": {"counters": ["workflows_scanned"], "timers": ["duration_ms"]},
+      "otel_spans": ["bwb.scan"]
+    },
+    {
+      "name": "report",
+      "kind": "task",
+      "entrypoint": "src/report.py:main",
+      "contracts": {"in": ["analysis"], "out": ["stability_report"]},
+      "retries": {"max": 3, "backoff": "exponential", "jitter": true},
+      "timeout_s": 30,
+      "idempotency_key": "hash(input)",
+      "resources": {"cpu": "200m", "mem": "256Mi"},
+      "metrics": {"counters": ["reports_generated"], "timers": ["duration_ms"]},
+      "otel_spans": ["bwb.report"]
+    }
   ],
-  "dependencies": [],
+  "dependencies": ["https://api.github.com"],
   "runbook": "docs/runbook.md",
   "failover": {"strategy": "brownout_then_rollback", "rpo_minutes": 5, "rto_minutes": 15},
   "rollback": {"guard": "Gate:RISK", "actions": ["revert:deployment", "restore:db_snapshot_t-1"]},
   "artifact_plan": [
-    {"path": "dist/secure-repo-scorecard-remediation-bundle.zip", "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]}
+    {"path": "dist/github-actions-stability-bundle.zip", "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]}
   ]
 }

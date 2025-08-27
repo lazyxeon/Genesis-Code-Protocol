@@ -22,7 +22,7 @@ class Settings:
 
     @staticmethod
     def from_env(repo: str) -> "Settings":
-        token = os.environ.get("SECURE_REPO_TOKEN", "")
+        token = os.environ.get("GITHUB_TOKEN", "")
         if not token:
-            raise RuntimeError("SECURE_REPO_TOKEN not set")
+            raise RuntimeError("GITHUB_TOKEN not set")
         return Settings(repo=repo, token=token)

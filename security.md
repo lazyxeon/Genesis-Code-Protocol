@@ -2,16 +2,16 @@
 
 ## Threat Model (STRIDE)
 
-- **Spoofing**: Mitigated via OIDC authentication.
-- **Tampering**: Artifacts signed with Sigstore.
+- **Spoofing**: OIDC authentication enforced for API calls.
+- **Tampering**: Artifacts signed with Sigstore; SBOM verified.
 - **Repudiation**: Audit logs stored for 90 days.
-- **Information Disclosure**: Secrets stored in GitHub Actions secrets.
+- **Information Disclosure**: `GITHUB_TOKEN` kept in secret store.
 - **Denial of Service**: Rate limiting at 60 req/min.
-- **Elevation of Privilege**: Least-privilege GitHub token.
+- **Elevation of Privilege**: Token scoped read-only.
 
 ## Secret Management
 
-`SECURE_REPO_TOKEN` sourced from environment; rotated every 90 days.
+`GITHUB_TOKEN` sourced from environment; rotated every 90 days.
 
 ## SBOM
 
@@ -21,5 +21,5 @@ Generated via `syft . -o json > sbom.json`. Pipeline fails on critical vulnerabi
 
 | Data              | Retention | Notes                     |
 |-------------------|-----------|---------------------------|
-| Scorecard Reports | 30 days   | Stored in internal bucket |
-| Remediation PRs   | 90 days   | GitHub retains metadata   |
+| Stability Reports | 90 days   | Stored in internal bucket |
+| Workflow Logs     | 30 days   | Redacted for PII          |

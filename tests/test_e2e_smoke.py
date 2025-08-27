@@ -14,4 +14,4 @@ def test_e2e_smoke(tmp_path, monkeypatch) -> None:
     result = main.run()
     assert Path(result).exists()
     data = json.loads(Path(result).read_text())
-    assert "vulnerabilities" in data
+    assert "unstable_workflows" in data

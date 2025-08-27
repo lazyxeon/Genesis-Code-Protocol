@@ -1,22 +1,22 @@
-# Secure Repo Scorecard Remediation Runbook
+# GitHub Actions Stability Runbook
 
 ## Overview
 
-This runbook guides operators through running and troubleshooting the automated remediation workflow that leverages StepSecurity's `secure-repo` to fix OpenSSF Scorecard vulnerabilities.
+This runbook guides operators through running and troubleshooting the workflow that analyzes GitHub Actions runs to detect failing workflows.
 
 ## Normal Operation
 
-1. Ensure `SECURE_REPO_TOKEN` is set in the environment.
+1. Ensure `GITHUB_TOKEN` is set in the environment.
 2. Execute `make install` to install dependencies.
 3. Run `make test` to verify the workflow passes all gates.
 4. Deploy using `make build` and run the workflow container.
 
 ## Troubleshooting
 
-- **Failure during scan**: Inspect logs for `scan_scorecard` step.
-- **Remediation issues**: Verify network access to StepSecurity and GitHub APIs.
-- **Rollback**: Execute `python -m src.rollback` to revert applied patches.
+- **Failure during ingest**: Inspect logs for network issues with the GitHub API.
+- **Analysis issues**: Verify repository name and token permissions.
+- **Rollback**: Execute `python -m src.rollback` to revert actions.
 
 ## Escalation
 
-Contact the DevSecOps team on call if remediation cannot be completed after one retry.
+Contact the DevOps team on call if stability cannot be confirmed after one retry.

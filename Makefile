@@ -11,7 +11,7 @@ test:
 >pytest -q
 
 build:
->docker build -t gcp-protocol .
+>docker build -t github-actions-stability .
 
 sbom:
 >syft . -o json > sbom.json
@@ -21,7 +21,7 @@ sign:
 
 package: build sbom
 >mkdir -p dist
->zip -r dist/gcp-protocol-bundle.zip workflow_manifest.json integration_contract.md observability.yaml governance.yaml cost_model.md security.md src tests Makefile
+>zip -r dist/github-actions-stability-bundle.zip workflow_manifest.json integration_contract.md observability.yaml governance.yaml cost_model.md security.md src tests Makefile
 
 canary:
 >echo "Launching canary deployment"

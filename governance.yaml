@@ -1,22 +1,23 @@
 risk_level: r2
 controls:
-  - code_review: required
-  - security_scan: required
+  code_review: required
+  security_scan: required
+  tests: required
 change_types:
   patch:
     reviewers: 1
     checks: [tests]
   minor:
     reviewers: 2
-    checks: [tests, sbom]
+    checks: [tests, security]
   major:
     reviewers: 3
-    checks: [tests, sbom, perf]
+    checks: [tests, security, perf]
 release_policy:
   canary_percent: 10
   error_budget_guard: 0.01
   auto_rollback: true
 provenance:
-  attestation: cosign attest
-  signing: cosign sign
+  build_attestation: cosign attest
+  artifact_signing: cosign sign
   sbom_policy: fail_on_critical
