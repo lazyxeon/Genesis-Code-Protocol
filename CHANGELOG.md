@@ -31,6 +31,7 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#175)
 - docs: refresh badge block (#170)
 - docs: auto-update Table Of Contents.md (#165)
 - docs(readme): auto-sync repo structure (#163)
