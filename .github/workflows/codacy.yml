@@ -30,7 +30,7 @@ permissions:
 
 jobs:
   codacy-security-scan:
-    if: env.CODACY_PROJECT_TOKEN != ''
+    if: ${{ env.CODACY_PROJECT_TOKEN != '' }}
     continue-on-error: true
     permissions:
       contents: read # for actions/checkout to fetch code
