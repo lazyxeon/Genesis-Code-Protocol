@@ -13,7 +13,7 @@ Welcome to the documentation site for **Genesis Code Protocol V50**.  This flag
 
 ## Running a GCP Session
 
-To run a full session, load `GCP V50.md` into a capable LLM, attach any necessary runners or cartridges, and follow the instructions at each gate.  You can also use the CLI (`CLI Bundle/gcp_cli.py`) to generate prompts or simulate phases.  See [Requirements.md](Requirements.md) for detailed guidance.
+To run a full session, load `GCP V50.md` into a capable LLM, attach any necessary runners or cartridges, and follow the instructions at each gate.  You can also use the CLI (`CLI_Bundle/gcp_cli.py`) to generate prompts or simulate phases.  See [Requirements.md](Requirements.md) for detailed guidance.
 
 ## About V50
 

@@ -19,7 +19,7 @@ This folder contains the command-line interface (CLI) tools for running GRCP pro
 - `gcp_cli.py`: Main CLI entry point for running protocols.
 - `full_run.py`: Script for executing complete invention cycles.
 - `phase1.py`: Example phase script (extendable for custom phases).
-- `phase6.7.py`: Another phase example (e.g., validation).
+- `phase6.py`: Another phase example (e.g., validation).
 - `audit_utils.py`: Utilities for auditing and governance checks.
 - `prompt_utils.py`: Helpers for generating LLM prompts.
 - `requirements.txt`: Dependency list for the CLI.
@@ -72,7 +72,7 @@ python gcp_cli.py --version 47 --risk-tier R2 --prompt "Invent an EV charging op
 
 - `audit_utils.py`: Functions for ethical audits and governance.
 - `prompt_utils.py`: Generate dynamic prompts for LLMs.
-- `phase1.py` / `phase6.7.py`: Modular phase scripts; extend for custom logic.
+- `phase1.py` / `phase6.py`: Modular phase scripts; extend for custom logic.
 
 ## Extending the CLI
 
@@ -178,7 +178,7 @@ if __name__ == "__main__":
     main()
 ```
 
-### phase6.7.py
+### phase6.py
 
 ```python
 import argparse

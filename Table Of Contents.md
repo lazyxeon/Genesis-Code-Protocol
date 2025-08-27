@@ -60,15 +60,15 @@ This document is auto-generated. Links are relative to the repo. Updated as of A
   - [pull_request_template.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/pull_request_template.md)
   - [release-drafter.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/release-drafter.yml)
 
-## CLI Bundle
+## CLI_Bundle
 
-  - [Readme.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI%20Bundle/Readme.md)
-  - [audit_utils.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI%20Bundle/audit_utils.py)
-  - [full_run.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI%20Bundle/full_run.py)
-  - [gcp_cli.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI%20Bundle/gcp_cli.py)
-  - [phase1.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI%20Bundle/phase1.py)
-  - [phase6.7.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI%20Bundle/phase6.7.py)
-  - [prompt_utils.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI%20Bundle/prompt_utils.py)
+  - [Readme.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI_Bundle/Readme.md)
+  - [audit_utils.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI_Bundle/audit_utils.py)
+  - [full_run.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI_Bundle/full_run.py)
+  - [gcp_cli.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI_Bundle/gcp_cli.py)
+  - [phase1.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI_Bundle/phase1.py)
+  - [phase6.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI_Bundle/phase6.py)
+  - [prompt_utils.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CLI_Bundle/prompt_utils.py)
 
 ## Documents
 

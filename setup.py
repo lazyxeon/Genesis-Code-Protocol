@@ -25,6 +25,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/lazyxeon/Genesis-Code-Protocol",
     packages=find_packages(),
+    py_modules=["gcp_cli"],
     include_package_data=True,
     install_requires=[
         # Minimum versions are set to address known security vulnerabilities.
@@ -46,7 +47,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "gcp = CLI_Bundle.gcp_cli:main",
+            "gcp = gcp_cli:main",
         ],
     },
     classifiers=[

@@ -1,6 +1,4 @@
 import argparse
-from phases import phase1, phase6, full_run
-from utils import audit_utils, prompt_utils
 
 def main():
     parser = argparse.ArgumentParser(description="Genesis Recursive Code Protocol CLI")
@@ -16,16 +14,24 @@ def main():
     elif args.command == "run" and args.phase:
         print(f"🚀 Running Phase {args.phase}")
         if args.phase == 1:
-            phase1.run()
+            from . import phase1
+            phase1.main()
         elif args.phase == 6:
-            phase6.run()
+            from . import phase6
+            phase6.main()
         else:
             print("⚠️ Phase not implemented yet.")
     elif args.command == "full-run":
-        full_run.run_all()
+        from . import full_run
+        full_run.execute_full_run(args.prompt or "", "", "")
     elif args.command == "prompt" and args.prompt:
-        prompt_utils.run_prompt(args.prompt)
+        from . import prompt_utils
+        try:
+            prompt_utils.run_prompt(args.prompt)
+        except AttributeError:
+            print("⚠️ Prompt utility not fully implemented.")
     elif args.command == "audit" and args.file:
+        from . import audit_utils
         audit_utils.run_audit(args.file)
     elif args.command == "export":
         print("📄 Exporting session...")
