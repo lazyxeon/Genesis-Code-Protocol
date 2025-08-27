@@ -405,6 +405,7 @@ scripts/
 ├─ fix_md_spacing.py
 ├─ generate_changelog.py
 ├─ generate_repo_toc.py
+├─ generate_sbom.py
 ├─ update_repo_structure.py
 security.md
 setup.py
@@ -433,6 +434,7 @@ tests/
 ├─ e2e_smoke_test.py
 ├─ perf_test.py
 ├─ rollback_test.py
+├─ scan_skip_test.py
 ├─ security_test.py
 ├─ spec_validation_test.py
 tools/
