@@ -20,8 +20,8 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r requirements.txt ruff
       - name: Lint
-        run: flake8 src tests
+        run: ruff check src tests
       - name: Test
         run: pytest -q
