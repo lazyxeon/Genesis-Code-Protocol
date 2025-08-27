@@ -12,3 +12,9 @@ def test_manifest_has_required_fields() -> None:
     assert data["id"] == "bwb::security-scan-workflow::v1"
     assert data["security"]["supply_chain"]["sbom"] is True
     assert data["security"]["supply_chain"]["policy"] == "fail_on_critical"
+
+
+def test_manifest_has_mock_run_input() -> None:
+    """Ensure mock_run input is declared."""
+    data = json.loads(Path("workflow_manifest.json").read_text())
+    assert any(i["name"] == "mock_run" for i in data["inputs"])
