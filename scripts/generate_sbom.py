@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Mapping, cast
 
 
+
 def main(path: str = "sbom.json") -> None:
     packages = []
     for dist in metadata.distributions():
