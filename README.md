@@ -396,12 +396,9 @@ src/
 ├─ ingest.py
 ├─ logging_utils.py
 ├─ main.py
-<<<<<< chore/update-repo-structure
 ├─ matrix_ci/
 ├─ ├─ __init__.py
 ├─ ├─ pipeline.py
-=======
->>>>>> main
 ├─ remediate.py
 ├─ report.py
 ├─ rollback.py
