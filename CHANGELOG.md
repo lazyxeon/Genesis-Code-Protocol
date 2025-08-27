@@ -1,6 +1,7 @@
 # GRCP Changelog
 
 ### Bug Fixes
+- fix: normalize leading blank lines (#125)
 - Fix Dockerfile syntax for FROM instruction
 - Fix syntax in sbom.yml for action references
 - Fix syntax in ossf-scorecard.yml workflow
@@ -146,6 +147,7 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing (#123)
 - chore(changelog): update and normalize spacing (#122)
 - chore(changelog): update and normalize spacing (#121)
 - Enhance TOC update workflow with signing and fixes
