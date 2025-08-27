@@ -3,7 +3,7 @@ name: Release Bundle
 # Run this workflow when a new release is created
 on:
   release:
-    types: [created]
+    types: [published]
   workflow_dispatch:
 
 # Default permissions for all jobs
@@ -12,7 +12,6 @@ permissions:
 
 jobs:
   bundle:
-    if: github.event_name == 'release'
     runs-on: ubuntu-latest
     # This job needs write access to upload the bundle and SBOMs
     permissions:
