@@ -1,0 +1,39 @@
+name: Trigger All Workflows
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger all workflows
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const workflows = await github.paginate(github.rest.actions.listRepoWorkflows, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100,
+            });
+            for (const wf of workflows) {
+              if (wf.name === 'Trigger All Workflows' || wf.state !== 'active') {
+                continue;
+              }
+              try {
+                await github.rest.actions.createWorkflowDispatch({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  workflow_id: wf.id,
+                  ref: context.ref,
+                });
+                core.info(`Dispatched ${wf.name}`);
+              } catch (error) {
+                core.warning(`Could not dispatch ${wf.name}: ${error.message}`);
+              }
+            }
