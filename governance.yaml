@@ -1,0 +1,20 @@
+risk_level: r2
+controls:
+  - code_review: required
+  - security_scan: required
+change_types:
+  patch:
+    reviewers: 1
+  minor:
+    reviewers: 2
+  major:
+    reviewers: 2
+    checks: ["load_test"]
+release_policy:
+  canary_percent: 10
+  error_budget_guard: 0.01
+  auto_rollback: true
+provenance:
+  attestation: true
+  signing: sigstore
+  sbom: required

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://example.com/schemas/workflow_manifest_v1.json",
+  "id": "bwb::ci-workflow-diagnoser::v1",
+  "version": "1.0.0",
+  "business_goal": "Diagnose failing GitHub workflows to restore CI reliability",
+  "value_hypothesis": "Reducing CI failures improves developer throughput and lowers incident cost",
+  "inputs": [
+    {"name": "workflow_logs", "type": "json", "source": "api", "validation": "schema:ci_logs_v1"}
+  ],
+  "outputs": [
+    {"name": "diagnosis_report", "type": "json", "retention_days": 90, "consumer": "dev-infra"}
+  ],
+  "SLOs": {"latency_ms_p95": 1200, "success_rate": 0.99, "error_budget_month": 0.01},
+  "constraints": ["latency <= 1.2s", "no paid dependencies"],
+  "operational_env": "container",
+  "security": {
+    "data_classes": ["internal"],
+    "secrets": ["ENV:CI_WORKFLOW_DIAGNOSER_TOKEN"],
+    "iam": [{"principal": "workflow-sa", "permissions": ["read:workflow-logs"]}],
+    "supply_chain": {"sbom": true, "signing": "sigstore", "policy": "fail_on_critical"}
+  },
+  "compliance": {"pii": false, "gdpr": "n/a", "sox": "n/a", "hipaa": false},
+  "tooling": {
+    "images": ["ghcr.io/org/ci-workflow-diagnoser:1.0.0"],
+    "runtimes": ["python3.11"],
+    "libraries": ["pydantic", "fastapi", "pytest", "opentelemetry-sdk"]
+  },
+  "steps": [
+    {
+      "name": "ingest",
+      "kind": "task",
+      "entrypoint": "src/ingest.py:main",
+      "contracts": {"in": ["inputs[*]"], "out": ["stage_raw"]},
+      "retries": {"max": 3, "backoff": "exponential", "jitter": true},
+      "timeout_s": 60,
+      "idempotency_key": "hash(input)",
+      "resources": {"cpu": "500m", "mem": "512Mi"},
+      "metrics": {"counters": ["records_ingested"], "timers": ["duration_ms"]},
+      "otel_spans": ["bwb.ingest"]
+    }
+  ],
+  "dependencies": ["s3://workflow-logs"],
+  "runbook": "docs/ci-workflow-diagnoser-runbook.md",
+  "failover": {"strategy": "brownout_then_rollback", "rpo_minutes": 5, "rto_minutes": 15},
+  "rollback": {"guard": "Gate:RISK", "actions": ["revert:deployment", "restore:db_snapshot_t-1"]},
+  "artifact_plan": [
+    {"path": "dist/ci-workflow-diagnoser-bundle.zip", "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]}
+  ]
+}

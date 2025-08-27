@@ -1,0 +1,1 @@
+"""CI Workflow Diagnoser package."""

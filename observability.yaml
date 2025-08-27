@@ -1,0 +1,19 @@
+traces:
+  spans:
+    ingest:
+      name: bwb.ingest
+      attributes:
+        - records_ingested
+metrics:
+  counters:
+    - name: records_ingested
+      unit: 1
+      cardinality: low
+  timers:
+    - name: duration_ms
+      unit: ms
+      cardinality: low
+logs:
+  format: json
+  pii_scrubbing: true
+  sampling: 1.0
