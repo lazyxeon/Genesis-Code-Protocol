@@ -411,6 +411,7 @@ security.md
 setup.py
 src/
 ├─ __init__.py
+├─ automerge.py
 ├─ codacy.py
 ├─ config.py
 ├─ errors.py
@@ -429,12 +430,12 @@ src/
 ├─ scan.py
 ├─ utils.py
 tests/
+├─ automerge_skip_test.py
 ├─ conftest.py
 ├─ contract_test.py
 ├─ e2e_smoke_test.py
 ├─ perf_test.py
 ├─ rollback_test.py
-├─ scan_skip_test.py
 ├─ security_test.py
 ├─ spec_validation_test.py
 tools/
