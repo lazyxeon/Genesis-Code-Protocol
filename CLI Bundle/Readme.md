@@ -60,12 +60,17 @@ Options:
 - `--prompt PROMPT`: Invention prompt (required for runs).
 - `--phase PHASE`: Run a specific phase (e.g., -1 for worth-it sprint).
 - `--full-run`: Execute a complete cycle (uses full_run.py).
-- `--audit`: Perform audit checks (uses audit_utils.py).
+- `--audit`: Perform audit checks (uses audit_utils.py). Requires `--prompt` and `--version`.
 - `--help`: Show help.
 
 Example:
 ```bash
 python gcp_cli.py --version 47 --risk-tier R2 --prompt "Invent an EV charging optimizer" --full-run
+```
+
+Audit example:
+```bash
+python gcp_cli.py audit --prompt "Invent an EV charging optimizer" --version 47
 ```
 
 ### Utilities
