@@ -44,6 +44,7 @@
   - cli_bundle/prompt_utils.py
   - cli_bundle/requirements.txt
 - **docs/**
+  - docs/ci-workflow-diagnoser-runbook.md
   - docs/index.md
   - docs/roadmap.md
   - docs/runbook.md
@@ -75,6 +76,9 @@
   - src/rollback.py
   - src/scan.py
   - src/utils.py
+  - **matrix_ci/**
+    - src/matrix_ci/__init__.py
+    - src/matrix_ci/pipeline.py
 - **scripts/**
   - scripts/__init__.py
   - scripts/fix_md_spacing.py
