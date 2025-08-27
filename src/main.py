@@ -1,17 +1,32 @@
-from typing import Optional
+from __future__ import annotations
 
-from . import errors, fuzz, ingest, report, rollback, scan
-from .config import Config
+import json
+import os
+from pathlib import Path
+from typing import Dict
+
+from . import codacy, errors, ethicalcheck, fortify, rollback, utils
 
 
-def run(cfg: Optional[Config] = None) -> str:
-    """Execute the workflow and return path to the report."""
-    cfg = cfg or Config()
+def run() -> str:
+    """Execute security scans and return path to report."""
+    report_path = Path(os.getenv("WF_REPORT_PATH", "scan-report.json"))
+    results: Dict[str, Dict[str, str]] = {}
     try:
-        data = ingest.main(cfg)
-        fuzzed = fuzz.main(data, cfg)
-        findings = scan.main(fuzzed, cfg)
-        return report.main(findings, cfg)
+        if os.getenv("WF_FAIL_STEP") == "ethicalcheck":
+            raise errors.TerminalError("forced failure at ethicalcheck")
+        results["ethicalcheck"] = ethicalcheck.main()
+
+        if os.getenv("WF_FAIL_STEP") == "fortify":
+            raise errors.TerminalError("forced failure at fortify")
+        results["fortify"] = fortify.main()
+
+        if os.getenv("WF_FAIL_STEP") == "codacy":
+            raise errors.TerminalError("forced failure at codacy")
+        results["codacy"] = codacy.main()
+
+        utils.atomic_write(report_path, json.dumps(results))
+        return str(report_path)
     except (errors.RetryableError, errors.TerminalError) as exc:
         rollback.perform(str(exc))
         raise
