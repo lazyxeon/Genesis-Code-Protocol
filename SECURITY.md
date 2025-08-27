@@ -26,7 +26,8 @@ We are particularly interested in reports of vulnerabilities that could lead to:
 Vulnerabilities solely affecting older, unsupported versions (v48 or earlier) are not prioritized but may still be acknowledged.
 
 ## Reporting a Vulnerability
-Please report suspected vulnerabilities privately to **security@lazyxeon.com** or via the GitHub Security Advisories form at <https://github.com/lazyxeon/Genesis-Code-Protocol/security/advisories/new>. We will acknowledge reports within **3 business days** and aim to resolve confirmed issues within **60 days**.
+
+Please report suspected vulnerabilities privately to **[security@lazyxeon.com](mailto:security@lazyxeon.com)** or via the GitHub Security Advisories form at <https://github.com/lazyxeon/Genesis-Code-Protocol/security/advisories/new>. We will acknowledge reports within **3 business days** and aim to resolve confirmed issues within **60 days**.
 
 To report a vulnerability, **please use the private reporting channel** so we can assess and address the issue before public disclosure:
 
