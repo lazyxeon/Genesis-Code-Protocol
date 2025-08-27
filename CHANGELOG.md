@@ -31,7 +31,10 @@
 
 ### Documentation
 
+<<<<<< chore/update-changelog
 - docs(readme): auto-sync repo structure (#176)
+=======
+>>>>>> main
 - docs: auto-update Table Of Contents.md (#175)
 - docs: refresh badge block (#170)
 - docs: auto-update Table Of Contents.md (#165)
