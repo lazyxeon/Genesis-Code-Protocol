@@ -28,6 +28,7 @@ on:
 
 jobs:
   Fortify-AST-Scan:
+    if: ${{ secrets.FOD_TENANT != '' && secrets.FOD_USER != '' && secrets.FOD_PAT != '' && vars.SSC_URL != '' && secrets.SSC_TOKEN != '' && secrets.SC_CLIENT_AUTH_TOKEN != '' && secrets.DEBRICKED_TOKEN != '' }}
     # Use the appropriate runner for building your source code. Ensure dev tools required to build your code are present and configured appropriately (MSBuild, Python, etc).
     runs-on: ubuntu-latest
     permissions:
