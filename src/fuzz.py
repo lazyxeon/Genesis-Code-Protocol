@@ -1,6 +1,6 @@
 from .config import Config
-from .logging_utils import log
 from .errors import RetryableError
+from .logging_utils import log
 
 
 def main(data: bytes, cfg: Config | None = None) -> bytes:
