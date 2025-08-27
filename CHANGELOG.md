@@ -45,6 +45,8 @@
 
 ### Documentation
 
+- docs: add badges for all workflows (#270)
+- docs: auto-update Table Of Contents.md (#263)
 - docs: auto-update Table Of Contents.md (#260)
 - docs: auto-update Table Of Contents.md (#258)
 - docs: auto-update Table Of Contents.md (#257)
@@ -207,6 +209,10 @@
 
 ### Miscellaneous Tasks
 
+- Use typing module for Python 3.8 compatibility (#268)
+- Format config using black (#267)
+- chore(changelog): update and normalize spacing (#264)
+- Use ruff for linting in matrix CI (#265)
 - chore(changelog): update and normalize spacing (#259)
 - chore(changelog): update and normalize spacing (#250)
 - Add pluggy and pytest dependencies (#254)
@@ -1378,6 +1384,8 @@
 
 ### Security
 
+- Add Codacy security scan workflow
+- Add EthicalCheck workflow for API security testing
 - Harden scripts against common security issues (#187)
 - Remove security-events permission in workflow
 - Refine security scan workflow configuration
