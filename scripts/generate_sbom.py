@@ -6,13 +6,14 @@ import json
 import sys
 from importlib import metadata
 from pathlib import Path
-from typing import Any, Mapping, cast
+from typing import Mapping, cast
+
 
 
 def main(path: str = "sbom.json") -> None:
     packages = []
     for dist in metadata.distributions():
-        meta = cast(Mapping[str, Any], dist.metadata)
+        meta = cast(Mapping[str, str], dist.metadata)
         name = meta.get("Name") or meta.get("Summary") or meta.get("name", "")
         packages.append({"name": name, "version": dist.version})
     data = {"packages": packages}
