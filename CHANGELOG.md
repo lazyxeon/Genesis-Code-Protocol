@@ -1,4 +1,4 @@
-# GRCP Changelog
+# GCP Changelog
 
 ### Bug Fixes
 - fix: normalize leading blank lines (#125)
@@ -147,6 +147,7 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing (#124)
 - chore(changelog): update and normalize spacing (#123)
 - chore(changelog): update and normalize spacing (#122)
 - chore(changelog): update and normalize spacing (#121)
