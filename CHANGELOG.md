@@ -2,6 +2,7 @@
 
 ### Features
 
+- feat: remove GitPython dependency from changelog script (#229)
 - feat: add workflow to trigger all workflows (#190)
 - feat(cli): pass version to audit (#131)
 
@@ -38,6 +39,13 @@
 
 ### Documentation
 
+- docs(readme): auto-sync repo structure (#227)
+- docs: auto-update Table Of Contents.md (#226)
+- docs(readme): auto-sync repo structure (#225)
+- docs: auto-update Table Of Contents.md (#222)
+- docs(readme): auto-sync repo structure (#221)
+- docs: auto-update Table Of Contents.md (#219)
+- docs(readme): auto-sync repo structure (#220)
 - docs: auto-update Table Of Contents.md (#207)
 - docs: auto-update Table Of Contents.md (#205)
 - docs: auto-update Table Of Contents.md (#198)
@@ -185,6 +193,12 @@
 
 ### Miscellaneous Tasks
 
+- chore: fix contract test reference (#224)
+- chore: remove pycache (#223)
+- Remove compiled artifacts (#218)
+- Add secure-repo remediation workflow skeleton (#217)
+- chore(changelog): update and normalize spacing (#215)
+- chore: harden workflows and pin dependencies (#216)
 - chore(changelog): update and normalize spacing (#214)
 - chore(changelog): update and normalize spacing (#210)
 - chore: add manual workflow triggers (#213)
