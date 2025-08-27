@@ -49,6 +49,7 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#288)
 - docs: auto-update Table Of Contents.md (#284)
 - docs(readme): auto-sync repo structure (#283)
 - docs(readme): auto-sync repo structure (#281)
@@ -222,6 +223,8 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#285)
+- Add Python SBOM generator (#290)
 - chore(changelog): update and normalize spacing (#278)
 - Update contract reference (#280)
 - chore(changelog): update and normalize spacing (#271)
