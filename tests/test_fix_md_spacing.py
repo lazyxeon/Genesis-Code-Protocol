@@ -18,7 +18,7 @@ def test_code_fences_preserved() -> None:
         "```\n",
         "After\n",
     ]
-    assert normalize_spacing(lines) == lines
+    assert normalize_spacing(lines) == lines  # nosec B101
 
 
 def test_single_level_list_spacing() -> None:
@@ -37,7 +37,7 @@ def test_single_level_list_spacing() -> None:
         "\n",
         "Outro\n",
     ]
-    assert normalize_spacing(lines) == expected
+    assert normalize_spacing(lines) == expected  # nosec B101
 
 
 def test_multi_level_list_spacing() -> None:
@@ -58,7 +58,7 @@ def test_multi_level_list_spacing() -> None:
         "\n",
         "Conclusion\n",
     ]
-    assert normalize_spacing(lines) == expected
+    assert normalize_spacing(lines) == expected  # nosec B101
 
 
 def test_collapse_consecutive_blank_lines() -> None:
@@ -79,4 +79,4 @@ def test_collapse_consecutive_blank_lines() -> None:
         "\n",
         "Line3\n",
     ]
-    assert normalize_spacing(lines) == expected
+    assert normalize_spacing(lines) == expected  # nosec B101

@@ -44,6 +44,7 @@ setup(
         "biopython>=1.83",
         "astropy>=6.1.0",
         "pygame>=2.6.0",
+        "GitPython>=3.1.44",
     ],
     entry_points={
         "console_scripts": [
