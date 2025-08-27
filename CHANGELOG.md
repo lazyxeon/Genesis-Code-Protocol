@@ -10,6 +10,7 @@
 
 ### Bug Fixes
 
+- fix: ensure EthicalCheck workflow runs with default vars
 - fix codacy workflow env check (#303)
 - fix: guard Fortify workflow when secrets missing (#305)
 - fix: resolve markdownlint issues (#300)

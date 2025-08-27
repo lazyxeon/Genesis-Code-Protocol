@@ -44,9 +44,13 @@ permissions:
   contents: read
   security-events: write
 
+env:
+  ETHICALCHECK_OAS_URL: ${{ vars.ETHICALCHECK_OAS_URL || 'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.yaml' }}
+  ETHICALCHECK_EMAIL: ${{ vars.ETHICALCHECK_EMAIL || 'devnull@example.com' }}
+
 jobs:
   Trigger_EthicalCheck:
-    if: ${{ vars.ETHICALCHECK_OAS_URL != '' && vars.ETHICALCHECK_EMAIL != '' }}
+    if: ${{ env.ETHICALCHECK_OAS_URL != '' && env.ETHICALCHECK_EMAIL != '' }}
     continue-on-error: true
     permissions:
       actions: read # required for a private repository by github/codeql-action/upload-sarif to get the Action run status
@@ -58,9 +62,9 @@ jobs:
          continue-on-error: true
          with:
           # The OpenAPI Specification URL or Swagger Path or Public Postman collection URL.
-          oas-url: ${{ vars.ETHICALCHECK_OAS_URL }}
+          oas-url: ${{ env.ETHICALCHECK_OAS_URL }}
           # The email address to which the penetration test report will be sent.
-          email: ${{ vars.ETHICALCHECK_EMAIL }}
+          email: ${{ env.ETHICALCHECK_EMAIL }}
           sarif-result-file: ethicalcheck-results.sarif
 
        - name: Upload sarif file to repository
