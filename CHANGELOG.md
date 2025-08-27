@@ -38,6 +38,7 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#205)
 - docs: auto-update Table Of Contents.md (#198)
 - docs: auto-update Table Of Contents.md (#197)
 - docs: auto-update Table Of Contents.md (#196)
