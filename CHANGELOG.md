@@ -1,5 +1,8 @@
 # GRCP Changelog
 
+### Features
+- feat(cli): pass version to audit (#131)
+
 ### Bug Fixes
 - fix: normalize leading blank lines (#125)
 - Fix Dockerfile syntax for FROM instruction
@@ -147,6 +150,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Refine workflow audit to search for tag refs (#132)
+- chore(changelog): update and normalize spacing (#128)
 - chore(changelog): update and normalize spacing (#126)
 - chore: pin workflow dependencies with hashes (#127)
 - chore(changelog): update and normalize spacing (#124)
