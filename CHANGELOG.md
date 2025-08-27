@@ -10,7 +10,6 @@
 
 ### Bug Fixes
 
-- fix: ensure EthicalCheck workflow runs with default vars
 - fix codacy workflow env check (#303)
 - fix: guard Fortify workflow when secrets missing (#305)
 - fix: resolve markdownlint issues (#300)
@@ -55,6 +54,7 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#302)
 - docs: auto-update Table Of Contents.md (#297)
 - docs: auto-update Table Of Contents.md (#295)
 - docs: auto-update Table Of Contents.md (#291)
@@ -233,6 +233,9 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update changelog (#307)
+- Run workflows on all branches (#306)
+- chore(changelog): update and normalize spacing (#301)
 - chore(changelog): update and normalize spacing (#294)
 - chore: fix fortify workflow conditional (#298)
 - chore(changelog): update and normalize spacing (#292)
