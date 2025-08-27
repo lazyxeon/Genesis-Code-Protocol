@@ -8,6 +8,8 @@
 
 ### Bug Fixes
 
+- fix trigger-all-workflows permissions (#252)
+- fix: ensure CI dependencies and lint (#251)
 - fix: resolve markdown lint issues (#231)
 - fix: resolve markdownlint issues (#203)
 - fix: repair Dockerfile and workflow dependencies (#200)
@@ -40,6 +42,8 @@
 
 ### Documentation
 
+- Document versioning and request IDs (#249)
+- docs(readme): auto-sync repo structure (#247)
 - docs(readme): auto-sync repo structure (#245)
 - docs: auto-update Table Of Contents.md (#244)
 - docs: auto-update Table Of Contents.md (#236)
@@ -197,6 +201,9 @@
 
 ### Miscellaneous Tasks
 
+- Ensure pre-commit installs dependencies (#255)
+- chore: remove apt package version pins (#256)
+- chore(changelog): update and normalize spacing (#248)
 - chore(changelog): update and normalize spacing (#246)
 - chore(changelog): update and normalize spacing (#233)
 - Clean up merge artifacts and restore tests (#240)
