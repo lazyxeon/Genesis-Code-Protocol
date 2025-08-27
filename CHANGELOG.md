@@ -10,6 +10,8 @@
 
 ### Bug Fixes
 
+- fix: repair security scans workflow configs (#332)
+- Fix workflow conditions to avoid skips (#328)
 - fix: run EthicalCheck workflow by default (#315)
 - Fix Codacy token check in workflow (#309)
 - fix codacy workflow env check (#303)
@@ -56,6 +58,8 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#346)
+- docs: auto-update Table Of Contents.md (#331)
 - docs: auto-update Table Of Contents.md (#302)
 - docs: auto-update Table Of Contents.md (#297)
 - docs: auto-update Table Of Contents.md (#295)
@@ -235,6 +239,9 @@
 
 ### Miscellaneous Tasks
 
+- Log skipped EthicalCheck and test skip behavior
+- chore(changelog): update and normalize spacing (#321)
+- chore: batch changelog PRs (#325)
 - chore(changelog): update and normalize spacing (#318)
 - chore: update workflows for current actions (#320)
 - chore(changelog): update and normalize spacing (#317)
