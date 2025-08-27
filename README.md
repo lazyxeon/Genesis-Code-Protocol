@@ -33,14 +33,13 @@
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/lazyxeon/Genesis-Code-Protocol/badge)](https://scorecard.dev/viewer/?uri=github.com/lazyxeon/Genesis-Code-Protocol)
 [![Release](https://img.shields.io/github/v/release/lazyxeon/Genesis-Code-Protocol)](https://github.com/lazyxeon/Genesis-Code-Protocol/releases/latest)
 
-
 [![LLM Reviewer: optional](https://img.shields.io/badge/LLM%20Reviewer-optional-lightgrey)](docs/llm-reviewer.md)
 [![Danger JS](https://img.shields.io/badge/Danger%20JS-enabled-blue?logo=npm)](https://danger.systems/js/)
 [![reviewdog](https://img.shields.io/badge/reviewdog-enabled-blue)](https://github.com/reviewdog/reviewdog)
 [![Semgrep CI](https://img.shields.io/badge/Semgrep-ci--ready-blue)](https://semgrep.dev/docs/deployment/add-semgrep-to-ci)
 [![Ruff](https://img.shields.io/badge/Ruff-linting-blue)](https://docs.astral.sh/ruff/)
 
-Quick nav: [What’s New](#whats-new) • [Quick Start](#quick-start) • [Phase Map](#phase-map) • [Runners & Cartridges](#runners--cartridges) • [Artifacts](#artifacts--ledgers) • [Security](#security--provenance) • [License](#license) • [Repo Structure](#Repository-Structure) •  [GCP Wiki](#GCP-Wiki)
+Quick nav: [What’s New](#whats-new) • [Quick Start](#quick-start) • [Phase Map](#phase-map) • [Runners & Cartridges](#runners--cartridges) • [Artifacts](#artifacts--ledgers) • [Security](#security--provenance) • [Limitations](#limitations) • [License](#license) • [Repo Structure](#Repository-Structure) •  [GCP Wiki](#GCP-Wiki)
 
 ---
 
@@ -109,12 +108,22 @@ See `SECURITY.md` for the security policy and supply‑chain controls. V50 conti
 
 ---
 
+## Limitations
+
+- **LLM validation environments:** Existing evaluation harnesses are minimal and primarily offline. They do not yet provide comprehensive adversarial coverage or deterministic scoring, so human review remains essential.
+- **Real‑time toolset constraints:** Tool integrations favor deterministic, batch-style runners. Access to live external APIs, hardware or streaming data is tightly restricted, which can introduce latency and coverage gaps for time‑sensitive tasks.
+- **Token and reasoning budgets:** GCP flows inherit the context limits of the host model. Long chains of thought or large artifacts can exceed the available window, requiring aggressive summarization or manual intervention.
+- **Ecosystem maturity:** Runners, cartridges and governance mappings are expanding but still do not cover every domain or regulatory regime; gaps may require custom extensions or manual processes.
+
+---
+
 ## Docs
 
 - **About** → [About.md](./About.md)  
 - **Charts & Graphs** → [Charts.md](./Charts.md)  
 - **Changelog** → [CHANGELOG.md](./CHANGELOG.md)
 - **Roadmap** → [Roadmap.md](./Roadmap.md)
+
 ---
 
 ## Version Matrix (Historic Highlights)
@@ -154,7 +163,6 @@ See [About.md](./About.md) for core principles and additional context.
 - Cartridges‑Pack‑V50 – summary of V50 cartridge modules.
 - GCP V49 Flagship Edition – Details of V49 Flagship Edition.
 - GCP V49 ‐ Summarized – Summary of V49 Flagship Edition
-
 
 ## **👉 https://github.com/lazyxeon/Genesis-Code-Protocol/wiki**
 
