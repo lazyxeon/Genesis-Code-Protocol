@@ -1,29 +1,20 @@
-<<<<<< codex/analyze-failing-github-workflows
 """End-to-end smoke test."""
-import json
-from pathlib import Path
-from src.ingest import main
 
-
-def test_ingest_creates_output(tmp_path) -> None:
-    input_path = tmp_path / "in.json"
-    output_path = tmp_path / "out.json"
-    input_path.write_text(json.dumps({"records": [1, 2]}))
-    main(str(input_path), str(output_path))
-    data = json.loads(output_path.read_text())
-    assert data["records"] == [1, 2]
-=======
-from pathlib import Path
 import json
-import sys, pathlib
+import pathlib
+import sys
+from pathlib import Path
 
 sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
-from src import scan, remediate
+from src import main
 
-def test_smoke(tmp_path, monkeypatch):
-    report_file = tmp_path / "report.json"
-    scan.scan_repository("owner/repo")
-    report_file.write_text(json.dumps({"critical":0}))
-    pr = remediate.remediate({"critical":0})
-    assert pr.startswith("https://")
->>>>>> main
+
+def test_e2e_smoke(tmp_path, monkeypatch) -> None:
+    """Run the main workflow and verify a report is produced."""
+    report_path = tmp_path / "report.json"
+    monkeypatch.setenv("WF_REPORT_PATH", str(report_path))
+    monkeypatch.setenv("WF_FAIL_STEP", "false")
+    result = main.run()
+    assert Path(result).exists()
+    data = json.loads(Path(result).read_text())
+    assert "vulnerabilities" in data
