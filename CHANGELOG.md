@@ -10,7 +10,6 @@
 
 ### Bug Fixes
 
-- Fix Codacy token check in workflow (#309)
 - fix codacy workflow env check (#303)
 - fix: guard Fortify workflow when secrets missing (#305)
 - fix: resolve markdownlint issues (#300)
