@@ -7,6 +7,7 @@
 
 ### Bug Fixes
 
+- fix: resolve markdownlint issues (#203)
 - fix: repair Dockerfile and workflow dependencies (#200)
 - fix: pin MkDocs dependencies with hashes (#199)
 - fix: pin MkDocs dependencies with hashes (#188)
@@ -37,6 +38,7 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#205)
 - docs: auto-update Table Of Contents.md (#198)
 - docs: auto-update Table Of Contents.md (#197)
 - docs: auto-update Table Of Contents.md (#196)
@@ -182,6 +184,7 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#202)
 - chore(deps): bump anchore/sbom-action from 0.16.0 to 0.20.5 (#193)
 - chore(deps): bump actions/github-script from 6.4.1 to 7.0.1 (#194)
 - chore(deps): bump python from 3.11-slim to 3.13-slim (#195)
