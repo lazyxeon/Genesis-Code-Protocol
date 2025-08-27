@@ -38,6 +38,7 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#207)
 - docs: auto-update Table Of Contents.md (#205)
 - docs: auto-update Table Of Contents.md (#198)
 - docs: auto-update Table Of Contents.md (#197)
@@ -184,6 +185,8 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#206)
+- chore(changelog): update and normalize spacing (#204)
 - chore(changelog): update and normalize spacing (#202)
 - chore(deps): bump anchore/sbom-action from 0.16.0 to 0.20.5 (#193)
 - chore(deps): bump actions/github-script from 6.4.1 to 7.0.1 (#194)
