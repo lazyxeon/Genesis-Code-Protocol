@@ -28,7 +28,6 @@ on:
 
 jobs:
   Fortify-AST-Scan:
-    if: ${{ secrets.FOD_TENANT != '' && secrets.FOD_USER != '' && secrets.FOD_PAT != '' && vars.SSC_URL != '' && secrets.SSC_TOKEN != '' && secrets.SC_CLIENT_AUTH_TOKEN != '' && secrets.DEBRICKED_TOKEN != '' }}
     continue-on-error: true
     # Use the appropriate runner for building your source code. Ensure dev tools required to build your code are present and configured appropriately (MSBuild, Python, etc).
     runs-on: ubuntu-latest
@@ -52,6 +51,7 @@ jobs:
       # documentation at https://github.com/fortify/github-action#readme for more information on the various
       # configuration options and available sub-actions.
       - name: Run Fortify Scan
+        if: ${{ secrets.FOD_TENANT != '' && secrets.FOD_USER != '' && secrets.FOD_PAT != '' && vars.SSC_URL != '' && secrets.SSC_TOKEN != '' && secrets.SC_CLIENT_AUTH_TOKEN != '' && secrets.DEBRICKED_TOKEN != '' }}
         # Specify Fortify GitHub Action version to run. As per GitHub starter workflow requirements, this example
         # uses the commit id corresponding to version 1.6.2. It is recommended to check whether any later releases
         # are available at https://github.com/fortify/github-action/releases. Depending on the amount of stability
