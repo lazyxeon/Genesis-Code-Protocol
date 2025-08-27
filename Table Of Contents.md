@@ -49,16 +49,17 @@
   - docs/roadmap.md
   - docs/runbook.md
 - **tests/**
+  - tests/automerge_skip_test.py
   - tests/conftest.py
   - tests/contract_test.py
   - tests/e2e_smoke_test.py
   - tests/perf_test.py
   - tests/rollback_test.py
-  - tests/scan_skip_test.py
   - tests/security_test.py
   - tests/spec_validation_test.py
 - **src/**
   - src/__init__.py
+  - src/automerge.py
   - src/codacy.py
   - src/config.py
   - src/errors.py
