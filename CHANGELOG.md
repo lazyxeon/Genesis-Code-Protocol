@@ -8,6 +8,7 @@
 
 ### Bug Fixes
 
+- fix: resolve markdown lint issues (#231)
 - fix: resolve markdownlint issues (#203)
 - fix: repair Dockerfile and workflow dependencies (#200)
 - fix: pin MkDocs dependencies with hashes (#199)
@@ -193,6 +194,7 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#230)
 - chore: fix contract test reference (#224)
 - chore: remove pycache (#223)
 - Remove compiled artifacts (#218)
