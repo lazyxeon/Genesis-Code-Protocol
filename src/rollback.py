@@ -1,3 +1,14 @@
+<<<<<< codex/develop-fuzzing-and-vulnerability-scanning-workflow
+from pathlib import Path
+
+from .logging_utils import log
+
+
+def perform(reason: str) -> None:
+    """Record rollback action."""
+    log("rollback", reason=reason)
+    Path("rollback.log").write_text(reason)
+=======
 from __future__ import annotations
 import logging
 
@@ -22,3 +33,4 @@ if __name__ == "__main__":
         raise RemediationError("simulated failure")
     except RemediationError:
         rollback()
+>>>>>> main

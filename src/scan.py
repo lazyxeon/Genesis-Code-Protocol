@@ -1,3 +1,15 @@
+<<<<<< codex/develop-fuzzing-and-vulnerability-scanning-workflow
+from .config import Config
+from .logging_utils import log
+
+
+def main(data: bytes, cfg: Config | None = None) -> dict:
+    cfg = cfg or Config()
+    log("scan.start")
+    findings = {"vulnerabilities": []}
+    log("scan.complete", vulnerabilities=len(findings["vulnerabilities"]))
+    return findings
+=======
 from __future__ import annotations
 import argparse
 import json
@@ -26,3 +38,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+>>>>>> main

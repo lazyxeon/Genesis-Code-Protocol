@@ -1,3 +1,15 @@
+<<<<<< codex/develop-fuzzing-and-vulnerability-scanning-workflow
+1. Validate schema and run tests
+   make test
+2. Build container, generate SBOM, sign artifact
+   make build sbom sign
+3. Launch canary deployment with OTEL enabled
+   kubectl apply -f deploy/canary.yaml
+4. Run 15-minute SLO probe; promote if pass else rollback
+   ./scripts/slo_probe.sh --minutes 15 || kubectl rollout undo deploy/fuzzing-vuln-scan
+5. Emit release receipt
+   printf '{"commit":"%s","image":"%s"}' "$(git rev-parse HEAD)" "$(docker images -q fuzzing_vuln_scan:latest)" > release_receipt.json
+=======
 # Exit Wizard for secure-repo-scorecard-remediation
 
 1. Validate schema and run tests
@@ -35,3 +47,4 @@ cat <<JSON > release_receipt.json
 }
 JSON
 ```
+>>>>>> main
