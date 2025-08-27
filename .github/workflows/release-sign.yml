@@ -4,6 +4,7 @@ name: Sign Release Artifacts
 on:
   release:
     types: [published]
+  workflow_dispatch:
 
 # Default permissions are read-only
 permissions:
@@ -11,6 +12,7 @@ permissions:
 
 jobs:
   sign-release:
+    if: github.event_name == 'release'
     runs-on: ubuntu-latest
     # The job needs write access to upload the signed artifacts, and
     # id-token to authenticate with Sigstore for keyless signing
