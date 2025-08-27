@@ -3,7 +3,6 @@ name: Docs (MkDocs → GitHub Pages)
 on:
   workflow_dispatch:
   push:
-    branches: ["main"]
     paths:
       - "docs/**"
       - "mkdocs.yml"

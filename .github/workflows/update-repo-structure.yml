@@ -2,7 +2,6 @@ name: Update Repo Structure
 
 on:
   push:
-    branches: ["main"]
     paths-ignore:
       - "README.md"
       - ".github/workflows/update-repo-structure.yml"

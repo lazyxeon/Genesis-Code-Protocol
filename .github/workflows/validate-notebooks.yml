@@ -2,10 +2,8 @@ name: Validate Jupyter Notebooks
 
 on:
   push:
-    branches: [ main ]
     paths: [ "**/*.ipynb" ]
   pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 permissions:

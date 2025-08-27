@@ -2,7 +2,6 @@ name: Update Top-Level TOC file
 
 on:
   push:
-    branches: ["main"]
     paths-ignore:
       - "Table Of Contents.md"
       - ".github/workflows/update-toc-file.yml"
