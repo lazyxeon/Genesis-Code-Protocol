@@ -185,6 +185,10 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#210)
+- chore: add manual workflow triggers (#213)
+- chore: address dependabot security alerts (#212)
+- chore: address dependabot security alerts (#211)
 - chore(changelog): update and normalize spacing (#209)
 - chore(changelog): update and normalize spacing (#208)
 - chore(changelog): update and normalize spacing (#206)
