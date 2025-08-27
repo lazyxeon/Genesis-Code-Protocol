@@ -71,6 +71,6 @@ jobs:
 
        - name: Upload sarif file to repository
          if: ${{ hashFiles('ethicalcheck-results.sarif') != '' }}
-         uses: github/codeql-action/upload-sarif@v3
+         uses: github/codeql-action/upload-sarif@ad2a4837011b42f6947b78d6417e7c253b1c504b # v3
          with:
           sarif_file: ./ethicalcheck-results.sarif
