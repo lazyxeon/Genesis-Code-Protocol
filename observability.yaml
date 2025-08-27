@@ -1,0 +1,18 @@
+traces:
+  service_name: matrix-ci
+  spans:
+    setup: {parent: root}
+    lint: {parent: setup}
+    test: {parent: lint}
+metrics:
+  counters:
+    env_prepared: {unit: count, description: "environments created", cardinality: low}
+    lint_warnings: {unit: count, description: "lint warnings", cardinality: low}
+    tests_run: {unit: count, description: "tests executed", cardinality: low}
+  timers:
+    duration_ms: {unit: ms, description: "step duration", cardinality: low}
+logs:
+  format: json
+  fields: [timestamp, level, message, step]
+  pii_scrub: true
+  sampling: {rate: 1.0}
