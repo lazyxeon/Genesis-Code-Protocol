@@ -31,6 +31,7 @@
 
 ### Documentation
 
+- docs: refresh badge block (#170)
 - docs: auto-update Table Of Contents.md (#165)
 - docs(readme): auto-sync repo structure (#163)
 - docs: auto-update Table Of Contents.md (#160)
@@ -169,6 +170,7 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#167)
 - chore(changelog): update and normalize spacing (#166)
 - chore(changelog): update and normalize spacing (#164)
 - chore(changelog): update and normalize spacing (#162)
