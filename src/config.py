@@ -1,16 +1,19 @@
-<<<<<< codex/develop-fuzzing-and-vulnerability-scanning-workflow
 import os
 from dataclasses import dataclass, field
 
 
 @dataclass
 class Config:
-    source_archive: str = field(default_factory=lambda: os.getenv("WF_SOURCE_ARCHIVE", "sample.tar.gz"))
-    report_path: str = field(default_factory=lambda: os.getenv("WF_REPORT_PATH", "report.json"))
-    fail_step: bool = field(default_factory=lambda: os.getenv("WF_FAIL_STEP", "false").lower() == "true")
-=======
-from dataclasses import dataclass
-import os
+    source_archive: str = field(
+        default_factory=lambda: os.getenv("WF_SOURCE_ARCHIVE", "sample.tar.gz")
+    )
+    report_path: str = field(
+        default_factory=lambda: os.getenv("WF_REPORT_PATH", "report.json")
+    )
+    fail_step: bool = field(
+        default_factory=lambda: os.getenv("WF_FAIL_STEP", "false").lower() == "true"
+    )
+
 
 @dataclass(frozen=True)
 class Settings:
@@ -23,4 +26,3 @@ class Settings:
         if not token:
             raise RuntimeError("SECURE_REPO_TOKEN not set")
         return Settings(repo=repo, token=token)
->>>>>> main
