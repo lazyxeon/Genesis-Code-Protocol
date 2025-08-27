@@ -39,18 +39,24 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      oas_url:
+        description: 'OpenAPI specification URL'
+        required: false
+      email:
+        description: 'Report email address'
+        required: false
 
 permissions:
   contents: read
   security-events: write
 
 env:
-  ETHICALCHECK_OAS_URL: ${{ vars.ETHICALCHECK_OAS_URL || 'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.yaml' }}
-  ETHICALCHECK_EMAIL: ${{ vars.ETHICALCHECK_EMAIL || 'devnull@example.com' }}
+  ETHICALCHECK_OAS_URL: ${{ inputs.oas_url || vars.ETHICALCHECK_OAS_URL || '' }}
+  ETHICALCHECK_EMAIL: ${{ inputs.email || vars.ETHICALCHECK_EMAIL || '' }}
 
 jobs:
   Trigger_EthicalCheck:
-    if: ${{ env.ETHICALCHECK_OAS_URL != '' && env.ETHICALCHECK_EMAIL != '' }}
     continue-on-error: true
     permissions:
       contents: read
@@ -59,7 +65,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+       - name: Validate inputs
+         run: |
+           if [ -z "${ETHICALCHECK_OAS_URL}" ] || [ -z "${ETHICALCHECK_EMAIL}" ]; then
+             echo "ETHICALCHECK_OAS_URL or ETHICALCHECK_EMAIL missing. Skipping scan." >> "$GITHUB_STEP_SUMMARY"
+             exit 0
+           fi
+
        - name: EthicalCheck Free & Automated API Security Testing Service
+         if: env.ETHICALCHECK_OAS_URL != '' && env.ETHICALCHECK_EMAIL != ''
          uses: Octota-GitHub/ethicalcheck-action@3ec5e93b42e591349e46635da9f909bac66c23a9
          continue-on-error: true
          with:
@@ -70,7 +84,7 @@ jobs:
           sarif-result-file: ethicalcheck-results.sarif
 
        - name: Upload sarif file to repository
-         if: ${{ hashFiles('ethicalcheck-results.sarif') != '' }}
+         if: env.ETHICALCHECK_OAS_URL != '' && env.ETHICALCHECK_EMAIL != '' && hashFiles('ethicalcheck-results.sarif') != ''
          uses: github/codeql-action/upload-sarif@v3
          with:
           sarif_file: ./ethicalcheck-results.sarif
