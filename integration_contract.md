@@ -36,6 +36,8 @@ Messages on `secure-repo-remediation` queue follow schema:
 
 Rate limit: 60 req/min per repo.
 
+All requests must include an `X-Request-ID` header for traceability.
+
 Error shape:
 
 ```json
@@ -48,4 +50,4 @@ Idempotency key = SHA256 of repo and commit. Duplicate keys are ignored.
 
 ## Versioning
 
-Semantic Versioning with 6-month deprecation window. Backward compatibility tests run via `tests/contract.test.py`.
+Semantic versioning with 6-month deprecation window. Backward compatibility tests run via `tests/contract.test.py`.
