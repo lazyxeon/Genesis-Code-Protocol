@@ -1,0 +1,30 @@
+traces:
+  - name: secure_repo.scan
+    parent: root
+    children: []
+  - name: secure_repo.remediate
+    parent: secure_repo.scan
+    children: []
+metrics:
+  counters:
+    findings:
+      unit: count
+      cardinality: low
+    pr_created:
+      unit: count
+      cardinality: low
+  timers:
+    duration_ms:
+      unit: milliseconds
+      cardinality: low
+logs:
+  format: json
+  pii_scrub: true
+  sample_rate: 1.0
+
+code_snippets:
+  python: |
+    from opentelemetry import trace
+    tracer = trace.get_tracer("secure-repo")
+    with tracer.start_as_current_span("secure_repo.scan"):
+        ...
