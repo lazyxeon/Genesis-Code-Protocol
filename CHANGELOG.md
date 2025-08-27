@@ -2,6 +2,7 @@
 
 ### Features
 
+- feat: add manual mock run workflow (#287)
 - feat: add github actions stability workflow (#272)
 - feat: remove GitPython dependency from changelog script (#229)
 - feat: add workflow to trigger all workflows (#190)
@@ -48,6 +49,8 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#284)
+- docs(readme): auto-sync repo structure (#283)
 - docs(readme): auto-sync repo structure (#281)
 - docs: auto-update Table Of Contents.md (#279)
 - docs: auto-update Table Of Contents.md (#277)
@@ -213,8 +216,13 @@
 - Refactor GitHub Actions workflow for image handling
 - Refactor OpenSSF Scorecard workflow configuration
 
+### Testing
+
+- test: verify scanners skip when missing credentials (#289)
+
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#278)
 - Update contract reference (#280)
 - chore(changelog): update and normalize spacing (#271)
 - Add Fortify AST Scan badge to README
