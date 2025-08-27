@@ -30,6 +30,7 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#150)
 - docs(readme): auto-sync repo structure (#149)
 - docs: auto-update Table Of Contents.md (#148)
 - docs: document current limitations (#145)
@@ -162,6 +163,7 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#151)
 - chore(changelog): update and normalize spacing (#147)
 - ci: add pre-commit configuration (#144)
 - chore(changelog): update and normalize spacing (#142)
