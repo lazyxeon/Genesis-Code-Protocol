@@ -1,6 +1,7 @@
 # Repository Structure
 
 - .dockerignore
+- .flake8
 - .gitattributes
 - .markdownlint.yml
 - .markdownlintignore
