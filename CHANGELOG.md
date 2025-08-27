@@ -10,6 +10,8 @@
 
 ### Bug Fixes
 
+- fix codacy workflow (#299)
+- fix: repair automation workflows (#296)
 - Fix release workflows and dependabot auto-merge (#276)
 - Fix typing compatibility in fix_md_spacing (#269)
 - Fix lint error and unpin Dockerfile dependencies (#262)
@@ -49,6 +51,9 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#295)
+- docs: auto-update Table Of Contents.md (#291)
+- docs(readme): auto-sync repo structure (#293)
 - docs: auto-update Table Of Contents.md (#288)
 - docs: auto-update Table Of Contents.md (#284)
 - docs(readme): auto-sync repo structure (#283)
@@ -223,6 +228,7 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#292)
 - chore(changelog): update and normalize spacing (#285)
 - Add Python SBOM generator (#290)
 - chore(changelog): update and normalize spacing (#278)
