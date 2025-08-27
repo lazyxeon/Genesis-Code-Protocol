@@ -175,6 +175,8 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#185)
+- chore(changelog): update and normalize spacing (#183)
 - chore(changelog): update and normalize spacing (#182)
 - chore(changelog): update and normalize spacing (#180)
 - chore(changelog): update and normalize spacing (#179)
