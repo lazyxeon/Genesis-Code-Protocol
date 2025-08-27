@@ -370,6 +370,7 @@ docker/
 ├─ Dockerfile
 ├─ requirements.txt
 docs/
+├─ ci-workflow-diagnoser-runbook.md
 ├─ index.md
 ├─ roadmap.md
 ├─ runbook.md
@@ -377,6 +378,7 @@ governance.yaml
 integration_contract.md
 mkdocs.yml
 observability.yaml
+pytest.ini
 requirements.txt
 scripts/
 ├─ __init__.py
@@ -389,11 +391,27 @@ setup.py
 src/
 ├─ __init__.py
 ├─ config.py
+├─ errors.py
+├─ fuzz.py
+├─ ingest.py
+├─ logging_utils.py
+├─ main.py
+├─ matrix_ci/
+├─ ├─ __init__.py
+├─ ├─ pipeline.py
 ├─ remediate.py
+├─ report.py
 ├─ rollback.py
 ├─ scan.py
 ├─ utils.py
 tests/
+├─ conftest.py
+├─ contract_test.py
+├─ e2e_smoke_test.py
+├─ perf_test.py
+├─ rollback_test.py
+├─ security_test.py
+├─ spec_validation_test.py
 ├─ test_contract.py
 ├─ test_e2e_smoke.py
 ├─ test_fix_md_spacing.py
