@@ -28,14 +28,24 @@ result  # Return result without print
 tasks = 1000  # Reduced tasks to lower overhead
 alloy_time = timeit.timeit(lambda: sum(float(r['result']) for r in lang.swarm(code, tasks) if isinstance(r.get('result'), (int, float))), number=3)
 
-def run_python_code(code_string):
-    safe_globals = {}
+def run_python_code(code_string: str) -> float:
+    """Execute a code string in a restricted global scope.
+
+    Only a minimal set of safe builtins is exposed to the executed code in
+    order to limit the potential impact of ``exec``.  If execution fails or the
+    result is not numeric, ``0.0`` is returned.
+    """
+
+    safe_builtins = {"range": range}
+    safe_globals = {"__builtins__": safe_builtins}
     try:
-        exec(code_string, safe_globals)
-        return safe_globals.get('result', 0)
-    except Exception as e:
+        compiled = compile(code_string, "<string>", "exec")
+        exec(compiled, safe_globals)  # nosec B102
+        result = safe_globals.get("result", 0)
+        return float(result) if isinstance(result, (int, float)) else 0.0
+    except Exception as e:  # pragma: no cover - logged for visibility
         print(f"Error executing Python code: {e}")
-        return 0 # Return 0 or another appropriate value in case of error
+        return 0.0
 
 python_time = timeit.timeit(lambda: sum(run_python_code(code) for _ in range(tasks)), number=5)
 
