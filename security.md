@@ -12,6 +12,7 @@
 ## Secret Management
 
 Secrets are sourced from environment variables:
+
 - `CODACY_PROJECT_TOKEN`
 - `FOD_TENANT`, `FOD_USER`, `FOD_PAT`
 - `SSC_TOKEN`, `SC_CLIENT_AUTH_TOKEN`, `DEBRICKED_TOKEN`
@@ -21,9 +22,11 @@ Rotation occurs every 90 days via platform automation.
 ## SBOM
 
 Generate SBOM with:
+
 ```bash
 syft . -o json > sbom.json
 ```
+
 Fail the pipeline on critical vulnerabilities.
 
 ## Data Handling & Retention
