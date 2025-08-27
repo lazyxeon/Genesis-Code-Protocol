@@ -235,6 +235,8 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#318)
+- chore: update workflows for current actions (#320)
 - chore(changelog): update and normalize spacing (#317)
 - chore(changelog): update and normalize spacing (#311)
 - chore(changelog): update changelog (#307)
