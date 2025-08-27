@@ -10,7 +10,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates=20240203 curl=7.88.1-10 && \
+    ca-certificates=20240203 curl && \
     rm -rf /var/lib/apt/lists/*
 
 # Install only dependencies first to leverage layer caching
