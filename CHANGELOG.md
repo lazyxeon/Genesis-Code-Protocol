@@ -6,6 +6,7 @@
 
 ### Bug Fixes
 
+- Fix CI workflows (#158)
 - fix: update workflows to run repository scripts (#146)
 - fix(lint): stub lang and optional plt in Alloyscript (#140)
 - fix: normalize leading blank lines (#125)
@@ -164,6 +165,7 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#156)
 - chore: add markdown lint workflow (#157)
 - chore(changelog): update and normalize spacing (#155)
 - chore(changelog): update and normalize spacing (#154)
