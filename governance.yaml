@@ -2,6 +2,7 @@ risk_level: r2
 controls:
   code_review: required
   security_scan: required
+  dependency_review: required
   tests: required
 change_types:
   patch:
@@ -19,5 +20,5 @@ release_policy:
   auto_rollback: true
 provenance:
   build_attestation: cosign attest
-  artifact_signing: cosign sign
+  artifact_signing: sigstore
   sbom_policy: fail_on_critical

@@ -1,70 +1,67 @@
-# Integration Contract: security-scan-workflow
+# Integration Contract: gha-workflow-resilience
 
 ## Interfaces
 
 ### CLI
 
 ```bash
-python -m src.main --repo <owner/repo>
+python -m src.resilience run --repo <owner/repo> --tag v1.2.3
 ```
 
 ### HTTP
 
-`POST /security/scan` with body `{ "repo": "owner/repo" }`
+`POST /workflows/resilience` with body `{"repo":"owner/repo","tag":"v1.2.3"}`
 
 ### Webhook
 
-GitHub `workflow_run` events trigger scanning.
+GitHub `push` and `release` events trigger the workflow via Actions dispatch.
 
 ### Queue
 
-Messages on `security-scan` queue follow schema:
+Messages on `workflow-resilience` queue follow schema:
 
 ```json
 {
   "repo": "owner/repo",
-  "commit": "sha",
-  "action": "scan"
+  "tag": "v1.2.3",
+  "action": "run"
 }
 ```
 
 ### GitHub Actions
 
-Manual dispatch enables mock runs via GitHub's API:
+Manual dispatch via API:
 
 ```bash
 curl -X POST \
   -H "Authorization: Bearer <token>" \
-  https://api.github.com/repos/<owner>/<repo>/actions/workflows/security-scan.yml/dispatches \
-  -d '{"ref":"main","inputs":{"mock":"true"}}'
+  https://api.github.com/repos/<owner>/<repo>/actions/workflows/gha-workflow-resilience.yml/dispatches \
+  -d '{"ref":"main","inputs":{"tag":"v1.2.3"}}'
 ```
-
-Setting `mock=true` runs the workflow without executing scanners while verifying configuration.
 
 ## Authentication
 
-- CLI/HTTP/Queue: Bearer token via `GITHUB_TOKEN` or OIDC.
+- Bearer token (`GITHUB_TOKEN`) or OIDC.
 - Rate limit: 60 req/min per repo.
-- All requests must include `X-Request-ID` header.
+- All requests include `X-Request-ID` header.
 
 Error shape:
 
 ```json
-{"error": "string", "request_id": "uuid"}
+{"error":"string","request_id":"uuid"}
 ```
 
 ## Idempotency
 
-- Idempotency key is the commit SHA.
-- Re-sending with same key overwrites previous results.
+- Idempotency key: `<repo>#<tag>`.
+- Replays with same key overwrite prior artifacts.
 
 ## Versioning
 
 - Semantic versioning (`1.0.0`).
 - Deprecation window: 90 days after minor release.
-- Backward compatibility tests verify previous contract versions.
+- Backward/forward compatibility tests ensure contract stability.
 
 ## Compatibility Tests
 
-- `tests/contract_test.py` exercises authentication and idempotency.
-- CI runs these on every pull request.
+- `tests/contract_test.py` exercises authentication and idempotency rules.

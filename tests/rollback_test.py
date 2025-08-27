@@ -4,16 +4,16 @@ from pathlib import Path
 
 import pytest
 
-from src import main, rollback
+from src import resilience, rollback
 
 
 def test_rollback_file_written(tmp_path, monkeypatch) -> None:
     """Ensure rollback creates a log file when steps fail."""
     report_path = tmp_path / "report.json"
     monkeypatch.setenv("WF_REPORT_PATH", str(report_path))
-    monkeypatch.setenv("WF_FAIL_STEP", "fortify")
+    monkeypatch.setenv("WF_FAIL_STEP", "markdownlint")
     with pytest.raises(Exception):
-        main.run()
+        resilience.run()
     assert Path("rollback.log").exists()
     Path("rollback.log").unlink()
 

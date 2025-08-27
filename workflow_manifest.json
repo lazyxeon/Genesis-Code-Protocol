@@ -1,74 +1,122 @@
 {
   "$schema": "https://example.com/schemas/workflow_manifest_v1.json",
-  "id": "bwb::security-scan-workflow::v1",
+  "id": "bwb::gha-workflow-resilience::v1",
   "version": "1.0.0",
-  "business_goal": "Run EthicalCheck, Fortify, and Codacy scans to detect security issues before merge",
-  "value_hypothesis": "Automated security scanning reduces vulnerabilities and improves compliance posture",
+  "business_goal": "Ensure critical GitHub workflows (dependency review, changelog, toc, repo structure, release signing, release bundling, markdown linting) run reliably and conflict-free",
+  "value_hypothesis": "Automated validation and release steps reduce integration failures and accelerate delivery",
   "inputs": [
     {"name": "repository", "type": "text", "source": "api", "validation": "<owner>/<repo>"},
-    {"name": "mock_run", "type": "text", "source": "manual", "validation": "true|false"}
+    {"name": "release_tag", "type": "text", "source": "api", "validation": "v[0-9]+\\.[0-9]+\\.[0-9]+"}
   ],
   "outputs": [
-    {"name": "scan_report", "type": "json", "retention_days": 90, "consumer": "security-team"}
+    {"name": "ci_report", "type": "json", "retention_days": 90, "consumer": "dev-team"}
   ],
   "SLOs": {"latency_ms_p95": 1200, "success_rate": 0.99, "error_budget_month": 0.01},
-  "constraints": ["reuse existing infrastructure", "avoid branch conflicts"],
+  "constraints": ["avoid branch conflicts", "fail-fast on critical vulnerabilities"],
   "operational_env": "container",
   "security": {
     "data_classes": ["internal"],
-    "secrets": ["ENV:CODACY_PROJECT_TOKEN", "ENV:FOD_TENANT", "ENV:FOD_USER", "ENV:FOD_PAT", "ENV:SSC_TOKEN", "ENV:SC_CLIENT_AUTH_TOKEN", "ENV:DEBRICKED_TOKEN"],
-    "iam": [{"principal": "workflow-sa", "permissions": ["security-events:write", "contents:read"]}],
+    "secrets": ["ENV:GITHUB_TOKEN", "ENV:COSIGN_EXPERIMENTAL"],
+    "iam": [{"principal": "workflow-sa", "permissions": ["contents:write", "pull-requests:write"]}],
     "supply_chain": {"sbom": true, "signing": "sigstore", "policy": "fail_on_critical"}
   },
   "compliance": {"pii": false, "gdpr": "n/a", "sox": "n/a", "hipaa": false},
   "tooling": {
-    "images": ["ghcr.io/org/security-scan-workflow:1.0.0"],
+    "images": ["ghcr.io/org/gha-workflow-resilience:1.0.0"],
     "runtimes": ["python3.11"],
     "libraries": ["pydantic", "pytest", "opentelemetry-sdk"]
   },
   "steps": [
     {
-      "name": "ethicalcheck",
+      "name": "dependency_review",
       "kind": "task",
-      "entrypoint": "src/ethicalcheck.py:main",
-      "contracts": {"in": ["inputs[*]"], "out": ["ethicalcheck_result"]},
+      "entrypoint": "src/resilience.py:dependency_review",
+      "contracts": {"in": ["inputs[*]"], "out": ["dependency_review_result"]},
       "retries": {"max": 1, "backoff": "exponential", "jitter": true},
       "timeout_s": 60,
       "idempotency_key": "hash(input)",
       "resources": {"cpu": "200m", "mem": "256Mi"},
-      "metrics": {"counters": ["ethicalcheck_runs"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.ethicalcheck"]
+      "metrics": {"counters": ["dependency_review_runs"], "timers": ["duration_ms"]},
+      "otel_spans": ["resilience.dependency_review"]
     },
     {
-      "name": "fortify",
+      "name": "generate_changelog",
       "kind": "task",
-      "entrypoint": "src/fortify.py:main",
-      "contracts": {"in": ["ethicalcheck_result"], "out": ["fortify_result"]},
+      "entrypoint": "src/resilience.py:generate_changelog",
+      "contracts": {"in": ["dependency_review_result"], "out": ["changelog_result"]},
       "retries": {"max": 1, "backoff": "exponential", "jitter": true},
-      "timeout_s": 300,
+      "timeout_s": 120,
       "idempotency_key": "hash(input)",
-      "resources": {"cpu": "500m", "mem": "512Mi"},
-      "metrics": {"counters": ["fortify_runs"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.fortify"]
+      "resources": {"cpu": "200m", "mem": "256Mi"},
+      "metrics": {"counters": ["changelog_runs"], "timers": ["duration_ms"]},
+      "otel_spans": ["resilience.generate_changelog"]
     },
     {
-      "name": "codacy",
+      "name": "update_toc",
       "kind": "task",
-      "entrypoint": "src/codacy.py:main",
-      "contracts": {"in": ["fortify_result"], "out": ["scan_report"]},
+      "entrypoint": "src/resilience.py:update_toc",
+      "contracts": {"in": ["changelog_result"], "out": ["toc_result"]},
+      "retries": {"max": 1, "backoff": "exponential", "jitter": true},
+      "timeout_s": 120,
+      "idempotency_key": "hash(input)",
+      "resources": {"cpu": "200m", "mem": "256Mi"},
+      "metrics": {"counters": ["toc_runs"], "timers": ["duration_ms"]},
+      "otel_spans": ["resilience.update_toc"]
+    },
+    {
+      "name": "update_repo_structure",
+      "kind": "task",
+      "entrypoint": "src/resilience.py:update_repo_structure",
+      "contracts": {"in": ["toc_result"], "out": ["repo_structure_result"]},
+      "retries": {"max": 1, "backoff": "exponential", "jitter": true},
+      "timeout_s": 120,
+      "idempotency_key": "hash(input)",
+      "resources": {"cpu": "200m", "mem": "256Mi"},
+      "metrics": {"counters": ["repo_structure_runs"], "timers": ["duration_ms"]},
+      "otel_spans": ["resilience.update_repo_structure"]
+    },
+    {
+      "name": "markdownlint",
+      "kind": "task",
+      "entrypoint": "src/resilience.py:markdownlint",
+      "contracts": {"in": ["repo_structure_result"], "out": ["markdownlint_result"]},
       "retries": {"max": 1, "backoff": "exponential", "jitter": true},
       "timeout_s": 60,
       "idempotency_key": "hash(input)",
       "resources": {"cpu": "200m", "mem": "256Mi"},
-      "metrics": {"counters": ["codacy_runs"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.codacy"]
+      "metrics": {"counters": ["markdownlint_runs"], "timers": ["duration_ms"]},
+      "otel_spans": ["resilience.markdownlint"]
+    },
+    {
+      "name": "release_bundle",
+      "kind": "task",
+      "entrypoint": "src/resilience.py:release_bundle",
+      "contracts": {"in": ["markdownlint_result"], "out": ["bundle_result"]},
+      "retries": {"max": 1, "backoff": "exponential", "jitter": true},
+      "timeout_s": 120,
+      "idempotency_key": "hash(input)",
+      "resources": {"cpu": "200m", "mem": "256Mi"},
+      "metrics": {"counters": ["bundle_runs"], "timers": ["duration_ms"]},
+      "otel_spans": ["resilience.release_bundle"]
+    },
+    {
+      "name": "sign_release",
+      "kind": "task",
+      "entrypoint": "src/resilience.py:sign_release",
+      "contracts": {"in": ["bundle_result"], "out": ["ci_report"]},
+      "retries": {"max": 1, "backoff": "exponential", "jitter": true},
+      "timeout_s": 120,
+      "idempotency_key": "hash(input)",
+      "resources": {"cpu": "200m", "mem": "256Mi"},
+      "metrics": {"counters": ["sign_release_runs"], "timers": ["duration_ms"]},
+      "otel_spans": ["resilience.sign_release"]
     }
   ],
   "dependencies": ["https://api.github.com"],
   "runbook": "docs/runbook.md",
   "failover": {"strategy": "brownout_then_rollback", "rpo_minutes": 5, "rto_minutes": 15},
-  "rollback": {"guard": "Gate:RISK", "actions": ["revert:deployment", "restore:scan_cache"]},
+  "rollback": {"guard": "Gate:RISK", "actions": ["revert:deployment", "restore:backup"]},
   "artifact_plan": [
-    {"path": "dist/security-scan-workflow-bundle.zip", "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]}
+    {"path": "dist/gha-workflow-resilience-bundle.zip", "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]}
   ]
 }

@@ -10,10 +10,17 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: release-sign-${{ github.ref_name }}
+  cancel-in-progress: true
+
 jobs:
   sign-release:
     if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     # The job needs write access to upload the signed artifacts, and
     # id-token to authenticate with Sigstore for keyless signing
     permissions:

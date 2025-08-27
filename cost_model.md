@@ -2,16 +2,16 @@
 
 | Scenario | Runs/Month | Cost/Run (USD) | Monthly Cost (USD) |
 |---------|------------|----------------|--------------------|
-| Low     | 100        | 0.04           | 4                  |
-| Medium  | 1_000      | 0.035          | 35                 |
-| High    | 10_000     | 0.03           | 300                |
+| Low     | 100        | 0.05           | 5 |
+| Medium  | 1_000      | 0.045          | 45 |
+| High    | 10_000     | 0.04           | 400 |
 
 ## Optimization Plan
 
-- **Hot path**: reuse scan artifacts across branches to reduce Fortify invocations (≈20% cost drop).
-- **Cold path**: schedule Codacy scans nightly for infrequently changed modules (≈10% cost drop).
+- **Hot path**: cache dependency data and markdown lint results to cut runtime ≈20%.
+- **Cold path**: batch changelog and TOC updates nightly to reduce triggers ≈15%.
 
 ## Tuning Levers
 
 - Adjust concurrency: ±25% cost impact.
-- Enable incremental SAST scans: 30% runtime reduction with moderate risk.
+- Toggle SBOM generation: 10% runtime trade-off with security risk.
