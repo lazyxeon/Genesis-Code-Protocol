@@ -1,12 +1,20 @@
 traces:
+  service_name: github-actions-stability
   spans:
-    ingest: {parent: root}
-    scan: {parent: ingest}
-    remediate: {parent: scan}
+    bwb.ingest: {parent: root, children: [bwb.fuzz]}
+    bwb.fuzz: {parent: bwb.ingest, children: [bwb.scan]}
+    bwb.scan: {parent: bwb.fuzz, children: [bwb.report]}
+    bwb.report: {parent: bwb.scan}
 metrics:
   counters:
-    records_ingested:
-      unit: count
+    runs_fetched:
+      unit: runs
+      cardinality: low
+    workflows_scanned:
+      unit: workflows
+      cardinality: low
+    reports_generated:
+      unit: reports
       cardinality: low
   timers:
     duration_ms:
@@ -19,13 +27,13 @@ logs:
 code_snippets:
   python: |
     from opentelemetry import trace
-    tracer = trace.get_tracer("gcp-protocol")
-    with tracer.start_as_current_span("ingest"):
+    tracer = trace.get_tracer("github-actions-stability")
+    with tracer.start_as_current_span("bwb.ingest"):
         ...
   node: |
     const { trace } = require("@opentelemetry/api");
-    const tracer = trace.getTracer("gcp-protocol");
-    tracer.startActiveSpan("ingest", span => {
+    const tracer = trace.getTracer("github-actions-stability");
+    tracer.startActiveSpan("bwb.ingest", span => {
       // ...
       span.end();
     });

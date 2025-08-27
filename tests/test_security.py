@@ -15,7 +15,7 @@ def test_no_secret_in_logs() -> None:
     logger = get_logger("test")
     logger.handlers = [handler]
     logger.info("hello")
-    assert "SECURE_REPO_TOKEN" not in stream.getvalue()
+    assert "GITHUB_TOKEN" not in stream.getvalue()
 
 
 def test_policy_enforces_fail_on_critical() -> None:
