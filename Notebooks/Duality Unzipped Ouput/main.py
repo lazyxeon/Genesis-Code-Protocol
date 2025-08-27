@@ -1,3 +1,5 @@
+import os
+
 import uvicorn
 from fastapi import FastAPI
 
@@ -8,4 +10,6 @@ def health():
     return {"ok": True, "role": "relay", "proto": "placeholder"}
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8099, log_level="info")
+    host = os.getenv("HOST", "127.0.0.1")
+    port = int(os.getenv("PORT", "8099"))
+    uvicorn.run(app, host=host, port=port, log_level="info")

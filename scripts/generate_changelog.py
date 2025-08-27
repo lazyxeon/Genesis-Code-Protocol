@@ -10,19 +10,21 @@ placed in a "Miscellaneous Tasks" section.
 
 Run this script from the repository root:
 
-    python Scripts/generate_changelog.py
+    python scripts/generate_changelog.py
 """
 
 import re
-import subprocess
 from pathlib import Path
+from typing import Dict, List
+
+from git import Repo
 
 # Resolve the repository root and CHANGELOG file location.
 ROOT = Path(__file__).resolve().parents[1]
 CHANGELOG = ROOT / "CHANGELOG.md"
 
 # Define the groups and the patterns that map commit message prefixes to them.
-GROUPS = {
+GROUPS: Dict[str, List[str]] = {
     "Features": [],
     "Bug Fixes": [],
     "Documentation": [],
@@ -35,32 +37,26 @@ GROUPS = {
 }
 
 PATTERNS = [
-    (r'^feat', 'Features'),
-    (r'^fix', 'Bug Fixes'),
-    (r'^doc', 'Documentation'),
-    (r'^refactor', 'Refactor'),
-    (r'^perf', 'Performance'),
-    (r'^style', 'Style'),
-    (r'^test', 'Testing'),
-    (r'^(chore|ci)', 'Miscellaneous Tasks'),
-    (r'.*security', 'Security'),
+    (r"^feat", "Features"),
+    (r"^fix", "Bug Fixes"),
+    (r"^doc", "Documentation"),
+    (r"^refactor", "Refactor"),
+    (r"^perf", "Performance"),
+    (r"^style", "Style"),
+    (r"^test", "Testing"),
+    (r"^(chore|ci)", "Miscellaneous Tasks"),
+    (r".*security", "Security"),
 ]
 
 
 def main() -> None:
     """Extract commit messages and write a grouped changelog."""
     try:
-        result = subprocess.run(
-            ["git", "log", "--pretty=format:%s"],
-            cwd=ROOT,
-            capture_output=True,
-            text=True,
-            check=True,
-        )
-    except subprocess.CalledProcessError as e:
-        raise SystemExit(f"Failed to retrieve git log: {e}") from e
+        repo = Repo(ROOT)
+    except Exception as e:  # pragma: no cover - repository must exist
+        raise SystemExit(f"Failed to open git repository: {e}") from e
 
-    messages = [m.strip() for m in result.stdout.splitlines() if m.strip()]
+    messages = [c.message.strip().splitlines()[0] for c in repo.iter_commits()]
 
     for msg in messages:
         assigned = False

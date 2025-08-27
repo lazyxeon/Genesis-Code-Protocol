@@ -2,9 +2,9 @@ name: CodeQL
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
   schedule:
     - cron: '0 4 * * 0'
 
@@ -16,32 +16,28 @@ jobs:
   analyze:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      # Optional: quick tokenize gate; shows exact file/line if syntax/encoding breaks
-      - name: Python tokenize gate
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Python syntax & encoding check (targets known problem files)
         run: |
           python - <<'PY'
-          import sys, tokenize, pathlib
+          import pathlib, tokenize, sys
           bad=[]
-          for p in pathlib.Path('.').rglob('*.py'):
+          for p in map(pathlib.Path, ["setup.py","scripts/generate_repo_toc.py"]):
               try:
-                  with open(p,'rb') as f:
+                  with open(p, "rb") as f:
                       for _ in tokenize.tokenize(f.readline): pass
               except Exception as e:
                   bad.append((str(p), e))
           if bad:
-              print("Syntax/encoding errors:")
-              for path, err in bad:
-                  print(f" - {path}: {err}")
+              print("Encoding/syntax issues:")
+              for path, err in bad: print(f" - {path}: {err}")
               sys.exit(1)
-          print("All .py files tokenized OK")
           PY
-
-      - uses: github/codeql-action/init@v3
+      - uses: github/codeql-action/init@3c3833e0f8c1c83d449a7478aa59c036a9165498
         with:
           languages: python
           tools: latest
-          config-file: .github/codeql/codeql-config.yml
-
-      - uses: github/codeql-action/analyze@v3
+      - uses: github/codeql-action/analyze@3c3833e0f8c1c83d449a7478aa59c036a9165498

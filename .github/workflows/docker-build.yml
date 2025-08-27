@@ -16,12 +16,12 @@ on:
       - 'requirements.txt'
   workflow_dispatch:
 
-# Restrict default permissions.
-permissions:
-  contents: read
+permissions: {}
 
 jobs:
   build:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8

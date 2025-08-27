@@ -1,21 +1,25 @@
 name: Release Bundle
 
+# Run this workflow when a new release is created
 on:
   release:
     types: [created]
 
-# Default read-only permissions.
+# Default permissions for all jobs
 permissions:
   contents: read
 
 jobs:
   bundle:
-    # Needs write permission to upload assets to the release.
+    runs-on: ubuntu-latest
+    # This job needs write access to upload the bundle and SBOMs
     permissions:
       contents: write
-    runs-on: ubuntu-latest
     steps:
+      # Checkout the repository at a known commit
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+
+      # Prepare a staging directory and create a ZIP of selected folders
       - name: Prepare staging
         env:
           TAG: ${{ github.ref_name }}
@@ -23,25 +27,33 @@ jobs:
           set -euo pipefail
           rm -rf dist
           mkdir -p dist
-          # Create a field kit zip containing key project directories.
-          zip -r "dist/GCP_${TAG}_Field_Kit.zip" "CLI Bundle" "Documents" "Scripts" -x "*.git*" "*.github*"
+          zip -r "dist/GCP_${TAG}_Field_Kit.zip" "cli_bundle" "Documents" "scripts" \
+            -x "*.git*" "*.github*"
+
+      # Generate SPDX SBOM
       - name: SBOM (SPDX)
         uses: anchore/sbom-action@e8d2a6937ecead383dfe75190d104edd1f9c5751
         with:
           path: .
           format: spdx-json
           output-file: dist/sbom.spdx.json
+
+      # Generate CycloneDX SBOM
       - name: SBOM (CycloneDX)
         uses: anchore/sbom-action@e8d2a6937ecead383dfe75190d104edd1f9c5751
         with:
           path: .
           format: cyclonedx-json
           output-file: dist/sbom.cdx.json
+
+      # Create a SHA-256 checksum file for all artifacts
       - name: SHA-256 checksums
         run: |
           set -euo pipefail
           cd dist
           sha256sum * > SHA256SUMS.txt
+
+      # Upload the ZIP and SBOM files to the GitHub release
       - name: Upload bundle to release
         uses: softprops/action-gh-release@72f2c25fcb47643c292f7107632f7a47c1df5cd8
         env:

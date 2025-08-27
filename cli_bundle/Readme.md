@@ -19,7 +19,7 @@ This folder contains the command-line interface (CLI) tools for running GRCP pro
 - `gcp_cli.py`: Main CLI entry point for running protocols.
 - `full_run.py`: Script for executing complete invention cycles.
 - `phase1.py`: Example phase script (extendable for custom phases).
-- `phase6.7.py`: Another phase example (e.g., validation).
+- `phase6_7.py`: Another phase example (e.g., validation).
 - `audit_utils.py`: Utilities for auditing and governance checks.
 - `prompt_utils.py`: Helpers for generating LLM prompts.
 - `requirements.txt`: Dependency list for the CLI.
@@ -60,7 +60,7 @@ Options:
 - `--prompt PROMPT`: Invention prompt (required for runs).
 - `--phase PHASE`: Run a specific phase (e.g., -1 for worth-it sprint).
 - `--full-run`: Execute a complete cycle (uses full_run.py).
-- `--audit`: Perform audit checks (uses audit_utils.py).
+- `--audit`: Perform audit checks (uses audit_utils.py). Requires `--prompt` and `--version`.
 - `--help`: Show help.
 
 Example:
@@ -68,11 +68,16 @@ Example:
 python gcp_cli.py --version 47 --risk-tier R2 --prompt "Invent an EV charging optimizer" --full-run
 ```
 
+Audit example:
+```bash
+python gcp_cli.py audit --prompt "Invent an EV charging optimizer" --version 47
+```
+
 ### Utilities
 
 - `audit_utils.py`: Functions for ethical audits and governance.
 - `prompt_utils.py`: Generate dynamic prompts for LLMs.
-- `phase1.py` / `phase6.7.py`: Modular phase scripts; extend for custom logic.
+- `phase1.py` / `phase6_7.py`: Modular phase scripts; extend for custom logic.
 
 ## Extending the CLI
 
@@ -178,7 +183,7 @@ if __name__ == "__main__":
     main()
 ```
 
-### phase6.7.py
+### phase6_7.py
 
 ```python
 import argparse

@@ -1,4 +1,3 @@
-
 # cliff.toml (basic config for git-cliff)
 [changelog]
 header = """

@@ -4,7 +4,7 @@
 
 <!-- PR Mentor badges -->
 <!-- CORE BADGES -->
-[![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen)](./Documents/LICENSE.md)
+[![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen)](LICENSE.md)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 [![Stars](https://img.shields.io/github/stars/lazyxeon/Genesis-Code-Protocol?style=flat)](https://github.com/lazyxeon/Genesis-Code-Protocol/stargazers)
 [![Forks](https://img.shields.io/github/forks/lazyxeon/Genesis-Code-Protocol?style=flat)](https://github.com/lazyxeon/Genesis-Code-Protocol/network/members)
@@ -15,32 +15,25 @@
 [![Contributors](https://img.shields.io/github/contributors/lazyxeon/Genesis-Code-Protocol)](https://github.com/lazyxeon/Genesis-Code-Protocol/graphs/contributors)
 
 <!-- CI / AUTOMATION BADGES -->
+[![pre-commit](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/pre-commit.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/pre-commit.yml)
 [![Python CI](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/Python-CI.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/Python-CI.yml)
+[![CodeQL](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/codeql.yml)
 [![Security Scan](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/security-scan.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/security-scan.yml)
-[![Repo Tree Sync](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml)
-[![Top-Level ToC](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-toc-file.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-toc-file.yml)
-[![Changelog](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/generate-changelog.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/generate-changelog.yml)
+[![Docs Build](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docs.yml)
 [![Notebooks](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/validate-notebooks.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/validate-notebooks.yml)
 [![Docker Build](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docker-build.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docker-build.yml)
 
 <!-- QUALITY / STYLE -->
 [![Code Style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://black.readthedocs.io/)
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://pre-commit.com/)
 [![Type Checking: mypy](https://img.shields.io/badge/type%20checking-mypy-2A6DB2)](https://mypy.readthedocs.io/)
 [![Tests: pytest](https://img.shields.io/badge/tests-pytest-0A9EDC)](https://docs.pytest.org/)
 [![Docs](https://img.shields.io/badge/docs-mkdocs%20material-blue)](https://lazyxeon.github.io/Genesis-Code-Protocol/)
 [![Container](https://img.shields.io/badge/ghcr-image-blue)](https://ghcr.io/lazyxeon/Genesis-Code-Protocol)
 [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/lazyxeon/Genesis-Code-Protocol/badge)](https://scorecard.dev/viewer/?uri=github.com/lazyxeon/Genesis-Code-Protocol)
 [![Release](https://img.shields.io/github/v/release/lazyxeon/Genesis-Code-Protocol)](https://github.com/lazyxeon/Genesis-Code-Protocol/releases/latest)
-
-
-[![LLM Reviewer: optional](https://img.shields.io/badge/LLM%20Reviewer-optional-lightgrey)](docs/llm-reviewer.md)
-[![Danger JS](https://img.shields.io/badge/Danger%20JS-enabled-blue?logo=npm)](https://danger.systems/js/)
-[![reviewdog](https://img.shields.io/badge/reviewdog-enabled-blue)](https://github.com/reviewdog/reviewdog)
-[![Semgrep CI](https://img.shields.io/badge/Semgrep-ci--ready-blue)](https://semgrep.dev/docs/deployment/add-semgrep-to-ci)
 [![Ruff](https://img.shields.io/badge/Ruff-linting-blue)](https://docs.astral.sh/ruff/)
 
-Quick nav: [What’s New](#whats-new) • [Quick Start](#quick-start) • [Phase Map](#phase-map) • [Runners & Cartridges](#runners--cartridges) • [Artifacts](#artifacts--ledgers) • [Security](#security--provenance) • [License](#license) • [Repo Structure](#Repository-Structure) •  [GCP Wiki](#GCP-Wiki)
+Quick nav: [What’s New](#whats-new) • [Quick Start](#quick-start) • [Phase Map](#phase-map) • [Runners & Cartridges](#runners--cartridges) • [Artifacts](#artifacts--ledgers) • [Security](#security--provenance) • [Limitations](#limitations) • [License](#license) • [Repo Structure](#Repository-Structure) •  [GCP Wiki](#GCP-Wiki)
 
 ---
 
@@ -109,12 +102,22 @@ See `SECURITY.md` for the security policy and supply‑chain controls. V50 conti
 
 ---
 
+## Limitations
+
+- **LLM validation environments:** Existing evaluation harnesses are minimal and primarily offline. They do not yet provide comprehensive adversarial coverage or deterministic scoring, so human review remains essential.
+- **Real‑time toolset constraints:** Tool integrations favor deterministic, batch-style runners. Access to live external APIs, hardware or streaming data is tightly restricted, which can introduce latency and coverage gaps for time‑sensitive tasks.
+- **Token and reasoning budgets:** GCP flows inherit the context limits of the host model. Long chains of thought or large artifacts can exceed the available window, requiring aggressive summarization or manual intervention.
+- **Ecosystem maturity:** Runners, cartridges and governance mappings are expanding but still do not cover every domain or regulatory regime; gaps may require custom extensions or manual processes.
+
+---
+
 ## Docs
 
 - **About** → [About.md](./About.md)  
 - **Charts & Graphs** → [Charts.md](./Charts.md)  
 - **Changelog** → [CHANGELOG.md](./CHANGELOG.md)
 - **Roadmap** → [Roadmap.md](./Roadmap.md)
+
 ---
 
 ## Version Matrix (Historic Highlights)
@@ -155,7 +158,6 @@ See [About.md](./About.md) for core principles and additional context.
 - GCP V49 Flagship Edition – Details of V49 Flagship Edition.
 - GCP V49 ‐ Summarized – Summary of V49 Flagship Edition
 
-
 ## **👉 https://github.com/lazyxeon/Genesis-Code-Protocol/wiki**
 
 ---
@@ -165,210 +167,220 @@ See [About.md](./About.md) for core principles and additional context.
 Overview Of Entire Repo, Auto Generated by Workflow.
  
 <details><!-- BEGIN REPO TREE -->
-```text
-- **.devcontainer/**
-  - devcontainer.json
-- **CLI Bundle/**
-  - Readme.md
-  - audit\_utils.py
-  - full\_run.py
-  - gcp\_cli.py
-  - phase1.py
-  - phase6.7.py
-  - prompt\_utils.py
-  - requirements.txt
-- **Documents/**
-  - A Documents Readme.md
-  - AI ChatGPT Critical Analysis Flagship GCP V49.md
-  - AI ChatGPT Critical Analysis GCP V45.6D.md
-  - AI ChatGPT Critical Analysis GCP V46.md
-  - AI ChatGPT Critical Analysis V47 Full Run EV issue.md
-  - AI Claude Critical Analysis Flagship GCP V49.md
-  - AI Claude Critical Analysis GCP V45.6d.md
-  - AI Claude Critical Analysis GCP V46.md
-  - AI Claude Critical Analysis V47 full run EV issue.md
-  - AI Grok Critical Analysis Flagship GCPV49.md
-  - AI Grok Critical Analysis GCP V45.6D.md
-  - AI Grok Critical Analysis GCP V46 .md
-  - AI Grok Critical Analysis V47 Full Run EV issue.md
-  - Feature Requests.md
-  - Issue Template.md
-  - Operations Manual.md
-  - Pull Request Template.md
-  - Requirements.md
-  - Security.md
-  - Theoretical Soundness Analysis.md
-  - index.md
-  - releases.md
-  - security\_report.md
-- **GCP Runners/**
-  - **GCP V50 Supplemental Docs/**
-    - GCP V50 Cartridges Pack.md
-    - GCP V50 Master Runners Codex.md
-  - A V49.0 Master Runners Codex: Flagship Edition.md
-  - Agriculture & Environmental MVR Runner.md
-  - Archaeology\_History Runner.md
-  - Code Runner.md
-  - Culinary Cartridge.md
-  - Cybersecurity Runner.md
-  - Deep Sea Runner.md
-  - Education Runner.md
-  - Energy\_Power Runner.md
-  - Entertainment Cartridge.md
-  - Exotics Runner.md
-  - Finance & FinTech Runner.md
-  - Humanitarian\_Disaster Relief Cartridge.md
-  - Industrial & Utilities OT Runner.md
-  - Infrastructure Runner.md
-  - Legal Cartridge.md
-  - Life Sciences Runner.md
-  - Physical Runner.md
-  - Political Systems Runner.md
-  - Public Programs\_Policy Runner.md
-  - Spaceflight\_Aerospace Runner.md
-  - Sports\_Athletics Cartridge.md
-  - Theology Runner.md
-- **GCP-All-Variants/**
-  - Changelog.md
-  - Changelog\_P2.md
-  - V09.md
-  - V11.md
-  - V20.md
-  - V22.md
-  - V23.md
-  - V30.md
-  - V34.md
-  - V35.md
-  - V36.md
-  - V40.md
-  - V41.md
-  - V42.md
-  - V43.0.md
-  - V43.6.md
-  - V43.7.md
-  - V44.1.md
-  - V44.7.md
-  - V44.8.md
-  - V44.9b.md
-  - V44.9d.md
-  - V45.0.md
-  - V45.1.md
-  - V45.2.md
-  - V45.3.md
-  - V45.4A.md
-  - V45.5.md
-  - V45.6.md
-  - V46.0.md
-  - V46.5.md
-  - V47.0.md
-  - V47.1.md
-  - V47.2.md
-  - V48.0.md
-  - V49.0.md
-  - V49.1 Flagship Edition.md
-  - V50.md
-- **Notebooks/**
-  - **Duality Unzipped Ouput/**
-    - BENCHMARK\_LEDGER.md
-    - DECISION\_LEDGER.md
-    - ENV\_LOCKFILE.yml
-    - Makefile
-    - README.md
-    - S49\_6\_Param\_Sweep.csv
-    - S49\_extended\_details (1).csv
-    - S49\_extended\_summary (1).csv
-    - \_\_init\_\_.py
-    - adaptive\_controller.py
-    - api\_server.py
-    - dataplane.py
-    - default\_policy.yml
-    - duality-agent.service
-    - flow\_classifier.py
-    - main.py
-    - masque\_placeholder.py
-    - openapi.yaml
-    - policy.py
-    - requirements.txt
-    - setup\_duality.sh
-    - sim\_duality.py
-    - sqm\_duality.conf
-  - **Full Runs/**
-    - **Flagship Full Runs/**
-    - **GCP V50 Full Runs/**
-    - A FR Readme.md
-    - High Speed Internet Issue V49 Full Run.md
-    - Known EV issue Full Run, GCPv47.md
-    - Latch Full run.md
-    - Quantum Mechanics Full Run.md
-    - Solar Energy Full Run.md
-    - V48 Full Run.md
-  - **Modulift Unzipped Output/**
-    - CMakeLists.txt
-    - README\_MODULIFT\_v0.1.md
-    - REFERENCES.md
-    - S48\_-0.5A\_CK\_Drift.md
-    - S48\_-0.8\_TRIZ\_Contradictions.md
-    - S48\_-1\_WorthIt\_Report.md
-    - S48\_10.0\_Simplicity\_Audit.md
-    - S48\_10.5\_Optimization\_Ledger.md
-    - S48\_1\_Context\_Dossier.md
-    - S48\_2\_Influence\_Matrix.md
-    - S48\_3\_Design\_Envelope.md
-    - S48\_4\_BranchTree.md
-    - S48\_5\_Architecture\_Blueprint.md
-    - S48\_6\_FunctionalPlan.md
-    - S48\_8.9\_RedTeam\_Findings.md
-    - S48\_9\_Validation\_Template.md
-    - bench\_build.ps1
-    - bench\_build.sh
-    - enable-named-modules.cmake
-    - headers.cmake
-    - hu-clang-gcc.cmake
-    - hu-msvc.cmake
-    - lib.cpp
-    - main.cpp
-    - math.hpp
-    - modulift-bench.yml
-    - modulift\_explain.py
-    - modulift\_explain\_rules.json
-    - util.hpp
-  - A Notebook Readme.md
-  - Adaptive QoS Allocator.ipynb
-  - Alloy Perceptual Loss.py
-  - Alloyscript.py
-  - Audio Processing.md
-  - JACCO.ipynb
-  - Latch LCH.md
-  - MOSAIC.ipynb
-- **Scripts/**
-  - fix\_md\_spacing.py
-  - generate\_changelog.py
-  - generate\_repo\_toc.py
-  - update\_repo\_structure.py
-- **docker/**
-  - .dockerignore
-  - Dockerfile
-  - requirements.txt
-- **docs/**
-  - index.md
-  - roadmap.md
-- .dockerignore
-- .gitattributes
-- About.md
-- CHANGELOG.md
-- CITATION.cff
-- Charts.md
-- Code of Conduct.md
-- Contributing.md
-- Dockerfile
-- GCP Current Version(V50 Flagship Edition).md
-- LICENSE.md
-- README.md
-- Roadmap.md
-- SECURITY.md
-- Table Of Contents.md
-- mkdocs.yml
-- requirements.txt
-- setup.py
+```
+.devcontainer/
+├─ devcontainer.json
+.dockerignore
+.flake8
+.gitattributes
+.markdownlint.yml
+.markdownlintignore
+.pre-commit-config.yaml
+About.md
+CHANGELOG.md
+CITATION.cff
+Charts.md
+Code of Conduct.md
+Contributing.md
+Dockerfile
+Documents/
+├─ A Documents Readme.md
+├─ AI ChatGPT Critical Analysis Flagship GCP V49.md
+├─ AI ChatGPT Critical Analysis GCP V45.6D.md
+├─ AI ChatGPT Critical Analysis GCP V46.md
+├─ AI ChatGPT Critical Analysis V47 Full Run EV issue.md
+├─ AI Claude Critical Analysis Flagship GCP V49.md
+├─ AI Claude Critical Analysis GCP V45.6d.md
+├─ AI Claude Critical Analysis GCP V46.md
+├─ AI Claude Critical Analysis V47 full run EV issue.md
+├─ AI Grok Critical Analysis Flagship GCPV49.md
+├─ AI Grok Critical Analysis GCP V45.6D.md
+├─ AI Grok Critical Analysis GCP V46 .md
+├─ AI Grok Critical Analysis V47 Full Run EV issue.md
+├─ Feature Requests.md
+├─ Issue Template.md
+├─ Operations Manual.md
+├─ Pull Request Template.md
+├─ Requirements.md
+├─ Security.md
+├─ Theoretical Soundness Analysis.md
+├─ index.md
+├─ releases.md
+├─ security_report.md
+GCP Current Version(V50 Flagship Edition).md
+GCP Runners/
+├─ A V49.0 Master Runners Codex: Flagship Edition.md
+├─ Agriculture & Environmental MVR Runner.md
+├─ Archaeology_History Runner.md
+├─ Code Runner.md
+├─ Culinary Cartridge.md
+├─ Cybersecurity Runner.md
+├─ Deep Sea Runner.md
+├─ Education Runner.md
+├─ Energy_Power Runner.md
+├─ Entertainment Cartridge.md
+├─ Exotics Runner.md
+├─ Finance & FinTech Runner.md
+├─ GCP V50 Supplemental Docs/
+├─ ├─ GCP V50 Cartridges Pack.md
+├─ ├─ GCP V50 Master Runners Codex.md
+├─ Humanitarian_Disaster Relief Cartridge.md
+├─ Industrial & Utilities OT Runner.md
+├─ Infrastructure Runner.md
+├─ Legal Cartridge.md
+├─ Life Sciences Runner.md
+├─ Physical Runner.md
+├─ Political Systems Runner.md
+├─ Public Programs_Policy Runner.md
+├─ Spaceflight_Aerospace Runner.md
+├─ Sports_Athletics Cartridge.md
+├─ Theology Runner.md
+GCP-All-Variants/
+├─ Changelog.md
+├─ Changelog_P2.md
+├─ V09.md
+├─ V11.md
+├─ V20.md
+├─ V22.md
+├─ V23.md
+├─ V30.md
+├─ V34.md
+├─ V35.md
+├─ V36.md
+├─ V40.md
+├─ V41.md
+├─ V42.md
+├─ V43.0.md
+├─ V43.6.md
+├─ V43.7.md
+├─ V44.1.md
+├─ V44.7.md
+├─ V44.8.md
+├─ V44.9b.md
+├─ V44.9d.md
+├─ V45.0.md
+├─ V45.1.md
+├─ V45.2.md
+├─ V45.3.md
+├─ V45.4A.md
+├─ V45.5.md
+├─ V45.6.md
+├─ V46.0.md
+├─ V46.5.md
+├─ V47.0.md
+├─ V47.1.md
+├─ V47.2.md
+├─ V48.0.md
+├─ V49.0.md
+├─ V49.1 Flagship Edition.md
+├─ V50.md
+LICENSE.md
+Notebooks/
+├─ A Notebook Readme.md
+├─ Adaptive QoS Allocator.ipynb
+├─ Alloy Perceptual Loss.py
+├─ Alloyscript.py
+├─ Audio Processing.md
+├─ Duality Unzipped Ouput/
+├─ ├─ BENCHMARK_LEDGER.md
+├─ ├─ DECISION_LEDGER.md
+├─ ├─ ENV_LOCKFILE.yml
+├─ ├─ Makefile
+├─ ├─ README.md
+├─ ├─ S49_6_Param_Sweep.csv
+├─ ├─ S49_extended_details (1).csv
+├─ ├─ S49_extended_summary (1).csv
+├─ ├─ __init__.py
+├─ ├─ adaptive_controller.py
+├─ ├─ api_server.py
+├─ ├─ dataplane.py
+├─ ├─ default_policy.yml
+├─ ├─ duality-agent.service
+├─ ├─ flow_classifier.py
+├─ ├─ main.py
+├─ ├─ masque_placeholder.py
+├─ ├─ openapi.yaml
+├─ ├─ policy.py
+├─ ├─ requirements.txt
+├─ ├─ setup_duality.sh
+├─ ├─ sim_duality.py
+├─ ├─ sqm_duality.conf
+├─ Full Runs/
+├─ ├─ A FR Readme.md
+├─ ├─ Flagship Full Runs/
+├─ ├─ GCP V50 Full Runs/
+├─ ├─ High Speed Internet Issue V49 Full Run.md
+├─ ├─ Known EV issue Full Run, GCPv47.md
+├─ ├─ Latch Full run.md
+├─ ├─ Quantum Mechanics Full Run.md
+├─ ├─ Solar Energy Full Run.md
+├─ ├─ V48 Full Run.md
+├─ JACCO.ipynb
+├─ Latch LCH.md
+├─ MOSAIC.ipynb
+├─ Modulift Unzipped Output/
+├─ ├─ CMakeLists.txt
+├─ ├─ README_MODULIFT_v0.1.md
+├─ ├─ REFERENCES.md
+├─ ├─ S48_-0.5A_CK_Drift.md
+├─ ├─ S48_-0.8_TRIZ_Contradictions.md
+├─ ├─ S48_-1_WorthIt_Report.md
+├─ ├─ S48_10.0_Simplicity_Audit.md
+├─ ├─ S48_10.5_Optimization_Ledger.md
+├─ ├─ S48_1_Context_Dossier.md
+├─ ├─ S48_2_Influence_Matrix.md
+├─ ├─ S48_3_Design_Envelope.md
+├─ ├─ S48_4_BranchTree.md
+├─ ├─ S48_5_Architecture_Blueprint.md
+├─ ├─ S48_6_FunctionalPlan.md
+├─ ├─ S48_8.9_RedTeam_Findings.md
+├─ ├─ S48_9_Validation_Template.md
+├─ ├─ bench_build.ps1
+├─ ├─ bench_build.sh
+├─ ├─ enable-named-modules.cmake
+├─ ├─ headers.cmake
+├─ ├─ hu-clang-gcc.cmake
+├─ ├─ hu-msvc.cmake
+├─ ├─ lib.cpp
+├─ ├─ main.cpp
+├─ ├─ math.hpp
+├─ ├─ modulift-bench.yml
+├─ ├─ modulift_explain.py
+├─ ├─ modulift_explain_rules.json
+├─ ├─ util.hpp
+README.md
+Roadmap.md
+SECURITY.md
+Table Of Contents.md
+cli_bundle/
+├─ Readme.md
+├─ __init__.py
+├─ audit_utils.py
+├─ full_run.py
+├─ gcp_cli.py
+├─ phase1.py
+├─ phase6_7.py
+├─ prompt_utils.py
+├─ requirements.txt
+docker/
+├─ .dockerignore
+├─ Dockerfile
+├─ requirements.txt
+docs/
+├─ index.md
+├─ roadmap.md
+mkdocs.yml
+requirements.txt
+scripts/
+├─ __init__.py
+├─ fix_md_spacing.py
+├─ generate_changelog.py
+├─ generate_repo_toc.py
+├─ update_repo_structure.py
+setup.py
+tests/
+├─ test_fix_md_spacing.py
+tools/
+├─ audit-workflows.sh
 ```
 <!-- END REPO TREE --></details>

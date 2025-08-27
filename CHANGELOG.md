@@ -1,6 +1,55 @@
 # GRCP Changelog
 
+### Features
+
+- feat(cli): pass version to audit (#131)
+
+### Bug Fixes
+
+- Fix notebook linting requirements and bundle paths (#184)
+- Fix pre-commit and docs setup (#181)
+- Fix CI workflows (#158)
+- fix: update workflows to run repository scripts (#146)
+- fix(lint): stub lang and optional plt in Alloyscript (#140)
+- fix: normalize leading blank lines (#125)
+- Fix Dockerfile syntax for FROM instruction
+- Fix syntax in sbom.yml for action references
+- Fix syntax in ossf-scorecard.yml workflow
+- Fix syntax in release-drafter workflow file
+- Fix formatting in cliff.toml workflow file
+- Fix formatting in security-scan.yml
+- Fix formatting in sbom.yml for summary print step
+- Fix file path for release signature artifacts
+- Fix formatting in release-drafter.yml
+- Fix newline at end of release-bundle.yml
+- Fix formatting in Python-CI.yml
+- Fix formatting in OSSF Scorecard workflow
+- Fix formatting in GitHub Actions workflow for docs
+- Fix indentation in auto-release workflow
+- Fix formatting issue in auto-merge workflow
+- Fix formatting issues in docker-build.yml
+- Fix formatting in cliff.toml configuration
+- Fix formatting of image digest output
+
 ### Documentation
+
+- docs: auto-update Table Of Contents.md (#178)
+- docs(readme): auto-sync repo structure (#176)
+- docs: auto-update Table Of Contents.md (#175)
+- docs: refresh badge block (#170)
+- docs: auto-update Table Of Contents.md (#165)
+- docs(readme): auto-sync repo structure (#163)
+- docs: auto-update Table Of Contents.md (#160)
+- docs(readme): auto-sync repo structure (#161)
+- docs(readme): auto-sync repo structure (#152)
+- docs: auto-update Table Of Contents.md (#150)
+- docs(readme): auto-sync repo structure (#149)
+- docs: auto-update Table Of Contents.md (#148)
+- docs: document current limitations (#145)
+- docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md
+- docs(readme): auto-sync repo structure
+- docs: auto-update Table Of Contents.md
 - docs: auto-update Table Of Contents.md
 - docs(readme): auto-sync repo structure
 - docs(readme): auto-sync repo structure
@@ -103,7 +152,226 @@
 - docs(readme): auto-sync repo structure
 - docs(readme): auto-sync repo structure
 
+### Refactor
+
+- Refactor codebase and fix lint issues (#143)
+- refactor: update workflows and changelog (#137)
+- Refactor TOC update workflow and remove gitsign
+- Refactor workflow to use create-pull-request action
+- Refactor changelog workflow to simplify steps
+- Refactor GHCR workflow to use env variables
+- Refactor docs.yml for GitHub Pages deployment
+- Refactor dependency submission workflow configuration
+- Refactor permissions in OSSF Scorecard workflow
+- Refactor MkDocs GitHub Actions workflow
+- Refactor GitHub Actions workflow for Docker image
+- Refactor image digest logging in workflow
+- Refactor Python CI workflow for clarity and conciseness
+- Refactor GitHub Actions workflow for notebook validation
+- Refactor build-and-push-ghcr workflow
+- Refactor GHCR workflow to derive image name dynamically
+- Refactor GitHub Actions workflow for image handling
+- Refactor OpenSSF Scorecard workflow configuration
+
 ### Miscellaneous Tasks
+
+- chore(changelog): update and normalize spacing (#185)
+- chore(changelog): update and normalize spacing (#183)
+- chore(changelog): update and normalize spacing (#182)
+- chore(changelog): update and normalize spacing (#180)
+- chore(changelog): update and normalize spacing (#179)
+- chore(changelog): update and normalize spacing (#177)
+- chore(changelog): update and normalize spacing (#174)
+- chore(changelog): update and normalize spacing (#172)
+- Configure flake8 and fix test import (#173)
+- chore(changelog): update and normalize spacing (#171)
+- chore(changelog): update and normalize spacing (#168)
+- chore: pin dependencies and tighten workflow permissions (#169)
+- chore(changelog): update and normalize spacing (#167)
+- chore(changelog): update and normalize spacing (#166)
+- chore(changelog): update and normalize spacing (#164)
+- chore(changelog): update and normalize spacing (#162)
+- chore(changelog): update and normalize spacing (#159)
+- chore(changelog): update and normalize spacing (#156)
+- chore: add markdown lint workflow (#157)
+- chore(changelog): update and normalize spacing (#155)
+- chore(changelog): update and normalize spacing (#154)
+- chore(changelog): update and normalize spacing (#153)
+- chore(changelog): update and normalize spacing (#151)
+- chore(changelog): update and normalize spacing (#147)
+- ci: add pre-commit configuration (#144)
+- chore(changelog): update and normalize spacing (#142)
+- chore(changelog): update and normalize spacing (#141)
+- chore(changelog): update and normalize spacing (#139)
+- chore(changelog): update and normalize spacing (#138)
+- chore(changelog): update and normalize spacing (#136)
+- chore(changelog): update and normalize spacing (#133)
+- Add tests for markdown spacing normalization (#134)
+- chore(changelog): update and normalize spacing (#129)
+- Refine workflow audit to search for tag refs (#132)
+- chore(changelog): update and normalize spacing (#128)
+- chore(changelog): update and normalize spacing (#126)
+- chore: pin workflow dependencies with hashes (#127)
+- chore(changelog): update and normalize spacing (#124)
+- chore(changelog): update and normalize spacing (#123)
+- chore(changelog): update and normalize spacing (#122)
+- chore(changelog): update and normalize spacing (#121)
+- Enhance TOC update workflow with signing and fixes
+- Enhance update-repo-structure workflow
+- Enhance changelog workflow with gitsign support
+- Update dependency review action and add version pinning
+- Update GitHub Actions workflow for release signing (#120)
+- chore(changelog): update and normalize spacing
+- Update release workflow to include SBOM generation
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- Modify permissions for dependency submission workflow
+- Update Dockerfile
+- chore(changelog): update and normalize spacing
+- Update GitHub Actions for documentation deployment
+- Update CodeQL action reference in workflow
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- Update GitHub Actions workflow for Docker setup
+- chore(changelog): update and normalize spacing
+- Update dependency-submission.yml
+- Pin Python image and enhance dependency installation
+- Pin Python image and optimize dependency installation
+- chore(changelog): update and normalize spacing
+- Update sbom.yml
+- chore(changelog): update and normalize spacing
+- Update OSSF Scorecard workflow dependencies
+- chore(changelog): update and normalize spacing
+- Update CodeQL workflow with new action versions
+- chore(changelog): update and normalize spacing
+- Modify release drafter workflow permissions and branches
+- chore(changelog): update and normalize spacing
+- Update GitHub Actions workflow for Docker build
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- Update Python-CI.yml
+- chore(changelog): update and normalize spacing
+- Merge pull request #119 from lazyxeon/chore/update-top-level-toc
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- Update ossf-scorecard.yml
+- chore(changelog): update and normalize spacing
+- Update GitHub Actions workflow for GHCR
+- chore(changelog): update and normalize spacing
+- Modify permissions in dependency-submission.yml
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- Clarify IMAGE environment variable in workflow
+- chore(changelog): update and normalize spacing
+- Update dependency submission workflow and permissions
+- chore(changelog): update and normalize spacing
+- Modify id-token permissions in OSSF Scorecard workflow
+- chore(changelog): update and normalize spacing
+- Delete .github/workflows/jekyll-gh-pages.yml
+- chore(changelog): update and normalize spacing
+- Add GitHub Actions workflow for Jekyll deployment
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- Update CodeQL workflow for Python analysis
+- chore(changelog): update and normalize spacing
+- Update OpenSSF Scorecard workflow configuration
+- chore(changelog): update and normalize spacing
+- Update SBOM workflow to use SPDX format
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- Update release drafter workflow configuration
+- chore(changelog): update and normalize spacing
+- Add GitHub Actions workflow for dependency submission
+- chore(changelog): update and normalize spacing
+- Update nbconvert version in requirements.txt
+- chore(changelog): update and normalize spacing
+- Enhance Table of Contents generation script
+- chore(changelog): update and normalize spacing
+- Enhance README update script for repo structure
+- chore(changelog): update and normalize spacing
+- Update commit message for CHANGELOG spacing
+- chore(changelog): update and normalize spacing
+- Ensure no-cache option is set for Docker build
+- Update docker-build.yml
+- Update dependency-review-action version
+- chore(changelog): update and normalize spacing
+- Add comment for Python file tokenization check
+- chore(changelog): update and normalize spacing
+- Update validate-notebooks.yml for Python setup
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- Reformat requirements.txt for consistency
+- chore(changelog): update and normalize spacing
+- Update TOC generation workflow permissions and script
+- chore(changelog): update and normalize spacing
+- Update GitHub Actions workflow for repo structure
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- Update SBOM workflow to use anchore/sbom-action
+- chore(changelog): update and normalize spacing
+- Update release-sign workflow for keyless signing
+- chore(changelog): update and normalize spacing
+- Update release drafter configuration and permissions
+- Adjust permissions and zip creation in release workflow
+- Update OpenSSF Scorecard workflow dependencies
+- chore(changelog): update and normalize spacing
+- Adjust permissions and update changelog spacing
+- chore(changelog): update and normalize spacing
+- Update docs.yml
+- chore(changelog): update and normalize spacing
+- Update Docker debug workflow permissions and settings
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- Update dependency review workflow with new permissions
+- Update CodeQL workflow permissions and actions
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- Update permissions for release job in workflow
+- chore(changelog): update and normalize spacing
+- Update GitHub Actions workflow for build and push
+- chore(changelog): update and normalize spacing
+- Refine auto-merge workflow for Dependabot
+- chore(changelog): update and normalize spacing
+- Update ossf-scorecard.yml
+- chore(changelog): update and normalize spacing
+- Merge pull request #118 from lazyxeon/chore/update-top-level-toc
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- Update GitHub Actions workflow for image build and push
+- chore(changelog): update and normalize spacing
+- Adjust permissions in ossf-scorecard workflow
+- chore(changelog): update and normalize spacing
+- Enhance Scorecard workflow with concurrency settings
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- chore(changelog): update and normalize spacing
+- Update GitHub Actions workflow for Docker image build
+- Update audit-workflows.sh
+- chore(changelog): update and normalize spacing
+- Create build-and-push-ghcr.yml
+- chore(changelog): update and normalize spacing
+- Delete .github/workflows/ghcr-build.yml
+- chore(changelog): update and normalize spacing
+- Update ossf-scorecard.yml
+- chore(changelog): update and normalize spacing
+- Delete .github/workflows/scorecards.yml
+- chore(changelog): update and normalize spacing
+- Merge pull request #117 from lazyxeon/chore/update-repo-structure
+- chore(changelog): update and normalize spacing
+- Merge pull request #116 from lazyxeon/chore/update-top-level-toc
+- Update audit-workflows.sh
+- chore(changelog): update and normalize spacing
+- Update ghcr-build.yml
+- chore(changelog): update and normalize spacing
+- Update ossf-scorecard.yml
+- Create audit-workflows.sh
+- chore(changelog): update and normalize spacing
+- Create release-sign.yml
+- chore(changelog): update and normalize spacing
+- Create ossf-scorecard.yml
+- chore(changelog): update and normalize spacing
 - Create dependency-review.yml
 - chore(changelog): update and normalize spacing
 - Update dependabot.yml
@@ -1043,6 +1311,9 @@
 - Initial commit
 
 ### Security
+
+- Remove security-events permission in workflow
+- Refine security scan workflow configuration
 - Update security-scan.yml
 - Update security-scan.yml
 - Update security-scan.yml

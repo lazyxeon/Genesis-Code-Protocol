@@ -5,13 +5,11 @@ on:
     tags:
       - 'v*'
 
-# Default to read-only permissions.
 permissions:
   contents: read
 
 jobs:
   release:
-    # This job needs write permissions to create a release.
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -20,7 +18,7 @@ jobs:
       - name: Create Release
         uses: actions/create-release@0cb9c9b65d5d1901c1f53e5e66eaf4afd303e70e
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}

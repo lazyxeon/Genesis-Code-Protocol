@@ -1,16 +1,17 @@
-
+"""Setup configuration for the Genesis Code Protocol package."""
 
 # -*- coding: utf-8 -*-
 from pathlib import Path
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 # Read the README file for the long description.  This resolves the path
 # relative to this file so that running setup from another directory still
 # finds the documentation.
 readme_path = Path(__file__).resolve().parents[1] / "README.md"
-long_description = ""
+LONG_DESCRIPTION = ""
 if readme_path.is_file():
-    long_description = readme_path.read_text(encoding="utf-8")
+    LONG_DESCRIPTION = readme_path.read_text(encoding="utf-8")
 
 setup(
     name="gcp",
@@ -21,7 +22,7 @@ setup(
     # ensure static analysis tools like CodeQL can parse this file.  Use
     # standard ASCII hyphens instead of fancy hyphens.
     description="Genesis Code Protocol: AI-native invention framework",
-    long_description=long_description,
+    long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     url="https://github.com/lazyxeon/Genesis-Code-Protocol",
     packages=find_packages(),
@@ -43,10 +44,11 @@ setup(
         "biopython>=1.83",
         "astropy>=6.1.0",
         "pygame>=2.6.0",
+        "GitPython>=3.1.44",
     ],
     entry_points={
         "console_scripts": [
-            "gcp = CLI_Bundle.gcp_cli:main",
+            "gcp = cli_bundle.gcp_cli:main",
         ],
     },
     classifiers=[
@@ -56,4 +58,3 @@ setup(
     ],
     python_requires=">=3.10",
 )
-

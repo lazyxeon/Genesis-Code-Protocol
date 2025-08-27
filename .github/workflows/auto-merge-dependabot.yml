@@ -5,15 +5,12 @@ on:
     branches: [main]
     types: [opened, synchronize]
 
-# Restrict default token permissions to read-only at the workflow level.
 permissions:
   contents: read
 
 jobs:
   merge:
-    # Only run this job if the actor is dependabot.
     if: github.actor == 'dependabot[bot]'
-    # This job needs permission to write to contents and pull-requests to merge.
     permissions:
       contents: write
       pull-requests: write

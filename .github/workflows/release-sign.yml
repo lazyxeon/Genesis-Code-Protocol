@@ -1,0 +1,67 @@
+name: Sign Release Artifacts
+
+# Trigger when a release is published (i.e. created and marked as published)
+on:
+  release:
+    types: [published]
+
+# Default permissions are read-only
+permissions:
+  contents: read
+
+jobs:
+  sign-release:
+    runs-on: ubuntu-latest
+    # The job needs write access to upload the signed artifacts, and
+    # id-token to authenticate with Sigstore for keyless signing
+    permissions:
+      contents: write
+      id-token: write
+    env:
+      # Provide the tag name and repository for gh commands
+      RELEASE_TAG: ${{ github.event.release.tag_name }}
+      REPO: ${{ github.repository }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+
+      # Install Cosign at a pinned commit; cosign-release specifies the cosign version
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@d58896d6a1865668819e1d91763c7751a165e159
+        with:
+          cosign-release: 'v2.5.3'
+
+      # Download the ZIP files attached to the release. gh CLI is preinstalled on
+      # GitHub-hosted runners. We authenticate using GH_TOKEN (alias of GITHUB_TOKEN).
+      - name: Download release ZIP artifacts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          mkdir -p signed_artifacts
+          # Download all .zip assets from the published release
+          gh release download "$RELEASE_TAG" --repo "$REPO" --pattern "*.zip" --dir signed_artifacts
+
+      # Sign each downloaded artifact using cosign's keyless signing.  The
+      # resulting .sigstore bundles contain the signature and certificate.
+      - name: Sign release artifacts
+        env:
+          COSIGN_EXPERIMENTAL: '1'
+        run: |
+          set -euo pipefail
+          cd signed_artifacts
+          for file in *.zip; do
+            echo "Signing $file..."
+            cosign sign-blob --yes --bundle "$file.sigstore" "$file"
+          done
+
+      # Upload the signature bundles back to the same release
+      - name: Upload signatures to release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          cd signed_artifacts
+          # Upload all .sigstore files to the release.  --clobber overwrites if the
+          # asset already exists (idempotent).
+          gh release upload "$RELEASE_TAG" *.sigstore --repo "$REPO" --clobber

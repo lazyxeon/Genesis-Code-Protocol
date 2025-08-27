@@ -2,35 +2,45 @@ name: Generate Changelog
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths:
       - "**/*.py"
       - "**/*.md"
       - "**/*.yml"
-  workflow_dispatch: {}
+  workflow_dispatch:
 
-# Default read-only permissions.
 permissions:
   contents: read
 
 jobs:
   changelog:
-    # Needs write permission to commit the changelog.
     permissions:
       contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
         with:
           fetch-depth: 0
-      - name: Set up Python
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
-          python-version: '3.11'
+          python-version: "3.11"
+
+      # Generate CHANGELOG.md using your script
       - name: Generate CHANGELOG.md
-        run: python Scripts/generate_changelog.py
-      - name: Commit updated CHANGELOG
-        uses: stefanzweifel/git-auto-commit-action@778341af668090896ca464160c2def5d1d1a3eb0
+        run: |
+          python scripts/generate_changelog.py
+          python scripts/fix_md_spacing.py CHANGELOG.md
+
+      # Create a pull request for the changelog update, sign commits with the GitHub Actions bot
+      - name: Create Pull Request
+      # v7.0.8 pinned to commit 271a8d0340265f705b14b6d32b9829c1cb33d45e
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         with:
-          commit_message: "chore(changelog): update and normalize spacing"
-          file_pattern: CHANGELOG.md
+          commit-message: "chore(changelog): update and normalize spacing"
+          branch: "chore/update-changelog"
+          title: "chore(changelog): update changelog"
+          body: "Automated changelog update."
+          labels: "documentation"
+          add-paths: "CHANGELOG.md"
+          sign-commits: true

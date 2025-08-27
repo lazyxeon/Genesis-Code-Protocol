@@ -1,5 +1,6 @@
 # syntax=docker/dockerfile:1.7
-FROM python:3.11-slim AS runner
+# Pin to a specific digest of python:3.11-slim
+FROM python:3.11-slim@sha256:4c904a8c1ece1177ddba2e4ecc6f241577637aa1d4db448e2393ae25d800cc85 AS runner
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -8,24 +9,22 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-# Minimal OS deps; extend if you actually need build tools for native wheels
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates curl && \
     rm -rf /var/lib/apt/lists/*
 
-# Leverage layer caching: copy requirements first
-# (This expects requirements.txt at repo root; we add one below if missing)
+# Install only dependencies first to leverage layer caching
 COPY requirements.txt ./requirements.txt
-RUN python -m pip install --upgrade pip && \
-    pip install -r requirements.txt
+RUN python -m pip install --upgrade pip==23.3.1 && \
+    pip install --require-hashes -r requirements.txt
 
-# Now copy the rest of the project (full repo because context will be '.')
+# Copy the rest of the repository
 COPY . .
 
 # Drop privileges for runtime
 RUN useradd -u 10001 -m appuser && chown -R appuser:appuser /app
 USER appuser
 
-# Default: show CLI help (adjust if you have a different entry point)
-ENTRYPOINT ["python", "CLI Bundle/gcp_cli.py"]
+# Default entrypoint shows CLI help
+ENTRYPOINT ["python", "cli_bundle/gcp_cli.py"]
 CMD ["--help"]

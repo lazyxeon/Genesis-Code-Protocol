@@ -1,14 +1,23 @@
+# .github/workflows/dependency-review.yml
 name: Dependency Review on PR
+
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   dependency-review:
-    name: Dependency review
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
       - name: Run Dependency Review
-        # NOTE: pin to a commit SHA for production; the tag below should be replaced with a pinned SHA
-        uses: github/dependency-review-action@v3
+        # Pin to a valid commit from v4.7.3 tag
+        uses: actions/dependency-review-action@595b5aeba73380359d98a5e087f648dbb0edce1b
