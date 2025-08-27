@@ -1,10 +1,7 @@
 """Performance probe."""
 
-import pathlib
-import sys
 import time
 
-sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
 from src.scan import scan_repository
 
 

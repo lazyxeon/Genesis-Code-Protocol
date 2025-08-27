@@ -19,7 +19,12 @@ def test_contract_mentions_authentication() -> None:
 def test_contract_sections_present() -> None:
     """Check required sections exist in the contract."""
     text = Path("integration_contract.md").read_text()
-    for section in ["Interfaces", "Authentication", "Idempotency", "Versioning"]:
+    for section in [
+        "Interfaces",
+        "Authentication",
+        "Idempotency",
+        "Versioning",
+    ]:
         assert f"## {section}" in text
 
 

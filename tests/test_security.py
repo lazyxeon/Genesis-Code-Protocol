@@ -3,11 +3,8 @@
 import io
 import json
 import logging
-import pathlib
-import sys
 from pathlib import Path
 
-sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
 from src.utils import get_logger
 
 
