@@ -10,6 +10,7 @@
 
 ### Bug Fixes
 
+- Fix workflow conditions to avoid skips
 - fix: run EthicalCheck workflow by default (#315)
 - Fix Codacy token check in workflow (#309)
 - fix codacy workflow env check (#303)
@@ -235,6 +236,10 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#333)
+- chore(changelog): update and normalize spacing (#330)
+- chore(changelog): update and normalize spacing (#318)
+- chore: update workflows for current actions (#320)
 - chore(changelog): update and normalize spacing (#317)
 - chore(changelog): update and normalize spacing (#311)
 - chore(changelog): update changelog (#307)

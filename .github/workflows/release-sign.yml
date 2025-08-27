@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   sign-release:
-    if: github.event_name == 'release'
+    if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     # The job needs write access to upload the signed artifacts, and
     # id-token to authenticate with Sigstore for keyless signing
@@ -21,7 +21,7 @@ jobs:
       id-token: write
     env:
       # Provide the tag name and repository for gh commands
-      RELEASE_TAG: ${{ github.event.release.tag_name }}
+      RELEASE_TAG: ${{ github.event.release.tag_name || github.ref_name }}
       REPO: ${{ github.repository }}
     steps:
       - name: Checkout repository
