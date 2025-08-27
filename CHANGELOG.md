@@ -152,6 +152,7 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing (#139)
 - chore(changelog): update and normalize spacing (#138)
 - chore(changelog): update and normalize spacing (#136)
 - chore(changelog): update and normalize spacing (#133)
