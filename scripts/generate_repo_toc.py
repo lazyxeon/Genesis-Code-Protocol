@@ -12,13 +12,20 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "Table Of Contents.md"
 
 IGNORE_DIRS = {
-    ".git", ".github", ".devcontainer", "docker", "__pycache__", ".venv",
+    ".git",
+    ".github",
+    ".devcontainer",
+    "docker",
+    "__pycache__",
+    ".venv",
 }
 IGNORE_EXTS = {".png", ".jpg", ".jpeg", ".gif", ".pdf", ".zip", ".ipynb"}
+
 
 def rel(p: Path) -> str:
     """Return path ``p`` relative to repo root with POSIX separators."""
     return str(p.relative_to(ROOT)).replace("\\", "/")
+
 
 def should_list(p: Path) -> bool:
     """Decide whether ``p`` should appear in the generated listing."""
@@ -26,6 +33,7 @@ def should_list(p: Path) -> bool:
         return p.name not in IGNORE_DIRS
     ext = p.suffix.lower()
     return ext not in IGNORE_EXTS
+
 
 def main() -> None:
     """Write the repository structure to ``Table Of Contents.md``."""
@@ -42,6 +50,7 @@ def main() -> None:
                 entries.append(f"{indent}- {rel(p)}")
     OUT.write_text("\n".join(entries) + "\n", encoding="utf-8")
     print(f"Wrote {rel(OUT)}")
+
 
 if __name__ == "__main__":
     main()
