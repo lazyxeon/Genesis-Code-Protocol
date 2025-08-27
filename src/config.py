@@ -11,7 +11,10 @@ class Config:
         default_factory=lambda: os.getenv("WF_REPORT_PATH", "report.json")
     )
     fail_step: bool = field(
-        default_factory=lambda: os.getenv("WF_FAIL_STEP", "false").lower() == "true"
+        default_factory=lambda: os.getenv(
+            "WF_FAIL_STEP", "false"
+        ).lower()
+        == "true",
     )
 
 
