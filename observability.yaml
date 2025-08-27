@@ -1,4 +1,24 @@
 traces:
+<<<<<< codex/analyze-failing-github-workflows
+  spans:
+    ingest:
+      name: bwb.ingest
+      attributes:
+        - records_ingested
+metrics:
+  counters:
+    - name: records_ingested
+      unit: 1
+      cardinality: low
+  timers:
+    - name: duration_ms
+      unit: ms
+      cardinality: low
+logs:
+  format: json
+  pii_scrubbing: true
+  sampling: 1.0
+=======
 <<<<<< codex/develop-fuzzing-and-vulnerability-scanning-workflow
   - span: bwb.ingest
     follows: []
@@ -68,4 +88,5 @@ code_snippets:
     tracer = trace.get_tracer("secure-repo")
     with tracer.start_as_current_span("secure_repo.scan"):
         ...
+>>>>>> main
 >>>>>> main

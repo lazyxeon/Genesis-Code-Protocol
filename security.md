@@ -1,3 +1,30 @@
+<<<<<< codex/analyze-failing-github-workflows
+# Security & Supply Chain
+
+## Threat Model (STRIDE)
+- **Spoofing**: OIDC tokens validated against issuer.
+- **Tampering**: Artifacts signed via Sigstore.
+- **Repudiation**: Audit logs stored for 90 days.
+- **Information Disclosure**: Secrets loaded from env vars; no secrets logged.
+- **Denial of Service**: Rate limiting on HTTP and queue consumers.
+- **Elevation of Privilege**: Least-privilege IAM for `workflow-sa`.
+
+## Secret Management
+- `CI_WORKFLOW_DIAGNOSER_TOKEN` sourced from environment variables.
+- Rotation every 90 days via secrets manager.
+
+## SBOM
+```
+syft . -o json > sbom.json
+```
+Policy: fail build on critical vulnerabilities.
+
+## Data Handling
+| Data | Location | Retention |
+|------|----------|-----------|
+| Logs | object storage | 30 days |
+| Reports | `dist/` | 90 days |
+=======
 <<<<<< codex/develop-fuzzing-and-vulnerability-scanning-workflow
 # Security and Supply Chain
 
@@ -48,4 +75,5 @@ Generated via `syft . -o json > sbom.json`. Pipeline fails on critical vulnerabi
 |------|-----------|-------|
 | Scorecard Reports | 30 days | Stored in internal bucket |
 | Remediation PRs | 90 days | GitHub retains metadata |
+>>>>>> main
 >>>>>> main

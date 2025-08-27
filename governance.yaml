@@ -1,5 +1,17 @@
 risk_level: r2
 controls:
+<<<<<< codex/analyze-failing-github-workflows
+  - code_review: required
+  - security_scan: required
+change_types:
+  patch:
+    reviewers: 1
+  minor:
+    reviewers: 2
+  major:
+    reviewers: 2
+    checks: ["load_test"]
+=======
 <<<<<< codex/develop-fuzzing-and-vulnerability-scanning-workflow
   - name: code_review
     description: All changes require peer review
@@ -37,12 +49,19 @@ change_types:
   major:
     reviewers: 3
     checks: [tests, sbom, perf]
+>>>>>> main
 release_policy:
   canary_percent: 10
   error_budget_guard: 0.01
   auto_rollback: true
 provenance:
+<<<<<< codex/analyze-failing-github-workflows
+  attestation: true
+  signing: sigstore
+  sbom: required
+=======
   attestation: cosign attest
   artifact_signing: cosign sign
   sbom_policy: fail_on_critical
+>>>>>> main
 >>>>>> main

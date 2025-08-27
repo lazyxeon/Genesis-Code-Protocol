@@ -1,4 +1,31 @@
-<<<<<< codex/develop-fuzzing-and-vulnerability-scanning-workflow
+<<<<<< codex/analyze-failing-github-workflows
+# Exit Wizard
+
+## 1. Validate
+make test
+
+## 2. Build & Sign
+docker build -t ci-workflow-diagnoser .
+make sbom
+make sign
+
+## 3. Canary Deploy
+kubectl apply -f deploy/canary.yaml
+
+## 4. SLO Probe
+sleep 900
+if kubectl logs deploy/ci-workflow-diagnoser | grep -q 'records_ingested'; then
+  kubectl apply -f deploy/prod.yaml
+else
+  kubectl rollout undo deployment/ci-workflow-diagnoser
+fi
+
+## 5. Release Receipt
+COMMIT=$(git rev-parse HEAD)
+sha256sum dist/ci-workflow-diagnoser-bundle.zip | awk '{print $1}' > checksum.txt
+jq -n --arg commit "$COMMIT" --arg checksum "$(cat checksum.txt)" '{commit:$commit, checksum:$checksum}' > release_receipt.json
+=======
+<<<<< codex/develop-fuzzing-and-vulnerability-scanning-workflow
 1. Validate schema and run tests
    make test
 2. Build container, generate SBOM, sign artifact
@@ -47,4 +74,5 @@ cat <<JSON > release_receipt.json
 }
 JSON
 ```
+>>>>>> main
 >>>>>> main
