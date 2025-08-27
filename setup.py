@@ -2,7 +2,8 @@
 
 # -*- coding: utf-8 -*-
 from pathlib import Path
-from setuptools import setup, find_packages
+
+from setuptools import find_packages, setup
 
 # Read the README file for the long description.  This resolves the path
 # relative to this file so that running setup from another directory still

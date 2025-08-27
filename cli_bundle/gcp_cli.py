@@ -4,11 +4,10 @@ import argparse
 
 from . import audit_utils, full_run, phase1, phase6_7, prompt_utils
 
+
 def main() -> None:
     """Entry point for the ``gcp`` CLI."""
-    parser = argparse.ArgumentParser(
-        description="Genesis Recursive Code Protocol CLI"
-    )
+    parser = argparse.ArgumentParser(description="Genesis Recursive Code Protocol CLI")
     parser.add_argument(
         "command",
         help="Command to run",
@@ -42,6 +41,7 @@ def main() -> None:
         parser.print_help()
     else:
         print("❗Invalid usage. Try `gcp help`")
+
 
 if __name__ == "__main__":
     main()

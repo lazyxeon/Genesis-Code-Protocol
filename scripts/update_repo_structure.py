@@ -11,16 +11,27 @@ README = ROOT / "README.md"
 
 # Tweak as needed
 EXCLUDE_DIRS = {
-    ".git", ".github", "__pycache__", ".mypy_cache", ".pytest_cache",
-    ".venv", "venv", "node_modules", "dist", "build", ".idea", ".vscode"
+    ".git",
+    ".github",
+    "__pycache__",
+    ".mypy_cache",
+    ".pytest_cache",
+    ".venv",
+    "venv",
+    "node_modules",
+    "dist",
+    "build",
+    ".idea",
+    ".vscode",
 }
 EXCLUDE_FILES = {".DS_Store"}
 
-MAX_DEPTH = 2          # increase to 3+ if you want deeper trees
-MAX_ENTRIES = 500      # safety cap per directory
+MAX_DEPTH = 2  # increase to 3+ if you want deeper trees
+MAX_ENTRIES = 500  # safety cap per directory
 
 BEGIN = "<!-- BEGIN REPO TREE -->"
 END = "<!-- END REPO TREE -->"
+
 
 def build_tree(root: Path, prefix: str = "", depth: int = 0) -> str:
     """Return a markdown-ish tree listing of files/dirs under root."""
@@ -44,7 +55,8 @@ def build_tree(root: Path, prefix: str = "", depth: int = 0) -> str:
                 lines.append(subtree)
         else:
             lines.append(f"{prefix}{name}")
-    return "\n".join(l for l in lines if l)
+    return "\n".join(line for line in lines if line)
+
 
 def replace_between(text: str, start: str, end: str, new_block: str) -> str:
     """Insert ``new_block`` between ``start`` and ``end`` markers in ``text``."""
@@ -55,6 +67,7 @@ def replace_between(text: str, start: str, end: str, new_block: str) -> str:
     # If markers missing, append a section at the end
     extra = f"\n\n## Repository Structure (auto-generated)\n\n{repl}\n"
     return text + extra
+
 
 def main() -> None:
     """Regenerate the repository tree section in README.md."""
@@ -71,6 +84,7 @@ def main() -> None:
         print("README.md updated with repository tree.")
     else:
         print("No changes needed (tree unchanged or markers absent).")
+
 
 if __name__ == "__main__":
     main()

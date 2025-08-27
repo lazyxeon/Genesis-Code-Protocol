@@ -3,7 +3,9 @@
 import sys
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).resolve().parents[1]))  # pylint: disable=wrong-import-position
+sys.path.append(
+    str(Path(__file__).resolve().parents[1])
+)  # pylint: disable=wrong-import-position
 from scripts.fix_md_spacing import normalize_spacing
 
 

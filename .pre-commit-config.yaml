@@ -1,3 +1,14 @@
+exclude: |
+  (?x)^(
+    Notebooks/
+    |GCP-All-Variants/
+    |GCP\ Runners/
+    |Documents/
+    |docs/
+    |.*\.md$
+    |.*\.ipynb$
+  )
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0

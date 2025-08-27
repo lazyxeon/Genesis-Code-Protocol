@@ -6,6 +6,7 @@
 
 ### Bug Fixes
 
+- Fix CI workflows (#158)
 - fix: update workflows to run repository scripts (#146)
 - fix(lint): stub lang and optional plt in Alloyscript (#140)
 - fix: normalize leading blank lines (#125)
@@ -30,6 +31,12 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#165)
+- docs(readme): auto-sync repo structure (#163)
+- docs: auto-update Table Of Contents.md (#160)
+- docs(readme): auto-sync repo structure (#161)
+- docs(readme): auto-sync repo structure (#152)
+- docs: auto-update Table Of Contents.md (#150)
 - docs(readme): auto-sync repo structure (#149)
 - docs: auto-update Table Of Contents.md (#148)
 - docs: document current limitations (#145)
@@ -162,6 +169,16 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#166)
+- chore(changelog): update and normalize spacing (#164)
+- chore(changelog): update and normalize spacing (#162)
+- chore(changelog): update and normalize spacing (#159)
+- chore(changelog): update and normalize spacing (#156)
+- chore: add markdown lint workflow (#157)
+- chore(changelog): update and normalize spacing (#155)
+- chore(changelog): update and normalize spacing (#154)
+- chore(changelog): update and normalize spacing (#153)
+- chore(changelog): update and normalize spacing (#151)
 - chore(changelog): update and normalize spacing (#147)
 - ci: add pre-commit configuration (#144)
 - chore(changelog): update and normalize spacing (#142)
