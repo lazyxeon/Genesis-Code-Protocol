@@ -207,6 +207,7 @@ Documents/
 ├─ index.md
 ├─ releases.md
 ├─ security_report.md
+EXIT_WIZARD.txt
 GCP Current Version(V50 Flagship Edition).md
 GCP Runners/
 ├─ A V49.0 Master Runners Codex: Flagship Edition.md
@@ -275,6 +276,7 @@ GCP-All-Variants/
 ├─ V49.1 Flagship Edition.md
 ├─ V50.md
 LICENSE.md
+Makefile
 Notebooks/
 ├─ A Notebook Readme.md
 ├─ Adaptive QoS Allocator.ipynb
@@ -362,6 +364,7 @@ cli_bundle/
 ├─ phase6_7.py
 ├─ prompt_utils.py
 ├─ requirements.txt
+cost_model.md
 docker/
 ├─ .dockerignore
 ├─ Dockerfile
@@ -369,7 +372,11 @@ docker/
 docs/
 ├─ index.md
 ├─ roadmap.md
+├─ runbook.md
+governance.yaml
+integration_contract.md
 mkdocs.yml
+observability.yaml
 requirements.txt
 scripts/
 ├─ __init__.py
@@ -377,10 +384,25 @@ scripts/
 ├─ generate_changelog.py
 ├─ generate_repo_toc.py
 ├─ update_repo_structure.py
+security.md
 setup.py
+src/
+├─ __init__.py
+├─ config.py
+├─ remediate.py
+├─ rollback.py
+├─ scan.py
+├─ utils.py
 tests/
+├─ test_contract.py
+├─ test_e2e_smoke.py
 ├─ test_fix_md_spacing.py
+├─ test_perf.py
+├─ test_rollback.py
+├─ test_security.py
+├─ test_spec_validation.py
 tools/
 ├─ audit-workflows.sh
+workflow_manifest.json
 ```
 <!-- END REPO TREE --></details>
