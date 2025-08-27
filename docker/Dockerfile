@@ -10,13 +10,13 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates curl && \
-    rm -rf /var/lib/apt/lists/*
+    ca-certificates curl \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install only dependencies first to leverage layer caching
 COPY requirements.txt ./requirements.txt
 RUN python -m pip install --upgrade pip==23.3.1 && \
-    pip install --require-hashes -r requirements.txt
+    pip install -r requirements.txt
 
 # Copy the rest of the repository
 COPY . .

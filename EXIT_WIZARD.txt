@@ -1,95 +1,23 @@
-<<<<<< codex/develop-and-implement-matrix-ci
-1. Validate schema & tests
-   make lint
-   make test
-2. Build container & SBOM
-   make build
-   make sbom
-   cosign sign --key env://COSIGN_KEY matrix-ci
-3. Launch canary with OTEL
-   make canary
-4. Run 15-minute SLO probe
-   watch -n 900 "curl -s http://localhost/health"
-5. Promote or rollback
-   if [ $? -eq 0 ]; then echo "promote"; else echo "rollback"; fi
-   echo '{"commit": "$(git rev-parse HEAD)", "image": "matrix-ci"}' > release_receipt.json
-=======
-<<<<<< codex/analyze-failing-github-workflows
-# Exit Wizard
-
-## 1. Validate
-make test
-
-## 2. Build & Sign
-docker build -t ci-workflow-diagnoser .
-make sbom
-make sign
-
-## 3. Canary Deploy
-kubectl apply -f deploy/canary.yaml
-
-## 4. SLO Probe
-sleep 900
-if kubectl logs deploy/ci-workflow-diagnoser | grep -q 'records_ingested'; then
-  kubectl apply -f deploy/prod.yaml
-else
-  kubectl rollout undo deployment/ci-workflow-diagnoser
-fi
-
-## 5. Release Receipt
-COMMIT=$(git rev-parse HEAD)
-sha256sum dist/ci-workflow-diagnoser-bundle.zip | awk '{print $1}' > checksum.txt
-jq -n --arg commit "$COMMIT" --arg checksum "$(cat checksum.txt)" '{commit:$commit, checksum:$checksum}' > release_receipt.json
-=======
-<<<<< codex/develop-fuzzing-and-vulnerability-scanning-workflow
-1. Validate schema and run tests
-   make test
-2. Build container, generate SBOM, sign artifact
-   make build sbom sign
-3. Launch canary deployment with OTEL enabled
-   kubectl apply -f deploy/canary.yaml
-4. Run 15-minute SLO probe; promote if pass else rollback
-   ./scripts/slo_probe.sh --minutes 15 || kubectl rollout undo deploy/fuzzing-vuln-scan
-5. Emit release receipt
-   printf '{"commit":"%s","image":"%s"}' "$(git rev-parse HEAD)" "$(docker images -q fuzzing_vuln_scan:latest)" > release_receipt.json
-=======
-# Exit Wizard for secure-repo-scorecard-remediation
+Exit Wizard
+===========
 
 1. Validate schema and run tests
-```
-make install
-make test
-```
+   make install
+   pre-commit run --all-files
+   make test
 
 2. Build container, generate SBOM, sign artifacts
-```
-make build
-make sbom
-cosign sign --key cosign.key secure-repo-workflow
-```
+   make build
+   make sbom
+   make sign
 
-3. Launch canary deployment with OTEL
-```
-docker run -e OTEL_EXPORTER_OTLP_ENDPOINT=collector:4317 secure-repo-workflow
-```
+3. Launch canary deployment with OTEL enabled
+   make canary
 
-4. Run 15-minute SLO probe
-```
-hey -z 15m http://localhost:8080/remediate
-```
-If probe passes, promote deployment; otherwise roll back.
+4. Run 15-minute SLO probe; promote if pass else rollback
+   ./scripts/slo_probe.sh --minutes 15 || echo "rollback"
 
 5. Emit release receipt
-```
-cat <<JSON > release_receipt.json
-{
-  "commit": "$(git rev-parse HEAD)",
-  "image": "secure-repo-workflow",
-  "sbom": "$(sha256sum sbom.json | cut -d' ' -f1)",
-  "slo_probe": "passed"
-}
-JSON
-```
->>>>>> main
->>>>>> main
->>>>>> main
+   commit=$(git rev-parse HEAD)
+   image=$(docker images -q gcp-protocol:latest)
+   printf '{"commit":"%s","image":"%s"}' "$commit" "$image" > release_receipt.json

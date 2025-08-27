@@ -1,6 +1,5 @@
+from . import errors, fuzz, ingest, report, rollback, scan
 from .config import Config
-from . import ingest, fuzz, scan, report, rollback
-from . import errors
 
 
 def run(cfg: Config | None = None) -> str:
