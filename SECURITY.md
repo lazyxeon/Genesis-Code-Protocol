@@ -29,10 +29,10 @@ Vulnerabilities solely affecting older, unsupported versions (v48 or earlier) ar
 
 To report a vulnerability, **please use the private reporting channel** so we can assess and address the issue before public disclosure:
 
-1. **Email security@lazyxeon.com** with a detailed description of the issue.  Include:
-   - Steps to reproduce (code snippets, input prompts, commands).
-   - Affected version(s) and environment (e.g., OS, Python version, LLM provider).
-   - Any proof‑of‑concept exploit or log output demonstrating the vulnerability.
+1. **Email [security@lazyxeon.com](mailto:security@lazyxeon.com)** with a detailed description of the issue.  Include:
+   * Steps to reproduce (code snippets, input prompts, commands).
+   * Affected version(s) and environment (e.g., OS, Python version, LLM provider).
+   * Any proof‑of‑concept exploit or log output demonstrating the vulnerability.
 2. Alternatively, **create a private GitHub Security Advisory** from the repository’s *Security* tab.  This sends your report to the maintainers without exposing it publicly.
 
 Please **do not open public issues or pull requests** for security vulnerabilities.  We use private channels to prevent exploitation while the fix is being developed.
@@ -60,4 +60,4 @@ While we strive to secure the protocol, users can reduce risk by following these
 
 ## Contact
 
-Questions related to this security policy or other security concerns?  Email us at **security@lazyxeon.com**.  For general questions, please use the [discussion forum](https://github.com/lazyxeon/Genesis-Code-Protocol/discussions) or the issue tracker.  Thank you for helping keep GCP safe and trustworthy.
+Questions related to this security policy or other security concerns?  Email us at **[security@lazyxeon.com](mailto:security@lazyxeon.com)**.  For general questions, please use the [discussion forum](https://github.com/lazyxeon/Genesis-Code-Protocol/discussions) or the issue tracker.  Thank you for helping keep GCP safe and trustworthy.
