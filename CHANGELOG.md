@@ -2,12 +2,15 @@
 
 ### Features
 
+- feat: add github actions stability workflow (#272)
 - feat: remove GitPython dependency from changelog script (#229)
 - feat: add workflow to trigger all workflows (#190)
 - feat(cli): pass version to audit (#131)
 
 ### Bug Fixes
 
+- Fix release workflows and dependabot auto-merge (#276)
+- Fix typing compatibility in fix_md_spacing (#269)
 - Fix lint error and unpin Dockerfile dependencies (#262)
 - Fix CI and Docker workflows (#261)
 - fix(docker): remove curl version pin (#253)
@@ -209,6 +212,10 @@
 
 ### Miscellaneous Tasks
 
+- Add Fortify AST Scan badge to README
+- Add Fortify AST Scan workflow
+- Add EthicalCheck workflow badge to README
+- chore(changelog): update and normalize spacing (#266)
 - Use typing module for Python 3.8 compatibility (#268)
 - Format config using black (#267)
 - chore(changelog): update and normalize spacing (#264)
@@ -1384,6 +1391,8 @@
 
 ### Security
 
+- conditionally run security workflows (#274)
+- Add Codacy Security Scan badge to README
 - Add Codacy security scan workflow
 - Add EthicalCheck workflow for API security testing
 - Harden scripts against common security issues (#187)
