@@ -6,6 +6,7 @@
 
 ### Bug Fixes
 
+- Fix notebook linting requirements and bundle paths (#184)
 - Fix pre-commit and docs setup (#181)
 - Fix CI workflows (#158)
 - fix: update workflows to run repository scripts (#146)
@@ -174,6 +175,7 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#182)
 - chore(changelog): update and normalize spacing (#180)
 - chore(changelog): update and normalize spacing (#179)
 - chore(changelog): update and normalize spacing (#177)
