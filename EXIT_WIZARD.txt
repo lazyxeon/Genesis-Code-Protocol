@@ -1,0 +1,37 @@
+# Exit Wizard for secure-repo-scorecard-remediation
+
+1. Validate schema and run tests
+```
+make install
+make test
+```
+
+2. Build container, generate SBOM, sign artifacts
+```
+make build
+make sbom
+cosign sign --key cosign.key secure-repo-workflow
+```
+
+3. Launch canary deployment with OTEL
+```
+docker run -e OTEL_EXPORTER_OTLP_ENDPOINT=collector:4317 secure-repo-workflow
+```
+
+4. Run 15-minute SLO probe
+```
+hey -z 15m http://localhost:8080/remediate
+```
+If probe passes, promote deployment; otherwise roll back.
+
+5. Emit release receipt
+```
+cat <<JSON > release_receipt.json
+{
+  "commit": "$(git rev-parse HEAD)",
+  "image": "secure-repo-workflow",
+  "sbom": "$(sha256sum sbom.json | cut -d' ' -f1)",
+  "slo_probe": "passed"
+}
+JSON
+```
