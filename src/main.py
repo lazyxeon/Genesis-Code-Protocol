@@ -1,8 +1,10 @@
+from typing import Optional
+
 from . import errors, fuzz, ingest, report, rollback, scan
 from .config import Config
 
 
-def run(cfg: Config | None = None) -> str:
+def run(cfg: Optional[Config] = None) -> str:
     """Execute the workflow and return path to the report."""
     cfg = cfg or Config()
     try:

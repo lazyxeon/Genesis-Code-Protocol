@@ -1,15 +1,13 @@
-from __future__ import annotations
-
-from typing import Dict
+from typing import Dict, List, Optional
 
 from .config import Config
 from .logging_utils import log
 
 
-def main(data: bytes, cfg: Config | None = None) -> dict[str, list[str]]:
+def main(data: bytes, cfg: Optional[Config] = None) -> Dict[str, List[str]]:
     cfg = cfg or Config()
     log("scan.start")
-    findings: dict[str, list[str]] = {"vulnerabilities": []}
+    findings: Dict[str, List[str]] = {"vulnerabilities": []}
     log("scan.complete", vulnerabilities=len(findings["vulnerabilities"]))
     return findings
 
