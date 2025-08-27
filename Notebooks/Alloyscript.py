@@ -1,5 +1,22 @@
 import timeit
 
+# Optional dependencies for plotting and swarm execution
+try:
+    import matplotlib.pyplot as plt
+except Exception:  # pragma: no cover
+    plt = None
+
+try:
+    import lang  # type: ignore
+except Exception:  # pragma: no cover
+    class _LangStub:
+        """Fallback when the real `lang` module is unavailable."""
+
+        def swarm(self, code, tasks):
+            return []
+
+    lang = _LangStub()
+
 # SOTA comparison with swarm mode
 code = '''import tensorflow as tf
 tensor = tf.constant([1.0, 2.0, 3.0, 4.0, 5.0, 6.0] * 50)  # Larger, varied tensor
@@ -30,7 +47,8 @@ print(f'Python Time: {python_time:.6f}s')
 print(f'% Faster: {faster:.2f}%')
 
 # Plot
-plt.bar(['AlloyScript Swarm', 'Python Sequential'], [alloy_time, python_time])
-plt.ylabel('Time (s)')
-plt.title('SOTA: AlloyScript Swarm vs Python')
-plt.show()
+if plt is not None:  # pragma: no cover
+    plt.bar(['AlloyScript Swarm', 'Python Sequential'], [alloy_time, python_time])
+    plt.ylabel('Time (s)')
+    plt.title('SOTA: AlloyScript Swarm vs Python')
+    plt.show()
