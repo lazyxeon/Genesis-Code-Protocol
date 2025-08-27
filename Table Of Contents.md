@@ -76,6 +76,9 @@
   - src/rollback.py
   - src/scan.py
   - src/utils.py
+  - **matrix_ci/**
+    - src/matrix_ci/__init__.py
+    - src/matrix_ci/pipeline.py
 - **scripts/**
   - scripts/__init__.py
   - scripts/fix_md_spacing.py
