@@ -8,6 +8,9 @@
 
 ### Bug Fixes
 
+- Fix lint error and unpin Dockerfile dependencies (#262)
+- Fix CI and Docker workflows (#261)
+- fix(docker): remove curl version pin (#253)
 - fix trigger-all-workflows permissions (#252)
 - fix: ensure CI dependencies and lint (#251)
 - fix: resolve markdown lint issues (#231)
@@ -42,6 +45,8 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#258)
+- docs: auto-update Table Of Contents.md (#257)
 - Document versioning and request IDs (#249)
 - docs(readme): auto-sync repo structure (#247)
 - docs(readme): auto-sync repo structure (#245)
@@ -201,6 +206,8 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#250)
+- Add pluggy and pytest dependencies (#254)
 - Ensure pre-commit installs dependencies (#255)
 - chore: remove apt package version pins (#256)
 - chore(changelog): update and normalize spacing (#248)
