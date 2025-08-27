@@ -31,6 +31,7 @@
 
 ### Documentation
 
+- docs(readme): auto-sync repo structure (#161)
 - docs(readme): auto-sync repo structure (#152)
 - docs: auto-update Table Of Contents.md (#150)
 - docs(readme): auto-sync repo structure (#149)
@@ -165,6 +166,7 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#162)
 - chore(changelog): update and normalize spacing (#159)
 - chore(changelog): update and normalize spacing (#156)
 - chore: add markdown lint workflow (#157)
