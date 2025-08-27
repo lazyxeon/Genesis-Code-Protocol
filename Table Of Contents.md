@@ -1,239 +1,224 @@
-# Table of Contents for Genesis Code Protocol (GCP)
+# Repository Structure
 
-This document is auto-generated. Links are relative to the repo. Updated as of August 26, 2025 (UTC).
-
-## Root
-
-- [About.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/About.md)
-- [CHANGELOG.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/CHANGELOG.md)
-- [Charts.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Charts.md)
-- [Code of Conduct.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Code%20of%20Conduct.md)
-- [Contributing.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Contributing.md)
-- [GCP Current Version(V50 Flagship Edition).md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Current%20Version%28V50%20Flagship%20Edition%29.md)
-- [LICENSE.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/LICENSE.md)
-- [README.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/README.md)
-- [Roadmap.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Roadmap.md)
-- [SECURITY.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/SECURITY.md)
-- [Table Of Contents.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Table%20Of%20Contents.md)
-- [mkdocs.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/mkdocs.yml)
-- [setup.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/setup.py)
-
-## .devcontainer
-
-
-## .github
-
-  - **ISSUE_TEMPLATE/**
-    - [bug_report.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/bug_report.md)
-    - [bug_report.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/bug_report.yml)
-    - [config.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/config.yml)
-    - [custom.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/custom.md)
-    - [feature_request.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/feature_request.md)
-    - [feature_request.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/feature_request.yml)
-    - [new_full_run.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/new_full_run.yml)
-    - [protocol_review.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/ISSUE_TEMPLATE/protocol_review.yml)
-  - **codeql/**
-    - [codeql-config.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/codeql/codeql-config.yml)
-  - **workflows/**
-    - [Python-CI.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/Python-CI.yml)
-    - [auto-merge-dependabot.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/auto-merge-dependabot.yml)
-    - [auto-release.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/auto-release.yml)
-    - [build-and-push-ghcr.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/build-and-push-ghcr.yml)
-    - [cliff.toml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/cliff.toml)
-    - [codeql.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/codeql.yml)
-    - [dependency-review.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/dependency-review.yml)
-    - [dependency-submission.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/dependency-submission.yml)
-    - [docker-build.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/docker-build.yml)
-    - [docker-debug.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/docker-debug.yml)
-    - [docs.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/docs.yml)
-    - [generate-changelog.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/generate-changelog.yml)
-    - [ossf-scorecard.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/ossf-scorecard.yml)
-    - [release-bundle.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/release-bundle.yml)
-    - [release-drafter.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/release-drafter.yml)
-    - [release-sign.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/release-sign.yml)
-    - [sbom.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/sbom.yml)
-    - [security-scan.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/security-scan.yml)
-    - [update-repo-structure.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/update-repo-structure.yml)
-    - [update-toc-file.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/update-toc-file.yml)
-    - [validate-notebooks.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/workflows/validate-notebooks.yml)
-  - [dependabot.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/dependabot.yml)
-  - [pull_request_template.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/pull_request_template.md)
-  - [release-drafter.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/.github/release-drafter.yml)
-
-## cli_bundle
-
-  - [Readme.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/cli_bundle/Readme.md)
-  - [audit_utils.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/cli_bundle/audit_utils.py)
-  - [full_run.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/cli_bundle/full_run.py)
-  - [gcp_cli.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/cli_bundle/gcp_cli.py)
-  - [phase1.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/cli_bundle/phase1.py)
-  - [phase6_7.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/cli_bundle/phase6_7.py)
-  - [prompt_utils.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/cli_bundle/prompt_utils.py)
-
-## Documents
-
-  - [A Documents Readme.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/A%20Documents%20Readme.md)
-  - [AI ChatGPT Critical Analysis Flagship GCP V49.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20ChatGPT%20Critical%20Analysis%20Flagship%20GCP%20V49.md)
-  - [AI ChatGPT Critical Analysis GCP V45.6D.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20ChatGPT%20Critical%20Analysis%20GCP%20V45.6D.md)
-  - [AI ChatGPT Critical Analysis GCP V46.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20ChatGPT%20Critical%20Analysis%20GCP%20V46.md)
-  - [AI ChatGPT Critical Analysis V47 Full Run EV issue.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20ChatGPT%20Critical%20Analysis%20V47%20Full%20Run%20EV%20issue.md)
-  - [AI Claude Critical Analysis Flagship GCP V49.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20Claude%20Critical%20Analysis%20Flagship%20GCP%20V49.md)
-  - [AI Claude Critical Analysis GCP V45.6d.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20Claude%20Critical%20Analysis%20GCP%20V45.6d.md)
-  - [AI Claude Critical Analysis GCP V46.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20Claude%20Critical%20Analysis%20GCP%20V46.md)
-  - [AI Claude Critical Analysis V47 full run EV issue.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20Claude%20Critical%20Analysis%20V47%20full%20run%20EV%20issue.md)
-  - [AI Grok Critical Analysis Flagship GCPV49.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20Grok%20Critical%20Analysis%20Flagship%20GCPV49.md)
-  - [AI Grok Critical Analysis GCP V45.6D.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20Grok%20Critical%20Analysis%20GCP%20V45.6D.md)
-  - [AI Grok Critical Analysis GCP V46 .md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20Grok%20Critical%20Analysis%20GCP%20V46%20.md)
-  - [AI Grok Critical Analysis V47 Full Run EV issue.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/AI%20Grok%20Critical%20Analysis%20V47%20Full%20Run%20EV%20issue.md)
-  - [Feature Requests.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Feature%20Requests.md)
-  - [Issue Template.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Issue%20Template.md)
-  - [Operations Manual.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Operations%20Manual.md)
-  - [Pull Request Template.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Pull%20Request%20Template.md)
-  - [Requirements.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Requirements.md)
-  - [Security.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Security.md)
-  - [Theoretical Soundness Analysis.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/Theoretical%20Soundness%20Analysis.md)
-  - [index.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/index.md)
-  - [releases.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/releases.md)
-  - [security_report.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Documents/security_report.md)
-
-## GCP Runners
-
-  - **GCP V50 Supplemental Docs/**
-    - [GCP V50 Cartridges Pack.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/GCP%20V50%20Supplemental%20Docs/GCP%20V50%20Cartridges%20Pack.md)
-    - [GCP V50 Master Runners Codex.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/GCP%20V50%20Supplemental%20Docs/GCP%20V50%20Master%20Runners%20Codex.md)
-  - [A V49.0 Master Runners Codex: Flagship Edition.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/A%20V49.0%20Master%20Runners%20Codex%3A%20Flagship%20Edition.md)
-  - [Agriculture & Environmental MVR Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Agriculture%20%26%20Environmental%20MVR%20Runner.md)
-  - [Archaeology_History Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Archaeology_History%20Runner.md)
-  - [Code Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Code%20Runner.md)
-  - [Culinary Cartridge.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Culinary%20Cartridge.md)
-  - [Cybersecurity Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Cybersecurity%20Runner.md)
-  - [Deep Sea Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Deep%20Sea%20Runner.md)
-  - [Education Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Education%20Runner.md)
-  - [Energy_Power Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Energy_Power%20Runner.md)
-  - [Entertainment Cartridge.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Entertainment%20Cartridge.md)
-  - [Exotics Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Exotics%20Runner.md)
-  - [Finance & FinTech Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Finance%20%26%20FinTech%20Runner.md)
-  - [Humanitarian_Disaster Relief Cartridge.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Humanitarian_Disaster%20Relief%20Cartridge.md)
-  - [Industrial & Utilities OT Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Industrial%20%26%20Utilities%20OT%20Runner.md)
-  - [Infrastructure Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Infrastructure%20Runner.md)
-  - [Legal Cartridge.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Legal%20Cartridge.md)
-  - [Life Sciences Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Life%20Sciences%20Runner.md)
-  - [Physical Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Physical%20Runner.md)
-  - [Political Systems Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Political%20Systems%20Runner.md)
-  - [Public Programs_Policy Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Public%20Programs_Policy%20Runner.md)
-  - [Spaceflight_Aerospace Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Spaceflight_Aerospace%20Runner.md)
-  - [Sports_Athletics Cartridge.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Sports_Athletics%20Cartridge.md)
-  - [Theology Runner.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP%20Runners/Theology%20Runner.md)
-
-## GCP-All-Variants
-
-  - [Changelog.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/Changelog.md)
-  - [Changelog_P2.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/Changelog_P2.md)
-  - [V09.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V09.md)
-  - [V11.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V11.md)
-  - [V20.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V20.md)
-  - [V22.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V22.md)
-  - [V23.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V23.md)
-  - [V30.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V30.md)
-  - [V34.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V34.md)
-  - [V35.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V35.md)
-  - [V36.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V36.md)
-  - [V40.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V40.md)
-  - [V41.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V41.md)
-  - [V42.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V42.md)
-  - [V43.0.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V43.0.md)
-  - [V43.6.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V43.6.md)
-  - [V43.7.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V43.7.md)
-  - [V44.1.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V44.1.md)
-  - [V44.7.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V44.7.md)
-  - [V44.8.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V44.8.md)
-  - [V44.9b.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V44.9b.md)
-  - [V44.9d.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V44.9d.md)
-  - [V45.0.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V45.0.md)
-  - [V45.1.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V45.1.md)
-  - [V45.2.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V45.2.md)
-  - [V45.3.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V45.3.md)
-  - [V45.4A.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V45.4A.md)
-  - [V45.5.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V45.5.md)
-  - [V45.6.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V45.6.md)
-  - [V46.0.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V46.0.md)
-  - [V46.5.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V46.5.md)
-  - [V47.0.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V47.0.md)
-  - [V47.1.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V47.1.md)
-  - [V47.2.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V47.2.md)
-  - [V48.0.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V48.0.md)
-  - [V49.0.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V49.0.md)
-  - [V49.1 Flagship Edition.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V49.1%20Flagship%20Edition.md)
-  - [V50.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/GCP-All-Variants/V50.md)
-
-## Notebooks
-
-  - **Duality Unzipped Ouput/**
-    - [BENCHMARK_LEDGER.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/BENCHMARK_LEDGER.md)
-    - [DECISION_LEDGER.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/DECISION_LEDGER.md)
-    - [ENV_LOCKFILE.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/ENV_LOCKFILE.yml)
-    - [README.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/README.md)
-    - [__init__.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/__init__.py)
-    - [adaptive_controller.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/adaptive_controller.py)
-    - [api_server.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/api_server.py)
-    - [dataplane.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/dataplane.py)
-    - [default_policy.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/default_policy.yml)
-    - [flow_classifier.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/flow_classifier.py)
-    - [main.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/main.py)
-    - [masque_placeholder.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/masque_placeholder.py)
-    - [openapi.yaml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/openapi.yaml)
-    - [policy.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/policy.py)
-    - [sim_duality.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Duality%20Unzipped%20Ouput/sim_duality.py)
+- .dockerignore
+- .gitattributes
+- .pre-commit-config.yaml
+- About.md
+- CHANGELOG.md
+- CITATION.cff
+- Charts.md
+- Code of Conduct.md
+- Contributing.md
+- Dockerfile
+- GCP Current Version(V50 Flagship Edition).md
+- LICENSE.md
+- README.md
+- Roadmap.md
+- SECURITY.md
+- Table Of Contents.md
+- mkdocs.yml
+- requirements.txt
+- setup.py
+- **tools/**
+  - tools/audit-workflows.sh
+- **cli_bundle/**
+  - cli_bundle/Readme.md
+  - cli_bundle/__init__.py
+  - cli_bundle/audit_utils.py
+  - cli_bundle/full_run.py
+  - cli_bundle/gcp_cli.py
+  - cli_bundle/phase1.py
+  - cli_bundle/phase6_7.py
+  - cli_bundle/prompt_utils.py
+  - cli_bundle/requirements.txt
+- **docs/**
+  - docs/index.md
+  - docs/roadmap.md
+- **tests/**
+  - tests/test_fix_md_spacing.py
+- **scripts/**
+  - scripts/__init__.py
+  - scripts/fix_md_spacing.py
+  - scripts/generate_changelog.py
+  - scripts/generate_repo_toc.py
+  - scripts/update_repo_structure.py
+- **Notebooks/**
+  - Notebooks/A Notebook Readme.md
+  - Notebooks/Alloy Perceptual Loss.py
+  - Notebooks/Alloyscript.py
+  - Notebooks/Audio Processing.md
+  - Notebooks/Latch LCH.md
   - **Full Runs/**
+    - Notebooks/Full Runs/A FR Readme.md
+    - Notebooks/Full Runs/High Speed Internet Issue V49 Full Run.md
+    - Notebooks/Full Runs/Known EV issue Full Run, GCPv47.md
+    - Notebooks/Full Runs/Latch Full run.md
+    - Notebooks/Full Runs/Quantum Mechanics Full Run.md
+    - Notebooks/Full Runs/Solar Energy Full Run.md
+    - Notebooks/Full Runs/V48 Full Run.md
     - **Flagship Full Runs/**
+      - Notebooks/Full Runs/Flagship Full Runs/A FFR Readme.md
+      - Notebooks/Full Runs/Flagship Full Runs/AGROS.md
+      - Notebooks/Full Runs/Flagship Full Runs/APNL-RT
+      - Notebooks/Full Runs/Flagship Full Runs/CMAP-X.md
+      - Notebooks/Full Runs/Flagship Full Runs/COES v1.0.md
+      - Notebooks/Full Runs/Flagship Full Runs/Civic Accord Stack.md
+      - Notebooks/Full Runs/Flagship Full Runs/Crisp-PCM.md
+      - Notebooks/Full Runs/Flagship Full Runs/EMP-GMD-Resilience.md
+      - Notebooks/Full Runs/Flagship Full Runs/FHASS.md
+      - Notebooks/Full Runs/Flagship Full Runs/Gobleki-Tepe.md
+      - Notebooks/Full Runs/Flagship Full Runs/HSO.md
+      - Notebooks/Full Runs/Flagship Full Runs/Helios-Arc PM Sail.md
+      - Notebooks/Full Runs/Flagship Full Runs/LYRA.md
+      - Notebooks/Full Runs/Flagship Full Runs/Nitrasafe.md
+      - Notebooks/Full Runs/Flagship Full Runs/NovelDesign.md
+      - Notebooks/Full Runs/Flagship Full Runs/PALIMPSET.md
+      - Notebooks/Full Runs/Flagship Full Runs/Payguard-DPC.md
+      - Notebooks/Full Runs/Flagship Full Runs/Poseidon Loop.md
+      - Notebooks/Full Runs/Flagship Full Runs/Proofline.md
     - **GCP V50 Full Runs/**
-    - [A FR Readme.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/A%20FR%20Readme.md)
-    - [High Speed Internet Issue V49 Full Run.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/High%20Speed%20Internet%20Issue%20V49%20Full%20Run.md)
-    - [Known EV issue Full Run, GCPv47.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/Known%20EV%20issue%20Full%20Run%2C%20GCPv47.md)
-    - [Latch Full run.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/Latch%20Full%20run.md)
-    - [Quantum Mechanics Full Run.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/Quantum%20Mechanics%20Full%20Run.md)
-    - [Solar Energy Full Run.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/Solar%20Energy%20Full%20Run.md)
-    - [V48 Full Run.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Full%20Runs/V48%20Full%20Run.md)
+      - Notebooks/Full Runs/GCP V50 Full Runs/Full auto spark run.md
+  - **Duality Unzipped Ouput/**
+    - Notebooks/Duality Unzipped Ouput/BENCHMARK_LEDGER.md
+    - Notebooks/Duality Unzipped Ouput/DECISION_LEDGER.md
+    - Notebooks/Duality Unzipped Ouput/ENV_LOCKFILE.yml
+    - Notebooks/Duality Unzipped Ouput/Makefile
+    - Notebooks/Duality Unzipped Ouput/README.md
+    - Notebooks/Duality Unzipped Ouput/S49_6_Param_Sweep.csv
+    - Notebooks/Duality Unzipped Ouput/S49_extended_details (1).csv
+    - Notebooks/Duality Unzipped Ouput/S49_extended_summary (1).csv
+    - Notebooks/Duality Unzipped Ouput/__init__.py
+    - Notebooks/Duality Unzipped Ouput/adaptive_controller.py
+    - Notebooks/Duality Unzipped Ouput/api_server.py
+    - Notebooks/Duality Unzipped Ouput/dataplane.py
+    - Notebooks/Duality Unzipped Ouput/default_policy.yml
+    - Notebooks/Duality Unzipped Ouput/duality-agent.service
+    - Notebooks/Duality Unzipped Ouput/flow_classifier.py
+    - Notebooks/Duality Unzipped Ouput/main.py
+    - Notebooks/Duality Unzipped Ouput/masque_placeholder.py
+    - Notebooks/Duality Unzipped Ouput/openapi.yaml
+    - Notebooks/Duality Unzipped Ouput/policy.py
+    - Notebooks/Duality Unzipped Ouput/requirements.txt
+    - Notebooks/Duality Unzipped Ouput/setup_duality.sh
+    - Notebooks/Duality Unzipped Ouput/sim_duality.py
+    - Notebooks/Duality Unzipped Ouput/sqm_duality.conf
   - **Modulift Unzipped Output/**
-    - [README_MODULIFT_v0.1.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/README_MODULIFT_v0.1.md)
-    - [REFERENCES.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/REFERENCES.md)
-    - [S48_-0.5A_CK_Drift.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/S48_-0.5A_CK_Drift.md)
-    - [S48_-0.8_TRIZ_Contradictions.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/S48_-0.8_TRIZ_Contradictions.md)
-    - [S48_-1_WorthIt_Report.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/S48_-1_WorthIt_Report.md)
-    - [S48_10.0_Simplicity_Audit.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/S48_10.0_Simplicity_Audit.md)
-    - [S48_10.5_Optimization_Ledger.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/S48_10.5_Optimization_Ledger.md)
-    - [S48_1_Context_Dossier.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/S48_1_Context_Dossier.md)
-    - [S48_2_Influence_Matrix.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/S48_2_Influence_Matrix.md)
-    - [S48_3_Design_Envelope.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/S48_3_Design_Envelope.md)
-    - [S48_4_BranchTree.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/S48_4_BranchTree.md)
-    - [S48_5_Architecture_Blueprint.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/S48_5_Architecture_Blueprint.md)
-    - [S48_6_FunctionalPlan.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/S48_6_FunctionalPlan.md)
-    - [S48_8.9_RedTeam_Findings.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/S48_8.9_RedTeam_Findings.md)
-    - [S48_9_Validation_Template.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/S48_9_Validation_Template.md)
-    - [modulift-bench.yml](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/modulift-bench.yml)
-    - [modulift_explain.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Modulift%20Unzipped%20Output/modulift_explain.py)
-  - [A Notebook Readme.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/A%20Notebook%20Readme.md)
-  - [Adaptive QoS Allocator.ipynb](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Adaptive%20QoS%20Allocator.ipynb)
-  - [Alloy Perceptual Loss.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Alloy%20Perceptual%20Loss.py)
-  - [Alloyscript.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Alloyscript.py)
-  - [Audio Processing.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Audio%20Processing.md)
-  - [JACCO.ipynb](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/JACCO.ipynb)
-  - [Latch LCH.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/Latch%20LCH.md)
-  - [MOSAIC.ipynb](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/Notebooks/MOSAIC.ipynb)
-
-## scripts
-
-  - [fix_md_spacing.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/scripts/fix_md_spacing.py)
-  - [generate_changelog.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/scripts/generate_changelog.py)
-  - [generate_repo_toc.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/scripts/generate_repo_toc.py)
-  - [update_repo_structure.py](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/scripts/update_repo_structure.py)
-
-## docker
-
-
-## docs
-
-  - [index.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/docs/index.md)
-  - [roadmap.md](/home/runner/work/Genesis-Code-Protocol/Genesis-Code-Protocol/docs/roadmap.md)
-
-## tools
+    - Notebooks/Modulift Unzipped Output/CMakeLists.txt
+    - Notebooks/Modulift Unzipped Output/README_MODULIFT_v0.1.md
+    - Notebooks/Modulift Unzipped Output/REFERENCES.md
+    - Notebooks/Modulift Unzipped Output/S48_-0.5A_CK_Drift.md
+    - Notebooks/Modulift Unzipped Output/S48_-0.8_TRIZ_Contradictions.md
+    - Notebooks/Modulift Unzipped Output/S48_-1_WorthIt_Report.md
+    - Notebooks/Modulift Unzipped Output/S48_10.0_Simplicity_Audit.md
+    - Notebooks/Modulift Unzipped Output/S48_10.5_Optimization_Ledger.md
+    - Notebooks/Modulift Unzipped Output/S48_1_Context_Dossier.md
+    - Notebooks/Modulift Unzipped Output/S48_2_Influence_Matrix.md
+    - Notebooks/Modulift Unzipped Output/S48_3_Design_Envelope.md
+    - Notebooks/Modulift Unzipped Output/S48_4_BranchTree.md
+    - Notebooks/Modulift Unzipped Output/S48_5_Architecture_Blueprint.md
+    - Notebooks/Modulift Unzipped Output/S48_6_FunctionalPlan.md
+    - Notebooks/Modulift Unzipped Output/S48_8.9_RedTeam_Findings.md
+    - Notebooks/Modulift Unzipped Output/S48_9_Validation_Template.md
+    - Notebooks/Modulift Unzipped Output/bench_build.ps1
+    - Notebooks/Modulift Unzipped Output/bench_build.sh
+    - Notebooks/Modulift Unzipped Output/enable-named-modules.cmake
+    - Notebooks/Modulift Unzipped Output/headers.cmake
+    - Notebooks/Modulift Unzipped Output/hu-clang-gcc.cmake
+    - Notebooks/Modulift Unzipped Output/hu-msvc.cmake
+    - Notebooks/Modulift Unzipped Output/lib.cpp
+    - Notebooks/Modulift Unzipped Output/main.cpp
+    - Notebooks/Modulift Unzipped Output/math.hpp
+    - Notebooks/Modulift Unzipped Output/modulift-bench.yml
+    - Notebooks/Modulift Unzipped Output/modulift_explain.py
+    - Notebooks/Modulift Unzipped Output/modulift_explain_rules.json
+    - Notebooks/Modulift Unzipped Output/util.hpp
+- **GCP-All-Variants/**
+  - GCP-All-Variants/Changelog.md
+  - GCP-All-Variants/Changelog_P2.md
+  - GCP-All-Variants/V09.md
+  - GCP-All-Variants/V11.md
+  - GCP-All-Variants/V20.md
+  - GCP-All-Variants/V22.md
+  - GCP-All-Variants/V23.md
+  - GCP-All-Variants/V30.md
+  - GCP-All-Variants/V34.md
+  - GCP-All-Variants/V35.md
+  - GCP-All-Variants/V36.md
+  - GCP-All-Variants/V40.md
+  - GCP-All-Variants/V41.md
+  - GCP-All-Variants/V42.md
+  - GCP-All-Variants/V43.0.md
+  - GCP-All-Variants/V43.6.md
+  - GCP-All-Variants/V43.7.md
+  - GCP-All-Variants/V44.1.md
+  - GCP-All-Variants/V44.7.md
+  - GCP-All-Variants/V44.8.md
+  - GCP-All-Variants/V44.9b.md
+  - GCP-All-Variants/V44.9d.md
+  - GCP-All-Variants/V45.0.md
+  - GCP-All-Variants/V45.1.md
+  - GCP-All-Variants/V45.2.md
+  - GCP-All-Variants/V45.3.md
+  - GCP-All-Variants/V45.4A.md
+  - GCP-All-Variants/V45.5.md
+  - GCP-All-Variants/V45.6.md
+  - GCP-All-Variants/V46.0.md
+  - GCP-All-Variants/V46.5.md
+  - GCP-All-Variants/V47.0.md
+  - GCP-All-Variants/V47.1.md
+  - GCP-All-Variants/V47.2.md
+  - GCP-All-Variants/V48.0.md
+  - GCP-All-Variants/V49.0.md
+  - GCP-All-Variants/V49.1 Flagship Edition.md
+  - GCP-All-Variants/V50.md
+- **Documents/**
+  - Documents/A Documents Readme.md
+  - Documents/AI ChatGPT Critical Analysis Flagship GCP V49.md
+  - Documents/AI ChatGPT Critical Analysis GCP V45.6D.md
+  - Documents/AI ChatGPT Critical Analysis GCP V46.md
+  - Documents/AI ChatGPT Critical Analysis V47 Full Run EV issue.md
+  - Documents/AI Claude Critical Analysis Flagship GCP V49.md
+  - Documents/AI Claude Critical Analysis GCP V45.6d.md
+  - Documents/AI Claude Critical Analysis GCP V46.md
+  - Documents/AI Claude Critical Analysis V47 full run EV issue.md
+  - Documents/AI Grok Critical Analysis Flagship GCPV49.md
+  - Documents/AI Grok Critical Analysis GCP V45.6D.md
+  - Documents/AI Grok Critical Analysis GCP V46 .md
+  - Documents/AI Grok Critical Analysis V47 Full Run EV issue.md
+  - Documents/Feature Requests.md
+  - Documents/Issue Template.md
+  - Documents/Operations Manual.md
+  - Documents/Pull Request Template.md
+  - Documents/Requirements.md
+  - Documents/Security.md
+  - Documents/Theoretical Soundness Analysis.md
+  - Documents/index.md
+  - Documents/releases.md
+  - Documents/security_report.md
+- **GCP Runners/**
+  - GCP Runners/A V49.0 Master Runners Codex: Flagship Edition.md
+  - GCP Runners/Agriculture & Environmental MVR Runner.md
+  - GCP Runners/Archaeology_History Runner.md
+  - GCP Runners/Code Runner.md
+  - GCP Runners/Culinary Cartridge.md
+  - GCP Runners/Cybersecurity Runner.md
+  - GCP Runners/Deep Sea Runner.md
+  - GCP Runners/Education Runner.md
+  - GCP Runners/Energy_Power Runner.md
+  - GCP Runners/Entertainment Cartridge.md
+  - GCP Runners/Exotics Runner.md
+  - GCP Runners/Finance & FinTech Runner.md
+  - GCP Runners/Humanitarian_Disaster Relief Cartridge.md
+  - GCP Runners/Industrial & Utilities OT Runner.md
+  - GCP Runners/Infrastructure Runner.md
+  - GCP Runners/Legal Cartridge.md
+  - GCP Runners/Life Sciences Runner.md
+  - GCP Runners/Physical Runner.md
+  - GCP Runners/Political Systems Runner.md
+  - GCP Runners/Public Programs_Policy Runner.md
+  - GCP Runners/Spaceflight_Aerospace Runner.md
+  - GCP Runners/Sports_Athletics Cartridge.md
+  - GCP Runners/Theology Runner.md
+  - **GCP V50 Supplemental Docs/**
+    - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Cartridges Pack.md
+    - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Master Runners Codex.md
