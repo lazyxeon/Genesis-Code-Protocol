@@ -1,10 +1,12 @@
+from typing import Optional
+
 from fastapi import FastAPI
 from pydantic import BaseModel
 
 class PolicyUpdate(BaseModel):
-    lte_budget_mb: int | None = None
-    parity_max_pct: float | None = None
-    jitter_hold_ms: int | None = None
+    lte_budget_mb: Optional[int] = None
+    parity_max_pct: Optional[float] = None
+    jitter_hold_ms: Optional[int] = None
 
 def build_app(state):
     app = FastAPI(title="DUALITY Agent API", version="0.1.0")
