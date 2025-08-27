@@ -40,6 +40,7 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#236)
 - docs(readme): auto-sync repo structure (#227)
 - docs: auto-update Table Of Contents.md (#226)
 - docs(readme): auto-sync repo structure (#225)
@@ -194,6 +195,9 @@
 
 ### Miscellaneous Tasks
 
+- Clean up merge artifacts and restore tests (#240)
+- chore: update trigger all workflows action (#234)
+- chore(changelog): update and normalize spacing (#232)
 - chore(changelog): update and normalize spacing (#230)
 - chore: fix contract test reference (#224)
 - chore: remove pycache (#223)
