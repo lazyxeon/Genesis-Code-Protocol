@@ -1,0 +1,25 @@
+risk_level: r2
+controls:
+  - name: code_review
+    description: All changes require peer review
+  - name: dependency_scan
+    description: SBOM and vulnerability scan on each build
+change_types:
+  patch:
+    reviewers: 1
+    checks: [test]
+  minor:
+    reviewers: 2
+    checks: [test, security]
+  major:
+    reviewers: 2
+    checks: [test, security, perf]
+release_policy:
+  canary_percent: 5
+  ramp_minutes: 30
+  error_budget_guard: 0.01
+  auto_rollback: true
+provenance:
+  attestation: cosign attest --predicate supply-chain.json
+  signing: cosign sign $IMAGE
+  sbom: syft . -o json > sbom.json

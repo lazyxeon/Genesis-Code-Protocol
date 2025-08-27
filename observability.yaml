@@ -1,0 +1,39 @@
+traces:
+  - span: bwb.ingest
+    follows: []
+    children: [bwb.fuzz]
+  - span: bwb.fuzz
+    follows: [bwb.ingest]
+    children: [bwb.scan]
+  - span: bwb.scan
+    follows: [bwb.fuzz]
+    children: [bwb.report]
+  - span: bwb.report
+    follows: [bwb.scan]
+    children: []
+metrics:
+  counters:
+    records_ingested: {unit: "records", cardinality: low}
+    fuzz_cases: {unit: "cases", cardinality: medium}
+    packages_scanned: {unit: "packages", cardinality: medium}
+    reports_generated: {unit: "reports", cardinality: low}
+  timers:
+    step_duration_ms: {unit: "milliseconds", cardinality: low}
+logs:
+  format: json
+  fields: [timestamp, level, message, event]
+  pii_scrub: ["secret", "token"]
+  sampling: 1.0
+code_snippets:
+  python: |
+    from opentelemetry import trace
+    tracer = trace.get_tracer("fuzzing_vuln_scan")
+    with tracer.start_as_current_span("bwb.ingest"):
+        ...
+  node: |
+    const { trace } = require("@opentelemetry/api");
+    const tracer = trace.getTracer("fuzzing_vuln_scan");
+    await tracer.startActiveSpan("bwb.ingest", span => {
+      // ...
+      span.end();
+    });

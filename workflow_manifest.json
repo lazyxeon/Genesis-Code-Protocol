@@ -1,0 +1,85 @@
+{
+  "$schema": "https://example.com/schemas/workflow_manifest_v1.json",
+  "id": "bwb::fuzzing_vuln_scan::v1",
+  "version": "1.0.0",
+  "business_goal": "Proactively uncover memory corruption and dependency vulnerabilities before release",
+  "value_hypothesis": "Early detection of flaws reduces production incidents and shortens remediation cycles, improving security posture",
+  "inputs": [
+    {"name": "source_archive", "type": "bytes", "source": "s3", "validation": "must be a tar.gz archive"}
+  ],
+  "outputs": [
+    {"name": "report", "type": "json", "retention_days": 90, "consumer": "security-team"}
+  ],
+  "SLOs": {"latency_ms_p95": 2000, "success_rate": 0.99, "error_budget_month": 0.01},
+  "constraints": ["use open-source tooling only", "per-run cost <= $3"],
+  "operational_env": "container",
+  "security": {
+    "data_classes": ["internal"],
+    "secrets": ["ENV:TRIVY_DB_TOKEN"],
+    "iam": [{"principal": "workflow-sa", "permissions": ["read:s3-source", "write:s3-reports"]}],
+    "supply_chain": {"sbom": true, "signing": "sigstore", "policy": "fail_on_critical"}
+  },
+  "compliance": {"pii": false, "gdpr": "n/a", "sox": "n/a", "hipaa": false},
+  "tooling": {
+    "images": ["ghcr.io/example/fuzzing_vuln_scan:1.0.0"],
+    "runtimes": ["python3.11"],
+    "libraries": ["requests", "pytest", "opentelemetry-sdk"]
+  },
+  "steps": [
+    {
+      "name": "ingest",
+      "kind": "task",
+      "entrypoint": "src/ingest.py:main",
+      "contracts": {"in": ["inputs[0]"], "out": ["stage_raw"]},
+      "retries": {"max": 3, "backoff": "exponential", "jitter": true},
+      "timeout_s": 60,
+      "idempotency_key": "hash(input)",
+      "resources": {"cpu": "500m", "mem": "512Mi"},
+      "metrics": {"counters": ["records_ingested"], "timers": ["duration_ms"]},
+      "otel_spans": ["bwb.ingest"]
+    },
+    {
+      "name": "fuzz",
+      "kind": "task",
+      "entrypoint": "src/fuzz.py:main",
+      "contracts": {"in": ["stage_raw"], "out": ["stage_fuzzed"]},
+      "retries": {"max": 2, "backoff": "linear", "jitter": false},
+      "timeout_s": 120,
+      "idempotency_key": "hash(input)",
+      "resources": {"cpu": "1", "mem": "1Gi"},
+      "metrics": {"counters": ["fuzz_cases"], "timers": ["duration_ms"]},
+      "otel_spans": ["bwb.fuzz"]
+    },
+    {
+      "name": "scan",
+      "kind": "task",
+      "entrypoint": "src/scan.py:main",
+      "contracts": {"in": ["stage_fuzzed"], "out": ["stage_findings"]},
+      "retries": {"max": 2, "backoff": "exponential", "jitter": true},
+      "timeout_s": 90,
+      "idempotency_key": "hash(input)",
+      "resources": {"cpu": "500m", "mem": "512Mi"},
+      "metrics": {"counters": ["packages_scanned"], "timers": ["duration_ms"]},
+      "otel_spans": ["bwb.scan"]
+    },
+    {
+      "name": "report",
+      "kind": "task",
+      "entrypoint": "src/report.py:main",
+      "contracts": {"in": ["stage_findings"], "out": ["outputs[0]"]},
+      "retries": {"max": 1, "backoff": "none", "jitter": false},
+      "timeout_s": 30,
+      "idempotency_key": "hash(input)",
+      "resources": {"cpu": "100m", "mem": "128Mi"},
+      "metrics": {"counters": ["reports_generated"], "timers": ["duration_ms"]},
+      "otel_spans": ["bwb.report"]
+    }
+  ],
+  "dependencies": ["s3://source", "https://trivy.dev"],
+  "runbook": "docs/runbook.md",
+  "failover": {"strategy": "brownout_then_rollback", "rpo_minutes": 5, "rto_minutes": 15},
+  "rollback": {"guard": "Gate:RISK", "actions": ["revert:deployment", "restore:db_snapshot_t-1"]},
+  "artifact_plan": [
+    {"path": "dist/fuzzing_vuln_scan-bundle.zip", "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]}
+  ]
+}
