@@ -28,7 +28,6 @@ permissions:
 
 jobs:
   codacy-security-scan:
-    if: ${{ env.CODACY_PROJECT_TOKEN != '' }}
     continue-on-error: true
     permissions:
       contents: read # for actions/checkout to fetch code
@@ -41,11 +40,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Verify Codacy token
+        if: env.CODACY_PROJECT_TOKEN == ''
+        run: echo 'CODACY_PROJECT_TOKEN not set, skipping scan.' >> $GITHUB_STEP_SUMMARY
+
       # Execute Codacy Analysis CLI and generate a SARIF output with the security issues identified during the analysis
       - name: Run Codacy Analysis CLI
+        if: env.CODACY_PROJECT_TOKEN != ''
         uses: codacy/codacy-analysis-cli-action@v4.4.7
         with:
-          # Check https://github.com/codacy/codacy-analysis-cli#project-token to get your project token from your Codacy repository
+          # Check https://github.com/codacy/codacy-analysis-cli#project-token to get your project token
+          # from your Codacy repository
           # You can also omit the token and run the tools that support default configurations
           project-token: ${{ env.CODACY_PROJECT_TOKEN }}
           verbose: true
@@ -59,6 +64,11 @@ jobs:
 
       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
+        if: env.CODACY_PROJECT_TOKEN != '' && hashFiles('results.sarif') != ''
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: results.sarif
+
+      - name: Codacy scan summary
+        if: env.CODACY_PROJECT_TOKEN != ''
+        run: echo 'Codacy scan completed.' >> $GITHUB_STEP_SUMMARY
