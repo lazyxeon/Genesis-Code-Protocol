@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Utility to normalize spacing in Markdown files."""
 
+from __future__ import annotations
+
 import re
 import sys
 from pathlib import Path
