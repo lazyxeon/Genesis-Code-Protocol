@@ -48,6 +48,9 @@
 
 ### Documentation
 
+- docs(readme): auto-sync repo structure (#281)
+- docs: auto-update Table Of Contents.md (#279)
+- docs: auto-update Table Of Contents.md (#277)
 - docs: add badges for all workflows (#270)
 - docs: auto-update Table Of Contents.md (#263)
 - docs: auto-update Table Of Contents.md (#260)
@@ -212,6 +215,8 @@
 
 ### Miscellaneous Tasks
 
+- Update contract reference (#280)
+- chore(changelog): update and normalize spacing (#271)
 - Add Fortify AST Scan badge to README
 - Add Fortify AST Scan workflow
 - Add EthicalCheck workflow badge to README
