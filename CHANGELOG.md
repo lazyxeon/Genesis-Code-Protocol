@@ -4,6 +4,7 @@
 - feat(cli): pass version to audit (#131)
 
 ### Bug Fixes
+- fix(lint): stub lang and optional plt in Alloyscript (#140)
 - fix: normalize leading blank lines (#125)
 - Fix Dockerfile syntax for FROM instruction
 - Fix syntax in sbom.yml for action references
@@ -151,6 +152,7 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing (#138)
 - chore(changelog): update and normalize spacing (#136)
 - chore(changelog): update and normalize spacing (#133)
 - Add tests for markdown spacing normalization (#134)
