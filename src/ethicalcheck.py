@@ -10,7 +10,13 @@ logger = get_logger(__name__)
 
 def main() -> Dict[str, str]:
     """Simulate running EthicalCheck scan."""
-    if not os.getenv("ETHICALCHECK_OAS_URL") or not os.getenv("ETHICALCHECK_EMAIL"):
+    required = ("ETHICALCHECK_OAS_URL", "ETHICALCHECK_EMAIL")
+    if not all(os.getenv(var) for var in required):
+        logger.info("ethicalcheck skipped: missing %s", " or ".join(required))
         return {"status": "skipped"}
     logger.info("ethicalcheck started")
     return {"status": "ok"}
+
+
+if __name__ == "__main__":  # pragma: no cover - script mode
+    main()
