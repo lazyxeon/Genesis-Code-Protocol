@@ -1,4 +1,4 @@
-# GCP Changelog
+# GRCP Changelog
 
 ### Features
 - feat(cli): pass version to audit (#131)
@@ -132,6 +132,7 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
+- refactor: update workflows and changelog (#137)
 - Refactor TOC update workflow and remove gitsign
 - Refactor workflow to use create-pull-request action
 - Refactor changelog workflow to simplify steps
@@ -150,6 +151,7 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing (#136)
 - chore(changelog): update and normalize spacing (#133)
 - Add tests for markdown spacing normalization (#134)
 - chore(changelog): update and normalize spacing (#129)
@@ -157,6 +159,7 @@
 - chore(changelog): update and normalize spacing (#128)
 - chore(changelog): update and normalize spacing (#126)
 - chore: pin workflow dependencies with hashes (#127)
+- chore(changelog): update and normalize spacing (#124)
 - chore(changelog): update and normalize spacing (#123)
 - chore(changelog): update and normalize spacing (#122)
 - chore(changelog): update and normalize spacing (#121)
