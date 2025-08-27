@@ -406,12 +406,6 @@ src/
 ├─ utils.py
 tests/
 ├─ conftest.py
-├─ contract_test.py
-├─ e2e_smoke_test.py
-├─ perf_test.py
-├─ rollback_test.py
-├─ security_test.py
-├─ spec_validation_test.py
 ├─ test_contract.py
 ├─ test_e2e_smoke.py
 ├─ test_fix_md_spacing.py
