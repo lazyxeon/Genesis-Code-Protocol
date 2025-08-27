@@ -170,6 +170,7 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#171)
 - chore(changelog): update and normalize spacing (#168)
 - chore: pin dependencies and tighten workflow permissions (#169)
 - chore(changelog): update and normalize spacing (#167)
