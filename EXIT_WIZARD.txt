@@ -19,5 +19,5 @@ Exit Wizard
 
 5. Emit release receipt
    commit=$(git rev-parse HEAD)
-   image=$(docker images -q security-scan-workflow:latest)
+   image=$(docker images -q dependabot-automerge-workflow:latest)
    printf '{"commit":"%s","image":"%s"}' "$commit" "$image" > release_receipt.json
