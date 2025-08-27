@@ -14,10 +14,9 @@ Run this script from the repository root:
 """
 
 import re
+import subprocess
 from pathlib import Path
 from typing import Dict, List
-
-from git import Repo
 
 # Resolve the repository root and CHANGELOG file location.
 ROOT = Path(__file__).resolve().parents[1]
@@ -49,14 +48,24 @@ PATTERNS = [
 ]
 
 
+def _git_log() -> List[str]:
+    """Return commit messages using the ``git`` command line."""
+    try:
+        result = subprocess.run(
+            ["git", "log", "--pretty=format:%s"],
+            cwd=ROOT,
+            check=True,
+            text=True,
+            capture_output=True,
+        )
+    except Exception as e:  # pragma: no cover - depends on git
+        raise SystemExit(f"Failed to read git log: {e}") from e
+    return result.stdout.splitlines()
+
+
 def main() -> None:
     """Extract commit messages and write a grouped changelog."""
-    try:
-        repo = Repo(ROOT)
-    except Exception as e:  # pragma: no cover - repository must exist
-        raise SystemExit(f"Failed to open git repository: {e}") from e
-
-    messages = [c.message.strip().splitlines()[0] for c in repo.iter_commits()]
+    messages = _git_log()
 
     for msg in messages:
         assigned = False
