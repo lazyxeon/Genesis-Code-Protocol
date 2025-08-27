@@ -26,5 +26,5 @@ RUN useradd -u 10001 -m appuser && chown -R appuser:appuser /app
 USER appuser
 
 # Default entrypoint shows CLI help
-ENTRYPOINT ["python", "CLI Bundle/gcp_cli.py"]
+ENTRYPOINT ["python", "cli_bundle/gcp_cli.py"]
 CMD ["--help"]
