@@ -164,6 +164,8 @@
 
 ### Miscellaneous Tasks
 
+- chore: add markdown lint workflow (#157)
+- chore(changelog): update and normalize spacing (#155)
 - chore(changelog): update and normalize spacing (#154)
 - chore(changelog): update and normalize spacing (#153)
 - chore(changelog): update and normalize spacing (#151)
