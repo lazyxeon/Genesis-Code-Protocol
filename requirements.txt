@@ -1,2 +1,3 @@
-# Keep this file even if empty; Dockerfile COPY expects it to exist.
-# Add your real dependencies here as you evolve the CLI.
+pytest
+pydantic
+opentelemetry-sdk
