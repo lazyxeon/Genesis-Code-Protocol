@@ -10,6 +10,9 @@
 
 ### Bug Fixes
 
+- fix codacy workflow env check (#303)
+- fix: guard Fortify workflow when secrets missing (#305)
+- fix: resolve markdownlint issues (#300)
 - fix codacy workflow (#299)
 - fix: repair automation workflows (#296)
 - Fix release workflows and dependabot auto-merge (#276)
@@ -51,6 +54,7 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#297)
 - docs: auto-update Table Of Contents.md (#295)
 - docs: auto-update Table Of Contents.md (#291)
 - docs(readme): auto-sync repo structure (#293)
@@ -228,6 +232,8 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update and normalize spacing (#294)
+- chore: fix fortify workflow conditional (#298)
 - chore(changelog): update and normalize spacing (#292)
 - chore(changelog): update and normalize spacing (#285)
 - Add Python SBOM generator (#290)
