@@ -1,2 +1,5 @@
 # Keep this file even if empty; Dockerfile COPY expects it to exist.
 # Add your real dependencies here as you evolve the CLI.
+
+flake8==7.3.0
+pytest==8.4.1

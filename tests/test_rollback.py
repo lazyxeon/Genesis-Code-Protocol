@@ -1,12 +1,9 @@
 """Rollback behavior on failure."""
 
-import pathlib
-import sys
 from pathlib import Path
 
 import pytest
 
-sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
 from src import main, rollback
 
 

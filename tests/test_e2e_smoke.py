@@ -1,11 +1,8 @@
 """End-to-end smoke test."""
 
 import json
-import pathlib
-import sys
 from pathlib import Path
 
-sys.path.append(str(pathlib.Path(__file__).resolve().parents[1]))
 from src import main
 
 
