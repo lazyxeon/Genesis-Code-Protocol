@@ -22,12 +22,15 @@ on:
   schedule:
     - cron: '45 23 * * 2'
 
+env:
+  CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
+
 permissions:
   contents: read
 
 jobs:
   codacy-security-scan:
-    if: ${{ secrets.CODACY_PROJECT_TOKEN != '' }}
+    if: env.CODACY_PROJECT_TOKEN != ''
     continue-on-error: true
     permissions:
       contents: read # for actions/checkout to fetch code
@@ -46,7 +49,7 @@ jobs:
         with:
           # Check https://github.com/codacy/codacy-analysis-cli#project-token to get your project token from your Codacy repository
           # You can also omit the token and run the tools that support default configurations
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+          project-token: ${{ env.CODACY_PROJECT_TOKEN }}
           verbose: true
           output: results.sarif
           format: sarif
