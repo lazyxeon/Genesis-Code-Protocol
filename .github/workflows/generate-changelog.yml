@@ -31,14 +31,33 @@ jobs:
           python -m pip install --upgrade pip==23.3.1
           pip install --no-deps gitpython==3.1.45
 
+      # Count commits since the last changelog update
+      - name: Count commits
+        id: changes
+        run: |
+          LAST=$(git log -1 --format=%H -- CHANGELOG.md || echo)
+          if [ -z "$LAST" ]; then
+            COUNT=$(git rev-list --count HEAD)
+          else
+            COUNT=$(git rev-list --count "$LAST"..HEAD)
+          fi
+          echo "count=$COUNT" >> "$GITHUB_OUTPUT"
+          if [ "$COUNT" -ge 5 ]; then
+            echo "run_pr=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run_pr=false" >> "$GITHUB_OUTPUT"
+          fi
+
       # Generate CHANGELOG.md using your script
       - name: Generate CHANGELOG.md
+        if: steps.changes.outputs.run_pr == 'true'
         run: |
           python scripts/generate_changelog.py
           python scripts/fix_md_spacing.py CHANGELOG.md
 
       # Create a pull request for the changelog update, sign commits with the GitHub Actions bot
       - name: Create Pull Request
+        if: steps.changes.outputs.run_pr == 'true'
       # v7.0.8 pinned to commit 271a8d0340265f705b14b6d32b9829c1cb33d45e
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         with:
