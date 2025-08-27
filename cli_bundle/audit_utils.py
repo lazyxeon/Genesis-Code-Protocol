@@ -1,5 +1,6 @@
 """Utilities for performing prompt audits."""
 
+
 def run_audit(prompt: str, version: str) -> dict:
     """Perform a simple audit of ``prompt`` for ``version`` (placeholder)."""
     print(f"Auditing prompt '{prompt}' for v{version}...")

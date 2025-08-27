@@ -16,13 +16,14 @@ Run this script from the repository root:
 import re
 import subprocess
 from pathlib import Path
+from typing import Dict, List
 
 # Resolve the repository root and CHANGELOG file location.
 ROOT = Path(__file__).resolve().parents[1]
 CHANGELOG = ROOT / "CHANGELOG.md"
 
 # Define the groups and the patterns that map commit message prefixes to them.
-GROUPS = {
+GROUPS: Dict[str, List[str]] = {
     "Features": [],
     "Bug Fixes": [],
     "Documentation": [],
@@ -35,15 +36,15 @@ GROUPS = {
 }
 
 PATTERNS = [
-    (r'^feat', 'Features'),
-    (r'^fix', 'Bug Fixes'),
-    (r'^doc', 'Documentation'),
-    (r'^refactor', 'Refactor'),
-    (r'^perf', 'Performance'),
-    (r'^style', 'Style'),
-    (r'^test', 'Testing'),
-    (r'^(chore|ci)', 'Miscellaneous Tasks'),
-    (r'.*security', 'Security'),
+    (r"^feat", "Features"),
+    (r"^fix", "Bug Fixes"),
+    (r"^doc", "Documentation"),
+    (r"^refactor", "Refactor"),
+    (r"^perf", "Performance"),
+    (r"^style", "Style"),
+    (r"^test", "Testing"),
+    (r"^(chore|ci)", "Miscellaneous Tasks"),
+    (r".*security", "Security"),
 ]
 
 
