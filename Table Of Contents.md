@@ -2,6 +2,8 @@
 
 - .dockerignore
 - .gitattributes
+- .markdownlint.yml
+- .markdownlintignore
 - .pre-commit-config.yaml
 - About.md
 - CHANGELOG.md
