@@ -10,7 +10,7 @@
 
 ### Bug Fixes
 
-- Fix Codacy token check in workflow
+- Fix Codacy token check in workflow (#309)
 - fix codacy workflow env check (#303)
 - fix: guard Fortify workflow when secrets missing (#305)
 - fix: resolve markdownlint issues (#300)
@@ -234,6 +234,7 @@
 
 ### Miscellaneous Tasks
 
+- chore(changelog): update changelog (#307)
 - Run workflows on all branches (#306)
 - chore(changelog): update and normalize spacing (#301)
 - chore(changelog): update and normalize spacing (#294)
