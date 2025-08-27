@@ -2,10 +2,14 @@
 
 ### Features
 
+- feat: add workflow to trigger all workflows (#190)
 - feat(cli): pass version to audit (#131)
 
 ### Bug Fixes
 
+- fix: repair Dockerfile and workflow dependencies (#200)
+- fix: pin MkDocs dependencies with hashes (#199)
+- fix: pin MkDocs dependencies with hashes (#188)
 - Fix notebook linting requirements and bundle paths (#184)
 - Fix pre-commit and docs setup (#181)
 - Fix CI workflows (#158)
@@ -33,6 +37,9 @@
 
 ### Documentation
 
+- docs: auto-update Table Of Contents.md (#198)
+- docs: auto-update Table Of Contents.md (#197)
+- docs: auto-update Table Of Contents.md (#196)
 - docs: auto-update Table Of Contents.md (#178)
 - docs(readme): auto-sync repo structure (#176)
 - docs: auto-update Table Of Contents.md (#175)
@@ -175,6 +182,12 @@
 
 ### Miscellaneous Tasks
 
+- chore(deps): bump anchore/sbom-action from 0.16.0 to 0.20.5 (#193)
+- chore(deps): bump actions/github-script from 6.4.1 to 7.0.1 (#194)
+- chore(deps): bump python from 3.11-slim to 3.13-slim (#195)
+- chore(changelog): update and normalize spacing (#186)
+- chore: clarify security policy and restrict workflow tokens (#189)
+- Install pytest in Python CI workflow (#191)
 - chore(changelog): update and normalize spacing (#185)
 - chore(changelog): update and normalize spacing (#183)
 - chore(changelog): update and normalize spacing (#182)
@@ -1312,6 +1325,7 @@
 
 ### Security
 
+- Harden scripts against common security issues (#187)
 - Remove security-events permission in workflow
 - Refine security scan workflow configuration
 - Update security-scan.yml
