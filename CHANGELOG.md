@@ -150,6 +150,8 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Miscellaneous Tasks
+- Add tests for markdown spacing normalization (#134)
+- chore(changelog): update and normalize spacing (#129)
 - Refine workflow audit to search for tag refs (#132)
 - chore(changelog): update and normalize spacing (#128)
 - chore(changelog): update and normalize spacing (#126)
