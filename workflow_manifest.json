@@ -1,140 +1,29 @@
 {
   "$schema": "https://example.com/schemas/workflow_manifest_v1.json",
-<<<<<< codex/develop-and-implement-matrix-ci
-  "id": "bwb::matrix_ci_pipeline::v1",
+  "id": "bwb::build-pipeline-stabilizer::v1",
   "version": "1.0.0",
-  "business_goal": "Ensure compatibility of the codebase across Python versions using automated matrix CI testing.",
-  "value_hypothesis": "Early detection of version-specific regressions reduces production incidents and speeds release cycles.",
+  "business_goal": "Ensure reliable build and push pipeline",
+  "value_hypothesis": "Reliable pipelines reduce release failures and improve developer velocity",
   "inputs": [
     {"name": "source", "type": "git", "source": "github", "validation": "branch_protection"}
   ],
   "outputs": [
-    {"name": "test_report", "type": "artifact", "retention_days": 30, "consumer": "dev_team"}
+    {"name": "image", "type": "file", "retention_days": 90, "consumer": "platform-team"}
   ],
   "SLOs": {"latency_ms_p95": 1200, "success_rate": 0.99, "error_budget_month": 0.01},
-  "constraints": ["Pipeline runtime per job < 600s", "Use only open-source dependencies"],
+  "constraints": ["must run in existing CI", "no external paid services"],
   "operational_env": "container",
   "security": {
     "data_classes": ["internal"],
-    "secrets": ["ENV:PYPI_TOKEN"],
-    "iam": [{"principal": "workflow-sa", "permissions": ["read:repo", "write:actions"]}],
-=======
-<<<<<< codex/analyze-failing-github-workflows
-  "id": "bwb::ci-workflow-diagnoser::v1",
-  "version": "1.0.0",
-  "business_goal": "Diagnose failing GitHub workflows to restore CI reliability",
-  "value_hypothesis": "Reducing CI failures improves developer throughput and lowers incident cost",
-  "inputs": [
-    {"name": "workflow_logs", "type": "json", "source": "api", "validation": "schema:ci_logs_v1"}
-  ],
-  "outputs": [
-    {"name": "diagnosis_report", "type": "json", "retention_days": 90, "consumer": "dev-infra"}
-  ],
-  "SLOs": {"latency_ms_p95": 1200, "success_rate": 0.99, "error_budget_month": 0.01},
-  "constraints": ["latency <= 1.2s", "no paid dependencies"],
-  "operational_env": "container",
-  "security": {
-    "data_classes": ["internal"],
-    "secrets": ["ENV:CI_WORKFLOW_DIAGNOSER_TOKEN"],
-    "iam": [{"principal": "workflow-sa", "permissions": ["read:workflow-logs"]}],
-=======
-<<<<<< codex/develop-fuzzing-and-vulnerability-scanning-workflow
-  "id": "bwb::fuzzing_vuln_scan::v1",
-  "version": "1.0.0",
-  "business_goal": "Proactively uncover memory corruption and dependency vulnerabilities before release",
-  "value_hypothesis": "Early detection of flaws reduces production incidents and shortens remediation cycles, improving security posture",
-  "inputs": [
-    {"name": "source_archive", "type": "bytes", "source": "s3", "validation": "must be a tar.gz archive"}
-  ],
-  "outputs": [
-    {"name": "report", "type": "json", "retention_days": 90, "consumer": "security-team"}
-  ],
-  "SLOs": {"latency_ms_p95": 2000, "success_rate": 0.99, "error_budget_month": 0.01},
-  "constraints": ["use open-source tooling only", "per-run cost <= $3"],
-  "operational_env": "container",
-  "security": {
-    "data_classes": ["internal"],
-    "secrets": ["ENV:TRIVY_DB_TOKEN"],
-    "iam": [{"principal": "workflow-sa", "permissions": ["read:s3-source", "write:s3-reports"]}],
-=======
-  "id": "bwb::secure-repo-scorecard-remediation::v1",
-  "version": "1.0.0",
-  "business_goal": "Automatically remediate OpenSSF Scorecard vulnerabilities to harden repositories.",
-  "value_hypothesis": "Reducing vulnerability exposure increases developer trust and decreases incident response time.",
-  "inputs": [
-    {"name": "repository", "type": "json", "source": "api", "validation": "must include full_name and default_branch"}
-  ],
-  "outputs": [
-    {"name": "remediation_pr", "type": "json", "retention_days": 90, "consumer": "devsecops"}
-  ],
-  "SLOs": {"latency_ms_p95": 1200, "success_rate": 0.99, "error_budget_month": 0.01},
-  "constraints": ["Runs only within GitHub Actions", "No external network egress beyond GitHub and StepSecurity"],
-  "operational_env": "container",
-  "security": {
-    "data_classes": ["internal"],
-    "secrets": ["ENV:SECURE_REPO_TOKEN"],
-    "iam": [{"principal": "workflow-sa", "permissions": ["repo:write", "pull:read"]}],
->>>>>> main
->>>>>> main
->>>>>> main
+    "secrets": ["ENV:REGISTRY_TOKEN"],
+    "iam": [{"principal": "workflow-sa", "permissions": ["read:repo", "write:registry"]}],
     "supply_chain": {"sbom": true, "signing": "sigstore", "policy": "fail_on_critical"}
   },
   "compliance": {"pii": false, "gdpr": "n/a", "sox": "n/a", "hipaa": false},
   "tooling": {
-<<<<<< codex/develop-and-implement-matrix-ci
-    "images": ["ghcr.io/org/matrix-ci:1.0.0"],
-    "runtimes": ["python3.8", "python3.9", "python3.10", "python3.11", "python3.12"],
-    "libraries": ["pytest", "opentelemetry-sdk"]
-  },
-  "steps": [
-    {
-      "name": "setup",
-      "kind": "task",
-      "entrypoint": "src/matrix_ci/pipeline.py:setup_env",
-      "contracts": {"in": ["inputs[0]"], "out": ["env_ready"]},
-      "retries": {"max": 2, "backoff": "exponential", "jitter": true},
-      "timeout_s": 60,
-      "idempotency_key": "hash(\"setup_env\")",
-      "resources": {"cpu": "250m", "mem": "256Mi"},
-      "metrics": {"counters": ["env_prepared"], "timers": ["duration_ms"]},
-      "otel_spans": ["matrix_ci.setup"]
-    },
-    {
-      "name": "lint",
-      "kind": "task",
-      "entrypoint": "src/matrix_ci/pipeline.py:run_lint",
-      "contracts": {"in": ["env_ready"], "out": ["lint_report"]},
-      "retries": {"max": 2, "backoff": "exponential", "jitter": true},
-      "timeout_s": 120,
-      "idempotency_key": "hash(\"run_lint\")",
-      "resources": {"cpu": "250m", "mem": "256Mi"},
-      "metrics": {"counters": ["lint_warnings"], "timers": ["duration_ms"]},
-      "otel_spans": ["matrix_ci.lint"]
-    },
-    {
-      "name": "test",
-      "kind": "task",
-      "entrypoint": "src/matrix_ci/pipeline.py:run_tests",
-      "contracts": {"in": ["lint_report"], "out": ["test_report"]},
-      "retries": {"max": 1, "backoff": "exponential", "jitter": true},
-      "timeout_s": 300,
-      "idempotency_key": "hash(\"run_tests\")",
-      "resources": {"cpu": "500m", "mem": "512Mi"},
-      "metrics": {"counters": ["tests_run"], "timers": ["duration_ms"]},
-      "otel_spans": ["matrix_ci.test"]
-    }
-  ],
-  "dependencies": ["github.com", "pypi.org"],
-  "runbook": "docs/runbook.md",
-  "failover": {"strategy": "brownout_then_rollback", "rpo_minutes": 5, "rto_minutes": 15},
-  "rollback": {"guard": "Gate:RISK", "actions": ["revert:workflow", "notify:dev_team"]},
-  "artifact_plan": [
-    {"path": "dist/matrix_ci_pipeline-bundle.zip", "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]}
-=======
-<<<<<< codex/analyze-failing-github-workflows
-    "images": ["ghcr.io/org/ci-workflow-diagnoser:1.0.0"],
+    "images": ["ghcr.io/org/build-pipeline-stabilizer:1.0.0"],
     "runtimes": ["python3.11"],
-    "libraries": ["pydantic", "fastapi", "pytest", "opentelemetry-sdk"]
+    "libraries": ["pydantic", "pytest", "opentelemetry-sdk"]
   },
   "steps": [
     {
@@ -142,119 +31,43 @@
       "kind": "task",
       "entrypoint": "src/ingest.py:main",
       "contracts": {"in": ["inputs[*]"], "out": ["stage_raw"]},
-=======
-<<<<<< codex/develop-fuzzing-and-vulnerability-scanning-workflow
-    "images": ["ghcr.io/example/fuzzing_vuln_scan:1.0.0"],
-=======
-    "images": ["ghcr.io/example/secure-repo-workflow:1.0.0"],
->>>>> main
-    "runtimes": ["python3.11"],
-    "libraries": ["requests", "pytest", "opentelemetry-sdk"]
-  },
-  "steps": [
-    {
-<<<<<< codex/develop-fuzzing-and-vulnerability-scanning-workflow
-      "name": "ingest",
-      "kind": "task",
-      "entrypoint": "src/ingest.py:main",
-      "contracts": {"in": ["inputs[0]"], "out": ["stage_raw"]},
->>>>> main
       "retries": {"max": 3, "backoff": "exponential", "jitter": true},
       "timeout_s": 60,
       "idempotency_key": "hash(input)",
       "resources": {"cpu": "500m", "mem": "512Mi"},
       "metrics": {"counters": ["records_ingested"], "timers": ["duration_ms"]},
       "otel_spans": ["bwb.ingest"]
-<<<<<< codex/analyze-failing-github-workflows
-    }
-  ],
-  "dependencies": ["s3://workflow-logs"],
-  "runbook": "docs/ci-workflow-diagnoser-runbook.md",
-  "failover": {"strategy": "brownout_then_rollback", "rpo_minutes": 5, "rto_minutes": 15},
-  "rollback": {"guard": "Gate:RISK", "actions": ["revert:deployment", "restore:db_snapshot_t-1"]},
-  "artifact_plan": [
-    {"path": "dist/ci-workflow-diagnoser-bundle.zip", "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]}
-=======
     },
     {
-      "name": "fuzz",
+      "name": "build",
       "kind": "task",
-      "entrypoint": "src/fuzz.py:main",
-      "contracts": {"in": ["stage_raw"], "out": ["stage_fuzzed"]},
-      "retries": {"max": 2, "backoff": "linear", "jitter": false},
+      "entrypoint": "src/build.py:main",
+      "contracts": {"in": ["stage_raw"], "out": ["artifact"]},
+      "retries": {"max": 1, "backoff": "linear", "jitter": false},
       "timeout_s": 120,
-      "idempotency_key": "hash(input)",
+      "idempotency_key": "hash(stage_raw)",
       "resources": {"cpu": "1", "mem": "1Gi"},
-      "metrics": {"counters": ["fuzz_cases"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.fuzz"]
+      "metrics": {"counters": ["builds"], "timers": ["duration_ms"]},
+      "otel_spans": ["bwb.build"]
     },
     {
-      "name": "scan",
+      "name": "push",
       "kind": "task",
-      "entrypoint": "src/scan.py:main",
-      "contracts": {"in": ["stage_fuzzed"], "out": ["stage_findings"]},
+      "entrypoint": "src/push.py:main",
+      "contracts": {"in": ["artifact"], "out": ["image"]},
       "retries": {"max": 2, "backoff": "exponential", "jitter": true},
-      "timeout_s": 90,
-      "idempotency_key": "hash(input)",
-      "resources": {"cpu": "500m", "mem": "512Mi"},
-      "metrics": {"counters": ["packages_scanned"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.scan"]
-    },
-    {
-      "name": "report",
-      "kind": "task",
-      "entrypoint": "src/report.py:main",
-      "contracts": {"in": ["stage_findings"], "out": ["outputs[0]"]},
-      "retries": {"max": 1, "backoff": "none", "jitter": false},
       "timeout_s": 30,
-      "idempotency_key": "hash(input)",
-      "resources": {"cpu": "100m", "mem": "128Mi"},
-      "metrics": {"counters": ["reports_generated"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.report"]
+      "idempotency_key": "hash(artifact)",
+      "resources": {"cpu": "200m", "mem": "256Mi"},
+      "metrics": {"counters": ["images_pushed"], "timers": ["duration_ms"]},
+      "otel_spans": ["bwb.push"]
     }
   ],
-  "dependencies": ["s3://source", "https://trivy.dev"],
+  "dependencies": ["docker", "git"],
   "runbook": "docs/runbook.md",
   "failover": {"strategy": "brownout_then_rollback", "rpo_minutes": 5, "rto_minutes": 15},
   "rollback": {"guard": "Gate:RISK", "actions": ["revert:deployment", "restore:db_snapshot_t-1"]},
   "artifact_plan": [
-    {"path": "dist/fuzzing_vuln_scan-bundle.zip", "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]}
-=======
-      "name": "scan_scorecard",
-      "kind": "task",
-      "entrypoint": "src/scan.py:main",
-      "contracts": {"in": ["inputs[*]"], "out": ["scorecard_report"]},
-      "retries": {"max": 3, "backoff": "exponential", "jitter": true},
-      "timeout_s": 60,
-      "idempotency_key": "hash(repository)",
-      "resources": {"cpu": "500m", "mem": "512Mi"},
-      "metrics": {"counters": ["findings"], "timers": ["duration_ms"]},
-      "otel_spans": ["secure_repo.scan"]
-    },
-    {
-      "name": "apply_secure_repo",
-      "kind": "task",
-      "entrypoint": "src/remediate.py:main",
-      "contracts": {"in": ["scorecard_report"], "out": ["remediation_pr"]},
-      "retries": {"max": 1, "backoff": "none", "jitter": false},
-      "timeout_s": 120,
-      "idempotency_key": "hash(scorecard_report)",
-      "resources": {"cpu": "1", "mem": "1Gi"},
-      "metrics": {"counters": ["pr_created"], "timers": ["duration_ms"]},
-      "otel_spans": ["secure_repo.remediate"]
-    }
-  ],
-  "dependencies": ["https://api.github.com", "https://api.stepsecurity.io"],
-  "runbook": "docs/runbook.md",
-  "failover": {"strategy": "brownout_then_rollback", "rpo_minutes": 5, "rto_minutes": 15},
-  "rollback": {"guard": "Gate:RISK", "actions": ["revert:remediation_pr", "restore:repo_snapshot"]},
-  "artifact_plan": [
-    {
-      "path": "dist/secure-repo-scorecard-remediation-bundle.zip",
-      "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]
-    }
->>>>>> main
->>>>>> main
->>>>>> main
+    {"path": "dist/build-pipeline-stabilizer-bundle.zip", "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]}
   ]
 }

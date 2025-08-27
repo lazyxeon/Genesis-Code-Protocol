@@ -1,15 +1,22 @@
+"""Structured JSON logging helpers."""
 import json
 import logging
-import sys
+from typing import Any, Dict
 
-logger = logging.getLogger("fuzzing_vuln_scan")
-handler = logging.StreamHandler(sys.stdout)
-handler.setFormatter(logging.Formatter("%(message)s"))
-logger.addHandler(handler)
-logger.setLevel(logging.INFO)
+class _JsonFormatter(logging.Formatter):
+    def format(self, record: logging.LogRecord) -> str:  # pragma: no cover - trivial
+        payload: Dict[str, Any] = {
+            "time": self.formatTime(record, "%Y-%m-%dT%H:%M:%S"),
+            "level": record.levelname,
+            "message": record.getMessage(),
+        }
+        return json.dumps(payload)
 
-
-def log(event: str, **fields) -> None:
-    """Emit a structured log line."""
-    data = {"event": event, **fields}
-    logger.info(json.dumps(data))
+def get_logger(name: str) -> logging.Logger:
+    logger = logging.getLogger(name)
+    if not logger.handlers:
+        handler = logging.StreamHandler()
+        handler.setFormatter(_JsonFormatter())
+        logger.addHandler(handler)
+        logger.setLevel(logging.INFO)
+    return logger
