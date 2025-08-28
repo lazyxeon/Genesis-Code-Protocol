@@ -3,7 +3,6 @@ from __future__ import annotations
 import os
 import requests
 from typing import Any, Dict
-
 from .errors import RetryableError, TerminalError
 from .utils import get_logger
 
@@ -14,7 +13,7 @@ class AutoMergeError(Exception):
     """Raised when auto-merge cannot be enabled."""
 
 
-def enable_automerge(pr_number: int, repo: str, token: str | None) -> Dict[str, Any]:
+def enable_automerge(pr_number: int, repo: str, token: str | None) -> dict[str, Any]:
     """Enable auto-merge for a PR.
 
     Returns a status dictionary; if token is missing the step is skipped.
@@ -160,7 +159,7 @@ def enable_automerge(pr_number: int, repo: str, token: str | None) -> Dict[str, 
         raise TerminalError(f"GitHub API request failed: {e}")
 
 
-def main() -> Dict[str, Any]:
+def main() -> dict[str, Any]:
     """Entrypoint used by the workflow step."""
     pr = int(os.getenv("PR_NUMBER", "0"))
     repo = os.getenv("REPO", "")

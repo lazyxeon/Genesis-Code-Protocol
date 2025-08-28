@@ -1,8 +1,14 @@
+
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
+
+# C extensions
+*.so
+
+# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -16,6 +22,8 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -28,6 +36,10 @@ MANIFEST
 # Unit test / coverage reports
 htmlcov/
 .tox/
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
 .coverage
 .coverage.*
 .cache
@@ -36,6 +48,42 @@ coverage.xml
 *.cover
 .hypothesis/
 .pytest_cache/
+*.py,cover
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
 
 # Environments
 .env
@@ -46,7 +94,25 @@ ENV/
 env.bak/
 venv.bak/
 
-# IDE
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# IDE files
 .vscode/
 .idea/
 *.swp
@@ -64,3 +130,29 @@ Thumbs.db
 tmp/
 temp/
 *.tmp
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+.tmp/
+.temp/
+
+# Pre-commit cache
+.pre-commit-config.yaml.swp
+
+# Rollback logs
+rollback.log
+
+# SBOM files (unless specifically needed)
+sbom.json
