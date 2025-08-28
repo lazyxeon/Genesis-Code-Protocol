@@ -161,6 +161,49 @@ def test_error_handling():
     assert "verification_failed" in content  # Verification error handling
 
 
+def test_exit_wizard_integration():
+    """Test that the workflow includes Exit Wizard pattern integration"""
+    workflow_path = Path(".github/workflows/release-complete.yml")
+    
+    with open(workflow_path) as f:
+        content = f.read()
+    
+    # Check for Exit Wizard pattern elements
+    assert "EXIT_WIZARD_MANIFEST.json" in content
+    assert "RFC 3161" in content
+    assert "transparency log" in content
+    assert "Exit Wizard" in content
+    assert "Genesis Code Protocol" in content
+
+
+def test_timestamp_integration():
+    """Test that RFC 3161 timestamp integration is included"""
+    workflow_path = Path(".github/workflows/release-complete.yml")
+    
+    with open(workflow_path) as f:
+        content = f.read()
+    
+    # Check for timestamp-related content
+    assert "openssl ts" in content
+    assert "freetsa.org" in content
+    assert "timestamp" in content.lower()
+    assert ".tsr" in content
+
+
+def test_comprehensive_verification():
+    """Test that the workflow includes comprehensive verification"""
+    workflow_path = Path(".github/workflows/release-complete.yml")
+    
+    with open(workflow_path) as f:
+        content = f.read()
+    
+    # Check for verification steps
+    assert "verification_failed" in content
+    assert "cosign verify-blob" in content
+    assert "Verification successful" in content
+    assert "Verification failed" in content
+
+
 if __name__ == "__main__":
     # Change to repository root for testing
     import sys
