@@ -77,7 +77,7 @@ def main() -> None:
         if not assigned:
             GROUPS["Miscellaneous Tasks"].append(msg)
 
-    lines = ["# GRCP Changelog", ""]
+    lines = ["# GCP Changelog", ""]
     for group, commits in GROUPS.items():
         if commits:
             lines.append(f"### {group}")

@@ -1,15 +1,15 @@
 # GRCP Changelog
 
-## Features
-
+### Features
 - feat: add manual mock run workflow (#287)
 - feat: add github actions stability workflow (#272)
 - feat: remove GitPython dependency from changelog script (#229)
 - feat: add workflow to trigger all workflows (#190)
 - feat(cli): pass version to audit (#131)
 
-## Bug Fixes
-
+### Bug Fixes
+- fix: repair security scans workflow configs (#332)
+- Fix workflow conditions to avoid skips (#328)
 - fix: run EthicalCheck workflow by default (#315)
 - Fix Codacy token check in workflow (#309)
 - fix codacy workflow env check (#303)
@@ -54,8 +54,8 @@
 - Fix formatting in cliff.toml configuration
 - Fix formatting of image digest output
 
-## Documentation
-
+### Documentation
+- docs: auto-update Table Of Contents.md (#331)
 - docs: auto-update Table Of Contents.md (#302)
 - docs: auto-update Table Of Contents.md (#297)
 - docs: auto-update Table Of Contents.md (#295)
@@ -208,8 +208,7 @@
 - docs(readme): auto-sync repo structure
 - docs(readme): auto-sync repo structure
 
-## Refactor
-
+### Refactor
 - Refactor codebase and fix lint issues (#143)
 - refactor: update workflows and changelog (#137)
 - Refactor TOC update workflow and remove gitsign
@@ -229,12 +228,12 @@
 - Refactor GitHub Actions workflow for image handling
 - Refactor OpenSSF Scorecard workflow configuration
 
-## Testing
-
+### Testing
 - test: verify scanners skip when missing credentials (#289)
 
-## Miscellaneous Tasks
-
+### Miscellaneous Tasks
+- chore(changelog): update and normalize spacing (#321)
+- chore: batch changelog PRs (#325)
 - chore(changelog): update and normalize spacing (#318)
 - chore: update workflows for current actions (#320)
 - chore(changelog): update and normalize spacing (#317)
@@ -1427,8 +1426,7 @@
 - Update README.md
 - Initial commit
 
-## Security
-
+### Security
 - conditionally run security workflows (#274)
 - Add Codacy Security Scan badge to README
 - Add Codacy security scan workflow
