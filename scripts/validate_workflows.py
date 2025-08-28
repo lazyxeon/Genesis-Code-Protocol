@@ -27,6 +27,7 @@ REQUIRED_WORKFLOW_FILES = [
     ".github/workflows/generate-changelog.yml",
     ".github/workflows/sbom.yml",
     ".github/workflows/validate-workflows.yml",
+    ".github/workflows/ethicalcheck.yml",
 ]
 
 
@@ -144,7 +145,31 @@ def main() -> int:
     except Exception as e:
         print(f"✗ Repo structure test failed: {e}")
         success = False
-
+    
+    try:
+        # Test ethicalcheck module
+        sys.path.insert(0, str(ROOT))
+        from src.ethicalcheck import validate_configuration, main
+        
+        # Test validation function
+        result = validate_configuration()
+        if result and "status" in result:
+            print("✓ EthicalCheck validation function works")
+        else:
+            print("✗ EthicalCheck validation function failed")
+            success = False
+            
+        # Test main function
+        result = main()
+        if result and "status" in result:
+            print("✓ EthicalCheck main function works")
+        else:
+            print("✗ EthicalCheck main function failed")
+            success = False
+    except Exception as e:
+        print(f"✗ EthicalCheck module test failed: {e}")
+        success = False
+    
     if success:
         print("\n✓ All workflow validations passed!")
         return 0

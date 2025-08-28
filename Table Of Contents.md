@@ -161,6 +161,7 @@
   - tests/conftest.py
   - tests/contract_test.py
   - tests/e2e_smoke_test.py
+  - tests/ethicalcheck_test.py
   - tests/perf_test.py
   - tests/rollback_test.py
   - tests/security_test.py
