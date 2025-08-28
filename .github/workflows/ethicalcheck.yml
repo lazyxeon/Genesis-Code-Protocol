@@ -52,7 +52,6 @@ permissions:
   security-events: write
 
 env:
-
   ETHICALCHECK_OAS_URL: ${{ vars.ETHICALCHECK_OAS_URL || '' }}
   ETHICALCHECK_EMAIL: ${{ vars.ETHICALCHECK_EMAIL || '' }}
 
@@ -73,7 +72,6 @@ jobs:
              echo "ETHICALCHECK_OAS_URL or ETHICALCHECK_EMAIL missing. Skipping scan." >> "$GITHUB_STEP_SUMMARY"
              exit 0
            fi
-
        - name: EthicalCheck Free & Automated API Security Testing Service
          if: env.ETHICALCHECK_OAS_URL != '' && env.ETHICALCHECK_EMAIL != ''
          uses: Octota-GitHub/ethicalcheck-action@3ec5e93b42e591349e46635da9f909bac66c23a9
