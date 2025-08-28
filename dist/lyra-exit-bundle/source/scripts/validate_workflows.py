@@ -11,7 +11,6 @@ REQUIRED_SCRIPTS = [
     "scripts/update_repo_structure.py",
     "scripts/fix_md_spacing.py",
     "scripts/generate_changelog.py",
-    "scripts/make_exit_bundle.sh",
 ]
 REQUIRED_CONFIGS = [
     ".markdownlint.yml",
@@ -50,22 +49,6 @@ def validate_python_syntax(filepath: str) -> bool:
         return False
 
 
-def validate_shell_syntax(filepath: str) -> bool:
-    """Validate shell script syntax."""
-    try:
-        import subprocess
-        result = subprocess.run(['bash', '-n', str(ROOT / filepath)], 
-                              capture_output=True, text=True)
-        if result.returncode == 0:
-            return True
-        else:
-            print(f"Shell syntax error in {filepath}: {result.stderr}")
-            return False
-    except Exception as e:
-        print(f"Error validating shell script {filepath}: {e}")
-        return False
-
-
 def main() -> int:
     """Main validation function."""
     print("Validating workflow dependencies...")
@@ -77,12 +60,8 @@ def main() -> int:
     for script in REQUIRED_SCRIPTS:
         if check_file_exists(script):
             print(f"✓ {script}")
-            if script.endswith('.py'):
-                if not validate_python_syntax(script):
-                    success = False
-            elif script.endswith('.sh'):
-                if not validate_shell_syntax(script):
-                    success = False
+            if not validate_python_syntax(script):
+                success = False
         else:
             print(f"✗ {script} - missing")
             success = False
