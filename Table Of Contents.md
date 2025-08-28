@@ -127,6 +127,13 @@
   - **matrix_ci/**
     - src/matrix_ci/__init__.py
     - src/matrix_ci/pipeline.py
+- **.pytest_cache/**
+  - .pytest_cache/.gitignore
+  - .pytest_cache/CACHEDIR.TAG
+  - .pytest_cache/README.md
+  - **v/**
+    - **cache/**
+      - .pytest_cache/v/cache/nodeids
 - **GCP-All-Variants/**
   - GCP-All-Variants/Changelog.md
   - GCP-All-Variants/Changelog_P2.md
