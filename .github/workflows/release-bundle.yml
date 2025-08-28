@@ -16,11 +16,22 @@ jobs:
     # This job needs write access to upload the bundle and SBOMs
     permissions:
       contents: write
+    outputs:
+      release-tag: ${{ steps.setup.outputs.release-tag }}
+      artifacts-ready: ${{ steps.upload.outputs.artifacts-ready }}
     env:
       RELEASE_TAG: ${{ github.ref_name }}
     steps:
       # Checkout the repository at a known commit
       - uses: actions/checkout@v4
+
+      # Set up release information
+      - name: Setup release info
+        id: setup
+        run: |
+          set -euo pipefail
+          echo "release-tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+          echo "Setting up release for tag: $RELEASE_TAG"
 
       # Prepare a staging directory and create a ZIP of selected folders
       - name: Prepare staging
@@ -71,6 +82,7 @@ jobs:
 
       # Upload the ZIP and SBOM files to the GitHub release
       - name: Upload bundle to release
+        id: upload
         uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -80,3 +92,11 @@ jobs:
             dist/sbom.spdx.json
             dist/sbom.cdx.json
             dist/SHA256SUMS.txt
+
+      # Signal that artifacts are ready for signing
+      - name: Signal artifacts ready
+        id: ready
+        run: |
+          set -euo pipefail
+          echo "artifacts-ready=true" >> "$GITHUB_OUTPUT"
+          echo "Release artifacts are ready for signing"

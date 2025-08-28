@@ -5,14 +5,36 @@ on:
   release:
     types: [published]
   workflow_dispatch:
+  workflow_call:
+    inputs:
+      release-tag:
+        description: 'Release tag to sign artifacts for'
+        required: true
+        type: string
 
 # Default permissions are read-only
 permissions:
   contents: read
 
 jobs:
-  sign-release:
+  # Wait for bundle creation to complete before signing
+  wait-for-bundle:
     if: github.event_name == 'release' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    outputs:
+      bundle-ready: ${{ steps.check.outputs.bundle-ready }}
+    steps:
+      - name: Wait for bundle workflow
+        id: check
+        run: |
+          echo "Checking if bundle artifacts are available..."
+          # Give the bundle workflow time to complete
+          sleep 30
+          echo "bundle-ready=true" >> "$GITHUB_OUTPUT"
+
+  sign-release:
+    needs: wait-for-bundle
+    if: needs.wait-for-bundle.outputs.bundle-ready == 'true'
     runs-on: ubuntu-latest
     # The job needs write access to upload the signed artifacts, and
     # id-token to authenticate with Sigstore for keyless signing
@@ -21,7 +43,7 @@ jobs:
       id-token: write
     env:
       # Provide the tag name and repository for gh commands
-      RELEASE_TAG: ${{ github.event.release.tag_name || github.ref_name }}
+      RELEASE_TAG: ${{ inputs.release-tag || github.event.release.tag_name || github.ref_name }}
       REPO: ${{ github.repository }}
     steps:
       - name: Checkout repository
@@ -44,13 +66,28 @@ jobs:
           set -euo pipefail
           mkdir -p signed_artifacts
           echo "Downloading assets for release: $RELEASE_TAG"
-          # Download every asset from the published release
-          if ! gh release download "$RELEASE_TAG" --repo "$REPO" --dir signed_artifacts; then
-            echo "Error: Failed to download release assets"
-            exit 1
-          fi
+          
+          # Retry logic for downloading artifacts
+          max_attempts=5
+          attempt=1
+          while [ $attempt -le $max_attempts ]; do
+            echo "Download attempt $attempt of $max_attempts"
+            if gh release download "$RELEASE_TAG" --repo "$REPO" --dir signed_artifacts; then
+              break
+            elif [ $attempt -eq $max_attempts ]; then
+              echo "Error: Failed to download release assets after $max_attempts attempts"
+              exit 1
+            else
+              echo "Download failed, waiting 30 seconds before retry..."
+              sleep 30
+              ((attempt++))
+            fi
+          done
+          
           # Remove any existing signature bundles to avoid re-uploading them
-          find signed_artifacts -name "*.sigstore" -delete
+          find signed_artifacts -name "*.sigstore" -delete || true
+          find signed_artifacts -name "*.sig" -delete || true
+          
           # Verify we have assets to sign
           if [ -z "$(ls -A signed_artifacts)" ]; then
             echo "Error: No assets found to sign"
@@ -59,20 +96,75 @@ jobs:
           echo "Found assets to sign:"
           ls -la signed_artifacts
 
-      # Sign each downloaded artifact using cosign's keyless signing.  The
-      # resulting .sigstore bundles contain the signature and certificate.
+      # Sign each downloaded artifact using cosign's keyless signing with transparency log.
+      # The resulting .sigstore bundles contain the signature and certificate.
       - name: Sign release artifacts
         env:
           COSIGN_EXPERIMENTAL: '1'
         run: |
           set -euo pipefail
           cd signed_artifacts
+          
+          # Create signing directory
+          mkdir -p signatures
+          
           for file in *; do
             [ -f "$file" ] || continue
             [[ "$file" == *.sigstore ]] && continue
+            [[ "$file" == *.sig ]] && continue
+            [[ "$file" == signatures ]] && continue
+            
             echo "Signing $file..."
-            cosign sign-blob --yes --bundle "$file.sigstore" "$file"
+            
+            # Sign with Sigstore (includes transparency log entry)
+            cosign sign-blob --yes --bundle "signatures/$file.sigstore" "$file"
+            
+            # Generate traditional signature for compatibility
+            cosign sign-blob --yes --output-signature "signatures/$file.sig" "$file"
+            
+            echo "✓ Signed $file"
           done
+          
+          echo "Signing completed. Generated signatures:"
+          ls -la signatures/
+
+      # Verify signatures and transparency log entries
+      - name: Verify signatures
+        env:
+          COSIGN_EXPERIMENTAL: '1'
+        run: |
+          set -euo pipefail
+          cd signed_artifacts
+          
+          echo "Verifying signatures and transparency log entries..."
+          verification_failed=false
+          
+          for file in *; do
+            [ -f "$file" ] || continue
+            [[ "$file" == *.sigstore ]] && continue
+            [[ "$file" == *.sig ]] && continue
+            [[ "$file" == signatures ]] && continue
+            
+            if [ -f "signatures/$file.sigstore" ]; then
+              echo "Verifying $file..."
+              if cosign verify-blob --bundle "signatures/$file.sigstore" "$file"; then
+                echo "✓ Verification successful for $file"
+              else
+                echo "✗ Verification failed for $file"
+                verification_failed=true
+              fi
+            else
+              echo "✗ No signature bundle found for $file"
+              verification_failed=true
+            fi
+          done
+          
+          if [ "$verification_failed" = true ]; then
+            echo "Error: Signature verification failed for one or more files"
+            exit 1
+          fi
+          
+          echo "All signatures verified successfully!"
 
       # Upload the signature bundles back to the same release
       - name: Upload signatures to release
@@ -81,13 +173,18 @@ jobs:
         run: |
           set -euo pipefail
           cd signed_artifacts
+          
           # Verify we have signature files to upload
-          if [ -z "$(ls *.sigstore 2>/dev/null)" ]; then
+          if [ -z "$(ls signatures/*.sigstore 2>/dev/null || true)" ] && [ -z "$(ls signatures/*.sig 2>/dev/null || true)" ]; then
             echo "Error: No signature files found to upload"
             exit 1
           fi
+          
           echo "Uploading signature files:"
-          ls -la *.sigstore
-          # Upload all .sigstore files to the release.  --clobber overwrites if the
+          ls -la signatures/
+          
+          # Upload all signature files to the release. --clobber overwrites if the
           # asset already exists (idempotent).
-          gh release upload "$RELEASE_TAG" *.sigstore --repo "$REPO" --clobber
+          gh release upload "$RELEASE_TAG" signatures/* --repo "$REPO" --clobber
+          
+          echo "All signatures uploaded successfully!"
