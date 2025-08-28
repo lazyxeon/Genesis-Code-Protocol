@@ -1,0 +1,71 @@
+name: Validate Workflows
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+      - 'scripts/**'
+      - '.markdownlint.yml'
+      - '.pre-commit-config.yaml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Validate workflow dependencies
+        run: python scripts/validate_workflows.py
+      
+      - name: Test TOC generation
+        run: |
+          python scripts/generate_repo_toc.py
+          if [ ! -f "Table Of Contents.md" ]; then
+            echo "Error: TOC file not generated"
+            exit 1
+          fi
+          echo "✓ TOC generation successful"
+      
+      - name: Test repo structure update
+        run: |
+          python scripts/update_repo_structure.py
+          echo "✓ Repo structure update successful"
+      
+      - name: Test markdown spacing fix
+        run: |
+          python scripts/fix_md_spacing.py "Table Of Contents.md"
+          echo "✓ Markdown spacing fix successful"
+      
+      - name: Test markdown linting
+        run: |
+          npm install -g markdownlint-cli2
+          markdownlint-cli2 --config .markdownlint.yml \
+            "**/*.md" \
+            "!Notebooks/**" \
+            "!Documents/**" \
+            "!GCP-All-Variants/**" \
+            "!GCP Runners/**" \
+            "!cli_bundle/**" \
+            "!Table Of Contents.md" \
+            "!GCP Current Version(V50 Flagship Edition).md" \
+            "!LICENSE.md" \
+            "!README.md" \
+            "!Charts.md"
+          echo "✓ Markdown linting successful"
+      
+      - name: Validate YAML workflows
+        run: |
+          for file in .github/workflows/*.yml; do
+            if ! python -c "import yaml; yaml.safe_load(open('$file'))"; then
+              echo "Error: Invalid YAML in $file"
+              exit 1
+            fi
+          done
+          echo "✓ All workflow YAML files are valid"

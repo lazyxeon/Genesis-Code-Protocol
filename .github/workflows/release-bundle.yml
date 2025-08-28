@@ -20,7 +20,7 @@ jobs:
       RELEASE_TAG: ${{ github.ref_name }}
     steps:
       # Checkout the repository at a known commit
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      - uses: actions/checkout@v4
 
       # Prepare a staging directory and create a ZIP of selected folders
       - name: Prepare staging
@@ -28,12 +28,19 @@ jobs:
           set -euo pipefail
           rm -rf dist
           mkdir -p dist
+          echo "Creating release bundle for tag: $RELEASE_TAG"
+          if [ ! -d "cli_bundle" ] || [ ! -d "Documents" ] || [ ! -d "scripts" ]; then
+            echo "Error: Required directories (cli_bundle, Documents, scripts) not found"
+            exit 1
+          fi
           zip -r "dist/GCP_${RELEASE_TAG}_Field_Kit.zip" "cli_bundle" "Documents" "scripts" \
             -x "*.git*" "*.github*"
+          echo "Bundle created: GCP_${RELEASE_TAG}_Field_Kit.zip"
+          ls -la dist/
 
       # Generate SPDX SBOM for the bundled artifact
       - name: SBOM (SPDX)
-        uses: anchore/sbom-action@da167eac915b4e86f08b264dbdbc867b61be6f0c # v0.20.5
+        uses: anchore/sbom-action@v0
         with:
           path: dist/GCP_${{ env.RELEASE_TAG }}_Field_Kit.zip
           format: spdx-json
@@ -41,7 +48,7 @@ jobs:
 
       # Generate CycloneDX SBOM for the bundled artifact
       - name: SBOM (CycloneDX)
-        uses: anchore/sbom-action@da167eac915b4e86f08b264dbdbc867b61be6f0c # v0.20.5
+        uses: anchore/sbom-action@v0
         with:
           path: dist/GCP_${{ env.RELEASE_TAG }}_Field_Kit.zip
           format: cyclonedx-json
@@ -52,11 +59,19 @@ jobs:
         run: |
           set -euo pipefail
           cd dist
+          if [ -z "$(ls -A 2>/dev/null)" ]; then
+            echo "Error: No files found in dist directory"
+            exit 1
+          fi
+          echo "Creating checksums for:"
+          ls -la
           sha256sum * > SHA256SUMS.txt
+          echo "Checksums created:"
+          cat SHA256SUMS.txt
 
       # Upload the ZIP and SBOM files to the GitHub release
       - name: Upload bundle to release
-        uses: softprops/action-gh-release@72f2c25fcb47643c292f7107632f7a47c1df5cd8 # v2
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

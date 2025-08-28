@@ -23,7 +23,7 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: actions/setup-python@v5
@@ -33,7 +33,12 @@ jobs:
       - name: Generate "Table Of Contents.md"
         run: |
           python scripts/generate_repo_toc.py
-          python scripts/fix_md_spacing.py "Table Of Contents.md"
+          if [ -f "Table Of Contents.md" ]; then
+            python scripts/fix_md_spacing.py "Table Of Contents.md"
+          else
+            echo "Error: Table Of Contents.md was not generated"
+            exit 1
+          fi
 
       # Show the diff (optional for debugging)
       - name: Show diff
@@ -43,7 +48,7 @@ jobs:
 
       # Create a PR for the TOC update
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
+        uses: peter-evans/create-pull-request@v7
         with:
           base: main
           commit-message: "docs: auto-update Table Of Contents.md"

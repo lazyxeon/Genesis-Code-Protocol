@@ -25,13 +25,13 @@ jobs:
       REPO: ${{ github.repository }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       # Install Cosign at a pinned commit; cosign-release specifies the cosign version
       - name: Install Cosign
-        uses: sigstore/cosign-installer@d58896d6a1865668819e1d91763c7751a165e159
+        uses: sigstore/cosign-installer@v3
         with:
           cosign-release: 'v2.5.3'
 
@@ -43,10 +43,21 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p signed_artifacts
+          echo "Downloading assets for release: $RELEASE_TAG"
           # Download every asset from the published release
-          gh release download "$RELEASE_TAG" --repo "$REPO" --dir signed_artifacts
+          if ! gh release download "$RELEASE_TAG" --repo "$REPO" --dir signed_artifacts; then
+            echo "Error: Failed to download release assets"
+            exit 1
+          fi
           # Remove any existing signature bundles to avoid re-uploading them
           find signed_artifacts -name "*.sigstore" -delete
+          # Verify we have assets to sign
+          if [ -z "$(ls -A signed_artifacts)" ]; then
+            echo "Error: No assets found to sign"
+            exit 1
+          fi
+          echo "Found assets to sign:"
+          ls -la signed_artifacts
 
       # Sign each downloaded artifact using cosign's keyless signing.  The
       # resulting .sigstore bundles contain the signature and certificate.
@@ -70,6 +81,13 @@ jobs:
         run: |
           set -euo pipefail
           cd signed_artifacts
+          # Verify we have signature files to upload
+          if [ -z "$(ls *.sigstore 2>/dev/null)" ]; then
+            echo "Error: No signature files found to upload"
+            exit 1
+          fi
+          echo "Uploading signature files:"
+          ls -la *.sigstore
           # Upload all .sigstore files to the release.  --clobber overwrites if the
           # asset already exists (idempotent).
           gh release upload "$RELEASE_TAG" *.sigstore --repo "$REPO" --clobber
