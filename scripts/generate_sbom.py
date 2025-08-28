@@ -7,14 +7,15 @@ import sys
 from email.message import Message
 from importlib import metadata
 from pathlib import Path
-from typing import cast
+from typing import Mapping, cast
+
 
 
 def main(path: str = "sbom.json") -> None:
     packages = []
     for dist in metadata.distributions():
-        md = cast(Message, dist.metadata)
-        name = md.get("Name") or md.get("Summary") or md.get("name", "")
+        meta = cast(Mapping[str, str], dist.metadata)
+        name = meta.get("Name") or meta.get("Summary") or meta.get("name", "")
         packages.append({"name": name, "version": dist.version})
     data = {"packages": packages}
     Path(path).write_text(json.dumps(data, indent=2), encoding="utf-8")
