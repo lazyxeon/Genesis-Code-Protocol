@@ -13,8 +13,12 @@ from typing import Mapping, cast
 def main(path: str = "sbom.json") -> None:
     packages = []
     for dist in metadata.distributions():
-        meta = cast(Mapping[str, str], dist.metadata)
-        name = meta.get("Name") or meta.get("Summary") or meta.get("name", "")
+        meta = dist.metadata
+        name = (
+            meta.get_all("Name", [""])[0]
+            or meta.get_all("Summary", [""])[0]
+            or meta.get_all("name", [""])[0]
+        )
         packages.append({"name": name, "version": dist.version})
     data = {"packages": packages}
     Path(path).write_text(json.dumps(data, indent=2), encoding="utf-8")
