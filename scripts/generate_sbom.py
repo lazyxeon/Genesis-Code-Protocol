@@ -4,14 +4,21 @@ from __future__ import annotations
 
 import json
 import sys
+from email.message import Message
 from importlib import metadata
 from pathlib import Path
+from typing import Mapping, cast
 
 
 def main(path: str = "sbom.json") -> None:
     packages = []
     for dist in metadata.distributions():
-        name = dist.metadata.get("Name") or dist.metadata.get("Summary") or dist.metadata.get("name", "")
+        meta = dist.metadata
+        name = (
+            meta.get_all("Name", [""])[0]
+            or meta.get_all("Summary", [""])[0]
+            or meta.get_all("name", [""])[0]
+        )
         packages.append({"name": name, "version": dist.version})
     data = {"packages": packages}
     Path(path).write_text(json.dumps(data, indent=2), encoding="utf-8")

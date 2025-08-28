@@ -1,70 +1,28 @@
-# Integration Contract: security-scan-workflow
+# Dependabot Auto-merge Integration Contract
 
 ## Interfaces
+- **CLI**: `python -m src.automerge --pr <num> --repo <owner/repo>`
+- **HTTP**: `POST /automerge` with JSON `{ "pr": <num>, "repo": "<owner/repo>" }`
 
-### CLI
-
-```bash
-python -m src.main --repo <owner/repo>
+### Example (HTTP)
 ```
-
-### HTTP
-
-`POST /security/scan` with body `{ "repo": "owner/repo" }`
-
-### Webhook
-
-GitHub `workflow_run` events trigger scanning.
-
-### Queue
-
-Messages on `security-scan` queue follow schema:
-
-```json
-{
-  "repo": "owner/repo",
-  "commit": "sha",
-  "action": "scan"
-}
+curl -H "Authorization: Bearer $TOKEN" \
+     -H "X-Request-ID: <uuid>" \
+     -d '{"pr":123,"repo":"octo/repo"}' \
+     https://example.com/automerge
 ```
-
-### GitHub Actions
-
-Manual dispatch enables mock runs via GitHub's API:
-
-```bash
-curl -X POST \
-  -H "Authorization: Bearer <token>" \
-  https://api.github.com/repos/<owner>/<repo>/actions/workflows/security-scan.yml/dispatches \
-  -d '{"ref":"main","inputs":{"mock":"true"}}'
-```
-
-Setting `mock=true` runs the workflow without executing scanners while verifying configuration.
 
 ## Authentication
-
-- CLI/HTTP/Queue: Bearer token via `GITHUB_TOKEN` or OIDC.
-- Rate limit: 60 req/min per repo.
-- All requests must include `X-Request-ID` header.
-
-Error shape:
-
-```json
-{"error": "string", "request_id": "uuid"}
-```
+Bearer token via `Authorization` header or `GITHUB_TOKEN` env var.
+Rate limit: 60 req/min per repo.
 
 ## Idempotency
-
-- Idempotency key is the commit SHA.
-- Re-sending with same key overwrites previous results.
+`X-Request-ID` required. Replays with same ID are ignored.
 
 ## Versioning
+Semantic versioning. Deprecation window: 6 months after minor release.
 
-- Semantic versioning (`1.0.0`).
-- Deprecation window: 90 days after minor release.
-- Backward compatibility tests verify previous contract versions.
-
-## Compatibility Tests
-
-- `tests/contract_test.py` exercises authentication and idempotency.
-- CI runs these on every pull request.
+## Errors
+- `401 Unauthorized`
+- `404 Not Found`
+- `409 Conflict` when PR not authored by Dependabot

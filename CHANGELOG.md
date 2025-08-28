@@ -1,7 +1,6 @@
 # GRCP Changelog
 
 ### Features
-
 - feat: add manual mock run workflow (#287)
 - feat: add github actions stability workflow (#272)
 - feat: remove GitPython dependency from changelog script (#229)
@@ -9,7 +8,8 @@
 - feat(cli): pass version to audit (#131)
 
 ### Bug Fixes
-
+- fix: repair security scans workflow configs (#332)
+- Fix workflow conditions to avoid skips (#328)
 - fix: run EthicalCheck workflow by default (#315)
 - Fix Codacy token check in workflow (#309)
 - fix codacy workflow env check (#303)
@@ -55,7 +55,7 @@
 - Fix formatting of image digest output
 
 ### Documentation
-
+- docs: auto-update Table Of Contents.md (#331)
 - docs: auto-update Table Of Contents.md (#302)
 - docs: auto-update Table Of Contents.md (#297)
 - docs: auto-update Table Of Contents.md (#295)
@@ -209,7 +209,6 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
-
 - Refactor codebase and fix lint issues (#143)
 - refactor: update workflows and changelog (#137)
 - Refactor TOC update workflow and remove gitsign
@@ -230,11 +229,11 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Testing
-
 - test: verify scanners skip when missing credentials (#289)
 
 ### Miscellaneous Tasks
-
+- chore(changelog): update and normalize spacing (#321)
+- chore: batch changelog PRs (#325)
 - chore(changelog): update and normalize spacing (#318)
 - chore: update workflows for current actions (#320)
 - chore(changelog): update and normalize spacing (#317)
@@ -1306,8 +1305,8 @@
 - Update README.md
 - Rename AI Critical Analysis GRCP to AI Critical Analysis GCP V43.7
 - Rename GCP FULL PROTOCOL.md to GCP Current Version(45.6D).md
-- Rename Complete Full runs_ Full Inventions Master List(no order).md to  A Complete Full runs_ Full Inventions Master List(no order).md
-- Rename Full runs_ Full Inventions Master List(no order).md to Complete Full runs_ Full Inventions Master List(no order).md
+- Rename Complete Full runs\_ Full Inventions Master List(no order).md to  A Complete Full runs\_ Full Inventions Master List(no order).md
+- Rename Full runs\_ Full Inventions Master List(no order).md to Complete Full runs\_ Full Inventions Master List(no order).md
 - Rename V9.md to V09.md
 - Delete GRCP most recent variants/GCP V43.md
 - Delete GRCP most recent variants/GCP V42.md
@@ -1428,7 +1427,6 @@
 - Initial commit
 
 ### Security
-
 - conditionally run security workflows (#274)
 - Add Codacy Security Scan badge to README
 - Add Codacy security scan workflow
