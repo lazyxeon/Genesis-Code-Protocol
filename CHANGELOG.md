@@ -1305,8 +1305,8 @@
 - Update README.md
 - Rename AI Critical Analysis GRCP to AI Critical Analysis GCP V43.7
 - Rename GCP FULL PROTOCOL.md to GCP Current Version(45.6D).md
-- Rename Complete Full runs_ Full Inventions Master List(no order).md to  A Complete Full runs_ Full Inventions Master List(no order).md
-- Rename Full runs_ Full Inventions Master List(no order).md to Complete Full runs_ Full Inventions Master List(no order).md
+- Rename Complete Full runs\_ Full Inventions Master List(no order).md to  A Complete Full runs\_ Full Inventions Master List(no order).md
+- Rename Full runs\_ Full Inventions Master List(no order).md to Complete Full runs\_ Full Inventions Master List(no order).md
 - Rename V9.md to V09.md
 - Delete GRCP most recent variants/GCP V43.md
 - Delete GRCP most recent variants/GCP V42.md

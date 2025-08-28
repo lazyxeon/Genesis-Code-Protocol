@@ -23,9 +23,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
-      - name: Run MarkdownLint
-        uses: DavidAnson/markdownlint-cli2-action@992badcdf24e3b8eb7e87ff9287fe931bcb00c6e # v20.0.0
+      - uses: DavidAnson/markdownlint-cli2-action@992badcdf24e3b8eb7e87ff9287fe931bcb00c6e # v20.0.0
         with:
-          globs: "**/*.md"
           config: .markdownlint.yml
-          ignore: .markdownlintignore
+          globs: |
+            **/*.md
+            !Notebooks/**
+            !Documents/**
+            !GCP-All-Variants/**
+            !GCP Runners/**
+            !cli_bundle/**
+            !Table Of Contents.md
+            !GCP Current Version(V50 Flagship Edition).md
+            !LICENSE.md
+            !README.md
+            !Charts.md
+
