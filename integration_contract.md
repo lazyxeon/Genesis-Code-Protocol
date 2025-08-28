@@ -5,7 +5,8 @@
 - **HTTP**: `POST /automerge` with JSON `{ "pr": <num>, "repo": "<owner/repo>" }`
 
 ### Example (HTTP)
-```
+
+```bash
 curl -H "Authorization: Bearer $TOKEN" \
      -H "X-Request-ID: <uuid>" \
      -d '{"pr":123,"repo":"octo/repo"}' \
