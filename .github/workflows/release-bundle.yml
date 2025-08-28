@@ -16,6 +16,9 @@ jobs:
     # This job needs write access to upload the bundle and SBOMs
     permissions:
       contents: write
+    outputs:
+      release-tag: ${{ steps.setup.outputs.release-tag }}
+      artifacts-ready: ${{ steps.upload.outputs.artifacts-ready }}
       id-token: write  # For SLSA provenance generation
     env:
       RELEASE_TAG: ${{ github.ref_name }}
@@ -30,6 +33,17 @@ jobs:
         uses: sigstore/cosign-installer@v3
         with:
           cosign-release: 'v2.5.3'
+          
+      # Set up release information
+      - name: Setup release info
+        id: setup
+        run: |
+          set -euo pipefail
+          echo "release-tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+          echo "Setting up release for tag: $RELEASE_TAG"
+
+      # Prepare a staging directory and create a ZIP of selected folders
+      - name: Prepare staging
 
       # Generate comprehensive exit bundle using the new script
       - name: Generate Exit Bundle
@@ -90,11 +104,25 @@ jobs:
 
       # Upload the comprehensive bundle and related files to the GitHub release
       - name: Upload bundle to release
+        id: upload
         uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
+            dist/GCP_${{ github.ref_name }}_Field_Kit.zip
+            dist/sbom.spdx.json
+            dist/sbom.cdx.json
+            dist/SHA256SUMS.txt
+
+      # Signal that artifacts are ready for signing
+      - name: Signal artifacts ready
+        id: ready
+        run: |
+          set -euo pipefail
+          echo "artifacts-ready=true" >> "$GITHUB_OUTPUT"
+          echo "Release artifacts are ready for signing"
+
             lyra-exit-bundle-*.zip
             dist/sbom-backup.spdx.json
             dist/sbom-backup.cdx.json
@@ -129,3 +157,4 @@ jobs:
             - Sigstore/Cosign signatures (generated separately)
             
             For full documentation, see the `docs/` directory in the bundle.
+

@@ -3,6 +3,7 @@
 - .dockerignore
 - .flake8
 - .gitattributes
+- .gitignore
 - .markdownlint.yml
 - .markdownlintignore
 - .pre-commit-config.yaml
@@ -164,6 +165,7 @@
   - tests/rollback_test.py
   - tests/security_test.py
   - tests/spec_validation_test.py
+  - tests/test_release_workflows.py
   - tests/test_release_bundle.py
 - **Documents/**
   - Documents/A Documents Readme.md
@@ -211,6 +213,14 @@
   - **matrix_ci/**
     - src/matrix_ci/__init__.py
     - src/matrix_ci/pipeline.py
+- **.pytest_cache/**
+  - .pytest_cache/.gitignore
+  - .pytest_cache/CACHEDIR.TAG
+  - .pytest_cache/README.md
+  - **v/**
+    - **cache/**
+      - .pytest_cache/v/cache/lastfailed
+      - .pytest_cache/v/cache/nodeids
 - **GCP-All-Variants/**
   - GCP-All-Variants/Changelog.md
   - GCP-All-Variants/Changelog_P2.md
