@@ -53,15 +53,15 @@ jobs:
         run: |
           echo "Generating Table Of Contents..."
           python scripts/generate_repo_toc.py
-          
+
           if [ ! -f "Table Of Contents.md" ]; then
             echo "Error: Table Of Contents.md was not generated"
             exit 1
           fi
-          
+
           echo "Fixing markdown spacing..."
           python scripts/fix_md_spacing.py "Table Of Contents.md"
-          
+
           echo "✓ Table Of Contents.md generated and formatted successfully"
 
       - name: Check for changes
@@ -97,13 +97,13 @@ jobs:
           title: "chore(docs): refresh Table Of Contents.md"
           body: |
             ## Automated Table Of Contents Update
-            
+
             This PR contains an automated update to the repository Table Of Contents.
-            
+
             ### Changes
             - Updated `Table Of Contents.md` with current repository structure
             - Applied markdown spacing normalization
-            
+
             ### Triggered by
             - Workflow: `${{ github.workflow }}`
             - Event: `${{ github.event_name }}`

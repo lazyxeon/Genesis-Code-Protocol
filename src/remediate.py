@@ -3,14 +3,13 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from typing import Dict
 
 from .utils import get_logger
 
 logger = get_logger(__name__)
 
 
-def remediate(report: Dict[str, int]) -> str:
+def remediate(report: dict[str, int]) -> str:
     """Simulate applying secure-repo fixes and returning PR URL."""
     logger.info("applying remediation for %s findings", sum(report.values()))
     return "https://github.com/example/repo/pull/1"
