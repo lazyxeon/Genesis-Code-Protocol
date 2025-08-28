@@ -33,16 +33,18 @@ jobs:
         with:
           cosign-release: 'v2.5.3'
 
-      # Download the ZIP files attached to the release. gh CLI is preinstalled on
+      # Download all assets attached to the release. gh CLI is preinstalled on
       # GitHub-hosted runners. We authenticate using GH_TOKEN (alias of GITHUB_TOKEN).
-      - name: Download release ZIP artifacts
+      - name: Download release artifacts
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           mkdir -p signed_artifacts
-          # Download all .zip assets from the published release
-          gh release download "$RELEASE_TAG" --repo "$REPO" --pattern "*.zip" --dir signed_artifacts
+          # Download every asset from the published release
+          gh release download "$RELEASE_TAG" --repo "$REPO" --dir signed_artifacts
+          # Remove any existing signature bundles to avoid re-uploading them
+          find signed_artifacts -name "*.sigstore" -delete
 
       # Sign each downloaded artifact using cosign's keyless signing.  The
       # resulting .sigstore bundles contain the signature and certificate.
@@ -52,7 +54,9 @@ jobs:
         run: |
           set -euo pipefail
           cd signed_artifacts
-          for file in *.zip; do
+          for file in *; do
+            [ -f "$file" ] || continue
+            [[ "$file" == *.sigstore ]] && continue
             echo "Signing $file..."
             cosign sign-blob --yes --bundle "$file.sigstore" "$file"
           done
