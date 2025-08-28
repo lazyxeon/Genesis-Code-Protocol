@@ -45,8 +45,8 @@ permissions:
   security-events: write
 
 env:
-  ETHICALCHECK_OAS_URL: ${{ vars.ETHICALCHECK_OAS_URL || 'https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/examples/v3.0/petstore.yaml' }}
-  ETHICALCHECK_EMAIL: ${{ vars.ETHICALCHECK_EMAIL || 'devnull@example.com' }}
+  ETHICALCHECK_OAS_URL: ${{ vars.ETHICALCHECK_OAS_URL || '' }}
+  ETHICALCHECK_EMAIL: ${{ vars.ETHICALCHECK_EMAIL || '' }}
 
 jobs:
   Trigger_EthicalCheck:
@@ -59,6 +59,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
        - name: EthicalCheck Free & Automated API Security Testing Service
          uses: Octota-GitHub/ethicalcheck-action@3ec5e93b42e591349e46635da9f909bac66c23a9
          continue-on-error: true
@@ -71,6 +72,6 @@ jobs:
 
        - name: Upload sarif file to repository
          if: ${{ hashFiles('ethicalcheck-results.sarif') != '' }}
-         uses: github/codeql-action/upload-sarif@v3
+         uses: github/codeql-action/upload-sarif@3c3833e0f8c1c83d449a7478aa59c036a9165498
          with:
           sarif_file: ./ethicalcheck-results.sarif
