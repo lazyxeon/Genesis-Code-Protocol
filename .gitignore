@@ -1,8 +1,9 @@
 
-# Python cache files
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
 
 # C extensions
 *.so
@@ -32,23 +33,22 @@ MANIFEST
 *.manifest
 *.spec
 
+# Unit test / coverage reports
+htmlcov/
+.tox/
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
 .coverage
 .coverage.*
 .cache
 nosetests.xml
 coverage.xml
 *.cover
-*.py,cover
 .hypothesis/
 .pytest_cache/
+*.py,cover
 
 # Translations
 *.mo
@@ -121,6 +121,15 @@ dmypy.json
 
 # OS
 .DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
 
 # OS files
 .DS_Store
