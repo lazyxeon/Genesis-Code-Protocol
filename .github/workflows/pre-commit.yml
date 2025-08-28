@@ -16,21 +16,52 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python 3.11
+      - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-      - name: Setup pip and install pre-commit
+          python-version: '3.12'
+      - name: Cache pre-commit environments
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: |
+            pre-commit-${{ runner.os }}-
+      - name: Setup pip and install pre-commit with retry
         run: |
           python -m pip install --upgrade pip
-          pip install --no-deps --disable-pip-version-check pre-commit==3.8.0
+          export PIP_TIMEOUT=60
+          export PIP_RETRIES=3
+          for i in {1..3}; do
+            if pip install --disable-pip-version-check --timeout 60 pre-commit==3.8.0 ruff; then
+              break
+            fi
+            echo "Pre-commit installation attempt $i failed, retrying in $((i*5)) seconds..."
+            sleep $((i*5))
+          done
+      - name: Install pre-commit hooks with timeout and retry
+        run: |
+          export PIP_TIMEOUT=60
+          export PIP_RETRIES=5
+          export PIP_DEFAULT_TIMEOUT=60
+          for i in {1..5}; do
+            if timeout 600 pre-commit install-hooks; then
+              break
+            fi
+            echo "Pre-commit hooks installation attempt $i failed, retrying in $((i*15)) seconds..."
+            sleep $((i*15))
+            # Clear cache on retry to avoid corrupted state
+            if [ $i -gt 2 ]; then
+              rm -rf ~/.cache/pre-commit
+            fi
+          done
       - name: Run pre-commit with retry
         run: |
           for i in {1..3}; do
-            if pre-commit run --all-files --show-diff-on-failure; then
+            if timeout 600 pre-commit run --all-files --show-diff-on-failure; then
               exit 0
             fi
-            echo "Pre-commit attempt $i failed, retrying in $((i*10)) seconds..."
+            echo "Pre-commit run attempt $i failed, retrying in $((i*10)) seconds..."
             sleep $((i*10))
           done
           exit 1

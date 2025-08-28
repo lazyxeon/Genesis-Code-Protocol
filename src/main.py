@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
-from typing import Dict
 
 from . import automerge, errors, rollback, utils
 
@@ -17,7 +16,7 @@ def run() -> str:
     try:
         if os.getenv("WF_FAIL_STEP") == "automerge":
             raise errors.TerminalError("forced failure at automerge")
-        result: Dict[str, str | int] = automerge.enable_automerge(
+        result: dict[str, str | int] = automerge.enable_automerge(
             pr_number, repo, token
         )
         utils.atomic_write(report_path, json.dumps(result))

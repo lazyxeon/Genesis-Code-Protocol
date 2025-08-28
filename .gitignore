@@ -1,7 +1,11 @@
+
 # Python cache files
 __pycache__/
 *.py[cod]
 *$py.class
+
+# C extensions
+*.so
 
 # Distribution / packaging
 .Python
@@ -17,6 +21,8 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
@@ -33,12 +39,14 @@ pip-delete-this-directory.txt
 # Unit test / coverage reports
 htmlcov/
 .tox/
+.nox/
 .coverage
 .coverage.*
 .cache
 nosetests.xml
 coverage.xml
 *.cover
+*.py,cover
 .hypothesis/
 .pytest_cache/
 
@@ -50,6 +58,7 @@ coverage.xml
 *.log
 local_settings.py
 db.sqlite3
+db.sqlite3-journal
 
 # Flask stuff:
 instance/
@@ -100,7 +109,10 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
-# IDEs
+# Pyre type checker
+.pyre/
+
+# IDE files
 .vscode/
 .idea/
 *.swp
@@ -109,6 +121,14 @@ dmypy.json
 
 # OS
 .DS_Store
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
 
 # Temporary files
@@ -116,3 +136,14 @@ Thumbs.db
 *.temp
 temp/
 tmp/
+.tmp/
+.temp/
+
+# Pre-commit cache
+.pre-commit-config.yaml.swp
+
+# Rollback logs
+rollback.log
+
+# SBOM files (unless specifically needed)
+sbom.json
