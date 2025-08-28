@@ -45,6 +45,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         with:
+          base: main
           commit-message: "docs: auto-update Table Of Contents.md"
           branch: "chore/update-top-level-toc"
           title: "chore(docs): refresh Table Of Contents.md"
