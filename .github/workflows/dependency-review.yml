@@ -15,22 +15,113 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
+  security-events: write
 
 jobs:
   dependency-review:
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
     permissions:
       contents: read
       pull-requests: read
       security-events: write
     steps:
       - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          
+      - name: Debug workflow context
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+          echo "Base ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.inputs.base_ref }}"
+          echo "Head ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.event.inputs.head_ref }}"
+          echo "Repository: ${{ github.repository }}"
+          
       - name: Run Dependency Review
-        uses: actions/dependency-review-action@595b5aeba73380359d98a5e087f648dbb0edce1b
+        uses: actions/dependency-review-action@v4
         with:
           base-ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.inputs.base_ref }}
           head-ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.event.inputs.head_ref }}
           fail-on-severity: high
+          comment-summary-in-pr: true
+          deny-licenses: GPL-2.0, GPL-3.0
+          allow-licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC
+          warn-only: false
+          vulnerability-check: true
+          license-check: true
+          config-file: .github/dependency-review-config.yml
+          
+      - name: Validate dependency files
+        run: |
+          echo "Checking for dependency files..."
+          declare -i file_count=0
+          
+          # Check for Python dependency files
+          for pattern in "requirements*.txt" "setup.py" "pyproject.toml" "setup.cfg" "Pipfile*"; do
+            while IFS= read -r -d '' file; do
+              echo "Found dependency file: $file"
+              file_count+=1
+              
+              if [[ "$file" == *.txt ]]; then
+                echo "Validating $file format..."
+                if python -c "
+          import sys
+          try:
+              with open('$file', 'r') as f:
+                  lines = [line.strip() for line in f.readlines() if line.strip() and not line.startswith('#')]
+              print(f'✓ $file is valid ({len(lines)} dependencies)')
+              # Check for common issues
+              for line in lines:
+                  if '==' not in line and '>=' not in line and '~=' not in line and line and not line.startswith('-'):
+                      print(f'  Warning: $file contains unpinned dependency: {line}')
+          except Exception as e:
+              print(f'✗ Error reading $file: {e}')
+              sys.exit(1)
+              "; then
+                  echo "✓ $file validation passed"
+                else
+                  echo "✗ $file validation failed"
+                  exit 1
+                fi
+              elif [[ "$file" == "setup.py" ]]; then
+                echo "Validating setup.py syntax..."
+                if python -m py_compile "$file"; then
+                  echo "✓ setup.py syntax is valid"
+                else
+                  echo "✗ setup.py has syntax errors"
+                  exit 1
+                fi
+              fi
+            done < <(find . -name "$pattern" -type f -print0 2>/dev/null)
+          done
+          
+          echo "Total dependency files found: $file_count"
+          if [ $file_count -eq 0 ]; then
+            echo "Warning: No dependency files found in repository"
+          fi
+          
+      - name: Report results
+        if: always()
+        run: |
+          echo "Dependency review completed"
+          echo "Workflow run: ${{ github.run_id }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Event: ${{ github.event_name }}"
+          echo "Actor: ${{ github.actor }}"
+          
+      - name: Generate summary report
+        if: always() 
+        run: |
+          echo "## Dependency Review Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Repository**: ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Event**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Workflow run**: [${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY
+          echo "- **Base ref**: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.inputs.base_ref }}" >> $GITHUB_STEP_SUMMARY  
+          echo "- **Head ref**: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.event.inputs.head_ref }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Files Analyzed" >> $GITHUB_STEP_SUMMARY
+          find . -name "requirements*.txt" -o -name "setup.py" -o -name "pyproject.toml" | head -10 | while read file; do
+            echo "- \`$file\`" >> $GITHUB_STEP_SUMMARY
+          done
