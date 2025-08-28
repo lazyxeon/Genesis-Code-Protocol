@@ -4,7 +4,7 @@ rich==13.7.1
 pyyaml==6.0.1
 requests==2.32.5  # fixed .netrc credential leak (CVE-2024-35195)
 numpy==1.26.4
-pandas==2.2.2
+pandas==2.3.2
 
 # Optional — enable as needed (uncomment to use)
 # pyspark==3.5.1              # Spark (CPU)
