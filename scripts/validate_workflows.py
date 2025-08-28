@@ -10,6 +10,7 @@ REQUIRED_SCRIPTS = [
     "scripts/generate_repo_toc.py",
     "scripts/update_repo_structure.py",
     "scripts/fix_md_spacing.py",
+    "scripts/generate_changelog.py",
 ]
 REQUIRED_CONFIGS = [
     ".markdownlint.yml",
@@ -22,6 +23,9 @@ REQUIRED_WORKFLOW_FILES = [
     ".github/workflows/release-bundle.yml",
     ".github/workflows/pre-commit.yml",
     ".github/workflows/markdownlint.yml",
+    ".github/workflows/generate-changelog.yml",
+    ".github/workflows/sbom.yml",
+    ".github/workflows/validate-workflows.yml",
 ]
 
 
