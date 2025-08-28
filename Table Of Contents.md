@@ -39,6 +39,7 @@
   - scripts/generate_repo_toc.py
   - scripts/generate_sbom.py
   - scripts/update_repo_structure.py
+  - scripts/validate_workflows.py
 - **docs/**
   - docs/ci-workflow-diagnoser-runbook.md
   - docs/index.md
