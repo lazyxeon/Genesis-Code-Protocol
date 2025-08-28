@@ -27,36 +27,64 @@
 - mkdocs.yml
 - observability.yaml
 - pytest.ini
+- requirements-dev.txt
 - requirements.txt
 - security.md
 - setup.py
 - workflow_manifest.json
+- **Documents/**
+  - Documents/A Documents Readme.md
+  - Documents/AI ChatGPT Critical Analysis Flagship GCP V49.md
+  - Documents/AI ChatGPT Critical Analysis GCP V45.6D.md
+  - Documents/AI ChatGPT Critical Analysis GCP V46.md
+  - Documents/AI ChatGPT Critical Analysis V47 Full Run EV issue.md
+  - Documents/AI Claude Critical Analysis Flagship GCP V49.md
+  - Documents/AI Claude Critical Analysis GCP V45.6d.md
+  - Documents/AI Claude Critical Analysis GCP V46.md
+  - Documents/AI Claude Critical Analysis V47 full run EV issue.md
+  - Documents/AI Grok Critical Analysis Flagship GCPV49.md
+  - Documents/AI Grok Critical Analysis GCP V45.6D.md
+  - Documents/AI Grok Critical Analysis GCP V46 .md
+  - Documents/AI Grok Critical Analysis V47 Full Run EV issue.md
+  - Documents/Feature Requests.md
+  - Documents/Issue Template.md
+  - Documents/Operations Manual.md
+  - Documents/Pull Request Template.md
+  - Documents/Requirements.md
+  - Documents/Security.md
+  - Documents/Theoretical Soundness Analysis.md
+  - Documents/index.md
+  - Documents/releases.md
+  - Documents/security_report.md
+- **GCP Runners/**
+  - GCP Runners/A V49.0 Master Runners Codex: Flagship Edition.md
+  - GCP Runners/Agriculture & Environmental MVR Runner.md
+  - GCP Runners/Archaeology_History Runner.md
+  - GCP Runners/Code Runner.md
+  - GCP Runners/Culinary Cartridge.md
+  - GCP Runners/Cybersecurity Runner.md
+  - GCP Runners/Deep Sea Runner.md
+  - GCP Runners/Education Runner.md
+  - GCP Runners/Energy_Power Runner.md
+  - GCP Runners/Entertainment Cartridge.md
+  - GCP Runners/Exotics Runner.md
+  - GCP Runners/Finance & FinTech Runner.md
+  - GCP Runners/Humanitarian_Disaster Relief Cartridge.md
+  - GCP Runners/Industrial & Utilities OT Runner.md
+  - GCP Runners/Infrastructure Runner.md
+  - GCP Runners/Legal Cartridge.md
+  - GCP Runners/Life Sciences Runner.md
+  - GCP Runners/Physical Runner.md
+  - GCP Runners/Political Systems Runner.md
+  - GCP Runners/Public Programs_Policy Runner.md
+  - GCP Runners/Spaceflight_Aerospace Runner.md
+  - GCP Runners/Sports_Athletics Cartridge.md
+  - GCP Runners/Theology Runner.md
+  - **GCP V50 Supplemental Docs/**
+    - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Cartridges Pack.md
+    - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Master Runners Codex.md
 - **tools/**
   - tools/audit-workflows.sh
-- **cli_bundle/**
-  - cli_bundle/Readme.md
-  - cli_bundle/__init__.py
-  - cli_bundle/audit_utils.py
-  - cli_bundle/full_run.py
-  - cli_bundle/gcp_cli.py
-  - cli_bundle/phase1.py
-  - cli_bundle/phase6_7.py
-  - cli_bundle/prompt_utils.py
-  - cli_bundle/requirements.txt
-- **docs/**
-  - docs/ci-workflow-diagnoser-runbook.md
-  - docs/index.md
-  - docs/roadmap.md
-  - docs/runbook.md
-- **tests/**
-  - tests/conftest.py
-  - tests/contract_test.py
-  - tests/e2e_smoke_test.py
-  - tests/perf_test.py
-  - tests/rollback_test.py
-  - tests/scan_skip_test.py
-  - tests/security_test.py
-  - tests/spec_validation_test.py
 - **src/**
   - src/__init__.py
   - src/codacy.py
@@ -76,6 +104,55 @@
   - **matrix_ci/**
     - src/matrix_ci/__init__.py
     - src/matrix_ci/pipeline.py
+- **cli_bundle/**
+  - cli_bundle/Readme.md
+  - cli_bundle/__init__.py
+  - cli_bundle/audit_utils.py
+  - cli_bundle/full_run.py
+  - cli_bundle/gcp_cli.py
+  - cli_bundle/phase1.py
+  - cli_bundle/phase6_7.py
+  - cli_bundle/prompt_utils.py
+  - cli_bundle/requirements.txt
+- **GCP-All-Variants/**
+  - GCP-All-Variants/Changelog.md
+  - GCP-All-Variants/Changelog_P2.md
+  - GCP-All-Variants/V09.md
+  - GCP-All-Variants/V11.md
+  - GCP-All-Variants/V20.md
+  - GCP-All-Variants/V22.md
+  - GCP-All-Variants/V23.md
+  - GCP-All-Variants/V30.md
+  - GCP-All-Variants/V34.md
+  - GCP-All-Variants/V35.md
+  - GCP-All-Variants/V36.md
+  - GCP-All-Variants/V40.md
+  - GCP-All-Variants/V41.md
+  - GCP-All-Variants/V42.md
+  - GCP-All-Variants/V43.0.md
+  - GCP-All-Variants/V43.6.md
+  - GCP-All-Variants/V43.7.md
+  - GCP-All-Variants/V44.1.md
+  - GCP-All-Variants/V44.7.md
+  - GCP-All-Variants/V44.8.md
+  - GCP-All-Variants/V44.9b.md
+  - GCP-All-Variants/V44.9d.md
+  - GCP-All-Variants/V45.0.md
+  - GCP-All-Variants/V45.1.md
+  - GCP-All-Variants/V45.2.md
+  - GCP-All-Variants/V45.3.md
+  - GCP-All-Variants/V45.4A.md
+  - GCP-All-Variants/V45.5.md
+  - GCP-All-Variants/V45.6.md
+  - GCP-All-Variants/V46.0.md
+  - GCP-All-Variants/V46.5.md
+  - GCP-All-Variants/V47.0.md
+  - GCP-All-Variants/V47.1.md
+  - GCP-All-Variants/V47.2.md
+  - GCP-All-Variants/V48.0.md
+  - GCP-All-Variants/V49.0.md
+  - GCP-All-Variants/V49.1 Flagship Edition.md
+  - GCP-All-Variants/V50.md
 - **scripts/**
   - scripts/__init__.py
   - scripts/fix_md_spacing.py
@@ -83,42 +160,17 @@
   - scripts/generate_repo_toc.py
   - scripts/generate_sbom.py
   - scripts/update_repo_structure.py
+- **docs/**
+  - docs/ci-workflow-diagnoser-runbook.md
+  - docs/index.md
+  - docs/roadmap.md
+  - docs/runbook.md
 - **Notebooks/**
   - Notebooks/A Notebook Readme.md
   - Notebooks/Alloy Perceptual Loss.py
   - Notebooks/Alloyscript.py
   - Notebooks/Audio Processing.md
   - Notebooks/Latch LCH.md
-  - **Full Runs/**
-    - Notebooks/Full Runs/A FR Readme.md
-    - Notebooks/Full Runs/High Speed Internet Issue V49 Full Run.md
-    - Notebooks/Full Runs/Known EV issue Full Run, GCPv47.md
-    - Notebooks/Full Runs/Latch Full run.md
-    - Notebooks/Full Runs/Quantum Mechanics Full Run.md
-    - Notebooks/Full Runs/Solar Energy Full Run.md
-    - Notebooks/Full Runs/V48 Full Run.md
-    - **Flagship Full Runs/**
-      - Notebooks/Full Runs/Flagship Full Runs/A FFR Readme.md
-      - Notebooks/Full Runs/Flagship Full Runs/AGROS.md
-      - Notebooks/Full Runs/Flagship Full Runs/APNL-RT
-      - Notebooks/Full Runs/Flagship Full Runs/CMAP-X.md
-      - Notebooks/Full Runs/Flagship Full Runs/COES v1.0.md
-      - Notebooks/Full Runs/Flagship Full Runs/Civic Accord Stack.md
-      - Notebooks/Full Runs/Flagship Full Runs/Crisp-PCM.md
-      - Notebooks/Full Runs/Flagship Full Runs/EMP-GMD-Resilience.md
-      - Notebooks/Full Runs/Flagship Full Runs/FHASS.md
-      - Notebooks/Full Runs/Flagship Full Runs/Gobleki-Tepe.md
-      - Notebooks/Full Runs/Flagship Full Runs/HSO.md
-      - Notebooks/Full Runs/Flagship Full Runs/Helios-Arc PM Sail.md
-      - Notebooks/Full Runs/Flagship Full Runs/LYRA.md
-      - Notebooks/Full Runs/Flagship Full Runs/Nitrasafe.md
-      - Notebooks/Full Runs/Flagship Full Runs/NovelDesign.md
-      - Notebooks/Full Runs/Flagship Full Runs/PALIMPSET.md
-      - Notebooks/Full Runs/Flagship Full Runs/Payguard-DPC.md
-      - Notebooks/Full Runs/Flagship Full Runs/Poseidon Loop.md
-      - Notebooks/Full Runs/Flagship Full Runs/Proofline.md
-    - **GCP V50 Full Runs/**
-      - Notebooks/Full Runs/GCP V50 Full Runs/Full auto spark run.md
   - **Duality Unzipped Ouput/**
     - Notebooks/Duality Unzipped Ouput/BENCHMARK_LEDGER.md
     - Notebooks/Duality Unzipped Ouput/DECISION_LEDGER.md
@@ -173,93 +225,42 @@
     - Notebooks/Modulift Unzipped Output/modulift_explain.py
     - Notebooks/Modulift Unzipped Output/modulift_explain_rules.json
     - Notebooks/Modulift Unzipped Output/util.hpp
-- **GCP-All-Variants/**
-  - GCP-All-Variants/Changelog.md
-  - GCP-All-Variants/Changelog_P2.md
-  - GCP-All-Variants/V09.md
-  - GCP-All-Variants/V11.md
-  - GCP-All-Variants/V20.md
-  - GCP-All-Variants/V22.md
-  - GCP-All-Variants/V23.md
-  - GCP-All-Variants/V30.md
-  - GCP-All-Variants/V34.md
-  - GCP-All-Variants/V35.md
-  - GCP-All-Variants/V36.md
-  - GCP-All-Variants/V40.md
-  - GCP-All-Variants/V41.md
-  - GCP-All-Variants/V42.md
-  - GCP-All-Variants/V43.0.md
-  - GCP-All-Variants/V43.6.md
-  - GCP-All-Variants/V43.7.md
-  - GCP-All-Variants/V44.1.md
-  - GCP-All-Variants/V44.7.md
-  - GCP-All-Variants/V44.8.md
-  - GCP-All-Variants/V44.9b.md
-  - GCP-All-Variants/V44.9d.md
-  - GCP-All-Variants/V45.0.md
-  - GCP-All-Variants/V45.1.md
-  - GCP-All-Variants/V45.2.md
-  - GCP-All-Variants/V45.3.md
-  - GCP-All-Variants/V45.4A.md
-  - GCP-All-Variants/V45.5.md
-  - GCP-All-Variants/V45.6.md
-  - GCP-All-Variants/V46.0.md
-  - GCP-All-Variants/V46.5.md
-  - GCP-All-Variants/V47.0.md
-  - GCP-All-Variants/V47.1.md
-  - GCP-All-Variants/V47.2.md
-  - GCP-All-Variants/V48.0.md
-  - GCP-All-Variants/V49.0.md
-  - GCP-All-Variants/V49.1 Flagship Edition.md
-  - GCP-All-Variants/V50.md
-- **Documents/**
-  - Documents/A Documents Readme.md
-  - Documents/AI ChatGPT Critical Analysis Flagship GCP V49.md
-  - Documents/AI ChatGPT Critical Analysis GCP V45.6D.md
-  - Documents/AI ChatGPT Critical Analysis GCP V46.md
-  - Documents/AI ChatGPT Critical Analysis V47 Full Run EV issue.md
-  - Documents/AI Claude Critical Analysis Flagship GCP V49.md
-  - Documents/AI Claude Critical Analysis GCP V45.6d.md
-  - Documents/AI Claude Critical Analysis GCP V46.md
-  - Documents/AI Claude Critical Analysis V47 full run EV issue.md
-  - Documents/AI Grok Critical Analysis Flagship GCPV49.md
-  - Documents/AI Grok Critical Analysis GCP V45.6D.md
-  - Documents/AI Grok Critical Analysis GCP V46 .md
-  - Documents/AI Grok Critical Analysis V47 Full Run EV issue.md
-  - Documents/Feature Requests.md
-  - Documents/Issue Template.md
-  - Documents/Operations Manual.md
-  - Documents/Pull Request Template.md
-  - Documents/Requirements.md
-  - Documents/Security.md
-  - Documents/Theoretical Soundness Analysis.md
-  - Documents/index.md
-  - Documents/releases.md
-  - Documents/security_report.md
-- **GCP Runners/**
-  - GCP Runners/A V49.0 Master Runners Codex: Flagship Edition.md
-  - GCP Runners/Agriculture & Environmental MVR Runner.md
-  - GCP Runners/Archaeology_History Runner.md
-  - GCP Runners/Code Runner.md
-  - GCP Runners/Culinary Cartridge.md
-  - GCP Runners/Cybersecurity Runner.md
-  - GCP Runners/Deep Sea Runner.md
-  - GCP Runners/Education Runner.md
-  - GCP Runners/Energy_Power Runner.md
-  - GCP Runners/Entertainment Cartridge.md
-  - GCP Runners/Exotics Runner.md
-  - GCP Runners/Finance & FinTech Runner.md
-  - GCP Runners/Humanitarian_Disaster Relief Cartridge.md
-  - GCP Runners/Industrial & Utilities OT Runner.md
-  - GCP Runners/Infrastructure Runner.md
-  - GCP Runners/Legal Cartridge.md
-  - GCP Runners/Life Sciences Runner.md
-  - GCP Runners/Physical Runner.md
-  - GCP Runners/Political Systems Runner.md
-  - GCP Runners/Public Programs_Policy Runner.md
-  - GCP Runners/Spaceflight_Aerospace Runner.md
-  - GCP Runners/Sports_Athletics Cartridge.md
-  - GCP Runners/Theology Runner.md
-  - **GCP V50 Supplemental Docs/**
-    - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Cartridges Pack.md
-    - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Master Runners Codex.md
+  - **Full Runs/**
+    - Notebooks/Full Runs/A FR Readme.md
+    - Notebooks/Full Runs/High Speed Internet Issue V49 Full Run.md
+    - Notebooks/Full Runs/Known EV issue Full Run, GCPv47.md
+    - Notebooks/Full Runs/Latch Full run.md
+    - Notebooks/Full Runs/Quantum Mechanics Full Run.md
+    - Notebooks/Full Runs/Solar Energy Full Run.md
+    - Notebooks/Full Runs/V48 Full Run.md
+    - **Flagship Full Runs/**
+      - Notebooks/Full Runs/Flagship Full Runs/A FFR Readme.md
+      - Notebooks/Full Runs/Flagship Full Runs/AGROS.md
+      - Notebooks/Full Runs/Flagship Full Runs/APNL-RT
+      - Notebooks/Full Runs/Flagship Full Runs/CMAP-X.md
+      - Notebooks/Full Runs/Flagship Full Runs/COES v1.0.md
+      - Notebooks/Full Runs/Flagship Full Runs/Civic Accord Stack.md
+      - Notebooks/Full Runs/Flagship Full Runs/Crisp-PCM.md
+      - Notebooks/Full Runs/Flagship Full Runs/EMP-GMD-Resilience.md
+      - Notebooks/Full Runs/Flagship Full Runs/FHASS.md
+      - Notebooks/Full Runs/Flagship Full Runs/Gobleki-Tepe.md
+      - Notebooks/Full Runs/Flagship Full Runs/HSO.md
+      - Notebooks/Full Runs/Flagship Full Runs/Helios-Arc PM Sail.md
+      - Notebooks/Full Runs/Flagship Full Runs/LYRA.md
+      - Notebooks/Full Runs/Flagship Full Runs/Nitrasafe.md
+      - Notebooks/Full Runs/Flagship Full Runs/NovelDesign.md
+      - Notebooks/Full Runs/Flagship Full Runs/PALIMPSET.md
+      - Notebooks/Full Runs/Flagship Full Runs/Payguard-DPC.md
+      - Notebooks/Full Runs/Flagship Full Runs/Poseidon Loop.md
+      - Notebooks/Full Runs/Flagship Full Runs/Proofline.md
+    - **GCP V50 Full Runs/**
+      - Notebooks/Full Runs/GCP V50 Full Runs/Full auto spark run.md
+- **tests/**
+  - tests/conftest.py
+  - tests/contract_test.py
+  - tests/e2e_smoke_test.py
+  - tests/perf_test.py
+  - tests/rollback_test.py
+  - tests/scan_skip_test.py
+  - tests/security_test.py
+  - tests/spec_validation_test.py
