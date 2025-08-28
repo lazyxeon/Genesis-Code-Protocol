@@ -1,7 +1,7 @@
 name: Auto-merge Dependabot PRs
 
 on:
-  pull_request_target:
+  pull_request:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
     inputs:
@@ -9,6 +9,7 @@ on:
         description: "Dependabot PR number"
         required: true
         type: number
+
 
 permissions:
   contents: write
