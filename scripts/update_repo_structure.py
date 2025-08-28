@@ -34,28 +34,40 @@ END = "<!-- END REPO TREE -->"
 
 
 def build_tree(root: Path, prefix: str = "", depth: int = 0) -> str:
-    """Return a markdown-ish tree listing of files/dirs under root."""
+    """Return a markdown-friendly tree listing of files and directories."""
     if depth > MAX_DEPTH:
         return ""
+
     try:
-        names = sorted(os.listdir(root))[:MAX_ENTRIES]
+        names = sorted(os.listdir(root))
     except OSError:
         return ""
-    lines = []
+
+    # Filter excluded entries and enforce MAX_ENTRIES limit
+    entries: list[tuple[str, Path]] = []
     for name in names:
         if name in EXCLUDE_FILES:
             continue
-        p = root / name
-        if p.is_dir():
-            if name in EXCLUDE_DIRS:
-                continue
-            lines.append(f"{prefix}{name}/")
-            subtree = build_tree(p, prefix + "├─ ", depth + 1)
+        path = root / name
+        if path.is_dir() and name in EXCLUDE_DIRS:
+            continue
+        entries.append((name, path))
+        if len(entries) >= MAX_ENTRIES:
+            break
+
+    lines = []
+    for idx, (name, path) in enumerate(entries):
+        connector = "└── " if idx == len(entries) - 1 else "├── "
+        if path.is_dir():
+            lines.append(f"{prefix}{connector}{name}/")
+            extension = "    " if idx == len(entries) - 1 else "│   "
+            subtree = build_tree(path, prefix + extension, depth + 1)
             if subtree:
                 lines.append(subtree)
         else:
-            lines.append(f"{prefix}{name}")
-    return "\n".join(line for line in lines if line)
+            lines.append(f"{prefix}{connector}{name}")
+
+    return "\n".join(lines)
 
 
 def replace_between(text: str, start: str, end: str, new_block: str) -> str:
