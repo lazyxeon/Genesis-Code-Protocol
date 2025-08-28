@@ -1,6 +1,7 @@
 # GRCP Changelog
 
 ### Features
+
 - feat: add manual mock run workflow (#287)
 - feat: add github actions stability workflow (#272)
 - feat: remove GitPython dependency from changelog script (#229)
@@ -8,6 +9,16 @@
 - feat(cli): pass version to audit (#131)
 
 ### Bug Fixes
+
+- fix: scope SBOM to release bundle (#399)
+- fix: use markdownlint action and correct ignore paths (#401)
+- fix: auto merge dependabot prs (#405)
+- fix: sign all release assets (#395)
+- fix: update workflow actions (#390)
+- fix: ensure sbom generation script passes mypy (#385)
+- fix: correct env usage in ethicalcheck workflow (#372)
+- fix: add typing for SBOM generator (#361)
+- Fix dependabot auto-merge workflow and add spec (#336)
 - fix: repair security scans workflow configs (#332)
 - Fix workflow conditions to avoid skips (#328)
 - fix: run EthicalCheck workflow by default (#315)
@@ -55,6 +66,7 @@
 - Fix formatting of image digest output
 
 ### Documentation
+
 - docs: auto-update Table Of Contents.md (#331)
 - docs: auto-update Table Of Contents.md (#302)
 - docs: auto-update Table Of Contents.md (#297)
@@ -209,6 +221,7 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
+
 - Refactor codebase and fix lint issues (#143)
 - refactor: update workflows and changelog (#137)
 - Refactor TOC update workflow and remove gitsign
@@ -229,9 +242,22 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Testing
+
 - test: verify scanners skip when missing credentials (#289)
 
 ### Miscellaneous Tasks
+
+- Merge branch 'main' into codex/analyze-and-fix-dependency-review-workflow
+- chore: update pre-commit hooks (#397)
+- chore: refine repo tree generation (#391)
+- chore: harden ethicalcheck workflow (#393)
+- chore: harden dependency review workflow
+- Pin GitHub Actions to commit SHAs (#387)
+- chore(docs): simplify docs requirements and install (#388)
+- chore: harden workflows and repo structure (#379)
+- Skip EthicalCheck workflow when configuration missing (#369)
+- chore: note missing secrets in fortify scan (#371)
+- chore: ensure full history in release signing (#340)
 - chore(changelog): update and normalize spacing (#321)
 - chore: batch changelog PRs (#325)
 - chore(changelog): update and normalize spacing (#318)
@@ -1427,6 +1453,7 @@
 - Initial commit
 
 ### Security
+
 - conditionally run security workflows (#274)
 - Add Codacy Security Scan badge to README
 - Add Codacy security scan workflow
