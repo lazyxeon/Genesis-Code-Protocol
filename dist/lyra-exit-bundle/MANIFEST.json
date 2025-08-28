@@ -1,0 +1,22 @@
+{
+  "bundle_version": "copilot/fix-ca55d134-03f1-4931-9d50-938a5add5ec0",
+  "created": "2025-08-28T23:21:31Z",
+  "creator": "LYRA Exit Wizard",
+  "description": "Comprehensive source bundle for LYRA/Genesis Code Protocol",
+  "contents": {
+    "source/": "Core source code and CLI tools",
+    "docs/": "Project documentation",
+    "SBOM/": "Software Bill of Materials",
+    "provenance/": "Supply chain provenance attestations",
+    "rehydration/": "Scripts for environment reconstruction",
+    "rehydrate.sh": "Main rehydration script"
+  },
+  "usage": "Run ./rehydrate.sh to reconstruct development environment",
+  "repository": "https://github.com/lazyxeon/Genesis-Code-Protocol",
+  "commit": "c58fefd59b8ca8edc9d4a8cb16cc53c789ecc73c",
+  "standards": [
+    "SLSA Build Provenance v0.2",
+    "SPDX-2.3",
+    "SemVer 2.0.0"
+  ]
+}
