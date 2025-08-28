@@ -87,23 +87,23 @@ def main() -> None:
         sys.exit(2)
 
     path = Path(sys.argv[1])
-    
+
     try:
         if not path.exists():
             raise FileNotFoundError(f"File not found: {path}")
-        
+
         if not path.is_file():
             raise ValueError(f"Path is not a file: {path}")
-            
+
         text = path.read_text(encoding="utf-8").splitlines(keepends=True)
         fixed = normalize_spacing(text)
-        
+
         if fixed != text:
             path.write_text("".join(fixed), encoding="utf-8")
             print(f"Normalized spacing in {path}")
         else:
             print(f"No changes needed for {path}")
-            
+
     except Exception as e:
         print(f"Error processing {path}: {e}")
         sys.exit(1)
