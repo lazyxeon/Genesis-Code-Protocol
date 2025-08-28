@@ -18,7 +18,7 @@ jobs:
       contents: write
     steps:
       # Checkout the repository at a known commit
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
 
       # Prepare a staging directory and create a ZIP of selected folders
       - name: Prepare staging
@@ -33,7 +33,7 @@ jobs:
 
       # Generate SPDX SBOM
       - name: SBOM (SPDX)
-        uses: anchore/sbom-action@v0.20.5
+        uses: anchore/sbom-action@da167eac915b4e86f08b264dbdbc867b61be6f0c # v0.20.5
         with:
           path: .
           format: spdx-json
@@ -41,7 +41,7 @@ jobs:
 
       # Generate CycloneDX SBOM
       - name: SBOM (CycloneDX)
-        uses: anchore/sbom-action@v0.20.5
+        uses: anchore/sbom-action@da167eac915b4e86f08b264dbdbc867b61be6f0c # v0.20.5
         with:
           path: .
           format: cyclonedx-json
@@ -56,7 +56,7 @@ jobs:
 
       # Upload the ZIP and SBOM files to the GitHub release
       - name: Upload bundle to release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@72f2c25fcb47643c292f7107632f7a47c1df5cd8 # v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
