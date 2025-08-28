@@ -29,8 +29,9 @@ EXCLUDE_FILES = {".DS_Store"}
 MAX_DEPTH = 2  # increase to 3+ if you want deeper trees
 MAX_ENTRIES = 500  # safety cap per directory
 
-BEGIN = "<!-- BEGIN REPO TREE -->"
-END = "<!-- END REPO TREE -->"
+# Markers surrounding the auto-generated tree in README.md
+BEGIN = "<!-- BEGIN_REPO_STRUCTURE -->"
+END = "<!-- END_REPO_STRUCTURE -->"
 
 
 def build_tree(root: Path, prefix: str = "", depth: int = 0) -> str:
@@ -64,8 +65,15 @@ def replace_between(text: str, start: str, end: str, new_block: str) -> str:
     repl = f"{start}\n```\n{new_block}\n```\n{end}"
     if pat.search(text):
         return pat.sub(repl, text, count=1)
-    # If markers missing, append a section at the end
-    extra = f"\n\n## Repository Structure (auto-generated)\n\n{repl}\n"
+
+    # Fallback: insert after the heading if markers are missing
+    heading = re.search(r"^## Repository Structure\s*$", text, flags=re.MULTILINE)
+    if heading:
+        insert_pos = heading.end()
+        return text[:insert_pos] + "\n\n" + repl + "\n" + text[insert_pos:]
+
+    # If heading also missing, append a new section at the end
+    extra = f"\n\n## Repository Structure\n\n{repl}\n"
     return text + extra
 
 
