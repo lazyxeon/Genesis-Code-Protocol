@@ -11,6 +11,7 @@ REQUIRED_SCRIPTS = [
     "scripts/update_repo_structure.py",
     "scripts/fix_md_spacing.py",
     "scripts/generate_changelog.py",
+    "scripts/make_exit_bundle.sh",
 ]
 REQUIRED_CONFIGS = [
     ".markdownlint.yml",
@@ -38,8 +39,8 @@ def check_file_exists(filepath: str) -> bool:
 def validate_python_syntax(filepath: str) -> bool:
     """Validate Python script syntax."""
     try:
-        with open(ROOT / filepath, 'r') as f:
-            compile(f.read(), filepath, 'exec')
+        with open(ROOT / filepath) as f:
+            compile(f.read(), filepath, "exec")
         return True
     except SyntaxError as e:
         print(f"Syntax error in {filepath}: {e}")
@@ -49,23 +50,43 @@ def validate_python_syntax(filepath: str) -> bool:
         return False
 
 
+def validate_shell_syntax(filepath: str) -> bool:
+    """Validate shell script syntax."""
+    try:
+        import subprocess
+        result = subprocess.run(['bash', '-n', str(ROOT / filepath)], 
+                              capture_output=True, text=True)
+        if result.returncode == 0:
+            return True
+        else:
+            print(f"Shell syntax error in {filepath}: {result.stderr}")
+            return False
+    except Exception as e:
+        print(f"Error validating shell script {filepath}: {e}")
+        return False
+
+
 def main() -> int:
     """Main validation function."""
     print("Validating workflow dependencies...")
-    
+
     success = True
-    
+
     # Check required scripts exist
     print("\nChecking required scripts:")
     for script in REQUIRED_SCRIPTS:
         if check_file_exists(script):
             print(f"✓ {script}")
-            if not validate_python_syntax(script):
-                success = False
+            if script.endswith('.py'):
+                if not validate_python_syntax(script):
+                    success = False
+            elif script.endswith('.sh'):
+                if not validate_shell_syntax(script):
+                    success = False
         else:
             print(f"✗ {script} - missing")
             success = False
-    
+
     # Check required config files
     print("\nChecking required config files:")
     for config in REQUIRED_CONFIGS:
@@ -74,7 +95,7 @@ def main() -> int:
         else:
             print(f"✗ {config} - missing")
             success = False
-    
+
     # Check required workflow files
     print("\nChecking workflow files:")
     for workflow in REQUIRED_WORKFLOW_FILES:
@@ -83,16 +104,21 @@ def main() -> int:
         else:
             print(f"✗ {workflow} - missing")
             success = False
-    
+
     # Test core functionality
     print("\nTesting core scripts...")
-    
+
     try:
         # Test TOC generation
         os.chdir(ROOT)
         import subprocess
-        result = subprocess.run([sys.executable, "scripts/generate_repo_toc.py"], 
-                              capture_output=True, text=True, timeout=30)
+
+        result = subprocess.run(
+            [sys.executable, "scripts/generate_repo_toc.py"],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
         if result.returncode == 0:
             print("✓ TOC generation script works")
         else:
@@ -101,11 +127,15 @@ def main() -> int:
     except Exception as e:
         print(f"✗ TOC generation test failed: {e}")
         success = False
-    
+
     try:
         # Test repo structure update
-        result = subprocess.run([sys.executable, "scripts/update_repo_structure.py"], 
-                              capture_output=True, text=True, timeout=30)
+        result = subprocess.run(
+            [sys.executable, "scripts/update_repo_structure.py"],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
         if result.returncode == 0:
             print("✓ Repo structure script works")
         else:
@@ -114,7 +144,7 @@ def main() -> int:
     except Exception as e:
         print(f"✗ Repo structure test failed: {e}")
         success = False
-    
+
     if success:
         print("\n✓ All workflow validations passed!")
         return 0

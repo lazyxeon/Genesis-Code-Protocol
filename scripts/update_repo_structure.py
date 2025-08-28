@@ -32,6 +32,7 @@ MAX_ENTRIES = 500  # safety cap per directory
 BEGIN = "<!-- BEGIN:REPO_STRUCTURE -->"
 END = "<!-- END:REPO_STRUCTURE -->"
 
+
 def build_tree(root: Path, prefix: str = "", depth: int = 0) -> str:
     """Return a markdown-friendly tree listing of files and directories."""
     if depth > MAX_DEPTH:
