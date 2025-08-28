@@ -41,6 +41,7 @@
   - scripts/generate_sbom.py
   - scripts/make_exit_bundle.sh
   - scripts/update_repo_structure.py
+  - scripts/validate_dependencies.py
   - scripts/validate_workflows.py
 - **dist/**
   - **lyra-exit-bundle/**
@@ -126,6 +127,7 @@
     - dist/checksums/SHA256SUMS.txt
 - **docs/**
   - docs/ci-workflow-diagnoser-runbook.md
+  - docs/dependency-review-workflow.md
   - docs/index.md
   - docs/roadmap.md
   - docs/runbook.md
