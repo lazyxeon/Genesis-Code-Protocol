@@ -16,34 +16,34 @@ jobs:
     # This job needs write access to upload the bundle and SBOMs
     permissions:
       contents: write
+    env:
+      RELEASE_TAG: ${{ github.ref_name }}
     steps:
       # Checkout the repository at a known commit
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
 
       # Prepare a staging directory and create a ZIP of selected folders
       - name: Prepare staging
-        env:
-          TAG: ${{ github.ref_name }}
         run: |
           set -euo pipefail
           rm -rf dist
           mkdir -p dist
-          zip -r "dist/GCP_${TAG}_Field_Kit.zip" "cli_bundle" "Documents" "scripts" \
+          zip -r "dist/GCP_${RELEASE_TAG}_Field_Kit.zip" "cli_bundle" "Documents" "scripts" \
             -x "*.git*" "*.github*"
 
-      # Generate SPDX SBOM
+      # Generate SPDX SBOM for the bundled artifact
       - name: SBOM (SPDX)
-        uses: anchore/sbom-action@v0.20.5
+        uses: anchore/sbom-action@da167eac915b4e86f08b264dbdbc867b61be6f0c # v0.20.5
         with:
-          path: .
+          path: dist/GCP_${{ env.RELEASE_TAG }}_Field_Kit.zip
           format: spdx-json
           output-file: dist/sbom.spdx.json
 
-      # Generate CycloneDX SBOM
+      # Generate CycloneDX SBOM for the bundled artifact
       - name: SBOM (CycloneDX)
-        uses: anchore/sbom-action@v0.20.5
+        uses: anchore/sbom-action@da167eac915b4e86f08b264dbdbc867b61be6f0c # v0.20.5
         with:
-          path: .
+          path: dist/GCP_${{ env.RELEASE_TAG }}_Field_Kit.zip
           format: cyclonedx-json
           output-file: dist/sbom.cdx.json
 
@@ -56,7 +56,7 @@ jobs:
 
       # Upload the ZIP and SBOM files to the GitHub release
       - name: Upload bundle to release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@72f2c25fcb47643c292f7107632f7a47c1df5cd8 # v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:

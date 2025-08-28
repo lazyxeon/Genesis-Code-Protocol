@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import sys
+from email.message import Message
 from importlib import metadata
 from pathlib import Path
 from typing import Mapping, cast
