@@ -1,6 +1,6 @@
 # GRCP Changelog
 
-### Features
+## Features
 
 - feat: add manual mock run workflow (#287)
 - feat: add github actions stability workflow (#272)
@@ -8,7 +8,7 @@
 - feat: add workflow to trigger all workflows (#190)
 - feat(cli): pass version to audit (#131)
 
-### Bug Fixes
+## Bug Fixes
 
 - fix: run EthicalCheck workflow by default (#315)
 - Fix Codacy token check in workflow (#309)
@@ -54,7 +54,7 @@
 - Fix formatting in cliff.toml configuration
 - Fix formatting of image digest output
 
-### Documentation
+## Documentation
 
 - docs: auto-update Table Of Contents.md (#302)
 - docs: auto-update Table Of Contents.md (#297)
@@ -208,7 +208,7 @@
 - docs(readme): auto-sync repo structure
 - docs(readme): auto-sync repo structure
 
-### Refactor
+## Refactor
 
 - Refactor codebase and fix lint issues (#143)
 - refactor: update workflows and changelog (#137)
@@ -229,11 +229,11 @@
 - Refactor GitHub Actions workflow for image handling
 - Refactor OpenSSF Scorecard workflow configuration
 
-### Testing
+## Testing
 
 - test: verify scanners skip when missing credentials (#289)
 
-### Miscellaneous Tasks
+## Miscellaneous Tasks
 
 - chore(changelog): update and normalize spacing (#318)
 - chore: update workflows for current actions (#320)
@@ -1306,8 +1306,8 @@
 - Update README.md
 - Rename AI Critical Analysis GRCP to AI Critical Analysis GCP V43.7
 - Rename GCP FULL PROTOCOL.md to GCP Current Version(45.6D).md
-- Rename Complete Full runs_ Full Inventions Master List(no order).md to  A Complete Full runs_ Full Inventions Master List(no order).md
-- Rename Full runs_ Full Inventions Master List(no order).md to Complete Full runs_ Full Inventions Master List(no order).md
+- Rename Complete Full runs\_ Full Inventions Master List(no order).md to  A Complete Full runs\_ Full Inventions Master List(no order).md
+- Rename Full runs\_ Full Inventions Master List(no order).md to Complete Full runs\_ Full Inventions Master List(no order).md
 - Rename V9.md to V09.md
 - Delete GRCP most recent variants/GCP V43.md
 - Delete GRCP most recent variants/GCP V42.md
@@ -1427,7 +1427,7 @@
 - Update README.md
 - Initial commit
 
-### Security
+## Security
 
 - conditionally run security workflows (#274)
 - Add Codacy Security Scan badge to README

@@ -23,8 +23,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: DavidAnson/markdownlint-cli2-action@992badcdf24e3b8eb7e87ff9287fe931bcb00c6e # v20.0.0
         with:
-          node-version: 20
-      - run: npm install -g markdownlint-cli@0.45.0
-      - run: markdownlint '**/*.md' --config .markdownlint.yml --ignore-path .markdownlintignore
+          config: .markdownlint.yml
+          globs: |
+            **/*.md
+            !Notebooks/**
+            !Documents/**
+            !GCP-All-Variants/**
+            !GCP Runners/**
+            !cli_bundle/**
+            !Table Of Contents.md
+            !GCP Current Version(V50 Flagship Edition).md
+            !LICENSE.md
+            !README.md
+            !Charts.md
