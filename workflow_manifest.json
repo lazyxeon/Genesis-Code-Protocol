@@ -1,74 +1,50 @@
 {
   "$schema": "https://example.com/schemas/workflow_manifest_v1.json",
-  "id": "bwb::security-scan-workflow::v1",
+  "id": "bwb::dependabot-automerge::v1",
   "version": "1.0.0",
-  "business_goal": "Run EthicalCheck, Fortify, and Codacy scans to detect security issues before merge",
-  "value_hypothesis": "Automated security scanning reduces vulnerabilities and improves compliance posture",
+  "business_goal": "Automatically merge Dependabot pull requests to keep dependencies up to date",
+  "value_hypothesis": "Automated merging reduces exposure window for vulnerable dependencies and saves developer time",
   "inputs": [
-    {"name": "repository", "type": "text", "source": "api", "validation": "<owner>/<repo>"},
-    {"name": "mock_run", "type": "text", "source": "manual", "validation": "true|false"}
+    {"name": "repo", "type": "text", "source": "api", "validation": "<owner>/<repo>"},
+    {"name": "pr_number", "type": "text", "source": "manual", "validation": "\\d+"}
   ],
   "outputs": [
-    {"name": "scan_report", "type": "json", "retention_days": 90, "consumer": "security-team"}
+    {"name": "automerge_report", "type": "json", "retention_days": 90, "consumer": "devops"}
   ],
   "SLOs": {"latency_ms_p95": 1200, "success_rate": 0.99, "error_budget_month": 0.01},
-  "constraints": ["reuse existing infrastructure", "avoid branch conflicts"],
+  "constraints": ["must avoid branch conflicts", "only merge Dependabot-authored PRs"],
   "operational_env": "container",
   "security": {
     "data_classes": ["internal"],
-    "secrets": ["ENV:CODACY_PROJECT_TOKEN", "ENV:FOD_TENANT", "ENV:FOD_USER", "ENV:FOD_PAT", "ENV:SSC_TOKEN", "ENV:SC_CLIENT_AUTH_TOKEN", "ENV:DEBRICKED_TOKEN"],
-    "iam": [{"principal": "workflow-sa", "permissions": ["security-events:write", "contents:read"]}],
+    "secrets": ["ENV:GITHUB_TOKEN"],
+    "iam": [{"principal": "workflow-sa", "permissions": ["pull-requests:write", "contents:write"]}],
     "supply_chain": {"sbom": true, "signing": "sigstore", "policy": "fail_on_critical"}
   },
   "compliance": {"pii": false, "gdpr": "n/a", "sox": "n/a", "hipaa": false},
   "tooling": {
-    "images": ["ghcr.io/org/security-scan-workflow:1.0.0"],
+    "images": ["ghcr.io/org/dependabot-automerge:1.0.0"],
     "runtimes": ["python3.11"],
-    "libraries": ["pydantic", "pytest", "opentelemetry-sdk"]
+    "libraries": ["requests", "pytest", "opentelemetry-sdk"]
   },
   "steps": [
     {
-      "name": "ethicalcheck",
+      "name": "automerge",
       "kind": "task",
-      "entrypoint": "src/ethicalcheck.py:main",
-      "contracts": {"in": ["inputs[*]"], "out": ["ethicalcheck_result"]},
+      "entrypoint": "src/automerge.py:main",
+      "contracts": {"in": ["inputs[*]"], "out": ["automerge_report"]},
       "retries": {"max": 1, "backoff": "exponential", "jitter": true},
       "timeout_s": 60,
       "idempotency_key": "hash(input)",
       "resources": {"cpu": "200m", "mem": "256Mi"},
-      "metrics": {"counters": ["ethicalcheck_runs"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.ethicalcheck"]
-    },
-    {
-      "name": "fortify",
-      "kind": "task",
-      "entrypoint": "src/fortify.py:main",
-      "contracts": {"in": ["ethicalcheck_result"], "out": ["fortify_result"]},
-      "retries": {"max": 1, "backoff": "exponential", "jitter": true},
-      "timeout_s": 300,
-      "idempotency_key": "hash(input)",
-      "resources": {"cpu": "500m", "mem": "512Mi"},
-      "metrics": {"counters": ["fortify_runs"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.fortify"]
-    },
-    {
-      "name": "codacy",
-      "kind": "task",
-      "entrypoint": "src/codacy.py:main",
-      "contracts": {"in": ["fortify_result"], "out": ["scan_report"]},
-      "retries": {"max": 1, "backoff": "exponential", "jitter": true},
-      "timeout_s": 60,
-      "idempotency_key": "hash(input)",
-      "resources": {"cpu": "200m", "mem": "256Mi"},
-      "metrics": {"counters": ["codacy_runs"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.codacy"]
+      "metrics": {"counters": ["automerge_runs"], "timers": ["duration_ms"]},
+      "otel_spans": ["bwb.automerge"]
     }
   ],
   "dependencies": ["https://api.github.com"],
   "runbook": "docs/runbook.md",
   "failover": {"strategy": "brownout_then_rollback", "rpo_minutes": 5, "rto_minutes": 15},
-  "rollback": {"guard": "Gate:RISK", "actions": ["revert:deployment", "restore:scan_cache"]},
+  "rollback": {"guard": "Gate:RISK", "actions": ["revert:deployment", "restore:automerge_state"]},
   "artifact_plan": [
-    {"path": "dist/security-scan-workflow-bundle.zip", "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]}
+    {"path": "dist/dependabot-automerge-bundle.zip", "contains": ["manifest", "contracts", "tests", "sbom", "runbook"]}
   ]
 }
