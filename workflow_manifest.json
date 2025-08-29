@@ -2,7 +2,7 @@
   "$schema": "https://example.com/schemas/workflow_manifest_v1.json",
   "id": "bwb::security-scan-workflow::v1",
   "version": "1.0.0",
-  "business_goal": "Run EthicalCheck, Fortify, and Codacy scans to detect security issues before merge",
+  "business_goal": "Run Fortify and Codacy scans to detect security issues before merge",
   "value_hypothesis": "Automated security scanning reduces vulnerabilities and improves compliance posture",
   "inputs": [
     {"name": "repository", "type": "text", "source": "api", "validation": "<owner>/<repo>"},
@@ -27,42 +27,30 @@
     "libraries": ["pydantic", "pytest", "opentelemetry-sdk"]
   },
   "steps": [
-    {
-      "name": "ethicalcheck",
-      "kind": "task",
-      "entrypoint": "src/ethicalcheck.py:main",
-      "contracts": {"in": ["inputs[*]"], "out": ["ethicalcheck_result"]},
-      "retries": {"max": 1, "backoff": "exponential", "jitter": true},
-      "timeout_s": 60,
-      "idempotency_key": "hash(input)",
-      "resources": {"cpu": "200m", "mem": "256Mi"},
-      "metrics": {"counters": ["ethicalcheck_runs"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.ethicalcheck"]
-    },
-    {
-      "name": "fortify",
-      "kind": "task",
-      "entrypoint": "src/fortify.py:main",
-      "contracts": {"in": ["ethicalcheck_result"], "out": ["fortify_result"]},
-      "retries": {"max": 1, "backoff": "exponential", "jitter": true},
-      "timeout_s": 300,
-      "idempotency_key": "hash(input)",
-      "resources": {"cpu": "500m", "mem": "512Mi"},
-      "metrics": {"counters": ["fortify_runs"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.fortify"]
-    },
-    {
-      "name": "codacy",
-      "kind": "task",
-      "entrypoint": "src/codacy.py:main",
-      "contracts": {"in": ["fortify_result"], "out": ["scan_report"]},
-      "retries": {"max": 1, "backoff": "exponential", "jitter": true},
-      "timeout_s": 60,
-      "idempotency_key": "hash(input)",
-      "resources": {"cpu": "200m", "mem": "256Mi"},
-      "metrics": {"counters": ["codacy_runs"], "timers": ["duration_ms"]},
-      "otel_spans": ["bwb.codacy"]
-    }
+      {
+        "name": "fortify",
+        "kind": "task",
+        "entrypoint": "src/fortify.py:main",
+        "contracts": {"in": ["inputs[*]"], "out": ["fortify_result"]},
+        "retries": {"max": 1, "backoff": "exponential", "jitter": true},
+        "timeout_s": 300,
+        "idempotency_key": "hash(input)",
+        "resources": {"cpu": "500m", "mem": "512Mi"},
+        "metrics": {"counters": ["fortify_runs"], "timers": ["duration_ms"]},
+        "otel_spans": ["bwb.fortify"]
+      },
+      {
+        "name": "codacy",
+        "kind": "task",
+        "entrypoint": "src/codacy.py:main",
+        "contracts": {"in": ["fortify_result"], "out": ["scan_report"]},
+        "retries": {"max": 1, "backoff": "exponential", "jitter": true},
+        "timeout_s": 60,
+        "idempotency_key": "hash(input)",
+        "resources": {"cpu": "200m", "mem": "256Mi"},
+        "metrics": {"counters": ["codacy_runs"], "timers": ["duration_ms"]},
+        "otel_spans": ["bwb.codacy"]
+      }
   ],
   "dependencies": ["https://api.github.com"],
   "runbook": "docs/runbook.md",

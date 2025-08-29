@@ -39,7 +39,6 @@
 [![Update Repo Structure](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml)
 [![Update TOC File](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-toc-file.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-toc-file.yml)
 [![Validate Notebooks](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/validate-notebooks.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/validate-notebooks.yml)
-[![EthicalCheck-Workflow](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/ethicalcheck.yml/badge.svg)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/ethicalcheck.yml)
 [![Codacy Security Scan](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/codacy.yml/badge.svg)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/codacy.yml)
 [![Fortify AST Scan](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/fortify.yml/badge.svg)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/fortify.yml)
 
@@ -414,7 +413,6 @@ src/
 ├─ codacy.py
 ├─ config.py
 ├─ errors.py
-├─ ethicalcheck.py
 ├─ fortify.py
 ├─ fuzz.py
 ├─ ingest.py

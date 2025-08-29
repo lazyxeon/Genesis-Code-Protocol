@@ -1,14 +1,10 @@
 traces:
   service_name: security-scan-workflow
   spans:
-    bwb.ethicalcheck: {parent: root, children: [bwb.fortify]}
-    bwb.fortify: {parent: bwb.ethicalcheck, children: [bwb.codacy]}
+    bwb.fortify: {parent: root, children: [bwb.codacy]}
     bwb.codacy: {parent: bwb.fortify}
 metrics:
   counters:
-    ethicalcheck_runs:
-      unit: runs
-      cardinality: low
     fortify_runs:
       unit: runs
       cardinality: low
@@ -27,12 +23,12 @@ code_snippets:
   python: |
     from opentelemetry import trace
     tracer = trace.get_tracer("security-scan-workflow")
-    with tracer.start_as_current_span("bwb.ethicalcheck"):
-        ...
+    with tracer.start_as_current_span("bwb.fortify"):
+      ...
   node: |
     const { trace } = require("@opentelemetry/api");
     const tracer = trace.getTracer("security-scan-workflow");
-    tracer.startActiveSpan("bwb.ethicalcheck", span => {
+    tracer.startActiveSpan("bwb.fortify", span => {
       // ...
       span.end();
     });

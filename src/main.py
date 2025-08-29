@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 from typing import Dict
 
-from . import codacy, errors, ethicalcheck, fortify, rollback, utils
+from . import codacy, errors, fortify, rollback, utils
 
 
 def run() -> str:
@@ -13,10 +13,6 @@ def run() -> str:
     report_path = Path(os.getenv("WF_REPORT_PATH", "scan-report.json"))
     results: Dict[str, Dict[str, str]] = {}
     try:
-        if os.getenv("WF_FAIL_STEP") == "ethicalcheck":
-            raise errors.TerminalError("forced failure at ethicalcheck")
-        results["ethicalcheck"] = ethicalcheck.main()
-
         if os.getenv("WF_FAIL_STEP") == "fortify":
             raise errors.TerminalError("forced failure at fortify")
         results["fortify"] = fortify.main()

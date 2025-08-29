@@ -62,7 +62,6 @@
   - src/codacy.py
   - src/config.py
   - src/errors.py
-  - src/ethicalcheck.py
   - src/fortify.py
   - src/fuzz.py
   - src/ingest.py
