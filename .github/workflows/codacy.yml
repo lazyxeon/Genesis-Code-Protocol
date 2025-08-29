@@ -1,4 +1,5 @@
 name: Codacy Security Scan
+run-name: ${{ github.workflow }}
 
 on:
   push:

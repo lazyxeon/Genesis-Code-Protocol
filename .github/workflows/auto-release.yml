@@ -1,4 +1,5 @@
 name: Auto Release
+run-name: ${{ github.workflow }}
 
 on:
   push:

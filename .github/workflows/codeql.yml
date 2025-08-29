@@ -1,4 +1,5 @@
 name: CodeQL
+run-name: ${{ github.workflow }}
 
 on:
   push:
