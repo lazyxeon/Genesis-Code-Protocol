@@ -8,6 +8,7 @@ on:
       - "**/*.py"
       - "**/*.md"
       - "**/*.yml"
+      - "**/*.yaml"
     paths-ignore:
       - "CHANGELOG.md"
       - ".github/workflows/generate-changelog.yml"
