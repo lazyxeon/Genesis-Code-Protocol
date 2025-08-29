@@ -21,23 +21,49 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      issues: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Build repo tree and patch README
         run: |
           python scripts/update_repo_structure.py
-          python scripts/fix_md_spacing.py README.md
+          if [ -f "README.md" ]; then
+            python scripts/fix_md_spacing.py README.md
+          else
+            echo "Error: README.md not found"
+            exit 1
+          fi
+
+      # Show the diff (optional for debugging)
+      - name: Show diff
+        run: |
+          git status
+          git --no-pager diff -- README.md || true
+
+      # Check if README.md changed
+      - name: Detect changes
+        id: changes
+        run: |
+          if git status --porcelain README.md | grep .; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
 
       # Create a PR for the README update
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c
+        if: steps.changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
+        uses: peter-evans/create-pull-request@v7
         with:
           commit-message: "docs(readme): auto-sync repo structure"
           branch: "chore/update-repo-structure"
@@ -45,4 +71,3 @@ jobs:
           body: "Automated update of the repository structure section."
           labels: "documentation"
           add-paths: "README.md"
-          sign-commits: true
