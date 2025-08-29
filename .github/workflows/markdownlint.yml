@@ -1,7 +1,8 @@
+---
 name: Markdown Lint
 run-name: ${{ github.workflow }}
 
-on:
+"on":
   push:
     paths:
       - '**/*.md'

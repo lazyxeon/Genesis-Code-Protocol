@@ -1,7 +1,8 @@
+---
 name: Sign Release Artifacts
 
 # Trigger when a release is published (i.e. created and marked as published)
-on:
+"on":
   release:
     types: [published]
   workflow_dispatch:

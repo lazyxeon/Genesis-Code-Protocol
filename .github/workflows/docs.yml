@@ -1,6 +1,7 @@
+---
 name: Docs (MkDocs → GitHub Pages)
 
-on:
+"on":
   workflow_dispatch:
   push:
     branches: ["main"]
@@ -27,7 +28,7 @@ jobs:
       contents: read
       pages: write
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'

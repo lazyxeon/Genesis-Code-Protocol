@@ -1,7 +1,8 @@
+---
 name: Build and Push Docker image to GHCR
 run-name: ${{ github.workflow }}
 
-on:
+"on":
   push:
     tags: ["v*"]
   workflow_dispatch:

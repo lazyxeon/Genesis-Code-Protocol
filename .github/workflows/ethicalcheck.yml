@@ -1,6 +1,7 @@
+---
 name: EthicalCheck-Workflow
 
-on:
+"on":
   push:
   pull_request:
   schedule:

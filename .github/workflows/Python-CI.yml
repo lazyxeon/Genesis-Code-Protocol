@@ -1,7 +1,8 @@
+---
 name: Python CI
 run-name: ${{ github.workflow }}
 
-on:
+"on":
   push:
     paths-ignore:
       - '**/*.md'
@@ -16,7 +17,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      - uses: actions/checkout@v4
       - name: Set up Python 3.10
         uses: actions/setup-python@v5
         with:

@@ -1,6 +1,7 @@
+---
 name: Docker Debug Build
 
-on:
+"on":
   workflow_dispatch: {}
 
 permissions: {}
@@ -13,7 +14,7 @@ jobs:
     env:
       BUILDKIT_PROGRESS: plain
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      - uses: actions/checkout@v4
       - name: Show context
         run: |
           pwd && ls -la
