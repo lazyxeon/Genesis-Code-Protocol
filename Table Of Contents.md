@@ -3,6 +3,7 @@
 - .dockerignore
 - .flake8
 - .gitattributes
+- .gitignore
 - .markdownlint.yml
 - .markdownlintignore
 - .pre-commit-config.yaml
@@ -26,7 +27,9 @@
 - integration_contract.md
 - mkdocs.yml
 - observability.yaml
+- pyproject.toml
 - pytest.ini
+- requirements-dev.txt
 - requirements.txt
 - security.md
 - setup.py
@@ -48,6 +51,7 @@
     - dist/lyra-exit-bundle/MANIFEST.json
     - dist/lyra-exit-bundle/README.md
     - dist/lyra-exit-bundle/rehydrate.sh
+    - **rehydration/**
     - **docs/**
       - **Documents/**
         - dist/lyra-exit-bundle/docs/Documents/A Documents Readme.md
@@ -123,21 +127,80 @@
   - **checksums/**
     - dist/checksums/SHA256SUMS.txt
 - **docs/**
+  - docs/RELEASE_WORKFLOW.md
   - docs/ci-workflow-diagnoser-runbook.md
+  - docs/dependency-review-workflow.md
   - docs/index.md
   - docs/roadmap.md
   - docs/runbook.md
+- **GCP Runners/**
+  - GCP Runners/A V49.0 Master Runners Codex: Flagship Edition.md
+  - GCP Runners/Agriculture & Environmental MVR Runner.md
+  - GCP Runners/Archaeology_History Runner.md
+  - GCP Runners/Code Runner.md
+  - GCP Runners/Culinary Cartridge.md
+  - GCP Runners/Cybersecurity Runner.md
+  - GCP Runners/Deep Sea Runner.md
+  - GCP Runners/Education Runner.md
+  - GCP Runners/Energy_Power Runner.md
+  - GCP Runners/Entertainment Cartridge.md
+  - GCP Runners/Exotics Runner.md
+  - GCP Runners/Finance & FinTech Runner.md
+  - GCP Runners/Humanitarian_Disaster Relief Cartridge.md
+  - GCP Runners/Industrial & Utilities OT Runner.md
+  - GCP Runners/Infrastructure Runner.md
+  - GCP Runners/Legal Cartridge.md
+  - GCP Runners/Life Sciences Runner.md
+  - GCP Runners/Physical Runner.md
+  - GCP Runners/Political Systems Runner.md
+  - GCP Runners/Public Programs_Policy Runner.md
+  - GCP Runners/Spaceflight_Aerospace Runner.md
+  - GCP Runners/Sports_Athletics Cartridge.md
+  - GCP Runners/Theology Runner.md
+  - **GCP V50 Supplemental Docs/**
+    - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Cartridges Pack.md
+    - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Master Runners Codex.md
 - **tests/**
+  - tests/automerge_skip_test.py
   - tests/conftest.py
   - tests/contract_test.py
   - tests/e2e_smoke_test.py
+  - tests/ethicalcheck_test.py
   - tests/perf_test.py
   - tests/rollback_test.py
-  - tests/scan_skip_test.py
   - tests/security_test.py
   - tests/spec_validation_test.py
+  - tests/test_release_bundle.py
+  - tests/test_release_workflows.py
+- **Documents/**
+  - Documents/A Documents Readme.md
+  - Documents/AI ChatGPT Critical Analysis Flagship GCP V49.md
+  - Documents/AI ChatGPT Critical Analysis GCP V45.6D.md
+  - Documents/AI ChatGPT Critical Analysis GCP V46.md
+  - Documents/AI ChatGPT Critical Analysis V47 Full Run EV issue.md
+  - Documents/AI Claude Critical Analysis Flagship GCP V49.md
+  - Documents/AI Claude Critical Analysis GCP V45.6d.md
+  - Documents/AI Claude Critical Analysis GCP V46.md
+  - Documents/AI Claude Critical Analysis V47 full run EV issue.md
+  - Documents/AI Grok Critical Analysis Flagship GCPV49.md
+  - Documents/AI Grok Critical Analysis GCP V45.6D.md
+  - Documents/AI Grok Critical Analysis GCP V46 .md
+  - Documents/AI Grok Critical Analysis V47 Full Run EV issue.md
+  - Documents/Feature Requests.md
+  - Documents/Issue Template.md
+  - Documents/Operations Manual.md
+  - Documents/Pull Request Template.md
+  - Documents/Requirements.md
+  - Documents/Security.md
+  - Documents/Theoretical Soundness Analysis.md
+  - Documents/index.md
+  - Documents/releases.md
+  - Documents/security_report.md
+- **tools/**
+  - tools/audit-workflows.sh
 - **src/**
   - src/__init__.py
+  - src/automerge.py
   - src/codacy.py
   - src/config.py
   - src/errors.py
@@ -155,6 +218,14 @@
   - **matrix_ci/**
     - src/matrix_ci/__init__.py
     - src/matrix_ci/pipeline.py
+- **.pytest_cache/**
+  - .pytest_cache/.gitignore
+  - .pytest_cache/CACHEDIR.TAG
+  - .pytest_cache/README.md
+  - **v/**
+    - **cache/**
+      - .pytest_cache/v/cache/lastfailed
+      - .pytest_cache/v/cache/nodeids
 - **GCP-All-Variants/**
   - GCP-All-Variants/Changelog.md
   - GCP-All-Variants/Changelog_P2.md
@@ -194,6 +265,57 @@
   - GCP-All-Variants/V49.0.md
   - GCP-All-Variants/V49.1 Flagship Edition.md
   - GCP-All-Variants/V50.md
+- **Documents/**
+  - Documents/A Documents Readme.md
+  - Documents/AI ChatGPT Critical Analysis Flagship GCP V49.md
+  - Documents/AI ChatGPT Critical Analysis GCP V45.6D.md
+  - Documents/AI ChatGPT Critical Analysis GCP V46.md
+  - Documents/AI ChatGPT Critical Analysis V47 Full Run EV issue.md
+  - Documents/AI Claude Critical Analysis Flagship GCP V49.md
+  - Documents/AI Claude Critical Analysis GCP V45.6d.md
+  - Documents/AI Claude Critical Analysis GCP V46.md
+  - Documents/AI Claude Critical Analysis V47 full run EV issue.md
+  - Documents/AI Grok Critical Analysis Flagship GCPV49.md
+  - Documents/AI Grok Critical Analysis GCP V45.6D.md
+  - Documents/AI Grok Critical Analysis GCP V46 .md
+  - Documents/AI Grok Critical Analysis V47 Full Run EV issue.md
+  - Documents/Feature Requests.md
+  - Documents/Issue Template.md
+  - Documents/Operations Manual.md
+  - Documents/Pull Request Template.md
+  - Documents/Requirements.md
+  - Documents/Security.md
+  - Documents/Theoretical Soundness Analysis.md
+  - Documents/index.md
+  - Documents/releases.md
+  - Documents/security_report.md
+- **GCP Runners/**
+  - GCP Runners/A V49.0 Master Runners Codex: Flagship Edition.md
+  - GCP Runners/Agriculture & Environmental MVR Runner.md
+  - GCP Runners/Archaeology_History Runner.md
+  - GCP Runners/Code Runner.md
+  - GCP Runners/Culinary Cartridge.md
+  - GCP Runners/Cybersecurity Runner.md
+  - GCP Runners/Deep Sea Runner.md
+  - GCP Runners/Education Runner.md
+  - GCP Runners/Energy_Power Runner.md
+  - GCP Runners/Entertainment Cartridge.md
+  - GCP Runners/Exotics Runner.md
+  - GCP Runners/Finance & FinTech Runner.md
+  - GCP Runners/Humanitarian_Disaster Relief Cartridge.md
+  - GCP Runners/Industrial & Utilities OT Runner.md
+  - GCP Runners/Infrastructure Runner.md
+  - GCP Runners/Legal Cartridge.md
+  - GCP Runners/Life Sciences Runner.md
+  - GCP Runners/Physical Runner.md
+  - GCP Runners/Political Systems Runner.md
+  - GCP Runners/Public Programs_Policy Runner.md
+  - GCP Runners/Spaceflight_Aerospace Runner.md
+  - GCP Runners/Sports_Athletics Cartridge.md
+  - GCP Runners/Theology Runner.md
+  - **GCP V50 Supplemental Docs/**
+    - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Cartridges Pack.md
+    - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Master Runners Codex.md
 - **cli_bundle/**
   - cli_bundle/Readme.md
   - cli_bundle/__init__.py
