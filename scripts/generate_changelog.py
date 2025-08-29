@@ -47,6 +47,8 @@ PATTERNS = [
     (r".*security", "Security"),
 ]
 
+CHANGELOG_SKIP_RE = re.compile(r"^chore\(changelog\)", re.IGNORECASE)
+
 
 def _git_log() -> List[str]:
     """Return commit messages using the ``git`` command line."""
@@ -68,6 +70,8 @@ def main() -> None:
     messages = _git_log()
 
     for msg in messages:
+        if CHANGELOG_SKIP_RE.search(msg):
+            continue
         assigned = False
         for pattern, group in PATTERNS:
             if re.search(pattern, msg, re.IGNORECASE):
@@ -77,7 +81,7 @@ def main() -> None:
         if not assigned:
             GROUPS["Miscellaneous Tasks"].append(msg)
 
-    lines = ["# GRCP Changelog", ""]
+    lines = ["# GCP Changelog", ""]
     for group, commits in GROUPS.items():
         if commits:
             lines.append(f"### {group}")
