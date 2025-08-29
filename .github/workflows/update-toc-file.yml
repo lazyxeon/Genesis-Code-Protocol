@@ -50,5 +50,5 @@ jobs:
           title: "chore(docs): refresh Table Of Contents.md"
           body: "Automated TOC update."
           labels: "documentation"
-          add-paths: "Table Of Contents.md"
+          add-paths: "Table\\ Of\\ Contents.md"
           sign-commits: true
