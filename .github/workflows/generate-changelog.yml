@@ -10,6 +10,8 @@ on:
       - "**/*.yml"
     paths-ignore:
       - "CHANGELOG.md"
+      - ".github/workflows/generate-changelog.yml"
+      
   workflow_dispatch:
 
 permissions:
