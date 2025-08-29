@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import os
-from typing import Dict
 
 from .utils import get_logger
 
@@ -18,7 +17,7 @@ REQUIRED = [
 ]
 
 
-def main() -> Dict[str, str]:
+def main() -> dict[str, str]:
     """Simulate running Fortify scan."""
     missing = [k for k in REQUIRED if not os.getenv(k)]
     if missing:
