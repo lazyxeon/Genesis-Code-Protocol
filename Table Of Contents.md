@@ -14,6 +14,258 @@
 - Code of Conduct.md
 - Contributing.md
 - Dockerfile
+- EXIT_WIZARD.txt
+- GCP Current Version(V50 Flagship Edition).md
+- LICENSE.md
+- Makefile
+- README.md
+- Roadmap.md
+- SECURITY.md
+- Table Of Contents.md
+- cost_model.md
+- governance.yaml
+- integration_contract.md
+- mkdocs.yml
+- observability.yaml
+- pyproject.toml
+- pytest.ini
+- requirements-dev.txt
+- requirements.txt
+- security.md
+- setup.py
+- workflow_manifest.json
+- **scripts/**
+  - scripts/__init__.py
+  - scripts/fix_md_spacing.py
+  - scripts/generate_changelog.py
+  - scripts/generate_repo_toc.py
+  - scripts/generate_sbom.py
+  - scripts/make_exit_bundle.sh
+  - scripts/update_repo_structure.py
+  - scripts/validate_dependencies.py
+  - scripts/validate_workflows.py
+- **dist/**
+  - **lyra-exit-bundle/**
+    - dist/lyra-exit-bundle/CHANGELOG.md
+    - dist/lyra-exit-bundle/LICENSE.md
+    - dist/lyra-exit-bundle/MANIFEST.json
+    - dist/lyra-exit-bundle/README.md
+    - dist/lyra-exit-bundle/rehydrate.sh
+    - **docs/**
+      - **Documents/**
+        - dist/lyra-exit-bundle/docs/Documents/A Documents Readme.md
+        - dist/lyra-exit-bundle/docs/Documents/AI ChatGPT Critical Analysis Flagship GCP V49.md
+        - dist/lyra-exit-bundle/docs/Documents/AI ChatGPT Critical Analysis GCP V45.6D.md
+        - dist/lyra-exit-bundle/docs/Documents/AI ChatGPT Critical Analysis GCP V46.md
+        - dist/lyra-exit-bundle/docs/Documents/AI ChatGPT Critical Analysis V47 Full Run EV issue.md
+        - dist/lyra-exit-bundle/docs/Documents/AI Claude Critical Analysis Flagship GCP V49.md
+        - dist/lyra-exit-bundle/docs/Documents/AI Claude Critical Analysis GCP V45.6d.md
+        - dist/lyra-exit-bundle/docs/Documents/AI Claude Critical Analysis GCP V46.md
+        - dist/lyra-exit-bundle/docs/Documents/AI Claude Critical Analysis V47 full run EV issue.md
+        - dist/lyra-exit-bundle/docs/Documents/AI Grok Critical Analysis Flagship GCPV49.md
+        - dist/lyra-exit-bundle/docs/Documents/AI Grok Critical Analysis GCP V45.6D.md
+        - dist/lyra-exit-bundle/docs/Documents/AI Grok Critical Analysis GCP V46 .md
+        - dist/lyra-exit-bundle/docs/Documents/AI Grok Critical Analysis V47 Full Run EV issue.md
+        - dist/lyra-exit-bundle/docs/Documents/Feature Requests.md
+        - dist/lyra-exit-bundle/docs/Documents/Issue Template.md
+        - dist/lyra-exit-bundle/docs/Documents/Operations Manual.md
+        - dist/lyra-exit-bundle/docs/Documents/Pull Request Template.md
+        - dist/lyra-exit-bundle/docs/Documents/Requirements.md
+        - dist/lyra-exit-bundle/docs/Documents/Security.md
+        - dist/lyra-exit-bundle/docs/Documents/Theoretical Soundness Analysis.md
+        - dist/lyra-exit-bundle/docs/Documents/index.md
+        - dist/lyra-exit-bundle/docs/Documents/releases.md
+        - dist/lyra-exit-bundle/docs/Documents/security_report.md
+    - **source/**
+      - dist/lyra-exit-bundle/source/requirements-dev.txt
+      - dist/lyra-exit-bundle/source/requirements.txt
+      - dist/lyra-exit-bundle/source/setup.py
+      - **scripts/**
+        - dist/lyra-exit-bundle/source/scripts/__init__.py
+        - dist/lyra-exit-bundle/source/scripts/fix_md_spacing.py
+        - dist/lyra-exit-bundle/source/scripts/generate_changelog.py
+        - dist/lyra-exit-bundle/source/scripts/generate_repo_toc.py
+        - dist/lyra-exit-bundle/source/scripts/generate_sbom.py
+        - dist/lyra-exit-bundle/source/scripts/make_exit_bundle.sh
+        - dist/lyra-exit-bundle/source/scripts/update_repo_structure.py
+        - dist/lyra-exit-bundle/source/scripts/validate_workflows.py
+      - **src/**
+        - dist/lyra-exit-bundle/source/src/__init__.py
+        - dist/lyra-exit-bundle/source/src/automerge.py
+        - dist/lyra-exit-bundle/source/src/codacy.py
+        - dist/lyra-exit-bundle/source/src/config.py
+        - dist/lyra-exit-bundle/source/src/errors.py
+        - dist/lyra-exit-bundle/source/src/ethicalcheck.py
+        - dist/lyra-exit-bundle/source/src/fortify.py
+        - dist/lyra-exit-bundle/source/src/fuzz.py
+        - dist/lyra-exit-bundle/source/src/ingest.py
+        - dist/lyra-exit-bundle/source/src/logging_utils.py
+        - dist/lyra-exit-bundle/source/src/main.py
+        - dist/lyra-exit-bundle/source/src/remediate.py
+        - dist/lyra-exit-bundle/source/src/report.py
+        - dist/lyra-exit-bundle/source/src/rollback.py
+        - dist/lyra-exit-bundle/source/src/scan.py
+        - dist/lyra-exit-bundle/source/src/utils.py
+        - **matrix_ci/**
+          - dist/lyra-exit-bundle/source/src/matrix_ci/__init__.py
+          - dist/lyra-exit-bundle/source/src/matrix_ci/pipeline.py
+      - **cli_bundle/**
+        - dist/lyra-exit-bundle/source/cli_bundle/Readme.md
+        - dist/lyra-exit-bundle/source/cli_bundle/__init__.py
+        - dist/lyra-exit-bundle/source/cli_bundle/audit_utils.py
+        - dist/lyra-exit-bundle/source/cli_bundle/full_run.py
+        - dist/lyra-exit-bundle/source/cli_bundle/gcp_cli.py
+        - dist/lyra-exit-bundle/source/cli_bundle/phase1.py
+        - dist/lyra-exit-bundle/source/cli_bundle/phase6_7.py
+        - dist/lyra-exit-bundle/source/cli_bundle/prompt_utils.py
+        - dist/lyra-exit-bundle/source/cli_bundle/requirements.txt
+    - **SBOM/**
+      - dist/lyra-exit-bundle/SBOM/sbom.spdx.json
+    - **provenance/**
+      - dist/lyra-exit-bundle/provenance/slsa_provenance.json
+  - **checksums/**
+    - dist/checksums/SHA256SUMS.txt
+- **docs/**
+  - docs/RELEASE_WORKFLOW.md
+  - docs/ci-workflow-diagnoser-runbook.md
+  - docs/dependency-review-workflow.md
+  - docs/index.md
+  - docs/roadmap.md
+  - docs/runbook.md
+- **GCP Runners/**
+  - GCP Runners/A V49.0 Master Runners Codex: Flagship Edition.md
+  - GCP Runners/Agriculture & Environmental MVR Runner.md
+  - GCP Runners/Archaeology_History Runner.md
+  - GCP Runners/Code Runner.md
+  - GCP Runners/Culinary Cartridge.md
+  - GCP Runners/Cybersecurity Runner.md
+  - GCP Runners/Deep Sea Runner.md
+  - GCP Runners/Education Runner.md
+  - GCP Runners/Energy_Power Runner.md
+  - GCP Runners/Entertainment Cartridge.md
+  - GCP Runners/Exotics Runner.md
+  - GCP Runners/Finance & FinTech Runner.md
+  - GCP Runners/Humanitarian_Disaster Relief Cartridge.md
+  - GCP Runners/Industrial & Utilities OT Runner.md
+  - GCP Runners/Infrastructure Runner.md
+  - GCP Runners/Legal Cartridge.md
+  - GCP Runners/Life Sciences Runner.md
+  - GCP Runners/Physical Runner.md
+  - GCP Runners/Political Systems Runner.md
+  - GCP Runners/Public Programs_Policy Runner.md
+  - GCP Runners/Spaceflight_Aerospace Runner.md
+  - GCP Runners/Sports_Athletics Cartridge.md
+  - GCP Runners/Theology Runner.md
+  - **GCP V50 Supplemental Docs/**
+    - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Cartridges Pack.md
+    - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Master Runners Codex.md
+- **tests/**
+  - tests/automerge_skip_test.py
+  - tests/conftest.py
+  - tests/contract_test.py
+  - tests/e2e_smoke_test.py
+  - tests/ethicalcheck_test.py
+  - tests/perf_test.py
+  - tests/rollback_test.py
+  - tests/security_test.py
+  - tests/spec_validation_test.py
+  - tests/test_release_bundle.py
+  - tests/test_release_workflows.py
+- **Documents/**
+  - Documents/A Documents Readme.md
+  - Documents/AI ChatGPT Critical Analysis Flagship GCP V49.md
+  - Documents/AI ChatGPT Critical Analysis GCP V45.6D.md
+  - Documents/AI ChatGPT Critical Analysis GCP V46.md
+  - Documents/AI ChatGPT Critical Analysis V47 Full Run EV issue.md
+  - Documents/AI Claude Critical Analysis Flagship GCP V49.md
+  - Documents/AI Claude Critical Analysis GCP V45.6d.md
+  - Documents/AI Claude Critical Analysis GCP V46.md
+  - Documents/AI Claude Critical Analysis V47 full run EV issue.md
+  - Documents/AI Grok Critical Analysis Flagship GCPV49.md
+  - Documents/AI Grok Critical Analysis GCP V45.6D.md
+  - Documents/AI Grok Critical Analysis GCP V46 .md
+  - Documents/AI Grok Critical Analysis V47 Full Run EV issue.md
+  - Documents/Feature Requests.md
+  - Documents/Issue Template.md
+  - Documents/Operations Manual.md
+  - Documents/Pull Request Template.md
+  - Documents/Requirements.md
+  - Documents/Security.md
+  - Documents/Theoretical Soundness Analysis.md
+  - Documents/index.md
+  - Documents/releases.md
+  - Documents/security_report.md
+- **tools/**
+  - tools/audit-workflows.sh
+- **src/**
+  - src/__init__.py
+  - src/automerge.py
+  - src/codacy.py
+  - src/config.py
+  - src/errors.py
+  - src/ethicalcheck.py
+  - src/fortify.py
+  - src/fuzz.py
+  - src/ingest.py
+  - src/logging_utils.py
+  - src/main.py
+  - src/remediate.py
+  - src/report.py
+  - src/rollback.py
+  - src/scan.py
+  - src/utils.py
+  - **matrix_ci/**
+    - src/matrix_ci/__init__.py
+    - src/matrix_ci/pipeline.py
+- **GCP-All-Variants/**
+  - GCP-All-Variants/Changelog.md
+  - GCP-All-Variants/Changelog_P2.md
+  - GCP-All-Variants/V09.md
+  - GCP-All-Variants/V11.md
+  - GCP-All-Variants/V20.md
+  - GCP-All-Variants/V22.md
+  - GCP-All-Variants/V23.md
+  - GCP-All-Variants/V30.md
+  - GCP-All-Variants/V34.md
+  - GCP-All-Variants/V35.md
+  - GCP-All-Variants/V36.md
+  - GCP-All-Variants/V40.md
+  - GCP-All-Variants/V41.md
+  - GCP-All-Variants/V42.md
+  - GCP-All-Variants/V43.0.md
+  - GCP-All-Variants/V43.6.md
+  - GCP-All-Variants/V43.7.md
+  - GCP-All-Variants/V44.1.md
+  - GCP-All-Variants/V44.7.md
+  - GCP-All-Variants/V44.8.md
+  - GCP-All-Variants/V44.9b.md
+  - GCP-All-Variants/V44.9d.md
+  - GCP-All-Variants/V45.0.md
+  - GCP-All-Variants/V45.1.md
+  - GCP-All-Variants/V45.2.md
+  - GCP-All-Variants/V45.3.md
+  - GCP-All-Variants/V45.4A.md
+  - GCP-All-Variants/V45.5.md
+  - GCP-All-Variants/V45.6.md
+  - GCP-All-Variants/V46.0.md
+  - GCP-All-Variants/V46.5.md
+  - GCP-All-Variants/V47.0.md
+  - GCP-All-Variants/V47.1.md
+  - GCP-All-Variants/V47.2.md
+  - GCP-All-Variants/V48.0.md
+  - GCP-All-Variants/V49.0.md
+  - GCP-All-Variants/V49.1 Flagship Edition.md
+  - GCP-All-Variants/V50.md
+- **cli_bundle/**
+  - cli_bundle/Readme.md
+  - cli_bundle/__init__.py
+  - cli_bundle/audit_utils.py
+  - cli_bundle/full_run.py
+  - cli_bundle/gcp_cli.py
+  - cli_bundle/phase1.py
+  - cli_bundle/phase6_7.py
+  - cli_bundle/prompt_utils.py
+  - cli_bundle/requirements.txt
 - **Notebooks/**
   - Notebooks/A Notebook Readme.md
   - Notebooks/Alloy Perceptual Loss.py
