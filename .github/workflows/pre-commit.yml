@@ -16,10 +16,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+
+      - name: Set up Python
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: 'pip'
+
       - name: Cache pre-commit environments
         uses: actions/cache@v4
         with:
@@ -27,7 +30,8 @@ jobs:
           key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
           restore-keys: |
             pre-commit-${{ runner.os }}-
-      - name: Setup pip and install pre-commit with retry
+
+      - name: Install pre-commit and ruff with retry
         run: |
           python -m pip install --upgrade pip
           export PIP_TIMEOUT=60
@@ -38,30 +42,69 @@ jobs:
             fi
             echo "Pre-commit installation attempt $i failed, retrying in $((i*5)) seconds..."
             sleep $((i*5))
+            if [ $i -eq 3 ]; then
+              echo "❌ Failed to install pre-commit after 3 attempts"
+              exit 1
+            fi
           done
+
       - name: Install pre-commit hooks with timeout and retry
+        id: install-hooks
         run: |
           export PIP_TIMEOUT=60
           export PIP_RETRIES=5
           export PIP_DEFAULT_TIMEOUT=60
+          # ensure clean pre-commit cache for reliability
+          if [ -d ~/.cache/pre-commit ]; then
+            rm -rf ~/.cache/pre-commit
+          fi
           for i in {1..5}; do
             if timeout 600 pre-commit install-hooks; then
-              break
+              echo "✅ Pre-commit hooks installed successfully"
+              exit 0
             fi
             echo "Pre-commit hooks installation attempt $i failed, retrying in $((i*15)) seconds..."
             sleep $((i*15))
-            # Clear cache on retry to avoid corrupted state
+            # Clear cache after 2 attempts to avoid corrupted state
             if [ $i -gt 2 ]; then
               rm -rf ~/.cache/pre-commit
             fi
           done
+          echo "❌ Failed to install pre-commit hooks after 5 attempts"
+          exit 1
+
       - name: Run pre-commit with retry
+        id: run-precommit
+        if: steps.install-hooks.outcome == 'success'
         run: |
           for i in {1..3}; do
+            echo "Running pre-commit (attempt $i of 3)..."
             if timeout 600 pre-commit run --all-files --show-diff-on-failure; then
+              echo "✅ Pre-commit checks passed"
               exit 0
             fi
             echo "Pre-commit run attempt $i failed, retrying in $((i*10)) seconds..."
             sleep $((i*10))
           done
+          echo "❌ Pre-commit checks failed after 3 attempts"
           exit 1
+
+      - name: Generate pre-commit report
+        if: always()
+        run: |
+          echo "## Pre-commit Workflow Results" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.install-hooks.outcome }}" == "success" ]; then
+            echo "- ✅ Hook installation: Successful" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ❌ Hook installation: Failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [ "${{ steps.run-precommit.outcome }}" == "success" ]; then
+            echo "- ✅ Pre-commit checks: Passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ❌ Pre-commit checks: Failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Recommendations" >> $GITHUB_STEP_SUMMARY
+          echo "- If pre-commit checks are consistently failing, consider updating the hooks in .pre-commit-config.yaml." >> $GITHUB_STEP_SUMMARY
+          echo "- Run pre-commit locally before pushing changes." >> $GITHUB_STEP_SUMMARY
+          echo "- Check for compatibility issues with Python 3.12." >> $GITHUB_STEP_SUMMARY

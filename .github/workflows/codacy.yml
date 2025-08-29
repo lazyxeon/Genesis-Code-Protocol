@@ -1,22 +1,8 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-# This workflow checks out code, performs a Codacy security scan
-# and integrates the results with the
-# GitHub Advanced Security code scanning feature.  For more information on
-# the Codacy security scan action usage and parameters, see
-# https://github.com/codacy/codacy-analysis-cli-action.
-# For more information on Codacy Analysis CLI in general, see
-# https://github.com/codacy/codacy-analysis-cli.
-
 name: Codacy Security Scan
 
 on:
   push:
   pull_request:
-    # The branches below must be a subset of the branches above
   schedule:
     - cron: '45 23 * * 2'
   workflow_dispatch:
@@ -32,42 +18,48 @@ permissions:
   contents: read
 
 jobs:
+  check-codacy-token:
+    runs-on: ubuntu-latest
+    outputs:
+      token_available: ${{ steps.check-token.outputs.token_available }}
+    steps:
+      - name: Check Codacy token
+        id: check-token
+        run: |
+          if [ -n "${{ env.CODACY_PROJECT_TOKEN }}" ]; then
+            echo "token_available=true" >> $GITHUB_OUTPUT
+            echo "✅ Codacy token is available" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "token_available=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ Codacy token is not set. Scan will be skipped." >> $GITHUB_STEP_SUMMARY
+            echo "To enable Codacy scanning, set the CODACY_PROJECT_TOKEN secret in your repository settings." >> $GITHUB_STEP_SUMMARY
+          fi
+
   codacy-security-scan:
+    needs: check-codacy-token
+    if: needs.check-codacy-token.outputs.token_available == 'true'
     continue-on-error: true
     permissions:
-      contents: read # for actions/checkout to fetch code
-      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+      contents: read
+      security-events: write
+      actions: read
     name: Codacy Security Scan
     runs-on: ubuntu-latest
     steps:
-      # Checkout the repository to the GitHub Actions runner
       - name: Checkout code
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
 
-      - name: Verify Codacy token
-        if: env.CODACY_PROJECT_TOKEN == ''
-        run: echo 'CODACY_PROJECT_TOKEN not set, skipping scan.' >> $GITHUB_STEP_SUMMARY
-
-      # Execute Codacy Analysis CLI and generate a SARIF output with the security issues identified during the analysis
       - name: Run Codacy Analysis CLI
         if: env.CODACY_PROJECT_TOKEN != ''
         uses: codacy/codacy-analysis-cli-action@562ee3e92b8e92df8b67e0a5ff8aa8e261919c08 # v4.4.7
         with:
-          # Check https://github.com/codacy/codacy-analysis-cli#project-token to get your project token
-          # from your Codacy repository
-          # You can also omit the token and run the tools that support default configurations
           project-token: ${{ env.CODACY_PROJECT_TOKEN }}
           verbose: true
           output: results.sarif
           format: sarif
-          # Adjust severity of non-security issues
           gh-code-scanning-compat: true
-          # Force 0 exit code to allow SARIF file generation
-          # This will handover control about PR rejection to the GitHub side
           max-allowed-issues: 2147483647
 
-      # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
         if: env.CODACY_PROJECT_TOKEN != '' && hashFiles('results.sarif') != ''
         uses: github/codeql-action/upload-sarif@ad2a4837011b42f6947b78d6417e7c253b1c504b # v3
@@ -75,5 +67,34 @@ jobs:
           sarif_file: results.sarif
 
       - name: Codacy scan summary
-        if: env.CODACY_PROJECT_TOKEN != ''
-        run: echo 'Codacy scan completed.' >> $GITHUB_STEP_SUMMARY
+        run: |
+          if [ -f "results.sarif" ]; then
+            echo "✅ Codacy scan completed successfully and results uploaded." >> $GITHUB_STEP_SUMMARY
+            CRITICAL=$(grep -c '"level": "critical"' results.sarif || echo 0)
+            HIGH=$(grep -c '"level": "high"' results.sarif || echo 0)
+            MEDIUM=$(grep -c '"level": "medium"' results.sarif || echo 0)
+            LOW=$(grep -c '"level": "low"' results.sarif || echo 0)
+            echo "### Scan Results Summary" >> $GITHUB_STEP_SUMMARY
+            echo "- Critical issues: $CRITICAL" >> $GITHUB_STEP_SUMMARY
+            echo "- High issues: $HIGH" >> $GITHUB_STEP_SUMMARY
+            echo "- Medium issues: $MEDIUM" >> $GITHUB_STEP_SUMMARY
+            echo "- Low issues: $LOW" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Codacy scan completed but no results file was generated." >> $GITHUB_STEP_SUMMARY
+          fi
+
+  codacy-skip-notification:
+    needs: check-codacy-token
+    if: needs.check-codacy-token.outputs.token_available != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify about skipped scan
+        run: |
+          echo "## Codacy Security Scan Skipped" >> $GITHUB_STEP_SUMMARY
+          echo "The Codacy security scan was skipped because the CODACY_PROJECT_TOKEN is not set." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### How to Enable Codacy Scanning" >> $GITHUB_STEP_SUMMARY
+          echo "1. Sign up for a Codacy account at https://www.codacy.com/" >> $GITHUB_STEP_SUMMARY
+          echo "2. Add your repository to Codacy" >> $GITHUB_STEP_SUMMARY
+          echo "3. Get your project token from Codacy" >> $GITHUB_STEP_SUMMARY
+          echo "4. Add the token as a repository secret named CODACY_PROJECT_TOKEN" >> $GITHUB_STEP_SUMMARY
