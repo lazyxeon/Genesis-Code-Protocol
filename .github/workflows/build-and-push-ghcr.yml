@@ -1,4 +1,5 @@
 name: Build and Push Docker image to GHCR
+run-name: ${{ github.workflow }}
 
 on:
   push:

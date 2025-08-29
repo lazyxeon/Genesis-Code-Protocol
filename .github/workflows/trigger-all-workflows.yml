@@ -1,4 +1,5 @@
 name: Trigger All Workflows
+run-name: ${{ github.workflow }}
 
 on:
   workflow_dispatch:

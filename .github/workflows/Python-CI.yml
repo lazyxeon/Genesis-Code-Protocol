@@ -1,4 +1,5 @@
 name: Python CI
+run-name: ${{ github.workflow }}
 
 on:
   push:
