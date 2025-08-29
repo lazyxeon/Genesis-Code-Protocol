@@ -1,17 +1,34 @@
 #!/usr/bin/env python3
 """Generate a minimal SBOM listing Python package dependencies."""
+
 from __future__ import annotations
 
 import json
 import sys
+from collections.abc import Mapping
 from importlib import metadata
 from pathlib import Path
+from typing import cast
 
 
 def main(path: str = "sbom.json") -> None:
     packages = []
     for dist in metadata.distributions():
-        name = dist.metadata.get("Name") or dist.metadata.get("Summary") or dist.metadata.get("name", "")
+        meta = cast(Mapping[str, str], dist.metadata)
+        if "Name" in meta:
+            name = meta["Name"]
+        elif "Summary" in meta:
+            name = meta["Summary"]
+        elif "name" in meta:
+            name = meta["name"]
+        else:
+            name = ""
+        meta = dist.metadata
+        name = (
+            meta.get_all("Name", [""])[0]
+            or meta.get_all("Summary", [""])[0]
+            or meta.get_all("name", [""])[0]
+        )
         packages.append({"name": name, "version": dist.version})
     data = {"packages": packages}
     Path(path).write_text(json.dumps(data, indent=2), encoding="utf-8")

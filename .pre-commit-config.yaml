@@ -9,36 +9,71 @@ exclude: |
     |.*\.ipynb$
   )
 
+default_install_hook_types: [pre-commit, pre-push]
+default_stages: [pre-commit]
+
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v6.0.0
+  - repo: local
     hooks:
-      - id: end-of-file-fixer
       - id: trailing-whitespace
-      - id: check-yaml
-      - id: check-toml
-      - id: check-added-large-files
-
+        name: Trim Trailing Whitespace
+        entry: sed -i 's/[[:space:]]*$//'
+        language: system
+        types: [text]
+        exclude: '\.md$'
   - repo: https://github.com/psf/black
-    rev: 24.4.2
+    rev: 25.1.0
     hooks:
       - id: black
         language_version: python3
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.4.8
+    rev: v0.12.11
     hooks:
       - id: ruff
         args: [--fix]
 
   - repo: https://github.com/PyCQA/isort
-    rev: 5.13.2
+    rev: 6.0.1
     hooks:
       - id: isort
         name: isort (python)
         args: ["--profile", "black"]
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.10.0
+    rev: v1.17.1
     hooks:
       - id: mypy
+      - id: end-of-file-fixer
+        name: Fix End of Files
+        entry: bash -c 'for file in "$@"; do [[ -s "$file" && $(tail -c1 "$file") != "" ]] && echo >> "$file"; done; exit 0' --
+        language: system
+        types: [text]
+        exclude: '\.txt$|\.json$'
+
+      - id: check-yaml
+        name: Check YAML
+        entry: python -c "import sys,yaml; [yaml.safe_load(open(f)) for f in sys.argv[1:]]"
+        language: system
+        types: [yaml]
+
+      - id: check-large-files
+        name: Check for large files
+        entry: bash -c 'for f in "$@"; do [[ "$f" == .git/* ]] && continue; s=$(stat -c%s "$f" 2>/dev/null || echo 0); [ $s -gt 1048576 ] && echo "File $f is $(($s/1024))KB" && exit 1; done; exit 0' --
+        language: system
+
+      - id: ruff-check
+        name: Ruff Check
+        entry: python -m ruff check --fix --exit-non-zero-on-fix
+        language: system
+        types: [python]
+        require_serial: true
+
+      - id: ruff-format
+        name: Ruff Format
+        entry: python -m ruff format
+        language: system
+        types: [python]
+        require_serial: true
