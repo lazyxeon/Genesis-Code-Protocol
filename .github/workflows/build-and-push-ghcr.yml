@@ -7,7 +7,7 @@ on:
 
 permissions:
   contents: read
-  packages: write   # needed to push images
+  packages: write
 
 concurrency:
   group: ghcr-${{ github.ref }}
@@ -20,28 +20,26 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # Set up QEMU and Buildx for multi-platform builds
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@29109295f81e9208d7d86ff1c6c12d2833863392
-      - name: Set up Buildx
-        uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435
+        uses: docker/setup-qemu-action@v3
 
-      # Authenticate to GitHub Container Registry using the GITHUB_TOKEN
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Log in to GHCR
-        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1
+        uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # Generate image metadata and tags for GHCR
       - name: Docker meta
         id: meta
-        uses: docker/metadata-action@c1e51972afc2121e065aed6d45c65596fe445f3f
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}
           tags: |
@@ -50,9 +48,21 @@ jobs:
             type=sha
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
 
-      # Build and push the image to GHCR
+      - name: Check Dockerfile Python version
+        id: check-dockerfile
+        run: |
+          PYTHON_VERSION=$(grep -oP 'FROM python:\K[0-9.]+' Dockerfile || echo "unknown")
+          echo "Detected Python version in Dockerfile: $PYTHON_VERSION"
+
+          if [[ "$PYTHON_VERSION" == "3.13"* ]]; then
+            echo "⚠️ Python 3.13 detected in Dockerfile. This version might not be widely available in all environments."
+            echo "dockerfile_warning=true" >> $GITHUB_OUTPUT
+          else
+            echo "dockerfile_warning=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Build and push
-        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83
+        uses: docker/build-push-action@v5
         with:
           context: .
           push: true
@@ -61,3 +71,9 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Add warning to job summary
+        if: steps.check-dockerfile.outputs.dockerfile_warning == 'true'
+        run: |
+          echo "⚠️ **Warning**: This workflow is using Python 3.13 in the Dockerfile, which might not be widely available in all environments." >> $GITHUB_STEP_SUMMARY
+          echo "Consider updating the Dockerfile to use a more stable Python version like 3.11 or 3.12 if you encounter build issues." >> $GITHUB_STEP_SUMMARY
