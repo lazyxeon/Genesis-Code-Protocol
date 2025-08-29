@@ -74,6 +74,7 @@ jobs:
         continue-on-error: true
         run: |
           set -e
+          nbqa flake8 .
           find . -name "*.ipynb" -not -path "*/\.*" > notebooks.txt
           if [ -s notebooks.txt ]; then
             echo "Linting the following notebooks:"
