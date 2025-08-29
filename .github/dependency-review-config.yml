@@ -1,0 +1,56 @@
+# Dependency Review Configuration
+# This file provides configuration for the dependency review GitHub Action
+
+# Fail the action if any of these severity levels are found
+fail_on_severity: high
+
+# List of licenses that are explicitly denied
+deny_licenses:
+  - GPL-2.0
+  - GPL-3.0
+  - AGPL-3.0
+  - LGPL-2.1
+  - LGPL-3.0
+
+# List of licenses that are explicitly allowed
+allow_licenses:
+  - MIT
+  - Apache-2.0
+  - BSD-2-Clause
+  - BSD-3-Clause
+  - ISC
+  - Unlicense
+  - CC0-1.0
+
+# Fail on packages with these scopes
+deny_packages:
+  - scope: "*"
+    name: "malicious-package-*"
+  
+# Allow these packages even if they would normally be denied
+allow_packages:
+  - scope: "python"
+    name: "setuptools"
+  - scope: "python" 
+    name: "pip"
+  - scope: "python"
+    name: "wheel"
+
+# Enable vulnerability checking
+vulnerability_check: true
+
+# Enable license checking  
+license_check: true
+
+# Configuration for comment generation
+comment_summary_in_pr: true
+
+# Warn only mode (set to false to fail the action)
+warn_only: false
+
+# Additional settings for Python packages
+python:
+  # Ignore dev dependencies in review
+  ignore_dev_dependencies: false
+  # Check requirements files
+  check_requirements_files: true
