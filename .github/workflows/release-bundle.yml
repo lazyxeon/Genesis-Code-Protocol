@@ -31,6 +31,10 @@ jobs:
       # Checkout the repository at a known commit
       - uses: actions/checkout@v4
         with:
+          ref: ${{ env.TAG }}
+
+      # Prepare a staging directory and create a ZIP of selected folders
+      - name: Prepare staging
           fetch-depth: 0  # Full history for proper provenance
 
       # Install cosign for signing capabilities

@@ -14,7 +14,6 @@
 - Code of Conduct.md
 - Contributing.md
 - Dockerfile
-- EXIT
 - **Notebooks/**
   - Notebooks/A Notebook Readme.md
   - Notebooks/Alloy Perceptual Loss.py
