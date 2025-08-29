@@ -3,7 +3,7 @@
   "predicateType": "https://slsa.dev/provenance/v0.2",
   "subject": [
     {
-      "name": "lyra-exit-bundle-copilot_fix-ca55d134-03f1-4931-9d50-938a5add5ec0.zip",
+      "name": "lyra-exit-bundle-copilot_fix-26ea40e0-c2f6-4529-a731-3915d10c05f2.zip",
       "digest": {
         "sha256": "placeholder-will-be-calculated-after-zip"
       }
@@ -18,13 +18,13 @@
       "configSource": {
         "uri": "git+https://github.com/lazyxeon/Genesis-Code-Protocol.git",
         "digest": {
-          "sha1": "c58fefd59b8ca8edc9d4a8cb16cc53c789ecc73c"
+          "sha1": "b1cc480b7313d6bfc02032138e57776b85251b17"
         }
       }
     },
     "metadata": {
-      "buildInvocationId": "17310131058",
-      "buildStartedOn": "2025-08-28T23:21:31Z",
+      "buildInvocationId": "17335281958",
+      "buildStartedOn": "2025-08-29T22:16:37Z",
       "completeness": {
         "parameters": true,
         "environment": false,
@@ -36,7 +36,7 @@
       {
         "uri": "git+https://github.com/lazyxeon/Genesis-Code-Protocol.git",
         "digest": {
-          "sha1": "c58fefd59b8ca8edc9d4a8cb16cc53c789ecc73c"
+          "sha1": "b1cc480b7313d6bfc02032138e57776b85251b17"
         }
       }
     ]

@@ -2,10 +2,10 @@
   "spdxVersion": "SPDX-2.3",
   "dataLicense": "CC0-1.0",
   "SPDXID": "SPDXRef-DOCUMENT",
-  "name": "LYRA-Exit-Bundle-copilot/fix-ca55d134-03f1-4931-9d50-938a5add5ec0",
-  "documentNamespace": "https://github.com/lazyxeon/Genesis-Code-Protocol/bundle/copilot/fix-ca55d134-03f1-4931-9d50-938a5add5ec0",
+  "name": "LYRA-Exit-Bundle-copilot/fix-26ea40e0-c2f6-4529-a731-3915d10c05f2",
+  "documentNamespace": "https://github.com/lazyxeon/Genesis-Code-Protocol/bundle/copilot/fix-26ea40e0-c2f6-4529-a731-3915d10c05f2",
   "creationInfo": {
-    "created": "2025-08-28T23:21:31Z",
+    "created": "2025-08-29T22:16:37Z",
     "creators": ["Tool: make_exit_bundle.sh"]
   },
   "packages": [

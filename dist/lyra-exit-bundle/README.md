@@ -15,31 +15,6 @@
 [![Contributors](https://img.shields.io/github/contributors/lazyxeon/Genesis-Code-Protocol)](https://github.com/lazyxeon/Genesis-Code-Protocol/graphs/contributors)
 
 <!-- CI / AUTOMATION BADGES -->
-[![Auto-merge Dependabot PRs](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/auto-merge-dependabot.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/auto-merge-dependabot.yml)
-[![Auto Release](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/auto-release.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/auto-release.yml)
-[![Build and Push GHCR Image](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/build-and-push-ghcr.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/build-and-push-ghcr.yml)
-[![CodeQL](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/codeql.yml)
-[![Dependency Review](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/dependency-review.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/dependency-review.yml)
-[![Dependency Submission](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/dependency-submission.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/dependency-submission.yml)
-[![Docs Build](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docs.yml)
-[![Docker Build](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docker-build.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docker-build.yml)
-[![Docker Debug Build](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docker-debug.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docker-debug.yml)
-[![Generate Changelog](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/generate-changelog.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/generate-changelog.yml)
-[![Generate SBOM](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/sbom.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/sbom.yml)
-[![Markdown Lint](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/markdownlint.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/markdownlint.yml)
-[![Matrix CI](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/matrix-ci.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/matrix-ci.yml)
-[![OpenSSF Scorecard](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/ossf-scorecard.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/ossf-scorecard.yml)
-[![pre-commit](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/pre-commit.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/pre-commit.yml)
-[![Python CI](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/Python-CI.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/Python-CI.yml)
-[![Release Bundle](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/release-bundle.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/release-bundle.yml)
-[![Release Drafter](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/release-drafter.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/release-drafter.yml)
-[![Sign Release Artifacts](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/release-sign.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/release-sign.yml)
-[![Security Scan](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/security-scan.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/security-scan.yml)
-[![Trigger All Workflows](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/trigger-all-workflows.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/trigger-all-workflows.yml)
-[![Update Repo Structure](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml)
-[![Update TOC File](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-toc-file.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-toc-file.yml)
-[![Validate Notebooks](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/validate-notebooks.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/validate-notebooks.yml)
-[![EthicalCheck-Workflow](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/ethicalcheck.yml/badge.svg)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/ethicalcheck.yml)
 [![Codacy Security Scan](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/codacy.yml/badge.svg)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/codacy.yml)
 [![Fortify AST Scan](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/fortify.yml/badge.svg)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/fortify.yml)
 
@@ -193,6 +168,7 @@ Overview Of Entire Repo, Auto Generated by Workflow.
 ├── .dockerignore
 ├── .flake8
 ├── .gitattributes
+├── .gitignore
 ├── .markdownlint.yml
 ├── .markdownlintignore
 ├── .pre-commit-config.yaml
@@ -390,14 +366,18 @@ Overview Of Entire Repo, Auto Generated by Workflow.
 │   ├── Dockerfile
 │   └── requirements.txt
 ├── docs/
+│   ├── RELEASE_WORKFLOW.md
 │   ├── ci-workflow-diagnoser-runbook.md
+│   ├── dependency-review-workflow.md
 │   ├── index.md
 │   ├── roadmap.md
 │   └── runbook.md
 ├── governance.yaml
 ├── integration_contract.md
+├── lyra-exit-bundle-copilot_fix-ca55d134-03f1-4931-9d50-938a5add5ec0.zip
 ├── mkdocs.yml
 ├── observability.yaml
+├── pyproject.toml
 ├── pytest.ini
 ├── requirements-dev.txt
 ├── requirements.txt
@@ -407,7 +387,9 @@ Overview Of Entire Repo, Auto Generated by Workflow.
 │   ├── generate_changelog.py
 │   ├── generate_repo_toc.py
 │   ├── generate_sbom.py
+│   ├── make_exit_bundle.sh
 │   ├── update_repo_structure.py
+│   ├── validate_dependencies.py
 │   └── validate_workflows.py
 ├── security.md
 ├── setup.py
@@ -436,10 +418,13 @@ Overview Of Entire Repo, Auto Generated by Workflow.
 │   ├── conftest.py
 │   ├── contract_test.py
 │   ├── e2e_smoke_test.py
+│   ├── ethicalcheck_test.py
 │   ├── perf_test.py
 │   ├── rollback_test.py
 │   ├── security_test.py
-│   └── spec_validation_test.py
+│   ├── spec_validation_test.py
+│   ├── test_release_bundle.py
+│   └── test_release_workflows.py
 ├── tools/
 │   └── audit-workflows.sh
 └── workflow_manifest.json
