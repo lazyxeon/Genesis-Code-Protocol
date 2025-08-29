@@ -3,6 +3,7 @@
 - .dockerignore
 - .flake8
 - .gitattributes
+- .gitignore
 - .markdownlint.yml
 - .markdownlintignore
 - .pre-commit-config.yaml
@@ -26,7 +27,9 @@
 - integration_contract.md
 - mkdocs.yml
 - observability.yaml
+- pyproject.toml
 - pytest.ini
+- requirements-dev.txt
 - requirements.txt
 - security.md
 - setup.py
@@ -39,7 +42,9 @@
   - scripts/generate_sbom.py
   - scripts/update_repo_structure.py
 - **docs/**
+  - docs/RELEASE_WORKFLOW.md
   - docs/ci-workflow-diagnoser-runbook.md
+  - docs/dependency-review-workflow.md
   - docs/index.md
   - docs/roadmap.md
   - docs/runbook.md
@@ -71,14 +76,14 @@
     - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Cartridges Pack.md
     - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Master Runners Codex.md
 - **tests/**
+  - tests/automerge_skip_test.py
   - tests/conftest.py
   - tests/contract_test.py
   - tests/e2e_smoke_test.py
+  - tests/ethicalcheck_test.py
   - tests/perf_test.py
   - tests/rollback_test.py
-  - tests/scan_skip_test.py
   - tests/security_test.py
-  - tests/spec_validation_test.py
 - **Documents/**
   - Documents/A Documents Readme.md
   - Documents/AI ChatGPT Critical Analysis Flagship GCP V49.md
@@ -107,6 +112,7 @@
   - tools/audit-workflows.sh
 - **src/**
   - src/__init__.py
+  - src/automerge.py
   - src/codacy.py
   - src/config.py
   - src/errors.py
@@ -124,55 +130,6 @@
   - **matrix_ci/**
     - src/matrix_ci/__init__.py
     - src/matrix_ci/pipeline.py
-- **GCP-All-Variants/**
-  - GCP-All-Variants/Changelog.md
-  - GCP-All-Variants/Changelog_P2.md
-  - GCP-All-Variants/V09.md
-  - GCP-All-Variants/V11.md
-  - GCP-All-Variants/V20.md
-  - GCP-All-Variants/V22.md
-  - GCP-All-Variants/V23.md
-  - GCP-All-Variants/V30.md
-  - GCP-All-Variants/V34.md
-  - GCP-All-Variants/V35.md
-  - GCP-All-Variants/V36.md
-  - GCP-All-Variants/V40.md
-  - GCP-All-Variants/V41.md
-  - GCP-All-Variants/V42.md
-  - GCP-All-Variants/V43.0.md
-  - GCP-All-Variants/V43.6.md
-  - GCP-All-Variants/V43.7.md
-  - GCP-All-Variants/V44.1.md
-  - GCP-All-Variants/V44.7.md
-  - GCP-All-Variants/V44.8.md
-  - GCP-All-Variants/V44.9b.md
-  - GCP-All-Variants/V44.9d.md
-  - GCP-All-Variants/V45.0.md
-  - GCP-All-Variants/V45.1.md
-  - GCP-All-Variants/V45.2.md
-  - GCP-All-Variants/V45.3.md
-  - GCP-All-Variants/V45.4A.md
-  - GCP-All-Variants/V45.5.md
-  - GCP-All-Variants/V45.6.md
-  - GCP-All-Variants/V46.0.md
-  - GCP-All-Variants/V46.5.md
-  - GCP-All-Variants/V47.0.md
-  - GCP-All-Variants/V47.1.md
-  - GCP-All-Variants/V47.2.md
-  - GCP-All-Variants/V48.0.md
-  - GCP-All-Variants/V49.0.md
-  - GCP-All-Variants/V49.1 Flagship Edition.md
-  - GCP-All-Variants/V50.md
-- **cli_bundle/**
-  - cli_bundle/Readme.md
-  - cli_bundle/__init__.py
-  - cli_bundle/audit_utils.py
-  - cli_bundle/full_run.py
-  - cli_bundle/gcp_cli.py
-  - cli_bundle/phase1.py
-  - cli_bundle/phase6_7.py
-  - cli_bundle/prompt_utils.py
-  - cli_bundle/requirements.txt
 - **Notebooks/**
   - Notebooks/A Notebook Readme.md
   - Notebooks/Alloy Perceptual Loss.py
