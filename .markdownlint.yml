@@ -1,2 +1,13 @@
 default: true
+# Disable line length checks as many files have long lines
 MD013: false
+# Disable first line heading requirement  
+MD041: false
+# Allow heading level increments (common in changelogs)
+MD001: false
+# Allow headings without blank lines around them (changelog style)
+MD022: false
+# Allow lists without blank lines around them (changelog style)
+MD032: false
+# Allow tables without blank lines around them
+MD058: false

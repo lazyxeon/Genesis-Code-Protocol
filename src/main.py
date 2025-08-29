@@ -3,29 +3,23 @@ from __future__ import annotations
 import json
 import os
 from pathlib import Path
-from typing import Dict
 
-from . import codacy, errors, ethicalcheck, fortify, rollback, utils
+from . import automerge, errors, rollback, utils
 
 
 def run() -> str:
-    """Execute security scans and return path to report."""
-    report_path = Path(os.getenv("WF_REPORT_PATH", "scan-report.json"))
-    results: Dict[str, Dict[str, str]] = {}
+    """Execute Dependabot auto-merge workflow and return report path."""
+    report_path = Path(os.getenv("WF_REPORT_PATH", "automerge-report.json"))
+    pr_number = int(os.getenv("PR_NUMBER", "0"))
+    repo = os.getenv("REPO", "")
+    token = os.getenv("GITHUB_TOKEN")
     try:
-        if os.getenv("WF_FAIL_STEP") == "ethicalcheck":
-            raise errors.TerminalError("forced failure at ethicalcheck")
-        results["ethicalcheck"] = ethicalcheck.main()
-
-        if os.getenv("WF_FAIL_STEP") == "fortify":
-            raise errors.TerminalError("forced failure at fortify")
-        results["fortify"] = fortify.main()
-
-        if os.getenv("WF_FAIL_STEP") == "codacy":
-            raise errors.TerminalError("forced failure at codacy")
-        results["codacy"] = codacy.main()
-
-        utils.atomic_write(report_path, json.dumps(results))
+        if os.getenv("WF_FAIL_STEP") == "automerge":
+            raise errors.TerminalError("forced failure at automerge")
+        result: dict[str, str | int] = automerge.enable_automerge(
+            pr_number, repo, token
+        )
+        utils.atomic_write(report_path, json.dumps(result))
         return str(report_path)
     except (errors.RetryableError, errors.TerminalError) as exc:
         rollback.perform(str(exc))
