@@ -26,8 +26,8 @@ jobs:
   Validate_Configuration:
     runs-on: ubuntu-latest
     outputs:
-      config-valid: ${{ steps.validate.outputs['config-valid'] }}
-      skip-reason: ${{ steps.validate.outputs['skip-reason'] }}
+      config-valid: ${{ steps.validate.outputs.config-valid }}
+      skip-reason: ${{ steps.validate.outputs.skip-reason }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -37,62 +37,47 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Validate EthicalCheck Configuration
+      - name: Validate EthicalCheck configuration
         id: validate
         run: |
-          cat > validate_config.py <<'PY'
+          python - <<'PY'
           import os
-          import sys
 
-          def validate_configuration():
-              oas_url = os.environ.get('ETHICALCHECK_OAS_URL', '')
-              email = os.environ.get('ETHICALCHECK_EMAIL', '')
+          output_file = os.environ['GITHUB_OUTPUT']
+          summary_file = os.environ['GITHUB_STEP_SUMMARY']
 
-              if not oas_url or not email:
-                  return {
-                      "status": "skipped",
-                      "reason": "missing_configuration"
-                  }
+          oas_url = os.environ.get('ETHICALCHECK_OAS_URL', '').strip()
+          email = os.environ.get('ETHICALCHECK_EMAIL', '').strip()
 
-              if not oas_url.startswith(('http://', 'https://')):
-                  return {
-                      "status": "error",
-                      "reason": "invalid_url"
-                  }
+          def write_output(key, value):
+              with open(output_file, 'a') as f:
+                  f.write(f"{key}={value}\n")
 
-              if '@' not in email or '.' not in email:
-                  return {
-                      "status": "error",
-                      "reason": "invalid_email"
-                  }
+          def append_summary(msg):
+              with open(summary_file, 'a') as f:
+                  f.write(f"{msg}\n")
 
-              return {
-                  "status": "configured"
-              }
-
-          if __name__ == "__main__":
-              result = validate_configuration()
-              print(f'Configuration validation result: {result}')
-
-              if result['status'] == 'configured':
-                  print('config-valid=true')
-                  print('✅ EthicalCheck configuration is valid')
-              elif result['status'] == 'skipped':
-                  print('config-valid=false')
-                  print(f"skip-reason={result.get('reason', 'unknown')}")
-                  print('⏭️ EthicalCheck scan skipped: Missing configuration variables')
-              else:
-                  print('config-valid=false')
-                  print(f"skip-reason={result.get('reason', 'unknown')}")
-                  print(f"❌ EthicalCheck configuration error: {result.get('reason', 'unknown')}")
-                  sys.exit(0)  # Don't fail the workflow, just skip
+          if not oas_url or not email:
+              write_output("config-valid", "false")
+              write_output("skip-reason", "missing_configuration")
+              append_summary("⏭️ EthicalCheck scan skipped: Missing configuration variables")
+          elif not (oas_url.startswith("http://") or oas_url.startswith("https://")):
+              write_output("config-valid", "false")
+              write_output("skip-reason", "invalid_url")
+              append_summary("❌ EthicalCheck configuration error: invalid_url")
+          elif "@" not in email or "." not in email:
+              write_output("config-valid", "false")
+              write_output("skip-reason", "invalid_email")
+              append_summary("❌ EthicalCheck configuration error: invalid_email")
+          else:
+              write_output("config-valid", "true")
+              write_output("skip-reason", "")
+              append_summary("✅ EthicalCheck configuration is valid")
           PY
-
-          python validate_config.py >> "$GITHUB_OUTPUT"
 
   Trigger_EthicalCheck:
     needs: Validate_Configuration
-    if: needs.Validate_Configuration.outputs['config-valid'] == 'true'
+    if: needs.Validate_Configuration.outputs.config-valid == 'true'
     continue-on-error: true
     permissions:
       contents: read
@@ -100,45 +85,44 @@ jobs:
       actions: read
     runs-on: ubuntu-latest
     timeout-minutes: 30
-
     steps:
-       - name: Checkout code
-         uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-       - name: EthicalCheck Free & Automated API Security Testing Service
-         id: ethicalcheck
-         uses: Octota-GitHub/ethicalcheck-action@3ec5e93b42e591349e46635da9f909bac66c23a9
-         timeout-minutes: 25
-         continue-on-error: true
-         with:
+      - name: EthicalCheck free & automated API security testing service
+        id: ethicalcheck
+        uses: Octota-GitHub/ethicalcheck-action@3ec5e93b42e591349e46635da9f909bac66c23a9
+        timeout-minutes: 25
+        continue-on-error: true
+        with:
           oas-url: ${{ env.ETHICALCHECK_OAS_URL }}
           email: ${{ env.ETHICALCHECK_EMAIL }}
           sarif-result-file: ethicalcheck-results.sarif
 
-       - name: Check scan results
-         run: |
-           if [ -f "ethicalcheck-results.sarif" ]; then
-             echo "✅ EthicalCheck scan completed successfully" >> "$GITHUB_STEP_SUMMARY"
-             echo "📊 SARIF results file generated: ethicalcheck-results.sarif" >> "$GITHUB_STEP_SUMMARY"
-           else
-             echo "⚠️ EthicalCheck scan completed but no SARIF file generated" >> "$GITHUB_STEP_SUMMARY"
-           fi
+      - name: Check scan results
+        run: |
+          if [ -f "ethicalcheck-results.sarif" ]; then
+            echo "✅ EthicalCheck scan completed successfully" >> "$GITHUB_STEP_SUMMARY"
+            echo "📊 SARIF results file generated: ethicalcheck-results.sarif" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "⚠️ EthicalCheck scan completed but no SARIF file generated" >> "$GITHUB_STEP_SUMMARY"
+          fi
 
-       - name: Upload sarif file to repository
-         if: hashFiles('ethicalcheck-results.sarif') != ''
-         uses: github/codeql-action/upload-sarif@v3
-         continue-on-error: true
-         with:
+      - name: Upload SARIF file to repository
+        if: hashFiles('ethicalcheck-results.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v3
+        continue-on-error: true
+        with:
           sarif_file: ./ethicalcheck-results.sarif
 
   Skip_Notification:
     needs: Validate_Configuration
-    if: needs.Validate_Configuration.outputs['config-valid'] != 'true'
+    if: needs.Validate_Configuration.outputs.config-valid != 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Report skip reason
         run: |
-          REASON="${{ needs.Validate_Configuration.outputs['skip-reason'] }}"
+          REASON="${{ needs.Validate_Configuration.outputs.skip-reason }}"
           case "$REASON" in
             "missing_configuration")
               echo "ℹ️ EthicalCheck scan skipped: Required environment variables ETHICALCHECK_OAS_URL and/or ETHICALCHECK_EMAIL are not configured" >> "$GITHUB_STEP_SUMMARY"
@@ -151,10 +135,6 @@ jobs:
             "invalid_email")
               echo "❌ EthicalCheck scan failed: Invalid email address format" >> "$GITHUB_STEP_SUMMARY"
               echo "Please ensure ETHICALCHECK_EMAIL is a valid email address" >> "$GITHUB_STEP_SUMMARY"
-              ;;
-            "module_error")
-              echo "❌ EthicalCheck scan failed: Error in ethicalcheck module" >> "$GITHUB_STEP_SUMMARY"
-              echo "Please check the module implementation" >> "$GITHUB_STEP_SUMMARY"
               ;;
             *)
               echo "❌ EthicalCheck scan failed: Unknown configuration error" >> "$GITHUB_STEP_SUMMARY"

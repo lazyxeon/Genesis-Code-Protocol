@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import json
 import logging
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Callable, List
 
 try:  # pragma: no cover - OTEL optional
     from opentelemetry import trace
@@ -58,7 +58,7 @@ def run_all() -> bool:
 
 @dataclass
 class RollbackState:
-    executed_steps: List[str]
+    executed_steps: list[str]
 
 
 def run_with_failure(step: Callable[[], bool]) -> RollbackState:
