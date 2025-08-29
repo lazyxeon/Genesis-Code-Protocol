@@ -16,6 +16,8 @@ jobs:
     # This job needs write access to upload the bundle and SBOMs
     permissions:
       contents: write
+    env:
+      TAG: ${{ github.event.release.tag_name || github.ref_name }}
     outputs:
       release-tag: ${{ steps.setup.outputs.release-tag }}
       artifacts-ready: ${{ steps.upload.outputs.artifacts-ready }}
@@ -42,8 +44,6 @@ jobs:
           echo "release-tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
           echo "Setting up release for tag: $RELEASE_TAG"
 
-      # Prepare a staging directory and create a ZIP of selected folders
-      - name: Prepare staging
 
       # Generate comprehensive exit bundle using the new script
       - name: Generate Exit Bundle
@@ -110,7 +110,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
-            dist/GCP_${{ github.ref_name }}_Field_Kit.zip
+            dist/GCP_${TAG}_Field_Kit.zip
             dist/sbom.spdx.json
             dist/sbom.cdx.json
             dist/SHA256SUMS.txt
