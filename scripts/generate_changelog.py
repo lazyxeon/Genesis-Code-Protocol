@@ -16,14 +16,13 @@ Run this script from the repository root:
 import re
 import subprocess
 from pathlib import Path
-from typing import Dict, List
 
 # Resolve the repository root and CHANGELOG file location.
 ROOT = Path(__file__).resolve().parents[1]
 CHANGELOG = ROOT / "CHANGELOG.md"
 
 # Define the groups and the patterns that map commit message prefixes to them.
-GROUPS: Dict[str, List[str]] = {
+GROUPS: dict[str, list[str]] = {
     "Features": [],
     "Bug Fixes": [],
     "Documentation": [],
@@ -50,7 +49,7 @@ PATTERNS = [
 CHANGELOG_SKIP_RE = re.compile(r"^chore\(changelog\)", re.IGNORECASE)
 
 
-def _git_log() -> List[str]:
+def _git_log() -> list[str]:
     """Return commit messages using the ``git`` command line."""
     try:
         result = subprocess.run(
