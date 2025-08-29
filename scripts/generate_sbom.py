@@ -5,13 +5,24 @@ from __future__ import annotations
 
 import json
 import sys
+from collections.abc import Mapping
 from importlib import metadata
 from pathlib import Path
+from typing import cast
 
 
 def main(path: str = "sbom.json") -> None:
     packages = []
     for dist in metadata.distributions():
+        meta = cast(Mapping[str, str], dist.metadata)
+        if "Name" in meta:
+            name = meta["Name"]
+        elif "Summary" in meta:
+            name = meta["Summary"]
+        elif "name" in meta:
+            name = meta["name"]
+        else:
+            name = ""
         meta = dist.metadata
         name = (
             meta.get_all("Name", [""])[0]
