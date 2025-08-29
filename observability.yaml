@@ -1,38 +1,20 @@
 traces:
-  service_name: security-scan-workflow
-  spans:
-    bwb.ethicalcheck: {parent: root, children: [bwb.fortify]}
-    bwb.fortify: {parent: bwb.ethicalcheck, children: [bwb.codacy]}
-    bwb.codacy: {parent: bwb.fortify}
+  - span: bwb.automerge
+    parent: root
+    attributes:
+      - pr
+      - repo
 metrics:
   counters:
-    ethicalcheck_runs:
-      unit: runs
-      cardinality: low
-    fortify_runs:
-      unit: runs
-      cardinality: low
-    codacy_runs:
-      unit: runs
-      cardinality: low
+    - name: automerge_runs
+      unit: 1
+      description: Total auto-merge executions
   timers:
-    duration_ms:
+    - name: duration_ms
       unit: ms
-      cardinality: low
+      description: Time spent enabling auto-merge
 logs:
   format: json
-  pii_scrub: true
-  sample_rate: 1.0
-code_snippets:
-  python: |
-    from opentelemetry import trace
-    tracer = trace.get_tracer("security-scan-workflow")
-    with tracer.start_as_current_span("bwb.ethicalcheck"):
-        ...
-  node: |
-    const { trace } = require("@opentelemetry/api");
-    const tracer = trace.getTracer("security-scan-workflow");
-    tracer.startActiveSpan("bwb.ethicalcheck", span => {
-      // ...
-      span.end();
-    });
+  scrub:
+    - GITHUB_TOKEN
+  sampling: 1.0
