@@ -23,32 +23,99 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Validate scripts exist
+        run: |
+          if [ ! -f "scripts/generate_repo_toc.py" ]; then
+            echo "Error: scripts/generate_repo_toc.py not found"
+            exit 1
+          fi
+          if [ ! -f "scripts/fix_md_spacing.py" ]; then
+            echo "Error: scripts/fix_md_spacing.py not found"
+            exit 1
+          fi
+          echo "✓ All required scripts found"
+
       - name: Generate "Table Of Contents.md"
         run: |
+          echo "Generating Table Of Contents..."
           python scripts/generate_repo_toc.py
+
+          if [ ! -f "Table Of Contents.md" ]; then
+            echo "Error: Table Of Contents.md was not generated"
+            exit 1
+          fi
+
+          echo "Fixing markdown spacing..."
           python scripts/fix_md_spacing.py "Table Of Contents.md"
 
-      # Show the diff (optional for debugging)
-      - name: Show diff
-        run: |
-          git status
-          git --no-pager diff -- "Table Of Contents.md" || true
+          echo "✓ Table Of Contents.md generated and formatted successfully"
 
-      # Create a PR for the TOC update
+      - name: Check for changes
+        id: changes
+        run: |
+          git add "Table Of Contents.md"
+          if git diff --cached --quiet; then
+            echo "No changes detected in Table Of Contents.md"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "Changes detected in Table Of Contents.md"
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      # Show the diff (for debugging)
+      - name: Show diff
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          echo "Git status:"
+          git status
+          echo "Changes in Table Of Contents.md:"
+          git --no-pager diff --cached -- "Table Of Contents.md"
+
+      # Create a PR for the TOC update only if there are changes
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
+        if: steps.changes.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v7
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
           commit-message: "docs: auto-update Table Of Contents.md"
           branch: "chore/update-top-level-toc"
           title: "chore(docs): refresh Table Of Contents.md"
-          body: "Automated TOC update."
-          labels: "documentation"
-          add-paths: "Table\\ Of\\ Contents.md"
-          sign-commits: true
+          body: |
+            ## Automated Table Of Contents Update
+
+            This PR contains an automated update to the repository Table Of Contents.
+
+            ### Changes
+            - Updated `Table Of Contents.md` with current repository structure
+            - Applied markdown spacing normalization
+
+            ### Triggered by
+            - Workflow: `${{ github.workflow }}`
+            - Event: `${{ github.event_name }}`
+            - Commit: `${{ github.sha }}`
+          labels: "documentation,automated"
+          add-paths: "Table Of Contents.md"
+          delete-branch: true
+
+      - name: Log result
+        run: |
+          if [ "${{ steps.changes.outputs.has_changes }}" == "true" ]; then
+            echo "✓ Pull request created for Table Of Contents update"
+          else
+            echo "✓ No changes needed - Table Of Contents is up to date"
+          fi
