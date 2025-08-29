@@ -1,1 +1,0 @@
-"""Matrix CI pipeline module."""

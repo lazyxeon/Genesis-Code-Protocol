@@ -156,3 +156,15 @@ rollback.log
 
 # SBOM files (unless specifically needed)
 sbom.json
+
+# Bundle artifacts and build outputs
+lyra-exit-bundle-*.zip
+*.bundle.zip
+dist/
+build/
+
+# Test cache and artifacts
+tests/__pycache__/
+.pytest_cache/
+*.pyc
+__pycache__/
