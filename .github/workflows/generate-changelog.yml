@@ -2,10 +2,13 @@ name: Generate Changelog
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "**/*.py"
       - "**/*.md"
       - "**/*.yml"
+      - "**/*.yaml"
   workflow_dispatch:
 
 permissions:
