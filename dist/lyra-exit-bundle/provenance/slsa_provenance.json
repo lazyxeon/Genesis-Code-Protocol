@@ -1,0 +1,44 @@
+{
+  "_type": "https://in-toto.io/Statement/v0.1",
+  "predicateType": "https://slsa.dev/provenance/v0.2",
+  "subject": [
+    {
+      "name": "lyra-exit-bundle-copilot_fix-ca55d134-03f1-4931-9d50-938a5add5ec0.zip",
+      "digest": {
+        "sha256": "placeholder-will-be-calculated-after-zip"
+      }
+    }
+  ],
+  "predicate": {
+    "builder": {
+      "id": "https://github.com/lazyxeon/Genesis-Code-Protocol/.github/workflows/release-bundle.yml"
+    },
+    "buildType": "https://github.com/Attestations/GitHubActionsWorkflow@v1",
+    "invocation": {
+      "configSource": {
+        "uri": "git+https://github.com/lazyxeon/Genesis-Code-Protocol.git",
+        "digest": {
+          "sha1": "c58fefd59b8ca8edc9d4a8cb16cc53c789ecc73c"
+        }
+      }
+    },
+    "metadata": {
+      "buildInvocationId": "17310131058",
+      "buildStartedOn": "2025-08-28T23:21:31Z",
+      "completeness": {
+        "parameters": true,
+        "environment": false,
+        "materials": false
+      },
+      "reproducible": false
+    },
+    "materials": [
+      {
+        "uri": "git+https://github.com/lazyxeon/Genesis-Code-Protocol.git",
+        "digest": {
+          "sha1": "c58fefd59b8ca8edc9d4a8cb16cc53c789ecc73c"
+        }
+      }
+    ]
+  }
+}
