@@ -13,17 +13,20 @@ permissions:
 jobs:
   bundle:
     runs-on: ubuntu-latest
+    # Expose the tag name for both release and manual runs
+    env:
+      TAG: ${{ github.event.release.tag_name || github.ref_name }}
     # This job needs write access to upload the bundle and SBOMs
     permissions:
       contents: write
     steps:
       # Checkout the repository at a known commit
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG }}
 
       # Prepare a staging directory and create a ZIP of selected folders
       - name: Prepare staging
-        env:
-          TAG: ${{ github.ref_name }}
         run: |
           set -euo pipefail
           rm -rf dist
@@ -61,7 +64,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           files: |
-            dist/GCP_${{ github.ref_name }}_Field_Kit.zip
+            dist/GCP_${{ env.TAG }}_Field_Kit.zip
             dist/sbom.spdx.json
             dist/sbom.cdx.json
             dist/SHA256SUMS.txt
