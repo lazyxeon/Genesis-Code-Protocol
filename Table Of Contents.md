@@ -40,6 +40,7 @@
   - scripts/generate_changelog.py
   - scripts/generate_repo_toc.py
   - scripts/generate_sbom.py
+  - scripts/update_repo_structure.py
   - scripts/make_exit_bundle.sh
   - scripts/update_repo_structure.py
   - scripts/validate_dependencies.py
@@ -170,8 +171,7 @@
   - tests/rollback_test.py
   - tests/security_test.py
   - tests/spec_validation_test.py
-  - tests/test_release_bundle.py
-  - tests/test_release_workflows.py
+
 - **Documents/**
   - Documents/A Documents Readme.md
   - Documents/AI ChatGPT Critical Analysis Flagship GCP V49.md
@@ -218,14 +218,7 @@
   - **matrix_ci/**
     - src/matrix_ci/__init__.py
     - src/matrix_ci/pipeline.py
-- **.pytest_cache/**
-  - .pytest_cache/.gitignore
-  - .pytest_cache/CACHEDIR.TAG
-  - .pytest_cache/README.md
-  - **v/**
-    - **cache/**
-      - .pytest_cache/v/cache/lastfailed
-      - .pytest_cache/v/cache/nodeids
+
 - **GCP-All-Variants/**
   - GCP-All-Variants/Changelog.md
   - GCP-All-Variants/Changelog_P2.md
