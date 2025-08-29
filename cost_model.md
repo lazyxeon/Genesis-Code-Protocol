@@ -1,17 +1,12 @@
-# Cost & Performance Model
+# Cost Model
 
-| Scenario | Runs/Month | Cost/Run (USD) | Monthly Cost (USD) |
-|---------|------------|----------------|--------------------|
-| Low     | 100        | 0.04           | 4                  |
-| Medium  | 1_000      | 0.035          | 35                 |
-| High    | 10_000     | 0.03           | 300                |
+| Load Scenario | Runs/Month | Cost/Run (USD) | Monthly Cost (USD) |
+|---------------|------------|----------------|--------------------|
+| Low           | 100        | 0.01           | 1.00               |
+| Medium        | 500        | 0.01           | 5.00               |
+| High          | 1000       | 0.01           | 10.00              |
 
-## Optimization Plan
+Hot path optimization: cache token lookup (~5% latency reduction).
+Cold path: avoid unnecessary API calls.
 
-- **Hot path**: reuse scan artifacts across branches to reduce Fortify invocations (≈20% cost drop).
-- **Cold path**: schedule Codacy scans nightly for infrequently changed modules (≈10% cost drop).
-
-## Tuning Levers
-
-- Adjust concurrency: ±25% cost impact.
-- Enable incremental SAST scans: 30% runtime reduction with moderate risk.
+Tuning levers: reduce retention days (low risk, -10% cost), adjust canary percentage (medium risk, -5% cost).
