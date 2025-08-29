@@ -34,9 +34,9 @@ jobs:
       - name: Install notebook linting tools
         run: |
           python -m pip install --upgrade pip==23.3.1
-          pip install --no-deps nbqa==1.7.0 flake8==7.0.0
+          pip install -r .github/workflows/notebook-lint-requirements.txt
 
       - name: Lint notebooks with nbqa
         run: |
           set -e
-          nbqa flake8 . || true
+          nbqa flake8 .
