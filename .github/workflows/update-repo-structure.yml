@@ -35,8 +35,25 @@ jobs:
           python scripts/update_repo_structure.py
           python scripts/fix_md_spacing.py README.md
 
+      # Show the diff (optional for debugging)
+      - name: Show diff
+        run: |
+          git status
+          git --no-pager diff -- README.md || true
+
+      # Check if README.md changed
+      - name: Detect changes
+        id: changes
+        run: |
+          if git status --porcelain README.md | grep .; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
       # Create a PR for the README update
       - name: Create Pull Request
+        if: steps.changes.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e
         with:
           commit-message: "docs(readme): auto-sync repo structure"
