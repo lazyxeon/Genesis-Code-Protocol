@@ -8,6 +8,7 @@
 - feat(cli): pass version to audit (#131)
 
 ### Bug Fixes
+- fix: use Python 3.11 for docs workflow
 - fix: repair security scans workflow configs (#332)
 - Fix workflow conditions to avoid skips (#328)
 - fix: run EthicalCheck workflow by default (#315)
@@ -232,6 +233,7 @@
 - test: verify scanners skip when missing credentials (#289)
 
 ### Miscellaneous Tasks
+- chore(docs): refresh Table Of Contents.md (#514)
 - chore(changelog): update and normalize spacing (#321)
 - chore: batch changelog PRs (#325)
 - chore(changelog): update and normalize spacing (#318)
