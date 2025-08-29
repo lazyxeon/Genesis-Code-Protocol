@@ -1,7 +1,8 @@
+---
 name: Release Bundle
 
 # Run this workflow when a new release is created
-on:
+"on":
   release:
     types: [published]
   workflow_dispatch:

@@ -1,6 +1,7 @@
+---
 name: Generate Changelog
 
-on:
+"on":
   push:
     branches:
       - main

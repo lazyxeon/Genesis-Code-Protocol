@@ -1,7 +1,8 @@
+---
 name: Trigger All Workflows
 run-name: ${{ github.workflow }}
 
-on:
+"on":
   workflow_dispatch:
 
 permissions:

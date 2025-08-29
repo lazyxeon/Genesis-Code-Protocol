@@ -1,6 +1,7 @@
+---
 name: Validate Jupyter Notebooks
 
-on:
+"on":
   push:
     paths:
       - "**/*.ipynb"
@@ -21,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4, actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        uses: actions/checkout@v4, actions/checkout@v4
         with:
           fetch-depth: 0
 

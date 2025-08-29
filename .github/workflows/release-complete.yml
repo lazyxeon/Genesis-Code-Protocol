@@ -1,7 +1,8 @@
+---
 name: Complete Release Process
 
 # This workflow orchestrates the complete release process including bundling and signing
-on:
+"on":
   release:
     types: [published]
   workflow_dispatch:

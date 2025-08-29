@@ -28,7 +28,7 @@ def test_release_bundle_workflow_syntax():
     
     # Check basic structure
     assert "name" in workflow
-    assert True in workflow  # YAML parses 'on' as boolean True
+    assert "on" in workflow  # YAML 'on' key
     assert "jobs" in workflow
     
     # Check that bundle job exists and has outputs
@@ -48,7 +48,7 @@ def test_release_sign_workflow_syntax():
     
     # Check basic structure
     assert "name" in workflow
-    assert True in workflow  # YAML parses 'on' as boolean True
+    assert "on" in workflow  # YAML 'on' key
     assert "jobs" in workflow
     
     # Check that wait-for-bundle job exists
@@ -70,7 +70,7 @@ def test_release_complete_workflow_syntax():
     
     # Check basic structure
     assert "name" in workflow
-    assert True in workflow  # YAML parses 'on' as boolean True
+    assert "on" in workflow  # YAML 'on' key
     assert "jobs" in workflow
     
     # Check that jobs exist in correct order
@@ -112,9 +112,9 @@ def test_workflow_triggers():
     with open(workflow_path) as f:
         workflow = yaml.safe_load(f)
     
-    # Check triggers (YAML parses 'on' as boolean True)
-    assert True in workflow
-    on_config = workflow[True]
+    # Check triggers (YAML 'on' key)
+    assert "on" in workflow
+    on_config = workflow["on"]
     assert "release" in on_config
     assert "workflow_dispatch" in on_config
     

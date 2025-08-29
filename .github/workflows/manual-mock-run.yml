@@ -1,6 +1,7 @@
+---
 name: Manual Mock Run
 
-on:
+"on":
   workflow_dispatch:
 
 permissions:
