@@ -27,4 +27,11 @@ jobs:
         with:
           node-version: 20
       - run: npm install -g markdownlint-cli@0.45.0
-      - run: markdownlint '**/*.md' --config .markdownlint.yml --ignore-path .markdownlintignore
+      - run: |
+          markdownlint '**/*.md' --config .markdownlint.yml --ignore-path .markdownlintignore || exit_code=$?
+          if [ "${exit_code:-0}" -eq 2 ]; then
+            echo "No Markdown files to lint."
+            exit 0
+          else
+            exit "${exit_code:-0}"
+          fi
