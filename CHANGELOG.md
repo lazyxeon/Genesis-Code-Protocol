@@ -1,6 +1,8 @@
-# GRCP Changelog
+# GCP Changelog
 
 ### Features
+
+- feat: add repo structure markers (#415)
 - feat: add manual mock run workflow (#287)
 - feat: add github actions stability workflow (#272)
 - feat: remove GitPython dependency from changelog script (#229)
@@ -8,6 +10,27 @@
 - feat(cli): pass version to audit (#131)
 
 ### Bug Fixes
+
+- Fix dependency review workflow with updated actions and comprehensive validation (#461)
+- Fix auto-merge dependabot workflow: YAML syntax, GitHub API integration, and comprehensive testing (#460)
+- fix: update markdownlint configuration and fix integration contract formatting (#459)
+- Fix and enhance ethical check workflow with proper validation and error handling (#462)
+- Fix sign release artifacts workflow with comprehensive security enhancements (#456)
+- Fix pre-commit workflow: eliminate network timeouts and improve reliability (#457)
+- Fix failing update-toc-file workflow with enhanced error handling and validation (#453)
+- fix: include base/head refs for manual dependency review (#438)
+- fix: limit ossf scorecard to main branch (#427)
+- fix: use cli_bundle path in workflows (#418)
+- fix: correct changelog header (#420)
+- fix: scope SBOM to release bundle (#399)
+- fix: use markdownlint action and correct ignore paths (#401)
+- fix: auto merge dependabot prs (#405)
+- fix: sign all release assets (#395)
+- fix: update workflow actions (#390)
+- fix: ensure sbom generation script passes mypy (#385)
+- fix: correct env usage in ethicalcheck workflow (#372)
+- fix: add typing for SBOM generator (#361)
+- Fix dependabot auto-merge workflow and add spec (#336)
 - fix: repair security scans workflow configs (#332)
 - Fix workflow conditions to avoid skips (#328)
 - fix: run EthicalCheck workflow by default (#315)
@@ -55,6 +78,11 @@
 - Fix formatting of image digest output
 
 ### Documentation
+
+- docs: auto-update Table Of Contents.md
+- docs: auto-update Table Of Contents.md (#466)
+- docs: auto-update Table Of Contents.md (#444)
+- docs: fix markdownlint errors in bug report template (#429)
 - docs: auto-update Table Of Contents.md (#331)
 - docs: auto-update Table Of Contents.md (#302)
 - docs: auto-update Table Of Contents.md (#297)
@@ -209,6 +237,7 @@
 - docs(readme): auto-sync repo structure
 
 ### Refactor
+
 - Refactor codebase and fix lint issues (#143)
 - refactor: update workflows and changelog (#137)
 - Refactor TOC update workflow and remove gitsign
@@ -229,9 +258,41 @@
 - Refactor OpenSSF Scorecard workflow configuration
 
 ### Testing
+
 - test: verify scanners skip when missing credentials (#289)
 
 ### Miscellaneous Tasks
+
+- Merge branch 'codex/fix-workflow-issues-in-github-repository' into chore/update-top-level-toc
+- Merge branch 'main' into codex/fix-workflow-issues-in-github-repository
+- chore: harden ci workflows
+- Remove CI automation badges from README
+- chore(deps): bump python from 3.11-slim to 3.13-slim (#473)
+- chore(deps): bump actions/setup-python from 4 to 5 (#477)
+- chore(deps): bump pandas from 2.2.2 to 2.3.2 (#478)
+- chore(deps): bump rich from 13.7.1 to 14.1.0 (#480)
+- chore(deps): bump pyyaml from 6.0.1 to 6.0.2 (#479)
+- chore(deps): bump numpy from 1.26.4 to 2.2.6 (#476)
+- chore(deps): bump fortify/github-action from 1.7.0 to 2.1.1 (#474)
+- [WIP] please analyze and fix my release bundle workflow (#458)
+- [WIP] please analyze and fix my update repo structure workflow (#455)
+- [WIP] please analyze and fix my failing Workflows to include, update TOC, update repo structure, sign release artifacts, pre commit, release bundle, and markdown lint (#451)
+- Align scripts with pre-commit formatting (#447)
+- ci: fix markdownlint workflow and lint docs (#445)
+- chore: update TOC workflow and file (#437)
+- chore: fix SBOM generator metadata typing (#431)
+- ci: pin docs workflow to Python 3.11 (#416)
+- ci: drop Python 3.12 from matrix (#419)
+- chore: harden dependency review workflow (#403)
+- chore: update pre-commit hooks (#397)
+- chore: refine repo tree generation (#391)
+- chore: harden ethicalcheck workflow (#393)
+- Pin GitHub Actions to commit SHAs (#387)
+- chore(docs): simplify docs requirements and install (#388)
+- chore: harden workflows and repo structure (#379)
+- Skip EthicalCheck workflow when configuration missing (#369)
+- chore: note missing secrets in fortify scan (#371)
+- chore: ensure full history in release signing (#340)
 - chore(changelog): update and normalize spacing (#321)
 - chore: batch changelog PRs (#325)
 - chore(changelog): update and normalize spacing (#318)
@@ -1305,8 +1366,8 @@
 - Update README.md
 - Rename AI Critical Analysis GRCP to AI Critical Analysis GCP V43.7
 - Rename GCP FULL PROTOCOL.md to GCP Current Version(45.6D).md
-- Rename Complete Full runs\_ Full Inventions Master List(no order).md to  A Complete Full runs\_ Full Inventions Master List(no order).md
-- Rename Full runs\_ Full Inventions Master List(no order).md to Complete Full runs\_ Full Inventions Master List(no order).md
+- Rename Complete Full runs_ Full Inventions Master List(no order).md to  A Complete Full runs_ Full Inventions Master List(no order).md
+- Rename Full runs_ Full Inventions Master List(no order).md to Complete Full runs_ Full Inventions Master List(no order).md
 - Rename V9.md to V09.md
 - Delete GRCP most recent variants/GCP V43.md
 - Delete GRCP most recent variants/GCP V42.md
@@ -1427,6 +1488,7 @@
 - Initial commit
 
 ### Security
+
 - conditionally run security workflows (#274)
 - Add Codacy Security Scan badge to README
 - Add Codacy security scan workflow
