@@ -46,85 +46,11 @@
   - scripts/validate_workflows.py
 - **dist/**
   - **lyra-exit-bundle/**
-    - dist/lyra-exit-bundle/CHANGELOG.md
-    - dist/lyra-exit-bundle/LICENSE.md
-    - dist/lyra-exit-bundle/MANIFEST.json
-    - dist/lyra-exit-bundle/README.md
-    - dist/lyra-exit-bundle/rehydrate.sh
-    - **docs/**
-      - **Documents/**
-        - dist/lyra-exit-bundle/docs/Documents/A Documents Readme.md
-        - dist/lyra-exit-bundle/docs/Documents/AI ChatGPT Critical Analysis Flagship GCP V49.md
-        - dist/lyra-exit-bundle/docs/Documents/AI ChatGPT Critical Analysis GCP V45.6D.md
-        - dist/lyra-exit-bundle/docs/Documents/AI ChatGPT Critical Analysis GCP V46.md
-        - dist/lyra-exit-bundle/docs/Documents/AI ChatGPT Critical Analysis V47 Full Run EV issue.md
-        - dist/lyra-exit-bundle/docs/Documents/AI Claude Critical Analysis Flagship GCP V49.md
-        - dist/lyra-exit-bundle/docs/Documents/AI Claude Critical Analysis GCP V45.6d.md
-        - dist/lyra-exit-bundle/docs/Documents/AI Claude Critical Analysis GCP V46.md
-        - dist/lyra-exit-bundle/docs/Documents/AI Claude Critical Analysis V47 full run EV issue.md
-        - dist/lyra-exit-bundle/docs/Documents/AI Grok Critical Analysis Flagship GCPV49.md
-        - dist/lyra-exit-bundle/docs/Documents/AI Grok Critical Analysis GCP V45.6D.md
-        - dist/lyra-exit-bundle/docs/Documents/AI Grok Critical Analysis GCP V46 .md
-        - dist/lyra-exit-bundle/docs/Documents/AI Grok Critical Analysis V47 Full Run EV issue.md
-        - dist/lyra-exit-bundle/docs/Documents/Feature Requests.md
-        - dist/lyra-exit-bundle/docs/Documents/Issue Template.md
-        - dist/lyra-exit-bundle/docs/Documents/Operations Manual.md
-        - dist/lyra-exit-bundle/docs/Documents/Pull Request Template.md
-        - dist/lyra-exit-bundle/docs/Documents/Requirements.md
-        - dist/lyra-exit-bundle/docs/Documents/Security.md
-        - dist/lyra-exit-bundle/docs/Documents/Theoretical Soundness Analysis.md
-        - dist/lyra-exit-bundle/docs/Documents/index.md
-        - dist/lyra-exit-bundle/docs/Documents/releases.md
-        - dist/lyra-exit-bundle/docs/Documents/security_report.md
+    - **rehydration/**
     - **source/**
-      - dist/lyra-exit-bundle/source/requirements-dev.txt
-      - dist/lyra-exit-bundle/source/requirements.txt
-      - dist/lyra-exit-bundle/source/setup.py
       - **scripts/**
-        - dist/lyra-exit-bundle/source/scripts/__init__.py
-        - dist/lyra-exit-bundle/source/scripts/fix_md_spacing.py
-        - dist/lyra-exit-bundle/source/scripts/generate_changelog.py
-        - dist/lyra-exit-bundle/source/scripts/generate_repo_toc.py
-        - dist/lyra-exit-bundle/source/scripts/generate_sbom.py
-        - dist/lyra-exit-bundle/source/scripts/make_exit_bundle.sh
-        - dist/lyra-exit-bundle/source/scripts/update_repo_structure.py
-        - dist/lyra-exit-bundle/source/scripts/validate_workflows.py
+        - dist/lyra-exit-bundle/source/scripts/validate_dependencies.py
       - **src/**
-        - dist/lyra-exit-bundle/source/src/__init__.py
-        - dist/lyra-exit-bundle/source/src/automerge.py
-        - dist/lyra-exit-bundle/source/src/codacy.py
-        - dist/lyra-exit-bundle/source/src/config.py
-        - dist/lyra-exit-bundle/source/src/errors.py
-        - dist/lyra-exit-bundle/source/src/ethicalcheck.py
-        - dist/lyra-exit-bundle/source/src/fortify.py
-        - dist/lyra-exit-bundle/source/src/fuzz.py
-        - dist/lyra-exit-bundle/source/src/ingest.py
-        - dist/lyra-exit-bundle/source/src/logging_utils.py
-        - dist/lyra-exit-bundle/source/src/main.py
-        - dist/lyra-exit-bundle/source/src/remediate.py
-        - dist/lyra-exit-bundle/source/src/report.py
-        - dist/lyra-exit-bundle/source/src/rollback.py
-        - dist/lyra-exit-bundle/source/src/scan.py
-        - dist/lyra-exit-bundle/source/src/utils.py
-        - **matrix_ci/**
-          - dist/lyra-exit-bundle/source/src/matrix_ci/__init__.py
-          - dist/lyra-exit-bundle/source/src/matrix_ci/pipeline.py
-      - **cli_bundle/**
-        - dist/lyra-exit-bundle/source/cli_bundle/Readme.md
-        - dist/lyra-exit-bundle/source/cli_bundle/__init__.py
-        - dist/lyra-exit-bundle/source/cli_bundle/audit_utils.py
-        - dist/lyra-exit-bundle/source/cli_bundle/full_run.py
-        - dist/lyra-exit-bundle/source/cli_bundle/gcp_cli.py
-        - dist/lyra-exit-bundle/source/cli_bundle/phase1.py
-        - dist/lyra-exit-bundle/source/cli_bundle/phase6_7.py
-        - dist/lyra-exit-bundle/source/cli_bundle/prompt_utils.py
-        - dist/lyra-exit-bundle/source/cli_bundle/requirements.txt
-    - **SBOM/**
-      - dist/lyra-exit-bundle/SBOM/sbom.spdx.json
-    - **provenance/**
-      - dist/lyra-exit-bundle/provenance/slsa_provenance.json
-  - **checksums/**
-    - dist/checksums/SHA256SUMS.txt
 - **docs/**
   - docs/RELEASE_WORKFLOW.md
   - docs/ci-workflow-diagnoser-runbook.md
@@ -217,6 +143,13 @@
   - **matrix_ci/**
     - src/matrix_ci/__init__.py
     - src/matrix_ci/pipeline.py
+- **.pytest_cache/**
+  - .pytest_cache/.gitignore
+  - .pytest_cache/CACHEDIR.TAG
+  - .pytest_cache/README.md
+  - **v/**
+    - **cache/**
+      - .pytest_cache/v/cache/nodeids
 - **GCP-All-Variants/**
   - GCP-All-Variants/Changelog.md
   - GCP-All-Variants/Changelog_P2.md
