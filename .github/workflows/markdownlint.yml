@@ -26,5 +26,4 @@ jobs:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 20
-      - run: npm install -g markdownlint-cli@0.45.0
-      - run: markdownlint '**/*.md' --config .markdownlint.yml --ignore-path .markdownlintignore
+      - run: npx --yes markdownlint-cli@0.45.0 --config .markdownlint.yml --ignore-path .markdownlintignore '**/*.md'
