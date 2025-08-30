@@ -173,6 +173,7 @@
   - tests/spec_validation_test.py
   - tests/test_release_bundle.py
   - tests/test_release_workflows.py
+  - tests/test_workflow_validation.py
 - **Documents/**
   - Documents/A Documents Readme.md
   - Documents/AI ChatGPT Critical Analysis Flagship GCP V49.md
@@ -225,6 +226,7 @@
   - .pytest_cache/README.md
   - **v/**
     - **cache/**
+      - .pytest_cache/v/cache/lastfailed
       - .pytest_cache/v/cache/nodeids
 - **GCP-All-Variants/**
   - GCP-All-Variants/Changelog.md
