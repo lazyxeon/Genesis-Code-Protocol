@@ -173,6 +173,7 @@
   - tests/spec_validation_test.py
   - tests/test_release_bundle.py
   - tests/test_release_workflows.py
+  - tests/test_workflow_validation.py
 - **Documents/**
   - Documents/A Documents Readme.md
   - Documents/AI ChatGPT Critical Analysis Flagship GCP V49.md
