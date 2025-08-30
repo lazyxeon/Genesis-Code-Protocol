@@ -15,6 +15,9 @@ default_stages: [pre-commit]
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: '\.md$'
   - repo: local
     hooks:
       - id: trailing-whitespace
