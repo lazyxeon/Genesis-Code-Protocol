@@ -93,7 +93,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           base: main
-          ref: main
           commit-message: "docs: auto-update Table Of Contents.md"
           branch: "chore/update-top-level-toc"
           title: "chore(docs): refresh Table Of Contents.md"
