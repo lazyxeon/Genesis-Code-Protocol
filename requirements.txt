@@ -6,3 +6,4 @@ pytest>=8
 pydantic>=2
 opentelemetry-sdk>=1.25
 requests>=2.31.0
+PyYAML>=6.0
