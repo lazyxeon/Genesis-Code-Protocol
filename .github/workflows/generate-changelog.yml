@@ -10,9 +10,8 @@ name: Generate Changelog
       - "**/*.md"
       - "**/*.yml"
       - "**/*.yaml"
-    paths-ignore:
-      - "CHANGELOG.md"
-      - ".github/workflows/generate-changelog.yml"
+      - "!CHANGELOG.md"
+      - "!.github/workflows/generate-changelog.yml"
       
   workflow_dispatch:
 
