@@ -30,4 +30,8 @@ jobs:
         run: ruff check src tests
       - name: Run tests
         run: |
-          if [ -d "tests" ] && [ "$(ls -A tests)" ]; then python -m pytest -v; else echo 'No tests found.'; fi
+          if [ -d "tests" ] && [ "$(ls -A tests)" ]; then
+            python -m pytest -v
+          else
+            echo 'No tests found.'
+          fi
