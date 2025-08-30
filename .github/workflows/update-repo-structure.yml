@@ -66,6 +66,8 @@ jobs:
         with:
           commit-message: "docs(readme): auto-sync repo structure"
           branch: "chore/update-repo-structure"
+          base: main
+          ref: main
           title: "chore(docs): sync Repository Structure in README"
           body: "Automated update of the repository structure section."
           labels: "documentation"
