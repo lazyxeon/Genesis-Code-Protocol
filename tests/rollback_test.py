@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from src import main, rollback, errors  # Added import for errors
+from src import errors, main, rollback  # Added import for errors
 
 
 def test_rollback_file_written(tmp_path, monkeypatch) -> None:
