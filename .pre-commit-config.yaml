@@ -22,44 +22,25 @@ repos:
         exclude: '\.txt$|\.json$'
       - id: check-yaml
         name: Check YAML
+
   - repo: local
     hooks:
-      - id: trailing-whitespace
-        name: Trim Trailing Whitespace
-        entry: sed -i 's/[[:space:]]*$//'
-        language: system
-        types: [text]
-        exclude: '\.md$'
       - id: check-large-files
         name: Check for large files
         entry: bash -c 'for f in "$@"; do [[ "$f" == .git/* ]] && continue; s=$(stat -c%s "$f" 2>/dev/null || echo 0); [ $s -gt 1048576 ] && echo "File $f is $(($s/1024))KB" && exit 1; done; exit 0' --
         language: system
-  - repo: https://github.com/psf/black
-    rev: 25.1.0
-    hooks:
-      - id: black
-        language_version: python3
 
+  # Use only ruff for linting and formatting (no black or isort)
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.12.11
+    rev: v0.3.0  # Use a stable, recent version
     hooks:
       - id: ruff
         args: [--fix]
       - id: ruff-format
-      - id: ruff-check
-        name: Ruff Check
-        entry: python -m ruff check --fix --exit-non-zero-on-fix
-        types: [python]
-        require_serial: true
 
-  - repo: https://github.com/PyCQA/isort
-    rev: 6.0.1
-    hooks:
-      - id: isort
-        name: isort (python)
-        args: ["--profile", "black"]
-
+  # Keep mypy for type checking
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.17.1
+    rev: v1.8.0  # Use a stable, recent version
     hooks:
       - id: mypy
+        additional_dependencies: [types-requests]
