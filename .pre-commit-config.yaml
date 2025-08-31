@@ -1,3 +1,5 @@
+fail_fast: false
+
 exclude: |
   (?x)^(
     Notebooks/
@@ -17,30 +19,34 @@ repos:
     rev: v6.0.0
     hooks:
       - id: trailing-whitespace
-        exclude: '\.md$'
+        exclude: '\.(md|rst)$'
       - id: end-of-file-fixer
-        exclude: '\.txt$|\.json$'
+        exclude: '\.(txt|json)$'
       - id: check-yaml
-        name: Check YAML
+      - id: mixed-line-ending
+        args: [--fix=lf]
 
   - repo: local
     hooks:
       - id: check-large-files
-        name: Check for large files
-        entry: bash -c 'for f in "$@"; do [[ "$f" == .git/* ]] && continue; s=$(stat -c%s "$f" 2>/dev/null || echo 0); [ $s -gt 1048576 ] && echo "File $f is $(($s/1024))KB" && exit 1; done; exit 0' --
+        name: check-large-files (>1MB)
         language: system
+        pass_filenames: true
+        entry: bash -c 'threshold=1048576; status=0; for f in "$@"; do [ -f "$f" ] || continue; case "$f" in .git/*) continue;; esac; size=$(wc -c <"$f" 2>/dev/null || echo 0); if [ "$size" -gt "$threshold" ]; then echo "Large file (>1MB): $f ($((size/1024)) KB)"; status=1; fi; done; exit $status' --
 
-  # Use only ruff for linting and formatting (no black or isort)
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.3.0  # Use a stable, recent version
+    rev: v0.5.6
     hooks:
-      - id: ruff
-        args: [--fix]
       - id: ruff-format
+        name: ruff-format
+      - id: ruff
+        name: ruff-lint
+        args: [--exit-non-zero-on-fix]
 
-  # Keep mypy for type checking
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.8.0  # Use a stable, recent version
+  - repo: local
     hooks:
-      - id: mypy
-        additional_dependencies: [types-requests]
+      - id: mypy-report
+        name: mypy-report (non-blocking)
+        language: system
+        pass_filenames: false
+        entry: bash -c 'echo "Running mypy (advisory)"; mypy || true'

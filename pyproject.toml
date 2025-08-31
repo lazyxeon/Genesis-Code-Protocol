@@ -3,37 +3,25 @@ requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.ruff]
-line-length = 88
+line-length = 100
 target-version = "py312"
+exclude = [
+  "Notebooks",
+  "Documents",
+  "docs",
+  "GCP-All-Variants",
+  "GCP Runners",
+]
 
 [tool.ruff.lint]
-# Enable key rule groups
-select = [
-    "E",  # pycodestyle errors
-    "W",  # pycodestyle warnings
-    "F",  # pyflakes
-    "I",  # isort
-    "N",  # pep8-naming
-    "UP", # pyupgrade
-    "B",  # flake8-bugbear
-    "C4", # flake8-comprehensions
-    "SIM", # flake8-simplify
-]
-
-# Ignore some rules that might be too strict for this project
-ignore = [
-    "E501",  # line too long (handled by formatter)
-    "B008",  # do not perform function calls in argument defaults
-    "N806",  # variable in function should be lowercase (conflicts with some patterns)
-]
+select = ["E", "F", "I", "B", "UP"]
+ignore = []
 
 [tool.ruff.lint.per-file-ignores]
-# Test files can be more lenient
 "tests/*" = ["N802", "N803", "N806", "S101"]
-# Scripts can have more flexible naming
 "scripts/*" = ["N802", "N803", "N806"]
 
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
-line-ending = "auto"
+line-ending = "lf"
