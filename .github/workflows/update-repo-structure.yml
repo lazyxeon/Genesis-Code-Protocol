@@ -62,7 +62,7 @@ jobs:
       # Create a PR for the README update
       - name: Create Pull Request
         if: steps.changes.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v6  # Downgraded from v7 to v6
         with:
           commit-message: "docs(readme): auto-sync repo structure"
           branch: "chore/update-repo-structure"
