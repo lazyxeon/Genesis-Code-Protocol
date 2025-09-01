@@ -41,8 +41,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global user.name  "github-actions[bot]"
-            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Validate scripts exist
         run: |
@@ -91,14 +91,13 @@ jobs:
         if: steps.changes.outputs.has_changes == 'true'
         run: |
           set -euo pipefail
-          # Create or reset the automation branch at current main HEAD, preserving the working tree changes
           git switch -C "$BRANCH_NAME"
           git add "$TOC_FILE"
           if git diff --cached --quiet; then
             echo "No staged changes after branch switch; exiting."
             exit 0
           fi
-          git commit -m "docs: auto-update Table Of Contents.md"
+            git commit -m "docs: auto-update Table Of Contents.md"
           git push -f origin "$BRANCH_NAME"
 
       - name: Create or Update Pull Request
@@ -108,11 +107,22 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_SHA: ${{ github.sha }}
           REPO: ${{ github.repository }}
+          PR_BODY: |
+            ## Automated Table Of Contents Update
+
+            This PR contains an automated update to the repository Table Of Contents.
+
+            ### Changes
+            - Updated `Table Of Contents.md` with current repository structure
+            - Applied markdown spacing normalization
+
+            ### Triggered by
+            - Workflow: ${{ github.workflow }}
+            - Event: ${{ github.event_name }}
+            - Commit: ${{ github.sha }}
         run: |
           set -euo pipefail
           owner="${REPO%%/*}"
-
-          # Look for existing open PR with this head branch
           existing_pr_number="$(gh pr list --state open --head "${owner}:${BRANCH_NAME}" --json number --jq '.[0].number // empty')"
 
           if [ -n "$existing_pr_number" ]; then
@@ -122,29 +132,14 @@ jobs:
             echo "pr_number=$existing_pr_number" >> "$GITHUB_OUTPUT"
           else
             echo "Creating new PR..."
-            body_file="$(mktemp)"
-            cat > "$body_file" <<'EOF'
-## Automated Table Of Contents Update
-
-This PR contains an automated update to the repository Table Of Contents.
-
-### Changes
-- Updated `Table Of Contents.md` with current repository structure
-- Applied markdown spacing normalization
-
-### Triggered by
-- Workflow: ${{ github.workflow }}
-- Event: ${{ github.event_name }}
-- Commit: ${{ github.sha }}
-EOF
+            printf '%s\n' "$PR_BODY" > pr_body.md
             gh pr create \
               --base main \
               --head "$BRANCH_NAME" \
               --title "$PR_TITLE" \
-              --body-file "$body_file" \
+              --body-file pr_body.md \
               --label "documentation" \
               --label "automated"
-
             new_pr="$(gh pr list --state open --head "${owner}:${BRANCH_NAME}" --json number --jq '.[0].number // empty')"
             [ -n "$new_pr" ] && echo "pr_number=$new_pr" >> "$GITHUB_OUTPUT"
           fi
