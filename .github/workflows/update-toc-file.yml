@@ -23,7 +23,9 @@ jobs:
   build-toc:
     runs-on: ubuntu-latest
     env:
+      # Provide both variables so gh can pick either.
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       BRANCH_NAME: chore/update-top-level-toc
       PR_TITLE: "chore(docs): refresh Table Of Contents.md"
       TOC_FILE: "Table Of Contents.md"
@@ -61,12 +63,12 @@ jobs:
       - name: Validate scripts exist
         run: |
           set -euo pipefail
-          for f in scripts/generate_repo_toc.py scripts/fix_md_spacing.py; do
-            if [ ! -f "$f" ]; then
-              echo "Error: $f not found"
-              exit 1
-            fi
-          done
+            for f in scripts/generate_repo_toc.py scripts/fix_md_spacing.py; do
+              if [ ! -f "$f" ]; then
+                echo "Error: $f not found"
+                exit 1
+              fi
+            done
           echo "✓ All required scripts found"
 
       - name: Generate Table Of Contents
@@ -74,7 +76,7 @@ jobs:
           set -euo pipefail
           echo "Generating $TOC_FILE..."
           python scripts/generate_repo_toc.py
-            if [ ! -f "$TOC_FILE" ]; then
+          if [ ! -f "$TOC_FILE" ]; then
             echo "Error: $TOC_FILE was not generated"
             exit 1
           fi
@@ -111,16 +113,27 @@ jobs:
             echo "No staged changes after branch switch; exiting."
             exit 0
           fi
-          git commit -m "docs: auto-update Table Of Contents.md"
+            git commit -m "docs: auto-update Table Of Contents.md"
           git push -f origin "$BRANCH_NAME"
+
+      - name: Verify gh auth
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          set -euo pipefail
+          echo "Verifying GitHub CLI authentication..."
+          if ! gh auth status; then
+            echo "::error title=GitHub CLI Not Authenticated::gh auth status failed (token not recognized)"
+            exit 1
+          fi
+          echo "✓ gh auth status OK"
 
       - name: Create or Update Pull Request
         id: pr
+        if: steps.changes.outputs.has_changes == 'true'
         run: |
-          # NOTE: We intentionally do NOT use 'set -u' so an unset variable (e.g. intermittent PR number) won't abort.
+          # Avoid -u so missing (unset) optional vars don't abort
           set -eo pipefail
 
-          # Define repository owner from the GitHub context
           owner="${GITHUB_REPOSITORY%/*}"
 
           retry() {
@@ -142,49 +155,57 @@ jobs:
             done
           }
 
+          # Ensure labels exist (ignore if already there)
           gh label create documentation --color FFFFFF --description "Documentation updates" 2>/dev/null || true
           gh label create automated --color 000000 --description "Automated change" 2>/dev/null || true
 
-          echo "Checking for existing PRs from branch $BRANCH_NAME..."
-          existing_pr_number=$(gh pr list --state open --head "${owner}:${BRANCH_NAME}" --json number --jq '.[0].number // empty' 2>/dev/null || echo "")
-          
+          echo "Checking for existing PR for branch: $BRANCH_NAME"
+
+          # First attempt: direct branch view
+          existing_pr_number=$(gh pr view "$BRANCH_NAME" --json number --jq '.number' 2>/dev/null || true)
+
+          # Fallback (head filter)
+          if [ -z "$existing_pr_number" ]; then
+            existing_pr_number=$(gh pr list --state open --head "${owner}:${BRANCH_NAME}" --json number --jq '.[0].number' 2>/dev/null || true)
+          fi
+
           if [ -n "$existing_pr_number" ]; then
             echo "PR #$existing_pr_number already exists - updating."
             if ! gh pr comment "$existing_pr_number" --body "Automated update pushed: \`${GITHUB_SHA}\`"; then
               echo "::warning title=PR Comment Failed::Could not add comment to PR #$existing_pr_number"
             fi
-            if ! gh pr edit "$existing_pr_number" --add-label "documentation" --add-label "automated"; then
+            if ! gh pr edit "$existing_pr_number" --add-label documentation --add-label automated 2>/dev/null; then
               echo "::warning title=PR Label Update Failed::Could not update labels on PR #$existing_pr_number"
             fi
-            echo "pr_number=$existing_pr_number" >> $GITHUB_OUTPUT
+            echo "pr_number=$existing_pr_number" >> "$GITHUB_OUTPUT"
           else
             echo "Creating new PR..."
-            if [ -z "$PR_TITLE" ]; then
-              PR_TITLE="Automated Documentation Update"
-              echo "::warning::PR_TITLE not set, using default: $PR_TITLE"
-            fi
-            if [ -z "$PR_BODY" ]; then
-              PR_BODY="This is an automated pull request with documentation updates."
-              echo "::warning::PR_BODY not set, using default body"
-            fi
+            : "${PR_TITLE:=Automated Documentation Update}"
+            : "${PR_BODY:=This is an automated pull request with documentation updates.}"
             printf '%s\n' "$PR_BODY" > pr_body.md
+
             if ! gh pr create \
-                --base main \
-                --head "$BRANCH_NAME" \
-                --title "$PR_TITLE" \
-                --body-file pr_body.md \
-                --label "documentation" \
-                --label "automated"; then
+              --base main \
+              --head "$BRANCH_NAME" \
+              --title "$PR_TITLE" \
+              --body-file pr_body.md \
+              --label documentation \
+              --label automated; then
               echo "::error title=PR Creation Failed::gh pr create command failed"
               exit 1
             fi
-            new_pr=$(retry 3 gh pr list --state open --head "${owner}:${BRANCH_NAME}" --json number --jq '.[0].number // empty' || echo "")
-            if [ -z "$new_pr" ]; then
-              echo "::warning title=PR Number Not Retrieved::PR created but number lookup failed; continuing."
+
+            new_pr_number=$(retry 3 gh pr list --state open --head "${owner}:${BRANCH_NAME}" --json number --jq '.[0].number' 2>/dev/null || true)
+
+            if [ -z "$new_pr_number" ]; then
+              echo "::warning title=PR Number Not Retrieved::PR created but number lookup failed."
             else
-              echo "pr_number=$new_pr" >> $GITHUB_OUTPUT
+              echo "New PR #$new_pr_number created."
+              echo "pr_number=$new_pr_number" >> "$GITHUB_OUTPUT"
             fi
           fi
+
+          # Always exit 0 if we got here
           exit 0
 
       - name: Log result
