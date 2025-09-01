@@ -1,7 +1,7 @@
 ---
 name: Update Repo Structure
 
-"on":
+on:
   push:
     branches: ["main"]
     paths-ignore:
@@ -26,12 +26,13 @@ jobs:
       issues: write
     runs-on: ubuntu-latest
     steps:
-     - uses: actions/checkout@v4
-  with:
-    fetch-depth: 0
-    clean: false
-    ref: main
-     - uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          clean: false
+          ref: main
+
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
@@ -45,13 +46,11 @@ jobs:
             exit 1
           fi
 
-      # Show the diff (optional for debugging)
       - name: Show diff
         run: |
           git status
           git --no-pager diff -- README.md || true
 
-      # Check if README.md changed
       - name: Detect changes
         id: changes
         run: |
@@ -61,15 +60,14 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
           fi
 
-      # Create a PR for the README update
       - name: Create Pull Request
         if: steps.changes.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v6  # Downgraded from v7 to v6
+        uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: "docs(readme): auto-sync repo structure"
-          branch: "chore/update-repo-structure"
-          base: main
-          title: "chore(docs): sync Repository Structure in README"
-          body: "Automated update of the repository structure section."
-          labels: "documentation"
-          add-paths: "README.md"
+            commit-message: "docs(readme): auto-sync repo structure"
+            branch: "chore/update-repo-structure"
+            base: main
+            title: "chore(docs): sync Repository Structure in README"
+            body: "Automated update of the repository structure section."
+            labels: "documentation"
+            add-paths: "README.md"
