@@ -1,52 +1,101 @@
-fail_fast: false
+name: pre-commit
+on:
+  push:
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.ipynb'
+  pull_request:
+  workflow_dispatch:
 
-exclude: |
-  (?x)^(
-    Notebooks/
-    |GCP-All-Variants/
-    |GCP\ Runners/
-    |Documents/
-    |docs/
-    |.*\.md$
-    |.*\.ipynb$
-  )
+permissions:
+  contents: read
 
-default_install_hook_types: [pre-commit, pre-push]
-default_stages: [pre-commit]
+jobs:
+  pre-commit:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_COLOR: "1"
+    steps:
+      - uses: actions/checkout@v4
 
-repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v6.0.0
-    hooks:
-      - id: trailing-whitespace
-        exclude: '\.(md|rst)$'
-      - id: end-of-file-fixer
-        exclude: '\.(txt|json)$'
-      - id: check-yaml
-      - id: mixed-line-ending
-        args: [--fix=lf]
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
 
-  - repo: local
-    hooks:
-      - id: check-large-files
-        name: check-large-files (>1MB)
-        language: system
-        pass_filenames: true
-        entry: bash -c 'threshold=1048576; status=0; for f in "$@"; do [ -f "$f" ] || continue; case "$f" in .git/*) continue;; esac; size=$(wc -c <"$f" 2>/dev/null || echo 0); if [ "$size" -gt "$threshold" ]; then echo "Large file (>1MB): $f ($((size/1024)) KB)"; status=1; fi; done; exit $status' --
+      - name: Validate pre-commit config (fast fail)
+        run: |
+          python -m pip install --quiet pre-commit
+          pre-commit validate-config
 
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.5.6
-    hooks:
-      - id: ruff-format
-        name: ruff-format
-      - id: ruff
-        name: ruff-lint
-        args: [--exit-non-zero-on-fix]
+      - name: Install dev dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
 
-  - repo: local
-    hooks:
-      - id: mypy-report
-        name: mypy-report (non-blocking)
-        language: system
-        pass_filenames: false
-        entry: bash -c 'echo "Running mypy (advisory)"; mypy || true'
+      - name: Cache pre-commit environments
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: |
+            pre-commit-${{ runner.os }}-
+
+      - name: Install pre-commit hooks
+        run: pre-commit install-hooks
+
+      - name: Phase 1 (auto-fix formatting & hygiene)
+        id: phase1
+        continue-on-error: true
+        env:
+          # Do NOT skip check-yaml now that config is validated; skip only non-fix, expensive or advisory hooks
+          SKIP: ruff-lint,mypy-report,check-large-files
+        run: |
+          echo "Running Phase 1 (auto-fix eligible hooks)..."
+          pre-commit run --all-files --show-diff-on-failure || true
+
+      - name: Guard: no uncommitted diffs after auto-fix
+        id: guard_diffs
+        run: |
+          if ! git diff --quiet; then
+            echo 'Auto-fix phase produced changes. Commit these locally before pushing.'
+            echo
+            echo 'Changed files:'
+            git --no-pager diff --name-only
+            exit 1
+          fi
+
+      - name: Phase 2 (enforcement: deterministic, no auto-fix)
+        id: phase2
+        run: |
+          echo "Running Phase 2 (enforcement)..."
+          SKIP=ruff-format pre-commit run --all-files --show-diff-on-failure
+
+      - name: Mypy (advisory, non-blocking)
+        id: mypy_report
+        continue-on-error: true
+        run: |
+          echo "Standalone mypy advisory run"
+          mypy || true
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "## Pre-commit CI Summary" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.phase2.outcome }}" = "success" ]; then
+            echo "- ✅ Enforcement phase passed" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ❌ Enforcement phase failed" >> $GITHUB_STEP_SUMMARY
+          fi
+          if [ "${{ steps.phase1.outcome }}" = "success" ] && [ "${{ steps.guard_diffs.outcome }}" = "success" ]; then
+            echo "- ✅ Auto-fix phase clean (no remaining diffs)" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- ⚠️ Auto-fix phase reported changes; guard prevented enforcement with dirty tree" >> $GITHUB_STEP_SUMMARY
+          fi
+            echo "- ℹ️ Mypy advisory (non-blocking)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Local Usage" >> $GITHUB_STEP_SUMMARY
+          echo "1. Run: pre-commit run --all-files" >> $GITHUB_STEP_SUMMARY
+          echo "2. If formatting issues appear: ruff format . && ruff check --fix ." >> $GITHUB_STEP_SUMMARY
+          echo "3. Optional type check: mypy" >> $GITHUB_STEP_SUMMARY
