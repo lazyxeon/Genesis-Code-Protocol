@@ -1,7 +1,6 @@
----
 name: Update Top-Level TOC file
 
-"on":
+on:
   push:
     branches:
       - main
@@ -27,13 +26,15 @@ jobs:
       BRANCH_NAME: chore/update-top-level-toc
       PR_TITLE: "chore(docs): refresh Table Of Contents.md"
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository (main)
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-          ref: main  # Explicitly checkout main branch
+          ref: main
 
-      - uses: actions/setup-python@v5
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
@@ -44,18 +45,18 @@ jobs:
 
       - name: Validate scripts exist
         run: |
-          if [ ! -f "scripts/generate_repo_toc.py" ]; then
-            echo "Error: scripts/generate_repo_toc.py not found"
-            exit 1
-          fi
-          if [ ! -f "scripts/fix_md_spacing.py" ]; then
-            echo "Error: scripts/fix_md_spacing.py not found"
-            exit 1
-          fi
+          set -e
+          for f in scripts/generate_repo_toc.py scripts/fix_md_spacing.py; do
+            if [ ! -f "$f" ]; then
+              echo "Error: $f not found"
+              exit 1
+            fi
+          done
           echo "✓ All required scripts found"
 
-      - name: Generate "Table Of Contents.md"
+      - name: Generate Table Of Contents.md
         run: |
+          set -e
           echo "Generating Table Of Contents..."
           python scripts/generate_repo_toc.py
 
@@ -65,49 +66,55 @@ jobs:
           fi
 
           echo "Fixing markdown spacing..."
-          python scripts/ffix_md_spacing.py "Table Of Contents.md" 2>/dev/null || python scripts/fix_md_spacing.py "Table Of Contents.md"
+          # Run formatter (single correct path)
+          python scripts/fix_md_spacing.py "Table Of Contents.md"
 
           echo "✓ Table Of Contents.md generated and formatted successfully"
 
       - name: Check for changes
         id: changes
         run: |
+          set -e
           git add "Table Of Contents.md"
-            if git diff --cached --quiet; then
-              echo "No changes detected in Table Of Contents.md"
-              echo "has_changes=false" >> $GITHUB_OUTPUT
-            else
-              echo "Changes detected in Table Of Contents.md"
-              echo "has_changes=true" >> $GITHUB_OUTPUT
-            fi
+          if git diff --cached --quiet; then
+            echo "No changes detected in Table Of Contents.md"
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Changes detected in Table Of Contents.md"
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Show diff
         if: steps.changes.outputs.has_changes == 'true'
         run: |
           echo "Git status:"
-          git status
+            git status
           echo "Changes in Table Of Contents.md:"
           git --no-pager diff --cached -- "Table Of Contents.md"
 
-      - name: Create or Update Pull Request (gh)
+      - name: Create or Update Pull Request
         if: steps.changes.outputs.has_changes == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
 
-          # Re-create / create branch locally off main
+          # Ensure we are up-to-date with main
+          git fetch origin main
           git checkout main
-          # If branch exists remotely, fetch it to avoid divergence
+          git pull --ff-only origin main
+
+          # Prepare branch
           if git ls-remote --exit-code --heads origin "$BRANCH_NAME" >/dev/null 2>&1; then
-            echo "Remote branch $BRANCH_NAME exists - deleting local if present and re-checking out"
+            echo "Remote branch $BRANCH_NAME exists - fetching and checking out"
             git fetch origin "$BRANCH_NAME":"$BRANCH_NAME"
             git checkout "$BRANCH_NAME"
+            git rebase main || (echo "Rebase failed, aborting & resetting to main"; git rebase --abort; git checkout main; git branch -D "$BRANCH_NAME"; git checkout -b "$BRANCH_NAME")
           else
             git checkout -b "$BRANCH_NAME"
           fi
 
-          # Ensure staged file is still staged (checkout might reset index)
+          # Re-add file (in case of branch switch)
           git add "Table Of Contents.md"
 
           if git diff --cached --quiet; then
@@ -118,19 +125,18 @@ jobs:
           git commit -m "docs: auto-update Table Of Contents.md"
           git push -u origin "$BRANCH_NAME"
 
-          # Check if a PR already exists
+          # Check for existing PR
           existing_pr_number=$(gh pr list --head "$BRANCH_NAME" --base main --json number --jq '.[0].number')
 
-            if [ -n "${existing_pr_number}" ]; then
-              echo "PR #${existing_pr_number} already exists - updating with new commit."
-              gh pr comment "$existing_pr_number" --body "Automated update pushed: \`${GITHUB_SHA}\`"
-              # Ensure labels exist (idempotent)
-              gh pr edit "$existing_pr_number" --add-label "documentation" --add-label "automated"
-              echo "pr_number=$existing_pr_number" >> $GITHUB_OUTPUT
-            else
-              echo "Creating new PR..."
-              body_file=$(mktemp)
-              cat > "$body_file" <<'EOF'
+          if [ -n "${existing_pr_number}" ]; then
+            echo "PR #${existing_pr_number} already exists - adding comment & labels."
+            gh pr comment "$existing_pr_number" --body "Automated update pushed: \`${GITHUB_SHA}\`"
+            gh pr edit "$existing_pr_number" --add-label "documentation" --add-label "automated"
+            echo "pr_number=$existing_pr_number" >> "$GITHUB_OUTPUT"
+          else
+            echo "Creating new PR..."
+            body_file=$(mktemp)
+            cat > "$body_file" <<'EOF'
 ## Automated Table Of Contents Update
 
 This PR contains an automated update to the repository Table Of Contents.
@@ -144,18 +150,18 @@ This PR contains an automated update to the repository Table Of Contents.
 - Event: ${{ github.event_name }}
 - Commit: ${{ github.sha }}
 EOF
-              gh pr create \
-                --base main \
-                --head "$BRANCH_NAME" \
-                --title "$PR_TITLE" \
-                --body-file "$body_file" \
-                --label "documentation" \
-                --label "automated"
-            fi
+            gh pr create \
+              --base main \
+              --head "$BRANCH_NAME" \
+              --title "$PR_TITLE" \
+              --body-file "$body_file" \
+              --label "documentation" \
+              --label "automated"
+          fi
 
-      - name: "Log result"
+      - name: Log result
         run: |
-          if [ "${{ steps.changes.outputs.has_changes }}" == "true" ]; then
+          if [ "${{ steps.changes.outputs.has_changes }}" = "true" ]; then
             echo "✓ Pull request created or updated for Table Of Contents update"
           else
             echo "✓ No changes needed - Table Of Contents is up to date"
