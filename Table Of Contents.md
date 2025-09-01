@@ -26,6 +26,7 @@
 - governance.yaml
 - integration_contract.md
 - mkdocs.yml
+- mypy.ini
 - observability.yaml
 - pyproject.toml
 - pytest.ini
@@ -43,7 +44,14 @@
   - scripts/make_exit_bundle.sh
   - scripts/update_repo_structure.py
   - scripts/validate_dependencies.py
+  - scripts/validate_precommit.sh
   - scripts/validate_workflows.py
+- **.ruff_cache/**
+  - .ruff_cache/.gitignore
+  - .ruff_cache/CACHEDIR.TAG
+  - **0.12.11/**
+    - .ruff_cache/0.12.11/7368832208071753625
+    - .ruff_cache/0.12.11/8263045760477670012
 - **docs/**
   - docs/RELEASE_WORKFLOW.md
   - docs/WORKFLOW_FIXES_SUMMARY.md
