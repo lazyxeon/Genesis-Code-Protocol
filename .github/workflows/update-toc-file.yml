@@ -101,13 +101,29 @@ jobs:
           git push -f origin "$BRANCH_NAME"
 
       - name: Create or Update Pull Request
-        id: pr
-        if: steps.changes.outputs.has_changes == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_SHA: ${{ github.sha }}
-          REPO: ${{ github.repository }}
-          PR_BODY: |
+        run: |
+          existing_pr_number="$(gh pr list --state open --head "${owner}:${BRANCH_NAME}" --json number --jq '.[0].number // empty' || true)"
+          if [ -n "$existing_pr_number" ]; then
+          echo "PR #$existing_pr_number already exists - updating."
+          gh pr comment "$existing_pr_number" --body "Automated update pushed: \`${GITHUB_SHA}\`" || \
+           echo "::warning title=PR Comment Failed::Could not add comment to PR #$existing_pr_number"
+          gh pr edit "$existing_pr_number" --add-label "documentation" --add-label "automated" || true
+          echo "pr_number=$existing_pr_number" >> "$GITHUB_OUTPUT"
+          else
+           echo "Creating new PR..."
+           printf '%s\n' "$PR_BODY" > pr_body.md
+           if ! gh pr create \
+          --base main \
+          --head "$BRANCH_NAME" \
+          --title "$PR_TITLE" \
+          --body-file pr_body.md \
+          --label "documentation" \
+          --label "automated"; then
+          echo "::error title=PR Creation Failed::gh pr create command failed"
+          exit 1
+          fi
+          fi
+          exit 0
             ## Automated Table Of Contents Update
 
             This PR contains an automated update to the repository Table Of Contents.
