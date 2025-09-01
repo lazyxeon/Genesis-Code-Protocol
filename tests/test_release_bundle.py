@@ -11,191 +11,79 @@ from pathlib import Path
 
 def test_bundle_script():
     """Test the make_exit_bundle.sh script."""
-    print("🧪 Testing make_exit_bundle.sh script...")
+    result = subprocess.run(
+        ["./scripts/make_exit_bundle.sh"],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, f"make_exit_bundle.sh failed: {result.stderr}"
 
-    # Run the script
-    result = subprocess.run(["./scripts/make_exit_bundle.sh"], capture_output=True, text=True)
-
-    if result.returncode != 0:
-        print(f"❌ Script failed: {result.stderr}")
-        return False
-
-    # Check if bundle was created
     bundle_files = list(Path(".").glob("lyra-exit-bundle-*.zip"))
-    if not bundle_files:
-        print("❌ No bundle file created")
-        return False
+    assert bundle_files, "No bundle file created by make_exit_bundle.sh"
 
     bundle_file = bundle_files[0]
-    print(f"✅ Bundle created: {bundle_file}")
 
-    # Test bundle contents
     with zipfile.ZipFile(bundle_file, "r") as zip_ref:
-        contents = zip_ref.namelist()
-
-        required_files = [
+        contents = set(zip_ref.namelist())
+        required_files = {
             "lyra-exit-bundle/rehydrate.sh",
             "lyra-exit-bundle/MANIFEST.json",
             "lyra-exit-bundle/SBOM/sbom.spdx.json",
             "lyra-exit-bundle/provenance/slsa_provenance.json",
-        ]
+        }
+        missing = required_files - contents
+        assert not missing, f"Missing required files in bundle: {missing}"
 
-        for req_file in required_files:
-            if req_file not in contents:
-                print(f"❌ Missing required file in bundle: {req_file}")
-                return False
-            print(f"✅ Found: {req_file}")
-
-        # Test MANIFEST.json structure
-        try:
-            with zip_ref.open("lyra-exit-bundle/MANIFEST.json") as f:
-                manifest = json.load(f)
-                required_keys = ["bundle_version", "created", "creator", "contents"]
-                for key in required_keys:
-                    if key not in manifest:
-                        print(f"❌ Missing key in manifest: {key}")
-                        return False
-                print("✅ Valid manifest structure")
-        except Exception as e:
-            print(f"❌ Invalid manifest JSON: {e}")
-            return False
-
-    print("✅ Bundle script test passed!")
-    return True
+        # Validate MANIFEST.json structure
+        with zip_ref.open("lyra-exit-bundle/MANIFEST.json") as f:
+            manifest = json.load(f)
+        for key in ["bundle_version", "created", "creator", "contents"]:
+            assert key in manifest, f"Missing key in MANIFEST.json: {key}"
 
 
 def test_rehydration():
-    """Test the rehydration process."""
-    print("🧪 Testing rehydration process...")
-
+    """Test that the bundle can be 'rehydrated' (basic structural checks)."""
     bundle_files = list(Path(".").glob("lyra-exit-bundle-*.zip"))
-    if not bundle_files:
-        print("❌ No bundle file found for rehydration test")
-        return False
-
+    assert bundle_files, "No bundle file found for rehydration test (run bundle script first)."
     bundle_file = bundle_files[0]
 
     with tempfile.TemporaryDirectory() as temp_dir:
-        # Extract bundle
         with zipfile.ZipFile(bundle_file, "r") as zip_ref:
             zip_ref.extractall(temp_dir)
 
         bundle_dir = Path(temp_dir) / "lyra-exit-bundle"
-        if not bundle_dir.exists():
-            print("❌ Bundle directory not found after extraction")
-            return False
+        assert bundle_dir.exists(), "Extracted bundle directory missing."
 
-        # Test rehydrate script exists and is executable
         rehydrate_script = bundle_dir / "rehydrate.sh"
-        if not rehydrate_script.exists():
-            print("❌ rehydrate.sh not found")
-            return False
+        assert rehydrate_script.exists(), "rehydrate.sh not found in bundle."
 
-        # Make executable (zip might not preserve permissions)
+        # Ensure executable (permissions may not persist in zip)
         os.chmod(rehydrate_script, 0o755)
+        assert os.access(rehydrate_script, os.X_OK), "rehydrate.sh is not executable."
 
-        if not os.access(rehydrate_script, os.X_OK):
-            print("❌ rehydrate.sh not executable after chmod")
-            return False
-
-        print("✅ Rehydration script found and executable")
-
-        # Test script syntax (dry run)
+        # Syntax check
         result = subprocess.run(
-            ["bash", "-n", str(rehydrate_script)], capture_output=True, text=True
+            ["bash", "-n", str(rehydrate_script)],
+            capture_output=True,
+            text=True,
         )
-        if result.returncode != 0:
-            print(f"❌ Rehydration script has syntax errors: {result.stderr}")
-            return False
-
-        print("✅ Rehydration script syntax valid")
-
-    print("✅ Rehydration test passed!")
-    return True
+        assert result.returncode == 0, f"rehydrate.sh has syntax errors: {result.stderr}"
 
 
 def test_workflow_syntax():
-    """Test workflow file syntax."""
-    print("🧪 Testing workflow file syntax...")
-
+    """Basic structural & YAML validity test for release-bundle workflow."""
     workflow_file = Path(".github/workflows/release-bundle.yml")
-    if not workflow_file.exists():
-        print("❌ release-bundle.yml workflow not found")
-        return False
+    assert workflow_file.exists(), "Workflow file release-bundle.yml not found."
 
-    # Test YAML syntax
-    try:
-        import yaml
+    import yaml  # PyYAML installed via requirements
 
-        with open(workflow_file) as f:
-            content = f.read()
-            workflow_data = yaml.safe_load(content)
+    with open(workflow_file) as f:
+        content = f.read()
+    data = yaml.safe_load(content)
+    assert data is not None, "Workflow YAML parsed as None."
 
-        if workflow_data is None:
-            print("❌ Failed to parse workflow YAML")
-            return False
-
-        # Check basic structure (handle YAML boolean parsing quirk for 'on')
-        required_keys = ["name", "jobs"]
-        on_key = "on" if "on" in workflow_data else True  # YAML may parse 'on' as boolean True
-
-        for key in required_keys:
-            if key not in workflow_data:
-                print(f"❌ Missing key in workflow: {key}")
-                return False
-
-        if on_key not in workflow_data:
-            print("❌ Missing 'on' trigger in workflow")
-            return False
-
-        if "bundle" not in workflow_data["jobs"]:
-            print("❌ Missing 'bundle' job in workflow")
-            return False
-
-        print("✅ Workflow syntax valid")
-
-    except ImportError:
-        print("⚠️ PyYAML not available, checking basic YAML structure...")
-        with open(workflow_file) as f:
-            content = f.read()
-            if "name:" not in content or "on:" not in content or "jobs:" not in content:
-                print("❌ Basic workflow structure missing")
-                return False
-        print("✅ Basic workflow structure present")
-    except Exception as e:
-        print(f"❌ Workflow syntax error: {e}")
-        return False
-
-    print("✅ Workflow test passed!")
-    return True
-
-
-def main():
-    """Run all tests."""
-    print("🚀 Starting release bundle workflow tests...\n")
-
-    tests = [test_bundle_script, test_rehydration, test_workflow_syntax]
-
-    passed = 0
-    total = len(tests)
-
-    for test in tests:
-        try:
-            if test():
-                passed += 1
-            print()  # Blank line between tests
-        except Exception as e:
-            print(f"❌ Test failed with exception: {e}\n")
-
-    print(f"📊 Test Results: {passed}/{total} passed")
-
-    if passed == total:
-        print("🎉 All tests passed!")
-        return 0
-    else:
-        print("💥 Some tests failed!")
-        return 1
-
-
-if __name__ == "__main__":
-    exit(main())
+    # Some YAML parsers can interpret 'on' specially; ensure triggers exist.
+    assert "name" in data, "Workflow missing 'name'."
+    assert "jobs" in data, "Workflow missing 'jobs'."
+    assert "on" in data, "Workflow missing 'on' trigger section."
+    assert "bundle" in data["jobs"], "Workflow missing 'bundle' job."
