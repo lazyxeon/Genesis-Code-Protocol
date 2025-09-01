@@ -62,7 +62,7 @@ jobs:
 
       - name: Create Pull Request
         if: steps.changes.outputs.changed == 'true'
-        uses: peter-evans/create-pull-request@v6
+        uses: pull request
         with:
             commit-message: "docs(readme): auto-sync repo structure"
             branch: "chore/update-repo-structure"
