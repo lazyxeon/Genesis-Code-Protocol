@@ -2,8 +2,8 @@
 """Validation script to check workflow dependencies and core functionality."""
 
 import os
-import sys
 import subprocess
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -81,10 +81,10 @@ def main() -> int:
     for script in REQUIRED_SCRIPTS:
         if check_file_exists(script):
             print(f"✓ {script}")
-            if script.endswith('.py'):
+            if script.endswith(".py"):
                 if not validate_python_syntax(script):
                     success = False
-            elif script.endswith('.sh'):
+            elif script.endswith(".sh"):
                 if not validate_shell_syntax(script):
                     success = False
         else:
@@ -151,7 +151,7 @@ def main() -> int:
     try:
         # Test ethicalcheck module
         sys.path.insert(0, str(ROOT))
-        from src.ethicalcheck import validate_configuration, main  # type: ignore
+        from src.ethicalcheck import main, validate_configuration  # type: ignore
 
         # Test validation function
         result = validate_configuration()

@@ -7,7 +7,7 @@ set -euo pipefail
 
 # Configuration
 SEMVER_TAG="${GITHUB_REF_NAME:-v0.0.0}"
-# Sanitize tag name for filename  
+# Sanitize tag name for filename
 SAFE_TAG=$(echo "$SEMVER_TAG" | sed 's/[^a-zA-Z0-9._-]/_/g')
 OUT="lyra-exit-bundle-${SAFE_TAG}.zip"
 STAGING_DIR="dist/lyra-exit-bundle"

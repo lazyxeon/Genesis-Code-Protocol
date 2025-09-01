@@ -26,26 +26,8 @@ repos:
       - id: check-yaml
       - id: mixed-line-ending
         args: [--fix=lf]
-
-  # Local: detect large files (>1MB)
-  - repo: local
-    hooks:
-      - id: check-large-files
-        name: check-large-files (>1MB)
-        language: system
-        pass_filenames: true
-        files: '.*'
-        entry: bash -c 'threshold=1048576; status=0;
-          for f in "$@"; do
-            [ -f "$f" ] || continue
-            case "$f" in .git/*) continue;; esac
-            size=$(wc -c <"$f" 2>/dev/null || echo 0)
-            if [ "$size" -gt "$threshold" ]; then
-              echo "File $f is $size bytes (> $threshold)"
-              status=1
-            fi
-          done
-          exit $status'
+      - id: check-added-large-files
+        args: ['--maxkb=1024']
 
   # Ruff (format + lint) – revision aligned with resolved version (0.12.11)
   - repo: https://github.com/astral-sh/ruff-pre-commit

@@ -40,7 +40,7 @@ def enable_automerge(pr_number: int, repo: str, token: str | None) -> dict[str, 
         headers = {
             "Authorization": f"Bearer {token}",
             "Accept": "application/vnd.github.v3+json",
-            "X-GitHub-Api-Version": "2022-11-28"
+            "X-GitHub-Api-Version": "2022-11-28",
         }
 
         # Get PR details
@@ -57,17 +57,19 @@ def enable_automerge(pr_number: int, repo: str, token: str | None) -> dict[str, 
             logger.warning("GitHub API server error", extra={"status": pr_response.status_code})
             raise RetryableError(f"GitHub API server error: {pr_response.status_code}")
         elif pr_response.status_code != 200:
-            logger.error("unexpected GitHub API response", extra={"status": pr_response.status_code})
+            logger.error(
+                "unexpected GitHub API response", extra={"status": pr_response.status_code}
+            )
             raise TerminalError(f"Unexpected GitHub API response: {pr_response.status_code}")
 
         pr_data = pr_response.json()
 
         # Verify it's a dependabot PR
         if pr_data.get("user", {}).get("login") != "dependabot[bot]":
-            logger.error("PR not authored by dependabot", extra={
-                "pr": pr_number,
-                "author": pr_data.get("user", {}).get("login")
-            })
+            logger.error(
+                "PR not authored by dependabot",
+                extra={"pr": pr_number, "author": pr_data.get("user", {}).get("login")},
+            )
             raise TerminalError(f"PR #{pr_number} is not authored by dependabot")
 
         # Check if PR is mergeable
@@ -99,25 +101,18 @@ def enable_automerge(pr_number: int, repo: str, token: str | None) -> dict[str, 
         }
         """
 
-        variables = {
-            "pullRequestId": pr_data["node_id"],
-            "mergeMethod": "SQUASH"
-        }
+        variables = {"pullRequestId": pr_data["node_id"], "mergeMethod": "SQUASH"}
 
-        graphql_payload = {
-            "query": mutation,
-            "variables": variables
-        }
+        graphql_payload = {"query": mutation, "variables": variables}
 
         graphql_response = requests.post(
-            graphql_url,
-            json=graphql_payload,
-            headers=headers,
-            timeout=30
+            graphql_url, json=graphql_payload, headers=headers, timeout=30
         )
 
         if graphql_response.status_code >= 500:
-            logger.warning("GraphQL API server error", extra={"status": graphql_response.status_code})
+            logger.warning(
+                "GraphQL API server error", extra={"status": graphql_response.status_code}
+            )
             raise RetryableError(f"GitHub GraphQL API server error: {graphql_response.status_code}")
         elif graphql_response.status_code != 200:
             logger.error("GraphQL API error", extra={"status": graphql_response.status_code})
@@ -136,18 +131,19 @@ def enable_automerge(pr_number: int, repo: str, token: str | None) -> dict[str, 
             logger.error("auto-merge not enabled", extra={"pr": pr_number})
             raise TerminalError("Auto-merge was not enabled")
 
-        logger.info("automerge enabled successfully", extra={
-            "pr": pr_number,
-            "repo": repo,
-            "merge_method": "SQUASH"
-        })
+        logger.info(
+            "automerge enabled successfully",
+            extra={"pr": pr_number, "repo": repo, "merge_method": "SQUASH"},
+        )
 
         return {
             "status": "enabled",
             "pr": pr_number,
             "repo": repo,
             "merge_method": "squash",
-            "enabled_at": auto_merge_data.get("pullRequest", {}).get("autoMergeRequest", {}).get("enabledAt")
+            "enabled_at": auto_merge_data.get("pullRequest", {})
+            .get("autoMergeRequest", {})
+            .get("enabledAt"),
         }
 
     except requests.exceptions.Timeout as err:

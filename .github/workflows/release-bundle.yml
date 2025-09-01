@@ -43,7 +43,7 @@ jobs:
         uses: sigstore/cosign-installer@v3
         with:
           cosign-release: 'v2.5.3'
-          
+
       # Set up release information
       - name: Setup release info
         id: setup
@@ -64,15 +64,15 @@ jobs:
         run: |
           set -euo pipefail
           echo "Creating comprehensive exit bundle for tag: $RELEASE_TAG"
-          
+
           # Check if script exists
           if [ -f "./scripts/make_exit_bundle.sh" ]; then
             # Run the exit wizard bundle generation script
             ./scripts/make_exit_bundle.sh
-            
+
             # The script creates a file with sanitized name, find it
             BUNDLE_FILE=$(ls lyra-exit-bundle-*.zip 2>/dev/null || echo "")
-            
+
             if [ -n "$BUNDLE_FILE" ]; then
               echo "Bundle file: $BUNDLE_FILE"
               echo "Bundle created successfully:"
@@ -93,13 +93,13 @@ jobs:
             echo "Placeholder bundle created:"
             ls -la lyra-exit-bundle-*.zip
           fi
-          
+
           # Verify bundle was created
           if [ ! -f "lyra-exit-bundle-$RELEASE_TAG.zip" ]; then
             echo "Error: Bundle not created"
             exit 1
           fi
-          
+
           ls -la dist/checksums/ || mkdir -p dist/checksums
 
       # Generate SPDX SBOM for the bundled artifact (backup)
@@ -124,7 +124,7 @@ jobs:
           set -euo pipefail
           echo "Creating comprehensive checksums..."
           mkdir -p dist/checksums
-          
+
           # Create checksums for all bundle-related files
           sha256sum lyra-exit-bundle-*.zip > dist/checksums/BUNDLE_SHA256SUMS.txt
           if [ -f "dist/sbom-backup.spdx.json" ]; then
@@ -133,7 +133,7 @@ jobs:
           if [ -f "dist/sbom-backup.cdx.json" ]; then
             sha256sum dist/sbom-backup.cdx.json >> dist/checksums/BUNDLE_SHA256SUMS.txt
           fi
-          
+
           echo "Final checksums:"
           cat dist/checksums/BUNDLE_SHA256SUMS.txt
 

@@ -14,15 +14,14 @@ def test_bundle_script():
     print("🧪 Testing make_exit_bundle.sh script...")
 
     # Run the script
-    result = subprocess.run(['./scripts/make_exit_bundle.sh'],
-                          capture_output=True, text=True)
+    result = subprocess.run(["./scripts/make_exit_bundle.sh"], capture_output=True, text=True)
 
     if result.returncode != 0:
         print(f"❌ Script failed: {result.stderr}")
         return False
 
     # Check if bundle was created
-    bundle_files = list(Path('.').glob('lyra-exit-bundle-*.zip'))
+    bundle_files = list(Path(".").glob("lyra-exit-bundle-*.zip"))
     if not bundle_files:
         print("❌ No bundle file created")
         return False
@@ -31,14 +30,14 @@ def test_bundle_script():
     print(f"✅ Bundle created: {bundle_file}")
 
     # Test bundle contents
-    with zipfile.ZipFile(bundle_file, 'r') as zip_ref:
+    with zipfile.ZipFile(bundle_file, "r") as zip_ref:
         contents = zip_ref.namelist()
 
         required_files = [
-            'lyra-exit-bundle/rehydrate.sh',
-            'lyra-exit-bundle/MANIFEST.json',
-            'lyra-exit-bundle/SBOM/sbom.spdx.json',
-            'lyra-exit-bundle/provenance/slsa_provenance.json'
+            "lyra-exit-bundle/rehydrate.sh",
+            "lyra-exit-bundle/MANIFEST.json",
+            "lyra-exit-bundle/SBOM/sbom.spdx.json",
+            "lyra-exit-bundle/provenance/slsa_provenance.json",
         ]
 
         for req_file in required_files:
@@ -49,9 +48,9 @@ def test_bundle_script():
 
         # Test MANIFEST.json structure
         try:
-            with zip_ref.open('lyra-exit-bundle/MANIFEST.json') as f:
+            with zip_ref.open("lyra-exit-bundle/MANIFEST.json") as f:
                 manifest = json.load(f)
-                required_keys = ['bundle_version', 'created', 'creator', 'contents']
+                required_keys = ["bundle_version", "created", "creator", "contents"]
                 for key in required_keys:
                     if key not in manifest:
                         print(f"❌ Missing key in manifest: {key}")
@@ -64,11 +63,12 @@ def test_bundle_script():
     print("✅ Bundle script test passed!")
     return True
 
+
 def test_rehydration():
     """Test the rehydration process."""
     print("🧪 Testing rehydration process...")
 
-    bundle_files = list(Path('.').glob('lyra-exit-bundle-*.zip'))
+    bundle_files = list(Path(".").glob("lyra-exit-bundle-*.zip"))
     if not bundle_files:
         print("❌ No bundle file found for rehydration test")
         return False
@@ -77,16 +77,16 @@ def test_rehydration():
 
     with tempfile.TemporaryDirectory() as temp_dir:
         # Extract bundle
-        with zipfile.ZipFile(bundle_file, 'r') as zip_ref:
+        with zipfile.ZipFile(bundle_file, "r") as zip_ref:
             zip_ref.extractall(temp_dir)
 
-        bundle_dir = Path(temp_dir) / 'lyra-exit-bundle'
+        bundle_dir = Path(temp_dir) / "lyra-exit-bundle"
         if not bundle_dir.exists():
             print("❌ Bundle directory not found after extraction")
             return False
 
         # Test rehydrate script exists and is executable
-        rehydrate_script = bundle_dir / 'rehydrate.sh'
+        rehydrate_script = bundle_dir / "rehydrate.sh"
         if not rehydrate_script.exists():
             print("❌ rehydrate.sh not found")
             return False
@@ -101,8 +101,9 @@ def test_rehydration():
         print("✅ Rehydration script found and executable")
 
         # Test script syntax (dry run)
-        result = subprocess.run(['bash', '-n', str(rehydrate_script)],
-                              capture_output=True, text=True)
+        result = subprocess.run(
+            ["bash", "-n", str(rehydrate_script)], capture_output=True, text=True
+        )
         if result.returncode != 0:
             print(f"❌ Rehydration script has syntax errors: {result.stderr}")
             return False
@@ -112,11 +113,12 @@ def test_rehydration():
     print("✅ Rehydration test passed!")
     return True
 
+
 def test_workflow_syntax():
     """Test workflow file syntax."""
     print("🧪 Testing workflow file syntax...")
 
-    workflow_file = Path('.github/workflows/release-bundle.yml')
+    workflow_file = Path(".github/workflows/release-bundle.yml")
     if not workflow_file.exists():
         print("❌ release-bundle.yml workflow not found")
         return False
@@ -124,6 +126,7 @@ def test_workflow_syntax():
     # Test YAML syntax
     try:
         import yaml
+
         with open(workflow_file) as f:
             content = f.read()
             workflow_data = yaml.safe_load(content)
@@ -133,8 +136,8 @@ def test_workflow_syntax():
             return False
 
         # Check basic structure (handle YAML boolean parsing quirk for 'on')
-        required_keys = ['name', 'jobs']
-        on_key = 'on' if 'on' in workflow_data else True  # YAML may parse 'on' as boolean True
+        required_keys = ["name", "jobs"]
+        on_key = "on" if "on" in workflow_data else True  # YAML may parse 'on' as boolean True
 
         for key in required_keys:
             if key not in workflow_data:
@@ -145,7 +148,7 @@ def test_workflow_syntax():
             print("❌ Missing 'on' trigger in workflow")
             return False
 
-        if 'bundle' not in workflow_data['jobs']:
+        if "bundle" not in workflow_data["jobs"]:
             print("❌ Missing 'bundle' job in workflow")
             return False
 
@@ -155,7 +158,7 @@ def test_workflow_syntax():
         print("⚠️ PyYAML not available, checking basic YAML structure...")
         with open(workflow_file) as f:
             content = f.read()
-            if 'name:' not in content or 'on:' not in content or 'jobs:' not in content:
+            if "name:" not in content or "on:" not in content or "jobs:" not in content:
                 print("❌ Basic workflow structure missing")
                 return False
         print("✅ Basic workflow structure present")
@@ -166,15 +169,12 @@ def test_workflow_syntax():
     print("✅ Workflow test passed!")
     return True
 
+
 def main():
     """Run all tests."""
     print("🚀 Starting release bundle workflow tests...\n")
 
-    tests = [
-        test_bundle_script,
-        test_rehydration,
-        test_workflow_syntax
-    ]
+    tests = [test_bundle_script, test_rehydration, test_workflow_syntax]
 
     passed = 0
     total = len(tests)
@@ -196,5 +196,6 @@ def main():
         print("💥 Some tests failed!")
         return 1
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     exit(main())

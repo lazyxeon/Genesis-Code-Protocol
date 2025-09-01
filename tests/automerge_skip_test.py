@@ -31,7 +31,7 @@ def test_automerge_fails_with_invalid_repo_format():
         automerge.enable_automerge(1, "", "fake-token")
 
 
-@patch('src.automerge.requests.get')
+@patch("src.automerge.requests.get")
 def test_automerge_fails_with_pr_not_found(mock_get):
     mock_get.return_value.status_code = 404
 
@@ -39,7 +39,7 @@ def test_automerge_fails_with_pr_not_found(mock_get):
         automerge.enable_automerge(1, "octo/example", "fake-token")
 
 
-@patch('src.automerge.requests.get')
+@patch("src.automerge.requests.get")
 def test_automerge_fails_with_unauthorized(mock_get):
     mock_get.return_value.status_code = 401
 
@@ -47,7 +47,7 @@ def test_automerge_fails_with_unauthorized(mock_get):
         automerge.enable_automerge(1, "octo/example", "fake-token")
 
 
-@patch('src.automerge.requests.get')
+@patch("src.automerge.requests.get")
 def test_automerge_retries_on_server_error(mock_get):
     mock_get.return_value.status_code = 500
 
@@ -55,7 +55,7 @@ def test_automerge_retries_on_server_error(mock_get):
         automerge.enable_automerge(1, "octo/example", "fake-token")
 
 
-@patch('src.automerge.requests.get')
+@patch("src.automerge.requests.get")
 def test_automerge_fails_with_non_dependabot_author(mock_get):
     mock_response = Mock()
     mock_response.status_code = 200
@@ -63,7 +63,7 @@ def test_automerge_fails_with_non_dependabot_author(mock_get):
         "user": {"login": "human-user"},
         "state": "open",
         "mergeable": True,
-        "node_id": "PR_123"
+        "node_id": "PR_123",
     }
     mock_get.return_value = mock_response
 
@@ -71,8 +71,8 @@ def test_automerge_fails_with_non_dependabot_author(mock_get):
         automerge.enable_automerge(1, "octo/example", "fake-token")
 
 
-@patch('src.automerge.requests.post')
-@patch('src.automerge.requests.get')
+@patch("src.automerge.requests.post")
+@patch("src.automerge.requests.get")
 def test_automerge_success(mock_get, mock_post, caplog):
     caplog.set_level("INFO")
 
@@ -83,7 +83,7 @@ def test_automerge_success(mock_get, mock_post, caplog):
         "user": {"login": "dependabot[bot]"},
         "state": "open",
         "mergeable": True,
-        "node_id": "PR_123"
+        "node_id": "PR_123",
     }
     mock_get.return_value = mock_pr_response
 
@@ -98,8 +98,8 @@ def test_automerge_success(mock_get, mock_post, caplog):
                     "number": 1,
                     "autoMergeRequest": {
                         "enabledAt": "2023-01-01T00:00:00Z",
-                        "mergeMethod": "SQUASH"
-                    }
+                        "mergeMethod": "SQUASH",
+                    },
                 }
             }
         }
