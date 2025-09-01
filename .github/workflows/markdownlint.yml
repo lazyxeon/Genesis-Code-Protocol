@@ -24,13 +24,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       # Install markdownlint-cli2 directly
       - name: Install markdownlint-cli2
         run: |
           npm install -g markdownlint-cli2
           markdownlint-cli2 --version
-      
+
       # Run markdownlint with specific exclusions
       - name: Run DavidAnson/markdownlint-cli2-action@v20
         run: |
@@ -50,11 +50,11 @@ jobs:
             - "Charts.md"
             - "node_modules/**"
           EOF
-          
+
           # Run markdownlint with the temporary config
           # Use --fix to automatically fix common issues
           markdownlint-cli2 --config .markdownlint-cli2.yaml "**/*.md" --fix || true
-          
+
           # Check if there are still issues after fixing
           if ! markdownlint-cli2 --config .markdownlint-cli2.yaml "**/*.md"; then
             echo "::warning::Markdown linting found issues that couldn't be automatically fixed."
@@ -64,7 +64,7 @@ jobs:
           else
             echo "✅ Markdown linting passed successfully!"
           fi
-      
+
       # If we're on a PR, commit the fixes
       - name: Commit fixes if on PR
         if: github.event_name == 'pull_request'

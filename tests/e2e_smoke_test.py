@@ -7,8 +7,8 @@ from unittest.mock import Mock, patch
 from src import main
 
 
-@patch('src.automerge.requests.post')
-@patch('src.automerge.requests.get')
+@patch("src.automerge.requests.post")
+@patch("src.automerge.requests.get")
 def test_e2e_smoke(mock_get, mock_post, tmp_path, monkeypatch) -> None:
     """Run the main workflow and verify a report is produced."""
     # Mock PR details response
@@ -18,7 +18,7 @@ def test_e2e_smoke(mock_get, mock_post, tmp_path, monkeypatch) -> None:
         "user": {"login": "dependabot[bot]"},
         "state": "open",
         "mergeable": True,
-        "node_id": "PR_123"
+        "node_id": "PR_123",
     }
     mock_get.return_value = mock_pr_response
 
@@ -33,8 +33,8 @@ def test_e2e_smoke(mock_get, mock_post, tmp_path, monkeypatch) -> None:
                     "number": 123,
                     "autoMergeRequest": {
                         "enabledAt": "2023-01-01T00:00:00Z",
-                        "mergeMethod": "SQUASH"
-                    }
+                        "mergeMethod": "SQUASH",
+                    },
                 }
             }
         }

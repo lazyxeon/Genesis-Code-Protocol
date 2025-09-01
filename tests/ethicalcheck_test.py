@@ -48,7 +48,9 @@ class TestEthicalCheck:
         assert result["status"] == "skipped"
         assert result["reason"] == "missing_configuration"
 
-    @patch.dict(os.environ, {"ETHICALCHECK_OAS_URL": "https://api.example.com/openapi.json"}, clear=True)
+    @patch.dict(
+        os.environ, {"ETHICALCHECK_OAS_URL": "https://api.example.com/openapi.json"}, clear=True
+    )
     def test_validate_configuration_missing_email(self):
         """Test configuration validation with missing email."""
         result = ethicalcheck.validate_configuration()
@@ -62,30 +64,39 @@ class TestEthicalCheck:
         assert result["status"] == "skipped"
         assert result["reason"] == "missing_configuration"
 
-    @patch.dict(os.environ, {
-        "ETHICALCHECK_OAS_URL": "invalid-url",
-        "ETHICALCHECK_EMAIL": "test@example.com"
-    }, clear=True)
+    @patch.dict(
+        os.environ,
+        {"ETHICALCHECK_OAS_URL": "invalid-url", "ETHICALCHECK_EMAIL": "test@example.com"},
+        clear=True,
+    )
     def test_validate_configuration_invalid_url(self):
         """Test configuration validation with invalid URL."""
         result = ethicalcheck.validate_configuration()
         assert result["status"] == "error"
         assert result["reason"] == "invalid_url"
 
-    @patch.dict(os.environ, {
-        "ETHICALCHECK_OAS_URL": "https://api.example.com/openapi.json",
-        "ETHICALCHECK_EMAIL": "invalid-email"
-    }, clear=True)
+    @patch.dict(
+        os.environ,
+        {
+            "ETHICALCHECK_OAS_URL": "https://api.example.com/openapi.json",
+            "ETHICALCHECK_EMAIL": "invalid-email",
+        },
+        clear=True,
+    )
     def test_validate_configuration_invalid_email(self):
         """Test configuration validation with invalid email."""
         result = ethicalcheck.validate_configuration()
         assert result["status"] == "error"
         assert result["reason"] == "invalid_email"
 
-    @patch.dict(os.environ, {
-        "ETHICALCHECK_OAS_URL": "https://api.example.com/openapi.json",
-        "ETHICALCHECK_EMAIL": "test@example.com"
-    }, clear=True)
+    @patch.dict(
+        os.environ,
+        {
+            "ETHICALCHECK_OAS_URL": "https://api.example.com/openapi.json",
+            "ETHICALCHECK_EMAIL": "test@example.com",
+        },
+        clear=True,
+    )
     def test_validate_configuration_valid(self):
         """Test configuration validation with valid parameters."""
         result = ethicalcheck.validate_configuration()
@@ -93,10 +104,14 @@ class TestEthicalCheck:
         assert result["url"] == "https://api.example.com/openapi.json"
         assert result["email"] == "test@example.com"
 
-    @patch.dict(os.environ, {
-        "ETHICALCHECK_OAS_URL": "  https://api.example.com/openapi.json  ",
-        "ETHICALCHECK_EMAIL": "  test@example.com  "
-    }, clear=True)
+    @patch.dict(
+        os.environ,
+        {
+            "ETHICALCHECK_OAS_URL": "  https://api.example.com/openapi.json  ",
+            "ETHICALCHECK_EMAIL": "  test@example.com  ",
+        },
+        clear=True,
+    )
     def test_validate_configuration_strips_whitespace(self):
         """Test configuration validation strips whitespace."""
         result = ethicalcheck.validate_configuration()
@@ -111,20 +126,25 @@ class TestEthicalCheck:
         assert result["status"] == "skipped"
         assert result["reason"] == "missing_configuration"
 
-    @patch.dict(os.environ, {
-        "ETHICALCHECK_OAS_URL": "invalid-url",
-        "ETHICALCHECK_EMAIL": "test@example.com"
-    }, clear=True)
+    @patch.dict(
+        os.environ,
+        {"ETHICALCHECK_OAS_URL": "invalid-url", "ETHICALCHECK_EMAIL": "test@example.com"},
+        clear=True,
+    )
     def test_main_invalid_configuration(self):
         """Test main function with invalid configuration."""
         result = ethicalcheck.main()
         assert result["status"] == "error"
         assert result["reason"] == "invalid_url"
 
-    @patch.dict(os.environ, {
-        "ETHICALCHECK_OAS_URL": "https://api.example.com/openapi.json",
-        "ETHICALCHECK_EMAIL": "test@example.com"
-    }, clear=True)
+    @patch.dict(
+        os.environ,
+        {
+            "ETHICALCHECK_OAS_URL": "https://api.example.com/openapi.json",
+            "ETHICALCHECK_EMAIL": "test@example.com",
+        },
+        clear=True,
+    )
     def test_main_valid_configuration(self):
         """Test main function with valid configuration."""
         result = ethicalcheck.main()

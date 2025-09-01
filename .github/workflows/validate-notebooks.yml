@@ -52,7 +52,7 @@ jobs:
             echo "Installation attempt $i failed, retrying in $((i*5)) seconds..."
             sleep $((i*5))
           done
-          
+
           if ! command -v nbqa &> /dev/null; then
             echo "⚠️ nbqa installation failed, but continuing workflow"
           fi

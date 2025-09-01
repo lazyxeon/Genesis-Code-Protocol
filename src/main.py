@@ -16,9 +16,7 @@ def run() -> str:
     try:
         if os.getenv("WF_FAIL_STEP") == "automerge":
             raise errors.TerminalError("forced failure at automerge")
-        result: dict[str, str | int] = automerge.enable_automerge(
-            pr_number, repo, token
-        )
+        result: dict[str, str | int] = automerge.enable_automerge(pr_number, repo, token)
         utils.atomic_write(report_path, json.dumps(result))
         return str(report_path)
     except (errors.RetryableError, errors.TerminalError) as exc:

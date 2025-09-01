@@ -26,12 +26,12 @@ allow_licenses:
 deny_packages:
   - scope: "*"
     name: "malicious-package-*"
-  
+
 # Allow these packages even if they would normally be denied
 allow_packages:
   - scope: "python"
     name: "setuptools"
-  - scope: "python" 
+  - scope: "python"
     name: "pip"
   - scope: "python"
     name: "wheel"
@@ -39,7 +39,7 @@ allow_packages:
 # Enable vulnerability checking
 vulnerability_check: true
 
-# Enable license checking  
+# Enable license checking
 license_check: true
 
 # Configuration for comment generation

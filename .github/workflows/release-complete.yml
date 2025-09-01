@@ -45,7 +45,7 @@ jobs:
           rm -rf dist
           mkdir -p dist
           echo "Creating release bundle for tag: $RELEASE_TAG"
-          
+
           # Check if required directories exist
           MISSING_DIRS=false
           for dir in "cli_bundle" "Documents" "scripts"; do
@@ -54,7 +54,7 @@ jobs:
               MISSING_DIRS=true
             fi
           done
-          
+
           if [ "$MISSING_DIRS" = true ]; then
             echo "Creating placeholder directories for testing"
             mkdir -p cli_bundle Documents scripts
@@ -62,7 +62,7 @@ jobs:
             echo "This is a placeholder file" > Documents/placeholder.txt
             echo "This is a placeholder file" > scripts/placeholder.txt
           fi
-          
+
           # Create the bundle
           zip -r "dist/GCP_${RELEASE_TAG}_Field_Kit.zip" "cli_bundle" "Documents" "scripts" \
             -x "*.git*" "*.github*"
@@ -149,7 +149,7 @@ jobs:
           set -euo pipefail
           mkdir -p signed_artifacts
           echo "Downloading assets for release: $RELEASE_TAG"
-          
+
           # Retry logic for downloading artifacts
           max_attempts=5
           attempt=1
@@ -166,11 +166,11 @@ jobs:
               ((attempt++))
             fi
           done
-          
+
           # Remove any existing signature files to avoid conflicts
           find signed_artifacts -name "*.sigstore" -delete || true
           find signed_artifacts -name "*.sig" -delete || true
-          
+
           # Verify we have assets to sign
           if [ -z "$(ls -A signed_artifacts)" ]; then
             echo "Error: No assets found to sign"
@@ -186,27 +186,27 @@ jobs:
         run: |
           set -euo pipefail
           cd signed_artifacts
-          
+
           # Create signing directory
           mkdir -p signatures
-          
+
           for file in *; do
             [ -f "$file" ] || continue
             [[ "$file" == *.sigstore ]] && continue
             [[ "$file" == *.sig ]] && continue
             [[ "$file" == signatures ]] && continue
-            
+
             echo "Signing $file..."
-            
+
             # Sign with Sigstore (includes transparency log entry)
             cosign sign-blob --yes --bundle "signatures/$file.sigstore" "$file"
-            
+
             # Generate traditional signature for compatibility
             cosign sign-blob --yes --output-signature "signatures/$file.sig" "$file"
-            
+
             echo "✓ Signed $file"
           done
-          
+
           echo "Signing completed. Generated signatures:"
           ls -la signatures/
 
@@ -215,22 +215,22 @@ jobs:
         run: |
           set -euo pipefail
           cd signed_artifacts
-          
+
           echo "Generating RFC 3161 timestamps for all artifacts..."
           mkdir -p timestamps
-          
+
           for file in *; do
             [ -f "$file" ] || continue
             [[ "$file" == *.sigstore ]] && continue
             [[ "$file" == *.sig ]] && continue
             [[ "$file" == signatures ]] && continue
             [[ "$file" == timestamps ]] && continue
-            
+
             echo "Creating timestamp for $file..."
-            
+
             # Create timestamp query
             openssl ts -query -data "$file" -cert -sha256 -no_nonce -out "timestamps/$file.tsq"
-            
+
             # Get timestamp from a free TSA (fallback to multiple sources)
             if curl -s https://freetsa.org/tsr -H "Content-Type: application/timestamp-query" \
                    --data-binary "@timestamps/$file.tsq" > "timestamps/$file.tsr"; then
@@ -239,7 +239,7 @@ jobs:
               echo "⚠ Timestamp creation failed for $file (continuing without timestamp)"
             fi
           done
-          
+
           echo "Timestamp generation completed"
           ls -la timestamps/ || echo "No timestamps created"
 
@@ -248,9 +248,9 @@ jobs:
         run: |
           set -euo pipefail
           cd signed_artifacts
-          
+
           echo "Creating Exit Wizard manifest..."
-          
+
           cat > ../EXIT_WIZARD_MANIFEST.json << EOF
           {
             "version": "1.0",
@@ -265,16 +265,16 @@ jobs:
             "verification_instructions": "Use 'cosign verify-blob --bundle <artifact>.sigstore <artifact>' to verify signatures"
           }
           EOF
-          
+
           # Populate artifact information
           python3 << 'PYTHON_SCRIPT'
           import json
           import os
           from pathlib import Path
-          
+
           with open('../EXIT_WIZARD_MANIFEST.json', 'r') as f:
               manifest = json.load(f)
-          
+
           # Scan for artifacts
           for file in os.listdir('.'):
               if os.path.isfile(file) and not file.startswith('.') and file not in ['signatures', 'timestamps']:
@@ -286,29 +286,29 @@ jobs:
                       "type": "sbom" if "sbom" in file.lower() else "bundle" if "zip" in file.lower() else "checksum" if "sha256" in file.lower() else "other"
                   }
                   manifest["artifacts"].append(file_info)
-          
+
           # Scan for signatures
           if os.path.exists('signatures'):
               for file in os.listdir('signatures'):
                   if file.endswith('.sigstore') or file.endswith('.sig'):
                       manifest["signatures"].append(file)
-          
+
           # Scan for timestamps
           if os.path.exists('timestamps'):
               for file in os.listdir('timestamps'):
                   if file.endswith('.tsr'):
                       manifest["timestamps"].append(file)
-          
+
           # Identify SBOM files
           for artifact in manifest["artifacts"]:
               if artifact["type"] == "sbom":
                   manifest["sbom"].append(artifact["name"])
-          
+
           with open('../EXIT_WIZARD_MANIFEST.json', 'w') as f:
               json.dump(manifest, f, indent=2)
-          
+
           PYTHON_SCRIPT
-          
+
           echo "Exit Wizard manifest created:"
           cat ../EXIT_WIZARD_MANIFEST.json
       - name: Verify signatures
@@ -317,16 +317,16 @@ jobs:
         run: |
           set -euo pipefail
           cd signed_artifacts
-          
+
           echo "Verifying signatures and transparency log entries..."
           verification_failed=false
-          
+
           for file in *; do
             [ -f "$file" ] || continue
             [[ "$file" == *.sigstore ]] && continue
             [[ "$file" == *.sig ]] && continue
             [[ "$file" == signatures ]] && continue
-            
+
             if [ -f "signatures/$file.sigstore" ]; then
               echo "Verifying $file..."
               if cosign verify-blob --bundle "signatures/$file.sigstore" "$file"; then
@@ -340,12 +340,12 @@ jobs:
               verification_failed=true
             fi
           done
-          
+
           if [ "$verification_failed" = true ]; then
             echo "Error: Signature verification failed for one or more files"
             exit 1
           fi
-          
+
           echo "All signatures verified successfully!"
 
       # Upload signatures and manifest to the release
@@ -355,32 +355,32 @@ jobs:
         run: |
           set -euo pipefail
           cd signed_artifacts
-          
+
           # Verify we have signature files to upload
           if [ -z "$(ls signatures/*.sigstore 2>/dev/null || true)" ] && [ -z "$(ls signatures/*.sig 2>/dev/null || true)" ]; then
             echo "Error: No signature files found to upload"
             exit 1
           fi
-          
+
           echo "Uploading signature files:"
           ls -la signatures/
-          
+
           # Upload all signature files to the release
           gh release upload "$RELEASE_TAG" signatures/* --repo "$REPO" --clobber
-          
+
           # Upload timestamps if they exist
           if [ -d timestamps ] && [ "$(ls -A timestamps 2>/dev/null)" ]; then
             echo "Uploading timestamp files:"
             ls -la timestamps/
             gh release upload "$RELEASE_TAG" timestamps/* --repo "$REPO" --clobber
           fi
-          
+
           # Upload Exit Wizard manifest
           if [ -f "../EXIT_WIZARD_MANIFEST.json" ]; then
             echo "Uploading Exit Wizard manifest"
             gh release upload "$RELEASE_TAG" ../EXIT_WIZARD_MANIFEST.json --repo "$REPO" --clobber
           fi
-          
+
           echo "All signatures and manifests uploaded successfully!"
 
       # Create comprehensive signing summary with Exit Wizard integration
@@ -388,7 +388,7 @@ jobs:
         run: |
           set -euo pipefail
           cd signed_artifacts
-          
+
           echo "# Release Signing Summary" > ../SIGNING_SUMMARY.md
           echo "" >> ../SIGNING_SUMMARY.md
           echo "**Release:** \`$RELEASE_TAG\`" >> ../SIGNING_SUMMARY.md
@@ -398,21 +398,21 @@ jobs:
           echo "" >> ../SIGNING_SUMMARY.md
           echo "## Artifacts Overview" >> ../SIGNING_SUMMARY.md
           echo "" >> ../SIGNING_SUMMARY.md
-          
+
           artifact_count=0
           signed_count=0
           timestamped_count=0
-          
+
           for file in *; do
             [ -f "$file" ] || continue
             [[ "$file" == *.sigstore ]] && continue
             [[ "$file" == *.sig ]] && continue
             [[ "$file" == signatures ]] && continue
             [[ "$file" == timestamps ]] && continue
-            
+
             ((artifact_count++))
             echo "### \`$file\`" >> ../SIGNING_SUMMARY.md
-            
+
             # File type detection
             if [[ "$file" == *"sbom"* ]]; then
               echo "**Type:** Software Bill of Materials (SBOM)" >> ../SIGNING_SUMMARY.md
@@ -423,7 +423,7 @@ jobs:
             else
               echo "**Type:** Release Artifact" >> ../SIGNING_SUMMARY.md
             fi
-            
+
             # Signing status
             if [ -f "signatures/$file.sigstore" ]; then
               echo "**Sigstore Bundle:** ✅ \`signatures/$file.sigstore\`" >> ../SIGNING_SUMMARY.md
@@ -431,13 +431,13 @@ jobs:
             else
               echo "**Sigstore Bundle:** ❌" >> ../SIGNING_SUMMARY.md
             fi
-            
+
             if [ -f "signatures/$file.sig" ]; then
               echo "**Traditional Signature:** ✅ \`signatures/$file.sig\`" >> ../SIGNING_SUMMARY.md
             else
               echo "**Traditional Signature:** ❌" >> ../SIGNING_SUMMARY.md
             fi
-            
+
             # Timestamp status
             if [ -f "timestamps/$file.tsr" ]; then
               echo "**RFC 3161 Timestamp:** ✅ \`timestamps/$file.tsr\`" >> ../SIGNING_SUMMARY.md
@@ -445,10 +445,10 @@ jobs:
             else
               echo "**RFC 3161 Timestamp:** ❌" >> ../SIGNING_SUMMARY.md
             fi
-            
+
             echo "" >> ../SIGNING_SUMMARY.md
           done
-          
+
           echo "## Summary Statistics" >> ../SIGNING_SUMMARY.md
           echo "" >> ../SIGNING_SUMMARY.md
           echo "- **Total Artifacts:** $artifact_count" >> ../SIGNING_SUMMARY.md
@@ -478,7 +478,7 @@ jobs:
           echo "- ✅ **Transparent:** Public transparency log via Sigstore Rekor" >> ../SIGNING_SUMMARY.md
           echo "" >> ../SIGNING_SUMMARY.md
           echo "See \`EXIT_WIZARD_MANIFEST.json\` for complete artifact metadata." >> ../SIGNING_SUMMARY.md
-          
+
           echo "Generated comprehensive signing summary:"
           cat ../SIGNING_SUMMARY.md
 
@@ -488,7 +488,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release upload "$RELEASE_TAG" SIGNING_SUMMARY.md --repo "$REPO" --clobber
-          
+
           echo "🎉 Release process completed successfully!"
           echo "✅ Bundle created with SBOM and checksums"
           echo "✅ All artifacts signed with Sigstore"

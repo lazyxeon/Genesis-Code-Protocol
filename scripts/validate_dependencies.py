@@ -38,14 +38,10 @@ def validate_requirements_file(filepath: str) -> bool:
 
             if not any(op in line for op in ["==", ">=", "<=", "~=", "!="]):
                 if not line.startswith("-"):
-                    warnings.append(
-                        f"Line {line_num}: Unpinned dependency '{line}'"
-                    )
+                    warnings.append(f"Line {line_num}: Unpinned dependency '{line}'")
 
             if ".." in line and not line.startswith("-r"):
-                issues.append(
-                    f"Line {line_num}: Suspicious path traversal pattern"
-                )
+                issues.append(f"Line {line_num}: Suspicious path traversal pattern")
 
             if line.startswith("http://"):
                 warnings.append(f"Line {line_num}: Insecure HTTP URL")

@@ -69,17 +69,17 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p signed_artifacts
-          
+
           # Check if release exists and has assets
           if ! gh release view "$RELEASE_TAG" --repo "$REPO" &>/dev/null; then
             echo "Creating placeholder release for testing"
             gh release create "$RELEASE_TAG" --repo "$REPO" --title "Release $RELEASE_TAG" --notes "Test release" || true
-            
+
             # Create placeholder artifacts
             echo "Creating placeholder artifacts"
             echo "This is a placeholder artifact" > signed_artifacts/placeholder.txt
             echo "This is a placeholder SBOM" > signed_artifacts/sbom.json
-            
+
             # Upload placeholder artifacts to release
             gh release upload "$RELEASE_TAG" signed_artifacts/placeholder.txt signed_artifacts/sbom.json --repo "$REPO" --clobber
           fi
@@ -95,7 +95,7 @@ jobs:
           set -euo pipefail
           mkdir -p signed_artifacts
           echo "Downloading assets for release: $RELEASE_TAG"
-          
+
           # Retry logic for downloading artifacts
           max_attempts=5
           attempt=1
@@ -112,11 +112,11 @@ jobs:
               ((attempt++))
             fi
           done
-          
+
           # Remove any existing signature bundles to avoid re-uploading them
           find signed_artifacts -name "*.sigstore" -delete || true
           find signed_artifacts -name "*.sig" -delete || true
-          
+
           # Verify we have assets to sign
           if [ -z "$(ls -A signed_artifacts)" ]; then
             echo "Error: No assets found to sign"
@@ -133,27 +133,27 @@ jobs:
         run: |
           set -euo pipefail
           cd signed_artifacts
-          
+
           # Create signing directory
           mkdir -p signatures
-          
+
           for file in *; do
             [ -f "$file" ] || continue
             [[ "$file" == *.sigstore ]] && continue
             [[ "$file" == *.sig ]] && continue
             [[ "$file" == signatures ]] && continue
-            
+
             echo "Signing $file..."
-            
+
             # Sign with Sigstore (includes transparency log entry)
             cosign sign-blob --yes --bundle "signatures/$file.sigstore" "$file"
-            
+
             # Generate traditional signature for compatibility
             cosign sign-blob --yes --output-signature "signatures/$file.sig" "$file"
-            
+
             echo "✓ Signed $file"
           done
-          
+
           echo "Signing completed. Generated signatures:"
           ls -la signatures/
 
@@ -164,16 +164,16 @@ jobs:
         run: |
           set -euo pipefail
           cd signed_artifacts
-          
+
           echo "Verifying signatures and transparency log entries..."
           verification_failed=false
-          
+
           for file in *; do
             [ -f "$file" ] || continue
             [[ "$file" == *.sigstore ]] && continue
             [[ "$file" == *.sig ]] && continue
             [[ "$file" == signatures ]] && continue
-            
+
             if [ -f "signatures/$file.sigstore" ]; then
               echo "Verifying $file..."
               if cosign verify-blob --bundle "signatures/$file.sigstore" "$file"; then
@@ -187,12 +187,12 @@ jobs:
               verification_failed=true
             fi
           done
-          
+
           if [ "$verification_failed" = true ]; then
             echo "Error: Signature verification failed for one or more files"
             exit 1
           fi
-          
+
           echo "All signatures verified successfully!"
 
       # Upload the signature bundles back to the same release
@@ -202,18 +202,18 @@ jobs:
         run: |
           set -euo pipefail
           cd signed_artifacts
-          
+
           # Verify we have signature files to upload
           if [ -z "$(ls signatures/*.sigstore 2>/dev/null || true)" ] && [ -z "$(ls signatures/*.sig 2>/dev/null || true)" ]; then
             echo "Error: No signature files found to upload"
             exit 1
           fi
-          
+
           echo "Uploading signature files:"
           ls -la signatures/
-          
+
           # Upload all signature files to the release. --clobber overwrites if the
           # asset already exists (idempotent).
           gh release upload "$RELEASE_TAG" signatures/* --repo "$REPO" --clobber
-          
+
           echo "All signatures uploaded successfully!"

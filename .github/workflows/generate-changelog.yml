@@ -12,7 +12,7 @@ name: Generate Changelog
       - "**/*.yaml"
       - "!CHANGELOG.md"
       - "!.github/workflows/generate-changelog.yml"
-      
+
   workflow_dispatch:
 
 permissions:
