@@ -2,6 +2,7 @@
 """Validation script to check workflow dependencies and core functionality."""
 
 import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -54,9 +55,9 @@ def validate_python_syntax(filepath: str) -> bool:
 def validate_shell_syntax(filepath: str) -> bool:
     """Validate shell script syntax."""
     try:
-        import subprocess
-        result = subprocess.run(['bash', '-n', str(ROOT / filepath)], 
-                              capture_output=True, text=True)
+        result = subprocess.run(
+            ["bash", "-n", str(ROOT / filepath)], capture_output=True, text=True
+        )
         if result.returncode == 0:
             return True
         else:
@@ -78,10 +79,10 @@ def main() -> int:
     for script in REQUIRED_SCRIPTS:
         if check_file_exists(script):
             print(f"✓ {script}")
-            if script.endswith('.py'):
+            if script.endswith(".py"):
                 if not validate_python_syntax(script):
                     success = False
-            elif script.endswith('.sh'):
+            elif script.endswith(".sh"):
                 if not validate_shell_syntax(script):
                     success = False
         else:
@@ -112,7 +113,6 @@ def main() -> int:
     try:
         # Test TOC generation
         os.chdir(ROOT)
-        import subprocess
 
         result = subprocess.run(
             [sys.executable, "scripts/generate_repo_toc.py"],
@@ -145,12 +145,12 @@ def main() -> int:
     except Exception as e:
         print(f"✗ Repo structure test failed: {e}")
         success = False
-    
+
     try:
         # Test ethicalcheck module
         sys.path.insert(0, str(ROOT))
         from src.ethicalcheck import validate_configuration, main
-        
+
         # Test validation function
         result = validate_configuration()
         if result and "status" in result:
@@ -158,7 +158,7 @@ def main() -> int:
         else:
             print("✗ EthicalCheck validation function failed")
             success = False
-            
+
         # Test main function
         result = main()
         if result and "status" in result:
@@ -169,7 +169,7 @@ def main() -> int:
     except Exception as e:
         print(f"✗ EthicalCheck module test failed: {e}")
         success = False
-    
+
     if success:
         print("\n✓ All workflow validations passed!")
         return 0
