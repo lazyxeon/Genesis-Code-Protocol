@@ -23,6 +23,7 @@ jobs:
   build-toc:
     runs-on: ubuntu-latest
     env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       BRANCH_NAME: chore/update-top-level-toc
       PR_TITLE: "chore(docs): refresh Table Of Contents.md"
       TOC_FILE: "Table Of Contents.md"
@@ -73,7 +74,7 @@ jobs:
           set -euo pipefail
           echo "Generating $TOC_FILE..."
           python scripts/generate_repo_toc.py
-          if [ ! -f "$TOC_FILE" ]; then
+            if [ ! -f "$TOC_FILE" ]; then
             echo "Error: $TOC_FILE was not generated"
             exit 1
           fi
@@ -122,7 +123,6 @@ jobs:
           # Define repository owner from the GitHub context
           owner="${GITHUB_REPOSITORY%/*}"
 
-          # Small helper for retries (handles eventual consistency or transient gh failures)
           retry() {
             local attempts="$1"; shift
             local delay=2
@@ -142,47 +142,32 @@ jobs:
             done
           }
 
-          # Ensure labels exist (ignore errors if they already do)
           gh label create documentation --color FFFFFF --description "Documentation updates" 2>/dev/null || true
           gh label create automated --color 000000 --description "Automated change" 2>/dev/null || true
 
-          # Check for existing PR
           echo "Checking for existing PRs from branch $BRANCH_NAME..."
           existing_pr_number=$(gh pr list --state open --head "${owner}:${BRANCH_NAME}" --json number --jq '.[0].number // empty' 2>/dev/null || echo "")
           
           if [ -n "$existing_pr_number" ]; then
             echo "PR #$existing_pr_number already exists - updating."
-            
-            # Add comment to existing PR
             if ! gh pr comment "$existing_pr_number" --body "Automated update pushed: \`${GITHUB_SHA}\`"; then
               echo "::warning title=PR Comment Failed::Could not add comment to PR #$existing_pr_number"
             fi
-            
-            # Update labels
             if ! gh pr edit "$existing_pr_number" --add-label "documentation" --add-label "automated"; then
               echo "::warning title=PR Label Update Failed::Could not update labels on PR #$existing_pr_number"
             fi
-            
-            # Set output for downstream steps
             echo "pr_number=$existing_pr_number" >> $GITHUB_OUTPUT
           else
             echo "Creating new PR..."
-            
-            # Ensure PR_TITLE and PR_BODY are set
             if [ -z "$PR_TITLE" ]; then
               PR_TITLE="Automated Documentation Update"
               echo "::warning::PR_TITLE not set, using default: $PR_TITLE"
             fi
-            
             if [ -z "$PR_BODY" ]; then
               PR_BODY="This is an automated pull request with documentation updates."
               echo "::warning::PR_BODY not set, using default body"
             fi
-            
-            # Create PR body file
             printf '%s\n' "$PR_BODY" > pr_body.md
-            
-            # Create PR
             if ! gh pr create \
                 --base main \
                 --head "$BRANCH_NAME" \
@@ -193,18 +178,13 @@ jobs:
               echo "::error title=PR Creation Failed::gh pr create command failed"
               exit 1
             fi
-
-            # Capture PR number robustly (retry to avoid race)
             new_pr=$(retry 3 gh pr list --state open --head "${owner}:${BRANCH_NAME}" --json number --jq '.[0].number // empty' || echo "")
-
             if [ -z "$new_pr" ]; then
               echo "::warning title=PR Number Not Retrieved::PR created but number lookup failed; continuing."
             else
               echo "pr_number=$new_pr" >> $GITHUB_OUTPUT
             fi
           fi
-
-          # Always succeed if we reached here (avoid job failing after successful PR creation due to lookup hiccups)
           exit 0
 
       - name: Log result
