@@ -55,7 +55,7 @@ jobs:
           echo "Running Phase 1 (auto-fix eligible hooks)..."
           pre-commit run --all-files --show-diff-on-failure || true
 
-      - name: Guard: no uncommitted diffs after auto-fix
+      - name: "Guard: no uncommitted diffs after auto-fix"
         id: guard_diffs
         run: |
           if ! git diff --quiet; then
@@ -66,7 +66,7 @@ jobs:
             exit 1
           fi
 
-      - name: Phase 2 (enforcement: deterministic, no auto-fix)
+      - name: "Phase 2 (enforcement: deterministic, no auto-fix)"
         id: phase2
         run: |
           echo "Running Phase 2 (enforcement)..."
