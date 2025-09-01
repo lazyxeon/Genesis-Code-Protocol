@@ -64,13 +64,13 @@ jobs:
 
       # Create a pull request for the changelog update, sign commits with the GitHub Actions bot
       - name: Create Pull Request
-        if: steps.changes.outputs.run_pr == 'true'
-        uses: peter-evans/create-pull-request@v7
+        if: steps.changes.outputs.changed == 'true'
+        uses: devops-infra/action-pull-request@v0.5.5
         with:
-          commit-message: "chore(changelog): update and normalize spacing"
-          branch: "chore/update-changelog"
-          title: "chore(changelog): update changelog"
-          body: "Automated changelog update."
-          labels: "documentation"
-          add-paths: "CHANGELOG.md"
-          sign-commits: true
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           source_branch: chore/update-repo-structure
+           target_branch: main
+           title: "chore(docs): sync Repository Structure in README"
+           body: "Automated update of the repository structure section."
+           labels: documentation
+           assignees: ${{ github.actor }}
