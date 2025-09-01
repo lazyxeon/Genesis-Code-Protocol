@@ -62,12 +62,12 @@ jobs:
 
       - name: Create Pull Request
         if: steps.changes.outputs.changed == 'true'
-        uses: pull request
+        uses: devops-infra/action-pull-request@v0.5.5
         with:
-            commit-message: "docs(readme): auto-sync repo structure"
-            branch: "chore/update-repo-structure"
-            base: main
-            title: "chore(docs): sync Repository Structure in README"
-            body: "Automated update of the repository structure section."
-            labels: "documentation"
-            add-paths: "README.md"
+           github_token: ${{ secrets.GITHUB_TOKEN }}
+           source_branch: chore/update-repo-structure
+           target_branch: main
+           title: "chore(docs): sync Repository Structure in README"
+           body: "Automated update of the repository structure section."
+           labels: documentation
+           assignees: ${{ github.actor }}
