@@ -45,20 +45,14 @@ class TestWorkflowValidation:
                 workflow = yaml.safe_load(f)
 
             # Check required top-level fields
-            assert "name" in workflow, f"{workflow_file} should have a 'name' field"
-            assert "on" in workflow or True in workflow, (
-                f"{workflow_file} should have an 'on' trigger field"
-            )
-            assert "jobs" in workflow, f"{workflow_file} should have 'jobs' field"
+            assert 'name' in workflow, f"{workflow_file} should have a 'name' field"
+            assert 'on' in workflow or True in workflow, f"{workflow_file} should have an 'on' trigger field"
+            assert 'jobs' in workflow, f"{workflow_file} should have 'jobs' field"
 
             # Check that jobs have required fields
-            for job_name, job_config in workflow["jobs"].items():
-                assert "runs-on" in job_config, (
-                    f"Job '{job_name}' in {workflow_file} should have 'runs-on'"
-                )
-                assert "steps" in job_config, (
-                    f"Job '{job_name}' in {workflow_file} should have 'steps'"
-                )
+            for job_name, job_config in workflow['jobs'].items():
+                assert 'runs-on' in job_config, f"Job '{job_name}' in {workflow_file} should have 'runs-on'"
+                assert 'steps' in job_config, f"Job '{job_name}' in {workflow_file} should have 'steps'"
 
     def test_action_versions_consistency(self, workflow_files):
         """Test that action versions are consistent across workflows"""
@@ -70,12 +64,12 @@ class TestWorkflowValidation:
                 workflow = yaml.safe_load(content)
 
             # Extract action versions from workflow
-            for _, job_config in workflow.get("jobs", {}).items():
-                for step in job_config.get("steps", []):
-                    if "uses" in step:
-                        action = step["uses"]
-                        action_name = action.split("@")[0]
-                        action_version = action.split("@")[1] if "@" in action else "latest"
+            for _, job_config in workflow.get('jobs', {}).items():
+                for step in job_config.get('steps', []):
+                    if 'uses' in step:
+                        action = step['uses']
+                        action_name = action.split('@')[0]
+                        action_version = action.split('@')[1] if '@' in action else 'latest'
 
                         if action_name not in action_versions:
                             action_versions[action_name] = set()
@@ -96,16 +90,16 @@ class TestWorkflowValidation:
             with open(workflow_file) as f:
                 workflow = yaml.safe_load(f)
 
-            for job_name, job_config in workflow.get("jobs", {}).items():
+            for job_name, job_config in workflow.get('jobs', {}).items():
                 checkout_count = 0
-                for step in job_config.get("steps", []):
-                    if "uses" in step and "actions/checkout@" in step["uses"]:
+                for step in job_config.get('steps', []):
+                    if 'uses' in step and 'actions/checkout@' in step['uses']:
                         checkout_count += 1
 
                 # Allow maximum 1 checkout per job (some legitimate cases may need 2)
                 assert checkout_count <= 2, (
-                    f"Job '{job_name}' in {workflow_file} has {checkout_count} checkout actions "
-                    f"(max 2 recommended)"
+                    f"Job '{job_name}' in {workflow_file} has {checkout_count} "
+                    "checkout actions (max 2 recommended)"
                 )
 
     def test_security_permissions_defined(self, workflow_files):
@@ -115,79 +109,74 @@ class TestWorkflowValidation:
                 workflow = yaml.safe_load(f)
 
             # Check if permissions are defined at workflow or job level
-            has_workflow_permissions = "permissions" in workflow
+            has_workflow_permissions = 'permissions' in workflow
             has_job_permissions = any(
-                "permissions" in job_config for job_config in workflow.get("jobs", {}).values()
+                'permissions' in job_config
+                for job_config in workflow.get('jobs', {}).values()
             )
 
-            assert has_workflow_permissions or has_job_permissions, (
+            assert has_workflow_permissions or has_job_permissions, \
                 f"{workflow_file} should define permissions at workflow or job level"
-            )
 
     def test_critical_workflows_present(self, workflows_dir):
         """Test that critical workflows are present"""
         critical_workflows = [
-            "Python-CI.yml",
-            "matrix-ci.yml",
-            "pre-commit.yml",
-            "markdownlint.yml",
-            "generate-changelog.yml",
-            "update-repo-structure.yml",
-            "update-toc-file.yml",
-            "validate-notebooks.yml",
-            "dependency-review.yml",
+            'Python-CI.yml',
+            'matrix-ci.yml',
+            'pre-commit.yml',
+            'markdownlint.yml',
+            'generate-changelog.yml',
+            'update-repo-structure.yml',
+            'update-toc-file.yml',
+            'validate-notebooks.yml',
+            'dependency-review.yml'
         ]
 
         existing_workflows = [f.name for f in workflows_dir.glob("*.yml")]
 
         for critical_workflow in critical_workflows:
-            assert critical_workflow in existing_workflows, (
+            assert critical_workflow in existing_workflows, \
                 f"Critical workflow {critical_workflow} is missing"
-            )
 
     def test_workflow_scripts_exist(self):
         """Test that scripts referenced by workflows exist"""
         script_references = [
-            "scripts/generate_repo_toc.py",
-            "scripts/update_repo_structure.py",
-            "scripts/fix_md_spacing.py",
-            "scripts/generate_changelog.py",
-            "scripts/make_exit_bundle.sh",
-            "scripts/validate_workflows.py",
+            'scripts/generate_repo_toc.py',
+            'scripts/update_repo_structure.py',
+            'scripts/fix_md_spacing.py',
+            'scripts/generate_changelog.py',
+            'scripts/make_exit_bundle.sh',
+            'scripts/validate_workflows.py'
         ]
 
         for script_ref in script_references:
             script_path = Path(script_ref)
-            assert script_path.exists(), (
-                f"Script {script_ref} referenced by workflows does not exist"
-            )
+            assert script_path.exists(), f"Script {script_ref} referenced by workflows does not exist"
 
     def test_config_files_exist(self):
         """Test that configuration files referenced by workflows exist"""
         config_files = [
-            ".markdownlint.yml",
-            ".pre-commit-config.yaml",
-            "requirements.txt",
-            "requirements-dev.txt",
-            ".github/workflows/notebook-lint-requirements.txt",
+            '.markdownlint.yml',
+            '.pre-commit-config.yaml',
+            'requirements.txt',
+            'requirements-dev.txt',
+            '.github/workflows/notebook-lint-requirements.txt'
         ]
 
         for config_file in config_files:
             config_path = Path(config_file)
-            assert config_path.exists(), (
-                f"Config file {config_file} referenced by workflows does not exist"
-            )
+            assert config_path.exists(), f"Config file {config_file} referenced by workflows does not exist"
 
     def test_no_hardcoded_secrets(self, workflow_files):
         """Test that workflows don't contain hardcoded secrets or tokens"""
         sensitive_patterns = [
-            "ghp_",  # GitHub personal access tokens
-            "ghs_",  # GitHub app tokens
-            "gho_",  # GitHub OAuth tokens
-            "github_pat_",  # GitHub personal access tokens (new format)
-            "sk-",  # OpenAI API keys
-            "AKIA",  # AWS access keys
-            "AIza",  # Google API keys
+            'ghp_',  # GitHub personal access tokens
+            'ghs_',  # GitHub app tokens
+            'gho_',  # GitHub OAuth tokens
+            'github_pat_',  # GitHub personal access tokens (new format)
+            'sk-',   # OpenAI API keys
+            'AKIA',  # AWS access keys
+            'AIza',  # Google API keys
         ]
 
         for workflow_file in workflow_files:
@@ -195,9 +184,8 @@ class TestWorkflowValidation:
                 content = f.read()
 
             for pattern in sensitive_patterns:
-                assert pattern not in content, (
+                assert pattern not in content, \
                     f"Potential hardcoded secret found in {workflow_file}: pattern '{pattern}'"
-                )
 
     def test_workflow_timeout_limits(self, workflow_files):
         """Test that workflows have reasonable timeout limits"""
@@ -205,12 +193,12 @@ class TestWorkflowValidation:
             with open(workflow_file) as f:
                 workflow = yaml.safe_load(f)
 
-            for job_name, job_config in workflow.get("jobs", {}).items():
-                if "timeout-minutes" in job_config:
-                    timeout = job_config["timeout-minutes"]
+            for job_name, job_config in workflow.get('jobs', {}).items():
+                if 'timeout-minutes' in job_config:
+                    timeout = job_config['timeout-minutes']
                     assert timeout <= 360, (
-                        f"Job '{job_name}' in {workflow_file} has excessive timeout: {timeout} minutes "
-                        f"(max 360 recommended)"
+                        f"Job '{job_name}' in {workflow_file} has excessive timeout: "
+                        f"{timeout} minutes (max 360 recommended)"
                     )
 
 
