@@ -97,7 +97,7 @@ jobs:
             echo "No staged changes after branch switch; exiting."
             exit 0
           fi
-            git commit -m "docs: auto-update Table Of Contents.md"
+          git commit -m "docs: auto-update Table Of Contents.md"
           git push -f origin "$BRANCH_NAME"
 
       - name: Create or Update Pull Request
@@ -121,36 +121,82 @@ jobs:
             - Event: ${{ github.event_name }}
             - Commit: ${{ github.sha }}
         run: |
-          set -euo pipefail
+          # NOTE: We intentionally do NOT use 'set -u' so an unset variable (e.g. intermittent PR number) won't abort.
+          set -eo pipefail
+
           owner="${REPO%%/*}"
-          existing_pr_number="$(gh pr list --state open --head "${owner}:${BRANCH_NAME}" --json number --jq '.[0].number // empty')"
+
+          # Small helper for retries (handles eventual consistency or transient gh failures)
+          retry() {
+            local attempts="$1"; shift
+            local delay=2
+            local n=1
+            while true; do
+              if "$@"; then
+                return 0
+              fi
+              if [ "$n" -ge "$attempts" ]; then
+                echo "Command failed after $attempts attempts: $*" >&2
+                return 1
+              fi
+              echo "Retry $n/$attempts failed; sleeping $delay s..." >&2
+              sleep "$delay"
+              n=$((n+1))
+              delay=$((delay*2))
+            done
+          }
+
+            # Ensure labels exist (ignore errors if they already do)
+          gh label create documentation --color FFFFFF --description "Documentation updates" 2>/dev/null || true
+          gh label create automated --color 000000 --description "Automated change" 2>/dev/null || true
+
+          existing_pr_number="$(gh pr list --state open --head "${owner}:${BRANCH_NAME}" --json number --jq '.[0].number // empty' || true)"
 
           if [ -n "$existing_pr_number" ]; then
             echo "PR #$existing_pr_number already exists - updating."
-            gh pr comment "$existing_pr_number" --body "Automated update pushed: \`${GITHUB_SHA}\`"
-            gh pr edit "$existing_pr_number" --add-label "documentation" --add-label "automated"
+            if ! gh pr comment "$existing_pr_number" --body "Automated update pushed: \`${GITHUB_SHA}\`"; then
+              echo "::warning title=PR Comment Failed::Could not add comment to PR #$existing_pr_number"
+            fi
+            # Add labels (ignore if already present)
+            gh pr edit "$existing_pr_number" --add-label "documentation" --add-label "automated" || true
             echo "pr_number=$existing_pr_number" >> "$GITHUB_OUTPUT"
           else
             echo "Creating new PR..."
             printf '%s\n' "$PR_BODY" > pr_body.md
-            gh pr create \
-              --base main \
-              --head "$BRANCH_NAME" \
-              --title "$PR_TITLE" \
-              --body-file pr_body.md \
-              --label "documentation" \
-              --label "automated"
-            new_pr="$(gh pr list --state open --head "${owner}:${BRANCH_NAME}" --json number --jq '.[0].number // empty')"
-            [ -n "$new_pr" ] && echo "pr_number=$new_pr" >> "$GITHUB_OUTPUT"
+
+            # Create PR; if it fails we abort (real failure).
+            if ! gh pr create \
+                --base main \
+                --head "$BRANCH_NAME" \
+                --title "$PR_TITLE" \
+                --body-file pr_body.md \
+                --label "documentation" \
+                --label "automated"; then
+              echo "::error title=PR Creation Failed::gh pr create command failed"
+              exit 1
+            fi
+
+            # Capture PR number robustly (retry to avoid race)
+            new_pr="$(retry 3 gh pr list --state open --head "${owner}:${BRANCH_NAME}" --json number --jq '.[0].number // empty' || true)"
+
+            if [ -z "$new_pr" ]; then
+              echo "::warning title=PR Number Not Retrieved::PR created but number lookup failed; continuing."
+            else
+              echo "pr_number=$new_pr" >> "$GITHUB_OUTPUT"
+            fi
           fi
+
+          # Always succeed if we reached here (avoid job failing after successful PR creation due to lookup hiccups)
+          exit 0
 
       - name: Log result
         run: |
           if [ "${{ steps.changes.outputs.has_changes }}" = "true" ]; then
-            if [ -n "${{ steps.pr.outputs.pr_number }}" ]; then
-              echo "✓ Pull request #${{ steps.pr.outputs.pr_number }} created or updated for TOC update"
+            pr_num="${{ steps.pr.outputs.pr_number }}"
+            if [ -n "$pr_num" ]; then
+              echo "✓ Pull request #$pr_num created or updated for TOC update"
             else
-              echo "✓ Pull request created or updated for TOC update"
+              echo "✓ Pull request created or updated for TOC update (number not captured)"
             fi
           else
             echo "✓ No changes needed - Table Of Contents is up to date"
