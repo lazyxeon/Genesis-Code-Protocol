@@ -1,4 +1,4 @@
-name: pre-commit
+name: pre-commit # Creates PRs for auto-fixes
 on:
   push:
     paths-ignore:
