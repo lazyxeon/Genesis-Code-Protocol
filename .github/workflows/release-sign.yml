@@ -1,5 +1,5 @@
 name: Sign Release Artifacts
-on:
+"on":
   push:
     branches: [main]
   workflow_dispatch:
