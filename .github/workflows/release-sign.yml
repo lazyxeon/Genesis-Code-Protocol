@@ -1,5 +1,4 @@
 name: Sign Release Artifacts
-
 on:
   push:
     branches: [main]
