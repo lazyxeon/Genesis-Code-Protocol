@@ -1,15 +1,16 @@
 name: Sign Release Artifacts
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       release_tag:
-        description: "Tag (or existing release tag) to sign"
-        required: true
-        default: "main"
-  push:
-    branches:
-      - main
+        description: 'Release tag'
+        required: false
+        default: 'main'
+jobs:
+  # your jobs here
 
 permissions:
   contents: write
