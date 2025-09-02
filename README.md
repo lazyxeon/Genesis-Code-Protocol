@@ -3,6 +3,32 @@
 > **GCP V50 Flagship** — the next‑generation AI‑native invention protocol. This release supersedes the V49 Flagship edition, integrating autonomous spark generation and refined governance & compliance frameworks. A capable LLM can follow these steps to transform a vague "spark" into a reproducible, auditable invention package with provenance and a verifiable exit wizard.
 
 <!-- PR Mentor badges -->
+[![Auto-merge Dependabot PRs](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/auto-merge-dependabot.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/auto-merge-dependabot.yml)
+[![Auto Release](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/auto-release.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/auto-release.yml)
+[![Build and Push GHCR Image](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/build-and-push-ghcr.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/build-and-push-ghcr.yml)
+[![CodeQL](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/codeql.yml)
+[![Dependency Review](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/dependency-review.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/dependency-review.yml)
+[![Dependency Submission](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/dependency-submission.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/dependency-submission.yml)
+[![Docs Build](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docs.yml)
+[![Docker Build](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docker-build.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docker-build.yml)
+[![Docker Debug Build](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docker-debug.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/docker-debug.yml)
+[![Generate Changelog](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/generate-changelog.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/generate-changelog.yml)
+[![Generate SBOM](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/sbom.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/sbom.yml)
+[![Markdown Lint](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/markdownlint.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/markdownlint.yml)
+[![Matrix CI](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/matrix-ci.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/matrix-ci.yml)
+[![OpenSSF Scorecard](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/ossf-scorecard.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/ossf-scorecard.yml)
+[![pre-commit](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/pre-commit.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/pre-commit.yml)
+[![Python CI](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/Python-CI.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/Python-CI.yml)
+[![Release Bundle](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/release-bundle.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/release-bundle.yml)
+[![Release Drafter](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/release-drafter.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/release-drafter.yml)
+[![Sign Release Artifacts](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/release-sign.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/release-sign.yml)
+[![Security Scan](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/security-scan.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/security-scan.yml)
+[![Trigger All Workflows](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/trigger-all-workflows.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/trigger-all-workflows.yml)
+[![Update Repo Structure](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-repo-structure.yml)
+[![Update TOC File](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-toc-file.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/update-toc-file.yml)
+[![Validate Notebooks](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/validate-notebooks.yml/badge.svg?branch=main)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/validate-notebooks.yml)
+[![EthicalCheck-Workflow](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/ethicalcheck.yml/badge.svg)](https://github.com/lazyxeon/Genesis-Code-Protocol/actions/workflows/ethicalcheck.yml)
+
 <!-- CORE BADGES -->
 [![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen)](LICENSE.md)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
