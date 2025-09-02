@@ -66,16 +66,24 @@ jobs:
             exit 1
           fi
 
-      - name: "Auto-commit fixes if needed"
-        if: steps.phase1.outcome == 'success' || steps.phase1.outcome == 'failure'
-        run: |
-           if ! git diff --quiet; then
+          - uses: actions/checkout@v4
+            with:
+              token: ${{ secrets.GITHUB_TOKEN }}
+              fetch-depth: 0
+
+          - name: Auto-commit fixes if needed
+            if: steps.phase1.outcome == 'success' || steps.phase1.outcome == 'failure'
+            run: |
               git config --global user.name "github-actions[bot]"
               git config --global user.email "github-actions[bot]@users.noreply.github.com"
+              git checkout ${{ github.head_ref || github.ref_name }}
+              if ! git diff --quiet; then
               git add .
-              git commit -m "chore: pre-commit auto-fix"
+              git commit -m "chore: pre-commit auto-fix [skip ci]"
               git push
-           fi
+            fi
+          env:
+             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Phase 2 (enforcement: deterministic, no auto-fix)"
         id: phase2
