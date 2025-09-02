@@ -146,7 +146,7 @@ Executing RUNNER_CREATIVE_DISCOVERY...
 
 Using "code" cartridge for domain scans. Need to query sources for real-world gamer desires/lacks (e.g., surveys, forums). Patent landscape for game mechanics. Ideation methods: SCAMPER, TRIZ, Morphological, Analogies, Blends.
 
-To gather data, using tools for scans.BEGIN ARTIFACT: creative/Scan_Sources.json
+To gather data, using tools for scans. BEGIN ARTIFACT: creative/Scan_Sources.json
 [
   {
     "source": "ESA 2025 Essential Facts",
