@@ -138,13 +138,13 @@ jobs:
           echo "pr_created=true" >> "$GITHUB_OUTPUT"
           echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
 
-      - name: Phase 2 (enforcement: deterministic, no auto-fix)
-        id: phase2
-        if: >
-          (steps.apply.outputs.changes_committed != 'true') &&
-          (steps.apply.outputs.pr_created != 'true')
-        run: |
-          echo "Running Phase 2 (enforcement)..."
+           - name: Phase 2 (enforcement: deterministic, no auto-fix)
+             id: phase2
+             if: >
+             (steps.apply.outputs.changes_committed != 'true') &&
+             (steps.apply.outputs.pr_created != 'true')
+             run: |
+             echo "Running Phase 2 (enforcement)..."
           # Do not rerun formatters that already changed files; enforce remaining checks
           SKIP=ruff-format pre-commit run --all-files --show-diff-on-failure
 
