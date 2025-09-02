@@ -66,6 +66,17 @@ jobs:
             exit 1
           fi
 
+      - name: "Auto-commit fixes if needed"
+        if: steps.phase1.outcome == 'success' || steps.phase1.outcome == 'failure'
+        run: |
+           if ! git diff --quiet; then
+              git config --global user.name "github-actions[bot]"
+              git config --global user.email "github-actions[bot]@users.noreply.github.com"
+              git add .
+              git commit -m "chore: pre-commit auto-fix"
+              git push
+           fi
+
       - name: "Phase 2 (enforcement: deterministic, no auto-fix)"
         id: phase2
         run: |
