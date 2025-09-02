@@ -27,13 +27,10 @@ deny-packages:
   - "malicious-package-*"
 
 # Allow these packages even if they would normally be denied
-allow-dependencies-licenses:
-  - package: setuptools
-    license: MIT
-  - package: pip
-    license: MIT
-  - package: wheel
-    license: MIT
+allow-dependency-licenses:
+  - pkg:pypi/setuptools@*#MIT
+  - pkg:pypi/pip@*#MIT
+  - pkg:pypi/wheel@*#MIT
 
 # Enable vulnerability checking
 vulnerability-check: true
