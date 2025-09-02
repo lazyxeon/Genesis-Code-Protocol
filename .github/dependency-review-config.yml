@@ -6,8 +6,6 @@ fail-on-severity: high
 
 # List of licenses that are explicitly denied
 deny-licenses:
-  - GPL-2.0
-  - GPL-3.0
   - AGPL-3.0
   - LGPL-2.1
   - LGPL-3.0
@@ -21,6 +19,8 @@ allow-licenses:
   - ISC
   - Unlicense
   - CC0-1.0
+  - GPL-2.0
+  - GPL-3.0
 
 # Fail on packages with these patterns
 deny-packages:
