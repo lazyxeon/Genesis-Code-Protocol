@@ -95,11 +95,11 @@ jobs:
             echo "changes_committed=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Phase 2 (enforcement: deterministic, no auto-fix)
-        id: phase2
-        if: steps.auto_commit.outputs.changes_committed != 'true'
-        run: |
-          echo "Running Phase 2 (enforcement)..."
+          - name: Phase 2 (enforcement: deterministic, no auto-fix)
+            id: phase2
+            if: steps.auto_commit.outputs.changes_committed != 'true'
+            run: |
+           echo "Running Phase 2 (enforcement)..."
           # Do not rerun formatters that already changed files; enforce remaining checks
           SKIP=ruff-format pre-commit run --all-files --show-diff-on-failure
 
