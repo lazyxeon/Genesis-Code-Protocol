@@ -654,3 +654,70 @@ All phases complete. Final Output: The invented game is **Reclaimed Horizons**, 
 - **Why It Fits Spark**: Addresses majority desires (escapism 68%, stress relief 81%, community 76% per ESA) and lacks (real impact, vibrant eco-worlds, no monetization per surveys/Reddit/X). Immersive like RDR2, impactful like Terra Nil but AAA scale. 
 
 Rehydration score: 0.95 (all artifacts reproducible). END GCP Run.
+
+---
+---
+---
+
+# **Manually Revised and Reiterated Pitch Deck**
+
+Revised Pitch Deck: Verdant Reclaim
+(Rebranded to "Verdant Reclaim" to avoid trademark/SEO issues with Horizon series; checked for availability—no direct conflicts in 2025 searches. Scope cut per MoSCoW; budget refined to emphasize vertical slice; stats citable from ESA 2025 and similar. Added pillars slide, tech plan, risks/mitigations, and 90-day plan.)
+Slide 1: Hook - Reclaim the Wild
+In a world healed by nature, master harmony to uncover humanity's legacy—and spark real change. Verdant Reclaim is a non-violent AAA open-world adventure where every clever solution heals a living world—and plants real trees. "No guns. No grind. All wonder."
+Slide 2: Design Pillars
+
+Non-Lethal Mastery (Eco-Cascades): Orchestrate multi-step environmental solves as "boss fights"—re-route rivers, topple vine bridges—for resonance scores and heroic feedback.
+Living World Agency (Harmony Index): Track local (biome perks) and global (narrative unlocks) harmony; choices shape ecosystems with observable, diegetic tells.
+Verified Real-World Impact (Impact Ledger): Opt-in quests trigger transparent donations via partner APIs (TBD); in-game receipts show pledged trees and verifications.
+
+Slide 3: The Problem - Gaming's Escapism Gap
+Gamers seek stress relief and meaning, but AAA often delivers grind and nihilism. Per ESA 2025, 54% play to unwind, and veterans report games aid mental health—yet eco-anxiety lacks positive outlets. Post-apoc games emphasize ruin; we flip to vibrant hope-punk, aligning with 2025's eco-gaming surge (e.g., sustainable practices and real-impact trends).
+Slide 4: The Solution - Game Overview
+Verdant Reclaim is a single-player AAA open-world on UE5 for PC/PS5/XSX (staged launch; evaluate Switch successor later). $60 full experience: No DLC/microtransactions. 50-80 hours at launch (expand post-launch). Comps: Death Stranding (traversal agency), Subnautica (awe/non-lethal), Terra Nil (eco-restoration)—but AAA-scaled with harmony focus.
+Slide 5: Core Storyline - Redemption Arc
+Awaken as the Wanderer in an overgrown metropolis. Act 1: Survive isolation via wildlife alliances. Act 2: Uncover regrets through artifacts. Act 3: Decide symbiosis or purity at the Heart of the Wild. Procedural branches ensure replay; themes of growth tie to therapeutic modes.
+Slide 6: Gameplay Mechanics - Harmony in Action
+Core Loop: Read the world → Set up eco-cascades → Solve non-lethally → Watch it heal.
+
+Exploration/Physics: Spline rivers, pre-fractured collapses; time-lapse growth via state machines.
+Adaptation: Observable ecology sources (e.g., chameleon study for camo); failure teaches via soft-resets.
+Companions: Affinity model (trust/fear); they propose solutions, evolving behaviors.
+Non-Lethal Depth: Telegraph tells (rustles/postures); resonance scores for chain reactions.
+
+Slide 7: Sidestories - Procedural with Polish
+8-12 templates (10-20 min arcs) with branches, quality gates, and cooldowns. Examples: Scientist's Regret (sim choices affect harmony); Survivor's Bond (emotional evolution). Narrative QA ensures coherence; no 60-min arcs in V1.
+Slide 8: Unique Features - Impact and Replay
+
+Impact Ledger: Transparent receipts for pledged trees; community events for batch donations.
+Therapeutic Modes: Breathing prompts; cognitive toggles for accessibility (e.g., arachnophobia filters).
+Replay: Seeds for variability; pixel-mode easter egg (Could-Have).
+
+Slide 9: UI and Atmosphere - Immersive Design
+Diegetic holograms; organic gauges. Art: Vibrant greens with Lumen lighting (fallbacks for performance). Sound: Nature-orchestral blends.
+Slide 10: Market Fit - Eco-Wave Opportunity
+$200B+ market; eco-trends like cozy/wellness games drive growth. Target: 18-35 eco-conscious players. Projected: 2.5M+ units to break even ($100M all-in, ~$42 net/unit). GTM: Festival demos, "How We Faked Nature" content.
+Slide 11: Tech Plan - Feasible UE5
+
+Physics: Curated break points; fake fluids.
+Growth: State machines/LODs.
+AI: Mass for crowds; full for spotlights.
+Parity: PC/PS5/XSX first; cross-save via custom accounts.
+
+Slide 12: Risks & Mitigations
+
+Scope: MoSCoW prioritization (Must: Core loop, Harmony Index; Won't: Full sims).
+Non-Lethal Fun: Vertical slice KPIs (time-to-cascade <25 min; stealth clarity surveys).
+Procedural Fatigue: QA harness flags issues.
+Impact Claims: Stubbed APIs; disclaimers until partners signed.
+
+Slide 13: Budget & Timeline
+Total: $80M/3 years (~125 FTE at $160K loaded; $20M outsourcing). Break-even: ~2.4M units. Vertical Slice: 12 months/$6-8M to prove fun.
+Slide 14: 90-Day Plan
+
+30 Days: Finalize pillars/rename; vertical slice spec/tech doc.
+60 Days: Graybox biome; prototype swing/glider; stub Harmony/Impact.
+90 Days: 15-min demo; 5-10 tests; iterate with GIFs in deck.
+
+Slide 15: Team & Ask
+Veteran team (ex-Ubisoft/Naughty Dog). Seeking $20M for slice/marketing. Partner to pioneer sustainable gaming—contact for GDD/demo.
