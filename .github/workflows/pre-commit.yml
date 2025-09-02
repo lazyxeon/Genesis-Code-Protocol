@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write  # Changed from 'read' to 'write' to allow pushing commits
 
 jobs:
   pre-commit:
@@ -55,8 +55,32 @@ jobs:
           echo "Running Phase 1 (auto-fix eligible hooks)..."
           pre-commit run --all-files --show-diff-on-failure || true
 
+      # Auto-commit changes if any were made by pre-commit hooks
+      - name: Auto-commit fixes if needed
+        id: auto_commit
+        if: steps.phase1.outcome == 'success' || steps.phase1.outcome == 'failure'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Check if there are changes to commit
+          if ! git diff --quiet; then
+            echo "Changes detected, committing fixes..."
+            git add .
+            git commit -m "chore: pre-commit auto-fix [skip ci]"
+            git push
+            echo "auto_commit_made=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes to commit"
+            echo "auto_commit_made=false" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Skip the guard check if we've already committed the changes
       - name: "Guard: no uncommitted diffs after auto-fix"
         id: guard_diffs
+        if: steps.auto_commit.outputs.auto_commit_made != 'true'
         run: |
           if ! git diff --quiet; then
             echo 'Auto-fix phase produced changes. Commit these locally before pushing.'
@@ -65,25 +89,6 @@ jobs:
             git --no-pager diff --name-only
             exit 1
           fi
-
-          - uses: actions/checkout@v4
-            with:
-              token: ${{ secrets.GITHUB_TOKEN }}
-              fetch-depth: 0
-
-          - name: Auto-commit fixes if needed
-            if: steps.phase1.outcome == 'success' || steps.phase1.outcome == 'failure'
-            run: |
-              git config --global user.name "github-actions[bot]"
-              git config --global user.email "github-actions[bot]@users.noreply.github.com"
-              git checkout ${{ github.head_ref || github.ref_name }}
-              if ! git diff --quiet; then
-              git add .
-              git commit -m "chore: pre-commit auto-fix [skip ci]"
-              git push
-            fi
-          env:
-             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Phase 2 (enforcement: deterministic, no auto-fix)"
         id: phase2
@@ -107,12 +112,16 @@ jobs:
           else
             echo "- ❌ Enforcement phase failed" >> $GITHUB_STEP_SUMMARY
           fi
-          if [ "${{ steps.phase1.outcome }}" = "success" ] && [ "${{ steps.guard_diffs.outcome }}" = "success" ]; then
+          
+          if [ "${{ steps.auto_commit.outputs.auto_commit_made }}" = "true" ]; then
+            echo "- ✅ Auto-fix changes were committed automatically" >> $GITHUB_STEP_SUMMARY
+          elif [ "${{ steps.phase1.outcome }}" = "success" ] && [ "${{ steps.guard_diffs.outcome }}" = "success" ]; then
             echo "- ✅ Auto-fix phase clean (no remaining diffs)" >> $GITHUB_STEP_SUMMARY
           else
             echo "- ⚠️ Auto-fix phase reported changes; guard prevented enforcement with dirty tree" >> $GITHUB_STEP_SUMMARY
           fi
-            echo "- ℹ️ Mypy advisory (non-blocking)" >> $GITHUB_STEP_SUMMARY
+          
+          echo "- ℹ️ Mypy advisory (non-blocking)" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Local Usage" >> $GITHUB_STEP_SUMMARY
           echo "1. Run: pre-commit run --all-files" >> $GITHUB_STEP_SUMMARY
