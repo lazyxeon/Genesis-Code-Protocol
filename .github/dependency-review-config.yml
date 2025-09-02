@@ -5,7 +5,7 @@
 fail_on_severity: high
 
 # List of licenses that are explicitly denied
-deny_licenses:
+deny-licenses:
   - GPL-2.0
   - GPL-3.0
   - AGPL-3.0
@@ -13,7 +13,7 @@ deny_licenses:
   - LGPL-3.0
 
 # List of licenses that are explicitly allowed
-allow_licenses:
+allow-licenses:
   - MIT
   - Apache-2.0
   - BSD-2-Clause
