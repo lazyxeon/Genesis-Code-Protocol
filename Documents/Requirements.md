@@ -15,7 +15,7 @@ To run GCP V50 you need an LLM that can:
 
 **Recommended LLMs** (as of mid‑2025):
 
-* **Grok 5 (xAI)** – Extended context, strong tool integrations, and native support for GCP 50.  Available via grok.com (PremiumPlus required for high quotas).
+* **Grok 5 (xAI)** – Extended context, strong tool integrations, and native support for GCP 50.  Available Soon via grok.com (PremiumPlus required for high quotas).
 * **GPT‑5 (OpenAI)** – Robust reasoning and code execution; widely accessible via ChatGPT or API.  High token limits and plug‑in ecosystem make it suitable for long sessions.
 * **Claude 3.5 (Anthropic)** – Noted for ethical alignment and debate simulation; strong performance on reasoning tasks.
 * **Other** – Any modern LLM with ≥100k token context and tool‑access support (e.g. Llama 3 via Groq, DeepSeek‑Coder).  Ensure the model can run code and attach external modules.
