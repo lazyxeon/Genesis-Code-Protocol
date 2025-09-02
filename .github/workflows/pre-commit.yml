@@ -152,7 +152,7 @@ jobs:
           echo "pr_created=true" >> "$GITHUB_OUTPUT"
           echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
 
-      - name: Phase 2 (enforcement: deterministic, no auto-fix)
+      - name: "Phase 2 (enforcement: deterministic, no auto-fix)"
         id: phase2
         if: >
           (steps.apply.outputs.changes_committed != 'true') &&
