@@ -52,12 +52,7 @@ jobs:
           deny-licenses: |
             GPL-2.0
             GPL-3.0
-          allow-licenses: |
-            MIT
-            Apache-2.0
-            BSD-2-Clause
-            BSD-3-Clause
-            ISC
+          allow-licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause,ISC
           warn-only: false
           vulnerability-check: true
           license-check: true
