@@ -74,7 +74,7 @@ jobs:
             git config --local user.name "github-actions[bot]"
             git add -A
             git commit -m "docs: fix markdown linting issues [skip ci]"
-            git push
+            git push origin HEAD:${{ github.head_ref }}
           else
             echo "No markdown files were changed, nothing to commit."
           fi
