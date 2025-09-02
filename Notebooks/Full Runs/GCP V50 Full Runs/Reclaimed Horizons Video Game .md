@@ -2,7 +2,7 @@ Proposed Configuration for GCP V50 Run (run_id: gcp-game-idea-001)
 
 | Field       | Proposed Value                                                                 | Description |
 |-------------|--------------------------------------------------------------------------------|-------------|
-| spark       | Invent a new video game idea based off of real world majority desire and lack of solution. The video game should be AAA quality, Immense and Emmersive gameplay, storyline, sidestories, physics, and novel concepts. the video game should be a full game with no paywalls or in game stores. | The initial problem spark derived from user input. |
+| spark       | Invent a new video game idea based off of real world majority desire and lack of solution. The video game should be AAA quality, Immense and Immersive gameplay, storyline, sidestories, physics, and novel concepts. the video game should be a full game with no paywalls or in game stores. | The initial problem spark derived from user input. |
 | mode        | auto                                                                           | Automatic execution with minimal intervention; proceeds through phases without manual gating unless needs-human. Alternatives: full (all phases), manual (step-by-step approval). |
 | risk        | r1                                                                             | Low-to-medium risk for creative invention (no high-risk elements like PHI, critical infrastructure, or regulated domains). Range: r0 (minimal) to r3 (high). |
 | runners     | auto                                                                           | Use planner to auto-select and sequence runners based on dependencies. |
