@@ -9,9 +9,7 @@ on:
         description: 'Release tag'
         required: false
         default: 'main'
-jobs:
-  # your jobs here
-
+        
 permissions:
   contents: write
   id-token: write   # Required for keyless cosign
