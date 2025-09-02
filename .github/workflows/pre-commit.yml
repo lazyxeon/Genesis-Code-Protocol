@@ -8,7 +8,13 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write  # Changed from 'read' to 'write' to allow auto-commits
+  contents: write  # Needed to create branches
+  pull-requests: write  # Needed to create PRs
+
+# Avoid races creating multiple auto-fix commits simultaneously
+concurrency:
+  group: pre-commit-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   pre-commit:
@@ -52,39 +58,69 @@ jobs:
         id: phase1
         continue-on-error: true
         env:
-          # Do NOT skip check-yaml now that config is validated; skip only non-fix, expensive or advisory hooks
+          # Skip only non-fix or expensive hooks here
           SKIP: ruff-lint,mypy-report,check-large-files
         run: |
           echo "Running Phase 1 (auto-fix eligible hooks)..."
           pre-commit run --all-files --show-diff-on-failure || true
 
-      - name: Auto-commit fixes if needed
-        id: auto_commit
+      - name: Create PR with fixes if needed
+        id: create_pr
+        # Skip for forked PRs (cannot create PRs from forks) but run for push / workflow_dispatch / same-repo PR
+        if: >
+          (steps.phase1.outcome == 'success' || steps.phase1.outcome == 'failure') &&
+          (github.event_name != 'pull_request' || !github.event.pull_request.head.repo.fork)
         run: |
+          set -euo pipefail
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           
-          # Use the appropriate branch (PR branch or current branch)
-          git checkout ${{ github.head_ref || github.ref_name }}
+          # Get the current branch name
+          CURRENT_BRANCH="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
           
-          # Check if there are changes to commit
-          if ! git diff --quiet; then
-            echo "Changes detected, committing fixes..."
-            git add .
-            git commit -m "chore: pre-commit auto-fix [skip ci]"
-            git push origin ${{ github.head_ref || github.ref_name }}
-            echo "::set-output name=changes_committed::true"
+          # Show status for debugging
+          git status --short || true
+          
+          if git diff --quiet; then
+            echo "No changes to commit."
+            echo "pr_created=false" >> "$GITHUB_OUTPUT"
           else
-            echo "No changes to commit"
-            echo "::set-output name=changes_committed::false"
+            echo "Changes detected - creating PR."
+            
+            # Create a new branch for the fixes
+            TIMESTAMP=$(date +%Y%m%d%H%M%S)
+            FIX_BRANCH="auto-fix-${TIMESTAMP}"
+            git checkout -b "$FIX_BRANCH"
+            
+            # Commit changes
+            git add .
+            git commit -m "chore: pre-commit auto-fix"
+            
+            # Push the new branch
+            git push origin "$FIX_BRANCH"
+            
+            # Create a PR using GitHub CLI
+            PR_URL=$(gh pr create \
+              --title "Auto-fix: Pre-commit formatting fixes" \
+              --body "This PR contains automatic formatting fixes from the pre-commit workflow. These changes fix code style and formatting issues." \
+              --base "$CURRENT_BRANCH" \
+              --head "$FIX_BRANCH")
+            
+            echo "Created PR: $PR_URL"
+            echo "pr_created=true" >> "$GITHUB_OUTPUT"
+            echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
           fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Phase 2 (enforcement: deterministic, no auto-fix)"
         id: phase2
-        # Skip this step if we just committed changes
-        if: steps.auto_commit.outputs.changes_committed != 'true'
+        # Skip this step if we just created a PR
+        if: steps.create_pr.outputs.pr_created != 'true'
         run: |
           echo "Running Phase 2 (enforcement)..."
+          # Do not rerun formatters that already changed files; enforce remaining checks
           SKIP=ruff-format pre-commit run --all-files --show-diff-on-failure
 
       - name: Mypy (advisory, non-blocking)
@@ -97,20 +133,23 @@ jobs:
       - name: Summary
         if: always()
         run: |
-          echo "## Pre-commit CI Summary" >> $GITHUB_STEP_SUMMARY
-          if [ "${{ steps.phase2.outcome }}" = "success" ] || [ "${{ steps.auto_commit.outputs.changes_committed }}" = "true" ]; then
-            echo "- ✅ Checks passed or changes auto-committed" >> $GITHUB_STEP_SUMMARY
+          echo "## Pre-commit CI Summary" >> "$GITHUB_STEP_SUMMARY"
+          if [ "${{ steps.create_pr.outputs.pr_created }}" = "true" ]; then
+            echo "- 🔧 Auto-fixes were created in PR: ${{ steps.create_pr.outputs.pr_url }}" >> "$GITHUB_STEP_SUMMARY"
+          elif [ "${{ steps.phase2.outcome }}" = "success" ]; then
+            echo "- ✅ Enforcement phase passed" >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "- ❌ Enforcement phase failed" >> $GITHUB_STEP_SUMMARY
+            echo "- ❌ Enforcement phase failed" >> "$GITHUB_STEP_SUMMARY"
           fi
-          
-          if [ "${{ steps.auto_commit.outputs.changes_committed }}" = "true" ]; then
-            echo "- 🔧 Auto-fixes were committed to the branch" >> $GITHUB_STEP_SUMMARY
-          fi
-          
-          echo "- ℹ️ Mypy advisory (non-blocking)" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Local Usage" >> $GITHUB_STEP_SUMMARY
-          echo "1. Run: pre-commit run --all-files" >> $GITHUB_STEP_SUMMARY
-          echo "2. If formatting issues appear: ruff format . && ruff check --fix ." >> $GITHUB_STEP_SUMMARY
-          echo "3. Optional type check: mypy" >> $GITHUB_STEP_SUMMARY
+          echo "- ℹ️ Mypy advisory result: ${{ steps.mypy_report.outcome }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Local Usage" >> "$GITHUB_STEP_SUMMARY"
+          echo "1. Run: pre-commit run --all-files" >> "$GITHUB_STEP_SUMMARY"
+          echo "2. If formatting issues appear: ruff format . && ruff check --fix ." >> "$GITHUB_STEP_SUMMARY"
+          echo "3. Optional type check: mypy" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Fail if enforcement failed
+        if: >
+          steps.create_pr.outputs.pr_created != 'true' &&
+          steps.phase2.outcome == 'failure'
+        run: exit 1
