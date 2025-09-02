@@ -24,7 +24,7 @@ allow-licenses:
 
 # Fail on packages with these patterns
 deny-packages:
-  - "malicious-package-*"
+  - "pkg:pypi/malicious-package@*"
 
 # Allow these packages even if they would normally be denied
 allow-dependency-licenses:
