@@ -13,11 +13,13 @@
 - Charts.md
 - Code of Conduct.md
 - Contributing.md
+- DEPENDENCY_REVIEW_FIX.md
 - Dockerfile
 - EXIT_WIZARD.txt
 - GCP Current Version(V50 Flagship Edition).md
 - LICENSE.md
 - Makefile
+- PR_README.md
 - README.md
 - Roadmap.md
 - SECURITY.md
@@ -96,6 +98,7 @@
   - tests/test_workflow_validation.py
 - **Documents/**
   - Documents/A Documents Readme.md
+  - Documents/A NinjaAI Repo Analysis.md
   - Documents/AI ChatGPT Critical Analysis Flagship GCP V49.md
   - Documents/AI ChatGPT Critical Analysis GCP V45.6D.md
   - Documents/AI ChatGPT Critical Analysis GCP V46.md
@@ -205,6 +208,7 @@
     - Notebooks/Full Runs/V48 Full Run.md
     - **GCP V50 Full Runs/**
       - Notebooks/Full Runs/GCP V50 Full Runs/Full auto spark run.md
+      - Notebooks/Full Runs/GCP V50 Full Runs/Reclaimed Horizons Video Game .md
     - **Flagship Full Runs/**
       - Notebooks/Full Runs/Flagship Full Runs/A FFR Readme.md
       - Notebooks/Full Runs/Flagship Full Runs/AGROS.md
