@@ -5,13 +5,13 @@ on:
     paths-ignore:
       - '**/*.md'
       - '**/*.ipynb'
+      - '.github/workflows/**'  # Ignore changes to workflow files
   pull_request:
   workflow_dispatch:
 
-# Write needed so the workflow can create PRs
+# Write needed so the workflow can optionally auto-commit formatting fixes
 permissions:
   contents: write
-  pull-requests: write
 
 # Avoid races creating multiple auto-fix commits simultaneously
 concurrency:
@@ -67,9 +67,23 @@ jobs:
           echo "Running Phase 1 (auto-fix eligible hooks)..."
           pre-commit run --all-files --show-diff-on-failure || true
 
-      - name: Create PR with fixes if needed
-        id: create_pr
-        # Skip for forked PRs (cannot create PRs from forks) but run for push / workflow_dispatch / same-repo PR
+      - name: Check for workflow file changes
+        id: check_workflow_changes
+        run: |
+          if git diff --name-only | grep -q "^\.github/workflows/"; then
+            echo "workflow_files_changed=true" >> "$GITHUB_OUTPUT"
+            echo "⚠️ WARNING: Workflow files were modified by pre-commit hooks."
+            echo "These changes will be ignored as GitHub Apps cannot modify workflow files without 'workflows' permission."
+            echo "Please apply these changes manually if needed."
+            # Reset workflow files to prevent commit failures
+            git checkout -- .github/workflows/
+          else
+            echo "workflow_files_changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Auto-commit fixes if needed
+        id: auto_commit
+        # Skip auto-commit for forked PRs (cannot push) but run for push / workflow_dispatch / same-repo PR
         if: >
           (steps.phase1.outcome == 'success' || steps.phase1.outcome == 'failure') &&
           (github.event_name != 'pull_request' || !github.event.pull_request.head.repo.fork)
@@ -78,49 +92,26 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          
-          # Get the current branch name
-          CURRENT_BRANCH="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
-          
+
+          BRANCH="${GITHUB_HEAD_REF:-${GITHUB_REF_NAME}}"
+
           # Show status for debugging
           git status --short || true
-          
+
           if git diff --quiet; then
             echo "No changes to commit."
-            echo "pr_created=false" >> "$GITHUB_OUTPUT"
+            echo "changes_committed=false" >> "$GITHUB_OUTPUT"
           else
-            echo "Changes detected - creating PR."
-            
-            # Create a new branch for the fixes
-            TIMESTAMP=$(date +%Y%m%d%H%M%S)
-            FIX_BRANCH="auto-fix-${TIMESTAMP}"
-            git checkout -b "$FIX_BRANCH"
-            
-            # Commit changes
+            echo "Changes detected - committing."
             git add .
-            git commit -m "chore: pre-commit auto-fix"
-            
-            # Push the new branch
-            git push origin "$FIX_BRANCH"
-            
-            # Create a PR using GitHub CLI
-            PR_URL=$(gh pr create \
-              --title "Auto-fix: Pre-commit formatting fixes" \
-              --body "This PR contains automatic formatting fixes from the pre-commit workflow. These changes fix code style and formatting issues." \
-              --base "$CURRENT_BRANCH" \
-              --head "$FIX_BRANCH")
-            
-            echo "Created PR: $PR_URL"
-            echo "pr_created=true" >> "$GITHUB_OUTPUT"
-            echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
+            git commit -m "chore: pre-commit auto-fix [skip ci]"
+            git push origin "${BRANCH}"
+            echo "changes_committed=true" >> "$GITHUB_OUTPUT"
           fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Phase 2 (enforcement: deterministic, no auto-fix)"
         id: phase2
-        # Skip this step if we just created a PR
-        if: steps.create_pr.outputs.pr_created != 'true'
+        if: steps.auto_commit.outputs.changes_committed != 'true'
         run: |
           echo "Running Phase 2 (enforcement)..."
           # Do not rerun formatters that already changed files; enforce remaining checks
@@ -137,13 +128,22 @@ jobs:
         if: always()
         run: |
           echo "## Pre-commit CI Summary" >> "$GITHUB_STEP_SUMMARY"
-          if [ "${{ steps.create_pr.outputs.pr_created }}" = "true" ]; then
-            echo "- 🔧 Auto-fixes were created in PR: ${{ steps.create_pr.outputs.pr_url }}" >> "$GITHUB_STEP_SUMMARY"
+
+          if [ "${{ steps.check_workflow_changes.outputs.workflow_files_changed }}" = "true" ]; then
+            echo "- ⚠️ **Workflow files were modified but changes were ignored**" >> "$GITHUB_STEP_SUMMARY"
+            echo "  GitHub Apps cannot modify workflow files without 'workflows' permission." >> "$GITHUB_STEP_SUMMARY"
+            echo "  Please apply these changes manually if needed." >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          if [ "${{ steps.auto_commit.outputs.changes_committed }}" = "true" ]; then
+            echo "- 🔧 Auto-fixes were committed to the branch" >> "$GITHUB_STEP_SUMMARY"
           elif [ "${{ steps.phase2.outcome }}" = "success" ]; then
             echo "- ✅ Enforcement phase passed" >> "$GITHUB_STEP_SUMMARY"
           else
             echo "- ❌ Enforcement phase failed" >> "$GITHUB_STEP_SUMMARY"
           fi
+
           echo "- ℹ️ Mypy advisory result: ${{ steps.mypy_report.outcome }}" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "### Local Usage" >> "$GITHUB_STEP_SUMMARY"
@@ -153,6 +153,6 @@ jobs:
 
       - name: Fail if enforcement failed
         if: >
-          steps.create_pr.outputs.pr_created != 'true' &&
+          steps.auto_commit.outputs.changes_committed != 'true' &&
           steps.phase2.outcome == 'failure'
         run: exit 1
