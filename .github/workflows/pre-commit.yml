@@ -1,4 +1,5 @@
-name: pre-commit # Creates PRs for auto-fixes
+name: pre-commit
+
 on:
   push:
     paths-ignore:
@@ -7,9 +8,10 @@ on:
   pull_request:
   workflow_dispatch:
 
+# Write needed so the workflow can create PRs
 permissions:
-  contents: write  # Needed to create branches
-  pull-requests: write  # Needed to create PRs
+  contents: write
+  pull-requests: write
 
 # Avoid races creating multiple auto-fix commits simultaneously
 concurrency:
@@ -22,7 +24,8 @@ jobs:
     env:
       FORCE_COLOR: "1"
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
@@ -47,7 +50,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pre-commit
-          key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
+          key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}-${{ hashFiles('requirements-dev.txt') }}
           restore-keys: |
             pre-commit-${{ runner.os }}-
 
