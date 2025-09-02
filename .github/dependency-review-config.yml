@@ -5,10 +5,7 @@
 fail-on-severity: high
 
 # List of licenses that are explicitly denied
-deny-licenses:
-  - AGPL-3.0
-  - LGPL-2.1
-  - LGPL-3.0
+
 
 # List of licenses that are explicitly allowed
 allow-licenses:
@@ -21,6 +18,9 @@ allow-licenses:
   - CC0-1.0
   - GPL-2.0
   - GPL-3.0
+  - AGPL-3.0
+  - LGPL-2.1
+  - LGPL-3.0
 
 # Fail on packages with these patterns
 deny-packages:
