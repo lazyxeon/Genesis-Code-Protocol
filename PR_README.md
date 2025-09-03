@@ -2,6 +2,7 @@
 
 ## Issue Identified
 The dependency review workflow was failing with the following error:
+
 ```
 ##[error]Invalid license(s) in allow-licenses: - MIT
 - Apache-2.0
@@ -15,12 +16,12 @@ The issue was related to the YAML formatting of the license lists in both the wo
 
 ## Changes Made
 
-### 1. Fixed `dependency-review.yml` workflow file:
+### 1. Fixed `dependency-review.yml` workflow file
 - Updated the format of `deny-licenses` and `allow-licenses` to use proper YAML multi-line string syntax
 - Removed the dash prefix from each license entry in the workflow file
 - Ensured consistent formatting throughout the file
 
-### 2. Fixed `dependency-review-config.yml` configuration file:
+### 2. Fixed `dependency-review-config.yml` configuration file
 - Standardized the format of license lists to use proper YAML array syntax
 - Ensured consistent naming conventions for all configuration keys
 - Maintained all existing configuration options with correct formatting

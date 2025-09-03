@@ -26,6 +26,7 @@ Changed all parameter names to use hyphens instead of underscores:
 ### 2. Fixed `deny-packages` Format
 
 Changed from:
+
 ```yaml
 deny_packages:
   - scope: "*"
@@ -33,6 +34,7 @@ deny_packages:
 ```
 
 To:
+
 ```yaml
 deny-packages:
   - "malicious-package-*"
@@ -41,6 +43,7 @@ deny-packages:
 ### 3. Fixed Package Allowlist Format
 
 Changed from:
+
 ```yaml
 allow_packages:
   - scope: "python"
@@ -52,6 +55,7 @@ allow_packages:
 ```
 
 To:
+
 ```yaml
 allow-dependencies-licenses:
   - package: setuptools
