@@ -54,7 +54,7 @@
 [![Release](https://img.shields.io/github/v/release/lazyxeon/Genesis-Code-Protocol)](https://github.com/lazyxeon/Genesis-Code-Protocol/releases/latest)
 [![Ruff](https://img.shields.io/badge/Ruff-linting-blue)](https://docs.astral.sh/ruff/)
 
-Quick nav: [What’s New](#whats-new) • [Quick Start](#quick-start) • [Phase Map](#phase-map) • [Runners & Cartridges](#runners--cartridges) • [Artifacts](#artifacts--ledgers) • [Security](#security--provenance) • [Limitations](#limitations) • [License](#license) • [Repo Structure](#Repository-Structure) •  [GCP Wiki](#GCP-Wiki)
+Quick nav: [What’s New](#whats-new) • [Document Links](#Quick-Links-to-Full-Documents) • [Quick Start](#quick-start) • [Phase Map](#phase-map) • [Runners & Cartridges](#runners--cartridges) • [Artifacts](#artifacts--ledgers) • [Security](#security--provenance) • [Limitations](#limitations) • [License](#license) • [Repo Structure](#Repository-Structure) •  [GCP Wiki](#GCP-Wiki)
 
 ---
 
@@ -70,6 +70,14 @@ Quick nav: [What’s New](#whats-new) • [Quick Start](#quick-start) • [Pha
 
 - Large models (e.g. ChatGPT5 and Gemini 2.5) run V50 seamlessly; earlier models may struggle as gating complexity increases.
 - Data rights, privacy budgets and SBOM/AI‑BOM generation are mandatory for R2+ risk tiers.
+
+---
+
+## Quick Links to Full Documents
+
+* [GCP Current Version(V50 Flagship Edition)](./GCP%20Current%20Version%28V50%20Flagship%20Edition%29.md)
+* [GCP V50 Cartridges Pack](./GCP%20Runners/GCP%20V50%20Supplemental%20Docs/GCP%20V50%20Cartridges%20Pack.md)
+* [GCP V50 Master Runners Codex](./GCP%20Runners/GCP%20V50%20Supplemental%20Docs/GCP%20V50%20Master%20Runners%20Codex.md)
 
 ---
 
