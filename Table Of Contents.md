@@ -4,6 +4,7 @@
 - .flake8
 - .gitattributes
 - .gitignore
+- .markdownlint-cli2.yaml
 - .markdownlint.yml
 - .markdownlintignore
 - .pre-commit-config.yaml
@@ -207,9 +208,14 @@
     - Notebooks/Full Runs/Solar Energy Full Run.md
     - Notebooks/Full Runs/V48 Full Run.md
     - **GCP V50 Full Runs/**
+      - Notebooks/Full Runs/GCP V50 Full Runs/Cell Phone Batteries Solution.md
       - Notebooks/Full Runs/GCP V50 Full Runs/Full auto spark run.md
+      - Notebooks/Full Runs/GCP V50 Full Runs/Herbquit.md
+      - Notebooks/Full Runs/GCP V50 Full Runs/Mercury Tilt Sensor.md
+      - Notebooks/Full Runs/GCP V50 Full Runs/MycoBNNT.md
       - Notebooks/Full Runs/GCP V50 Full Runs/Reclaimed Horizons Video Game .md
       - Notebooks/Full Runs/GCP V50 Full Runs/Veilweaver Video Game.md
+      - Notebooks/Full Runs/GCP V50 Full Runs/Veripact.md
     - **Flagship Full Runs/**
       - Notebooks/Full Runs/Flagship Full Runs/A FFR Readme.md
       - Notebooks/Full Runs/Flagship Full Runs/AGROS.md
