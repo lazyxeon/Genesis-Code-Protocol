@@ -211,6 +211,8 @@
       - Notebooks/Full Runs/GCP V50 Full Runs/Cell Phone Batteries Solution.md
       - Notebooks/Full Runs/GCP V50 Full Runs/Full auto spark run.md
       - Notebooks/Full Runs/GCP V50 Full Runs/Herbquit.md
+      - Notebooks/Full Runs/GCP V50 Full Runs/Hybrid ASIC.md
+      - Notebooks/Full Runs/GCP V50 Full Runs/IQ test solution.md
       - Notebooks/Full Runs/GCP V50 Full Runs/Mercury Tilt Sensor.md
       - Notebooks/Full Runs/GCP V50 Full Runs/MycoBNNT.md
       - Notebooks/Full Runs/GCP V50 Full Runs/Reclaimed Horizons Video Game .md
