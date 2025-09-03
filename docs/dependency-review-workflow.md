@@ -70,6 +70,7 @@ Key settings:
    - Review step-by-step logs
 
 2. **Validate Local Files**
+
    ```bash
    # Check YAML syntax
    python -c "import yaml; yaml.safe_load(open('.github/workflows/dependency-review.yml'))"
@@ -83,6 +84,7 @@ Key settings:
    ```
 
 3. **Test Configuration**
+
    ```bash
    # Validate configuration file
    python -c "import yaml; yaml.safe_load(open('.github/dependency-review-config.yml'))"

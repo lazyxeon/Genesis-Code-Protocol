@@ -10,7 +10,7 @@ The Genesis Code Protocol repository includes a comprehensive release workflow t
 
 This is the primary workflow that handles the complete release process in two coordinated jobs:
 
-#### Features:
+#### Features
 - **Bundle Creation**: Creates release bundles with SBOM generation
 - **Cryptographic Signing**: Signs all artifacts using Sigstore (keyless signing)
 - **Transparency Log**: Automatically registers signatures in Sigstore Rekor
@@ -18,7 +18,7 @@ This is the primary workflow that handles the complete release process in two co
 - **Exit Wizard Integration**: Creates manifest following GCP Exit Wizard pattern
 - **Comprehensive Verification**: Verifies all signatures before upload
 
-#### Triggers:
+#### Triggers
 - Automatically on release publication
 - Manual trigger via `workflow_dispatch`
 

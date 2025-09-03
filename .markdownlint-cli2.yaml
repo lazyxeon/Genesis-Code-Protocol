@@ -1,0 +1,13 @@
+extends: .markdownlint.yml
+ignores:
+  - "Notebooks/**"
+  - "Documents/**"
+  - "GCP-All-Variants/**"
+  - "GCP Runners/**"
+  - "cli_bundle/**"
+  - "Table Of Contents.md"
+  - "GCP Current Version(V50 Flagship Edition).md"
+  - "LICENSE.md"
+  - "README.md"
+  - "Charts.md"
+  - "node_modules/**"
