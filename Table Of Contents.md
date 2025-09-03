@@ -209,6 +209,7 @@
     - **GCP V50 Full Runs/**
       - Notebooks/Full Runs/GCP V50 Full Runs/Full auto spark run.md
       - Notebooks/Full Runs/GCP V50 Full Runs/Reclaimed Horizons Video Game .md
+      - Notebooks/Full Runs/GCP V50 Full Runs/Veilweaver Video Game.md
     - **Flagship Full Runs/**
       - Notebooks/Full Runs/Flagship Full Runs/A FFR Readme.md
       - Notebooks/Full Runs/Flagship Full Runs/AGROS.md
