@@ -1,0 +1,20 @@
+[package]
+name = "astraweave-ui"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+egui = "0.28"
+egui-wgpu = "0.28"
+egui-winit = "0.28"
+wgpu = "0.20"
+winit = "0.29"
+glam = "0.28"
+
+[features]
+default = []
+clone-ui-data = []
+
+[lib]
+name = "astraweave_ui"
+path = "src/lib.rs"

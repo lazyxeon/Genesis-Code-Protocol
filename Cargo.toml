@@ -1,0 +1,11 @@
+[workspace]
+members = ["astraweave-ui"]
+resolver = "2"
+
+[workspace.dependencies]
+egui = "0.28"
+egui-wgpu = "0.28"
+egui-winit = "0.28"
+wgpu = "0.20"
+winit = "0.29"
+glam = "0.28"
