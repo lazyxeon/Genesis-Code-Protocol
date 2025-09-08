@@ -29,7 +29,7 @@ jobs:
       RELEASE_TAG: ${{ github.event.release.tag_name || inputs.release-tag || github.ref_name }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup release info
         id: setup
@@ -133,7 +133,7 @@ jobs:
       REPO: ${{ github.repository }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # Install Cosign at a pinned commit
       - name: Install Cosign
