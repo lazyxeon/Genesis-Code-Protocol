@@ -84,7 +84,7 @@ jobs:
 
     steps:
       - name: Check Out Source Code
-        uses: actions/checkout@v4 # v5
+        uses: actions/checkout@v5 # v5
 
       - name: Fortify secrets check
         if: ${{ env.FOD_TENANT == '' || env.FOD_USER == '' || env.FOD_PAT == '' || env.SSC_URL == '' || env.SSC_TOKEN == '' || env.SC_CLIENT_AUTH_TOKEN == '' || env.DEBRICKED_TOKEN == '' }}
