@@ -168,3 +168,19 @@ tests/__pycache__/
 .pytest_cache/
 *.pyc
 __pycache__/
+
+# Rust and sccache artifacts
+Cargo.lock
+target/
+.cargo/
+sccache-error.log
+
+# CMake artifacts
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+build/
+
+# CI/CD artifacts
+.github/actions-runner/
+*.ci.log
