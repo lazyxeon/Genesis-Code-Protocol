@@ -168,3 +168,26 @@ tests/__pycache__/
 .pytest_cache/
 *.pyc
 __pycache__/
+
+
+# Added by cargo
+/target
+
+# Rust artifacts
+target/
+Cargo.lock
+*.pdb
+
+# Benchmark results
+benchmark-results/
+criterion-cache/
+flamegraph.svg
+perf.data*
+
+# Rust coverage
+lcov.info
+*.profraw
+coverage/
+
+# Rust documentation
+target/doc/

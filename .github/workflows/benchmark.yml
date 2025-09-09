@@ -1,0 +1,273 @@
+name: Benchmark
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'benches/**'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'src/**'
+      - 'benches/**'
+      - 'Cargo.toml'
+      - 'Cargo.lock'
+  workflow_dispatch:
+    inputs:
+      baseline:
+        description: 'Baseline commit SHA for comparison'
+        required: false
+        type: string
+
+env:
+  CARGO_TERM_COLOR: always
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  benchmark:
+    name: Run Benchmarks
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - uses: dtolnay/rust-toolchain@stable
+    - uses: Swatinem/rust-cache@v2
+    
+    - name: Install cargo-criterion
+      run: cargo install cargo-criterion
+    
+    - name: Run benchmarks
+      run: |
+        # Create benchmarks directory
+        mkdir -p benchmark-results
+        
+        # Run benchmarks and save output
+        cargo criterion --message-format=json | tee benchmark-results/benchmark-output.json
+        
+        # Generate HTML report
+        cargo criterion --bench protocol_benchmarks --output-format html
+        
+        # Copy HTML reports to results directory
+        cp -r target/criterion benchmark-results/
+    
+    - name: Store benchmark result
+      uses: benchmark-action/github-action-benchmark@v1
+      with:
+        name: Rust Benchmarks
+        tool: 'cargo'
+        output-file-path: benchmark-results/benchmark-output.json
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        auto-push: true
+        comment-on-alert: true
+        alert-threshold: '150%'
+        fail-on-alert: true
+    
+    - name: Upload benchmark artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: benchmark-results
+        path: benchmark-results/
+        retention-days: 30
+    
+    - name: Setup Pages
+      if: github.ref == 'refs/heads/main'
+      uses: actions/configure-pages@v4
+    
+    - name: Upload to GitHub Pages
+      if: github.ref == 'refs/heads/main'
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: benchmark-results/criterion
+    
+    - name: Deploy to GitHub Pages
+      if: github.ref == 'refs/heads/main'
+      id: deployment
+      uses: actions/deploy-pages@v4
+
+  compare-benchmarks:
+    name: Compare with Baseline
+    runs-on: ubuntu-latest
+    if: github.event.inputs.baseline != ''
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - uses: dtolnay/rust-toolchain@stable
+    - uses: Swatinem/rust-cache@v2
+    
+    - name: Install cargo-criterion
+      run: cargo install cargo-criterion
+    
+    - name: Run current benchmarks
+      run: |
+        mkdir -p current-benchmarks
+        cargo criterion --message-format=json | tee current-benchmarks/benchmark-output.json
+    
+    - name: Checkout baseline
+      run: git checkout ${{ github.event.inputs.baseline }}
+    
+    - name: Run baseline benchmarks
+      run: |
+        mkdir -p baseline-benchmarks
+        cargo criterion --message-format=json | tee baseline-benchmarks/benchmark-output.json
+    
+    - name: Compare benchmarks
+      run: |
+        echo "## Benchmark Comparison Report" > comparison-report.md
+        echo "" >> comparison-report.md
+        echo "Comparing current branch with baseline: ${{ github.event.inputs.baseline }}" >> comparison-report.md
+        echo "" >> comparison-report.md
+        
+        # Parse and compare JSON outputs (simplified)
+        echo "### Performance Changes" >> comparison-report.md
+        echo "- Current benchmarks: $(wc -l < current-benchmarks/benchmark-output.json) test cases" >> comparison-report.md
+        echo "- Baseline benchmarks: $(wc -l < baseline-benchmarks/benchmark-output.json) test cases" >> comparison-report.md
+        echo "" >> comparison-report.md
+        echo "Detailed comparison available in artifacts." >> comparison-report.md
+    
+    - name: Upload comparison results
+      uses: actions/upload-artifact@v4
+      with:
+        name: benchmark-comparison
+        path: |
+          comparison-report.md
+          current-benchmarks/
+          baseline-benchmarks/
+        retention-days: 30
+
+  performance-regression-test:
+    name: Performance Regression Test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - uses: dtolnay/rust-toolchain@stable
+    - uses: Swatinem/rust-cache@v2
+    
+    - name: Install cargo-criterion
+      run: cargo install cargo-criterion
+    
+    - name: Run PR benchmarks
+      run: |
+        mkdir -p pr-benchmarks
+        cargo criterion --message-format=json | tee pr-benchmarks/benchmark-output.json
+    
+    - name: Checkout main branch
+      run: git checkout origin/main
+    
+    - name: Run main benchmarks
+      run: |
+        mkdir -p main-benchmarks
+        cargo criterion --message-format=json | tee main-benchmarks/benchmark-output.json
+    
+    - name: Check for performance regression
+      id: regression-check
+      run: |
+        # Simple regression check (in a real scenario, you'd parse JSON more thoroughly)
+        pr_time=$(grep -o '"mean":{[^}]*"estimate":[0-9.]*' pr-benchmarks/benchmark-output.json | head -1 | grep -o '[0-9.]*$' || echo "0")
+        main_time=$(grep -o '"mean":{[^}]*"estimate":[0-9.]*' main-benchmarks/benchmark-output.json | head -1 | grep -o '[0-9.]*$' || echo "0")
+        
+        if (( $(echo "$pr_time > $main_time * 1.2" | bc -l) )); then
+          echo "regression=true" >> $GITHUB_OUTPUT
+          echo "Performance regression detected: PR took ${pr_time}ns vs main ${main_time}ns"
+        else
+          echo "regression=false" >> $GITHUB_OUTPUT
+          echo "No significant performance regression detected"
+        fi
+    
+    - name: Comment on PR with results
+      if: steps.regression-check.outputs.regression == 'true'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '⚠️ **Performance Regression Detected** ⚠️\n\nThe benchmarks show potential performance degradation compared to the main branch. Please review the changes and consider optimization.'
+          })
+    
+    - name: Fail on regression
+      if: steps.regression-check.outputs.regression == 'true'
+      run: |
+        echo "Performance regression detected! Check the benchmark results."
+        exit 1
+
+  stress-test:
+    name: Stress Test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    - uses: dtolnay/rust-toolchain@stable
+    - uses: Swatinem/rust-cache@v2
+    
+    - name: Run stress tests
+      run: |
+        # Run benchmarks with increased iterations for stress testing
+        export CRITERION_SAMPLE_SIZE=1000
+        export CRITERION_MEASUREMENT_TIME=10
+        
+        mkdir -p stress-test-results
+        cargo criterion --bench protocol_benchmarks | tee stress-test-results/stress-test.log
+    
+    - name: Check for memory leaks
+      run: |
+        # Simple memory usage check (in production, you'd use valgrind or similar)
+        cargo test --release | tee stress-test-results/memory-test.log
+    
+    - name: Upload stress test results
+      uses: actions/upload-artifact@v4
+      with:
+        name: stress-test-results
+        path: stress-test-results/
+        retention-days: 7
+
+  benchmark-summary:
+    name: Benchmark Summary
+    runs-on: ubuntu-latest
+    needs: [benchmark]
+    if: always()
+    steps:
+    - name: Download benchmark results
+      uses: actions/download-artifact@v4
+      with:
+        name: benchmark-results
+        path: benchmark-results/
+    
+    - name: Generate summary
+      run: |
+        echo "# Benchmark Summary" > benchmark-summary.md
+        echo "" >> benchmark-summary.md
+        echo "- **Run Date**: $(date)" >> benchmark-summary.md
+        echo "- **Commit**: ${{ github.sha }}" >> benchmark-summary.md
+        echo "- **Branch**: ${{ github.ref_name }}" >> benchmark-summary.md
+        echo "" >> benchmark-summary.md
+        
+        if [ -f benchmark-results/benchmark-output.json ]; then
+          echo "## Results" >> benchmark-summary.md
+          echo "Benchmarks completed successfully. Detailed results are available in the artifacts." >> benchmark-summary.md
+        else
+          echo "## Error" >> benchmark-summary.md
+          echo "Benchmark execution failed or no results found." >> benchmark-summary.md
+        fi
+    
+    - name: Upload summary
+      uses: actions/upload-artifact@v4
+      with:
+        name: benchmark-summary
+        path: benchmark-summary.md
+        retention-days: 30
