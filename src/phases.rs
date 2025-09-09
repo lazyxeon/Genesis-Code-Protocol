@@ -6,7 +6,10 @@ use anyhow::Result;
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 
-use crate::{Phase, gates::{GateProcessor, GateDecision, GateType}};
+use crate::{
+    gates::{GateDecision, GateProcessor, GateType},
+    Phase,
+};
 
 /// Phase manager for handling protocol execution flow
 #[derive(Debug)]
@@ -40,12 +43,17 @@ impl PhaseManager {
     pub fn transition_to_phase(&mut self, target_phase: Phase, context: &str) -> Result<bool> {
         // Validate transition is allowed
         if !self.is_valid_transition(&self.current_phase, &target_phase) {
-            anyhow::bail!("Invalid phase transition from {:?} to {:?}", 
-                         self.current_phase, target_phase);
+            anyhow::bail!(
+                "Invalid phase transition from {:?} to {:?}",
+                self.current_phase,
+                target_phase
+            );
         }
 
         // Process gate decision
-        let gate_signal = self.gate_processor.process_gate(GateType::PhaseTransition, context)?;
+        let gate_signal = self
+            .gate_processor
+            .process_gate(GateType::PhaseTransition, context)?;
 
         match gate_signal.decision {
             GateDecision::Allow => {
@@ -67,7 +75,10 @@ impl PhaseManager {
             }
             GateDecision::NeedsHuman => {
                 // Log that human intervention is needed
-                tracing::warn!("Phase transition requires human approval: {}", gate_signal.reasoning);
+                tracing::warn!(
+                    "Phase transition requires human approval: {}",
+                    gate_signal.reasoning
+                );
                 Ok(false)
             }
         }
@@ -106,7 +117,7 @@ impl PhaseManager {
             (Phase::C2DesignPhase, Phase::C1RequirementsAnalysis) |  // Iteration back
             (Phase::C4Validation, Phase::C3Implementation) |         // Bug fixes
             (Phase::C3Implementation, Phase::C2DesignPhase) |        // Design revision
-            (_, Phase::C10Archival)                                   // Emergency archival
+            (_, Phase::C10Archival) // Emergency archival
         )
     }
 
@@ -208,27 +219,27 @@ mod tests {
     #[test]
     fn test_valid_sequential_transition() {
         let mut manager = PhaseManager::new(Phase::C0AmbiguityToBrief);
-        
+
         let result = manager.transition_to_phase(
             Phase::C1RequirementsAnalysis,
-            "Requirements analysis ready with complete documentation"
+            "Requirements analysis ready with complete documentation",
         );
-        
+
         assert!(result.is_ok());
         assert!(result.unwrap()); // Should return true for allowed transition
-        assert!(matches!(manager.current_phase, Phase::C1RequirementsAnalysis));
+        assert!(matches!(
+            manager.current_phase,
+            Phase::C1RequirementsAnalysis
+        ));
         assert_eq!(manager.phase_history.len(), 1);
     }
 
     #[test]
     fn test_invalid_transition() {
         let mut manager = PhaseManager::new(Phase::C0AmbiguityToBrief);
-        
-        let result = manager.transition_to_phase(
-            Phase::C4Validation,
-            "Skipping to validation"
-        );
-        
+
+        let result = manager.transition_to_phase(Phase::C4Validation, "Skipping to validation");
+
         assert!(result.is_err());
         assert!(matches!(manager.current_phase, Phase::C0AmbiguityToBrief));
     }
@@ -237,7 +248,7 @@ mod tests {
     fn test_get_next_phase() {
         let manager = PhaseManager::new(Phase::C2DesignPhase);
         let next = manager.get_next_phase();
-        
+
         assert!(next.is_some());
         assert!(matches!(next.unwrap(), Phase::C3Implementation));
     }
@@ -246,14 +257,14 @@ mod tests {
     fn test_final_phase_has_no_next() {
         let manager = PhaseManager::new(Phase::C10Archival);
         let next = manager.get_next_phase();
-        
+
         assert!(next.is_none());
     }
 
     #[test]
     fn test_valid_iteration_back() {
         let manager = PhaseManager::new(Phase::C4Validation);
-        
+
         assert!(manager.is_valid_transition(&Phase::C4Validation, &Phase::C3Implementation));
         assert!(manager.is_valid_transition(&Phase::C2DesignPhase, &Phase::C1RequirementsAnalysis));
     }
@@ -262,7 +273,7 @@ mod tests {
     fn test_phase_requirements() {
         let manager = PhaseManager::new(Phase::C1RequirementsAnalysis);
         let requirements = manager.get_phase_requirements(&Phase::C1RequirementsAnalysis);
-        
+
         assert!(!requirements.is_empty());
         assert!(requirements.iter().any(|r| r.contains("requirements")));
     }

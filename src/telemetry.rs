@@ -94,7 +94,13 @@ impl TelemetryCollector {
     }
 
     /// Records a metric
-    pub fn record_metric(&self, name: String, value: f64, unit: String, tags: HashMap<String, String>) -> Result<()> {
+    pub fn record_metric(
+        &self,
+        name: String,
+        value: f64,
+        unit: String,
+        tags: HashMap<String, String>,
+    ) -> Result<()> {
         let metric = TelemetryMetric {
             name,
             value,
@@ -112,7 +118,13 @@ impl TelemetryCollector {
     }
 
     /// Records an event
-    pub fn record_event(&self, name: String, phase: Option<Phase>, data: HashMap<String, serde_json::Value>, severity: EventSeverity) -> Result<()> {
+    pub fn record_event(
+        &self,
+        name: String,
+        phase: Option<Phase>,
+        data: HashMap<String, serde_json::Value>,
+        severity: EventSeverity,
+    ) -> Result<()> {
         let event = TelemetryEvent {
             name,
             timestamp: Utc::now(),
@@ -130,7 +142,12 @@ impl TelemetryCollector {
     }
 
     /// Records execution time for an operation
-    pub fn record_execution_time(&self, operation: &str, duration_ms: f64, phase: Option<Phase>) -> Result<()> {
+    pub fn record_execution_time(
+        &self,
+        operation: &str,
+        duration_ms: f64,
+        phase: Option<Phase>,
+    ) -> Result<()> {
         let mut tags = HashMap::new();
         tags.insert("operation".to_string(), operation.to_string());
         if let Some(phase) = &phase {
@@ -146,8 +163,14 @@ impl TelemetryCollector {
 
         // Also record as an event for detailed tracking
         let mut event_data = HashMap::new();
-        event_data.insert("operation".to_string(), serde_json::Value::String(operation.to_string()));
-        event_data.insert("duration_ms".to_string(), serde_json::Value::Number(serde_json::Number::from_f64(duration_ms).unwrap()));
+        event_data.insert(
+            "operation".to_string(),
+            serde_json::Value::String(operation.to_string()),
+        );
+        event_data.insert(
+            "duration_ms".to_string(),
+            serde_json::Value::Number(serde_json::Number::from_f64(duration_ms).unwrap()),
+        );
 
         self.record_event(
             "operation_completed".to_string(),
@@ -160,9 +183,17 @@ impl TelemetryCollector {
     }
 
     /// Records an error
-    pub fn record_error(&self, error_message: String, phase: Option<Phase>, context: HashMap<String, String>) -> Result<()> {
+    pub fn record_error(
+        &self,
+        error_message: String,
+        phase: Option<Phase>,
+        context: HashMap<String, String>,
+    ) -> Result<()> {
         let mut event_data = HashMap::new();
-        event_data.insert("error_message".to_string(), serde_json::Value::String(error_message.clone()));
+        event_data.insert(
+            "error_message".to_string(),
+            serde_json::Value::String(error_message.clone()),
+        );
         for (key, value) in context {
             event_data.insert(key, serde_json::Value::String(value));
         }
@@ -196,12 +227,14 @@ impl TelemetryCollector {
 
     /// Generates a comprehensive telemetry report
     pub fn generate_report(&self) -> Result<TelemetryReport> {
-        let metrics = self.metrics
+        let metrics = self
+            .metrics
             .lock()
             .map_err(|_| anyhow::anyhow!("Failed to acquire metrics lock"))?
             .clone();
 
-        let events = self.events
+        let events = self
+            .events
             .lock()
             .map_err(|_| anyhow::anyhow!("Failed to acquire events lock"))?
             .clone();
@@ -222,9 +255,12 @@ impl TelemetryCollector {
             }
         } else {
             PerformanceSummary {
-                average_execution_time_ms: execution_times.iter().sum::<f64>() / execution_times.len() as f64,
+                average_execution_time_ms: execution_times.iter().sum::<f64>()
+                    / execution_times.len() as f64,
                 min_execution_time_ms: execution_times.iter().fold(f64::INFINITY, |a, &b| a.min(b)),
-                max_execution_time_ms: execution_times.iter().fold(f64::NEG_INFINITY, |a, &b| a.max(b)),
+                max_execution_time_ms: execution_times
+                    .iter()
+                    .fold(f64::NEG_INFINITY, |a, &b| a.max(b)),
                 total_operations: execution_times.len(),
             }
         };
@@ -301,13 +337,18 @@ impl PerformanceTracker {
         let duration = self.start_time.elapsed();
         let duration_ms = duration.as_millis() as f64;
 
-        self.collector.record_execution_time(&self.operation_name, duration_ms, phase)?;
+        self.collector
+            .record_execution_time(&self.operation_name, duration_ms, phase)?;
 
         Ok(duration_ms)
     }
 
     /// Stops tracking with additional context
-    pub fn stop_with_context(self, phase: Option<Phase>, context: HashMap<String, String>) -> Result<f64> {
+    pub fn stop_with_context(
+        self,
+        phase: Option<Phase>,
+        context: HashMap<String, String>,
+    ) -> Result<f64> {
         let phase_clone = phase.clone();
         let collector = self.collector.clone();
         let operation_name = self.operation_name.clone();
@@ -319,8 +360,14 @@ impl PerformanceTracker {
             .map(|(k, v)| (k, serde_json::Value::String(v)))
             .collect();
 
-        event_data.insert("operation".to_string(), serde_json::Value::String(operation_name));
-        event_data.insert("duration_ms".to_string(), serde_json::Value::Number(serde_json::Number::from_f64(duration_ms).unwrap()));
+        event_data.insert(
+            "operation".to_string(),
+            serde_json::Value::String(operation_name),
+        );
+        event_data.insert(
+            "duration_ms".to_string(),
+            serde_json::Value::Number(serde_json::Number::from_f64(duration_ms).unwrap()),
+        );
 
         collector.record_event(
             "operation_completed_with_context".to_string(),
@@ -347,7 +394,7 @@ mod tests {
     fn test_telemetry_collector_creation() {
         let collector = TelemetryCollector::new();
         let report = collector.generate_report().unwrap();
-        
+
         assert_eq!(report.total_metrics, 0);
         assert_eq!(report.total_events, 0);
     }
@@ -358,12 +405,9 @@ mod tests {
         let mut tags = HashMap::new();
         tags.insert("test".to_string(), "value".to_string());
 
-        collector.record_metric(
-            "test_metric".to_string(),
-            42.0,
-            "units".to_string(),
-            tags,
-        ).unwrap();
+        collector
+            .record_metric("test_metric".to_string(), 42.0, "units".to_string(), tags)
+            .unwrap();
 
         let report = collector.generate_report().unwrap();
         assert_eq!(report.total_metrics, 1);
@@ -373,18 +417,26 @@ mod tests {
     fn test_record_event() {
         let collector = TelemetryCollector::new();
         let mut data = HashMap::new();
-        data.insert("test_key".to_string(), serde_json::Value::String("test_value".to_string()));
+        data.insert(
+            "test_key".to_string(),
+            serde_json::Value::String("test_value".to_string()),
+        );
 
-        collector.record_event(
-            "test_event".to_string(),
-            Some(Phase::C1RequirementsAnalysis),
-            data,
-            EventSeverity::Info,
-        ).unwrap();
+        collector
+            .record_event(
+                "test_event".to_string(),
+                Some(Phase::C1RequirementsAnalysis),
+                data,
+                EventSeverity::Info,
+            )
+            .unwrap();
 
         let report = collector.generate_report().unwrap();
         assert_eq!(report.total_events, 1);
-        assert_eq!(report.phase_distribution.get("C1RequirementsAnalysis"), Some(&1));
+        assert_eq!(
+            report.phase_distribution.get("C1RequirementsAnalysis"),
+            Some(&1)
+        );
     }
 
     #[test]
@@ -396,9 +448,9 @@ mod tests {
         std::thread::sleep(std::time::Duration::from_millis(10));
 
         let duration = tracker.stop(Some(Phase::C3Implementation)).unwrap();
-        
+
         assert!(duration >= 10.0);
-        
+
         let report = collector.generate_report().unwrap();
         assert!(report.total_metrics > 0);
         assert!(report.total_events > 0);
@@ -411,11 +463,13 @@ mod tests {
         let mut context = HashMap::new();
         context.insert("context_key".to_string(), "context_value".to_string());
 
-        collector.record_error(
-            "Test error message".to_string(),
-            Some(Phase::C4Validation),
-            context,
-        ).unwrap();
+        collector
+            .record_error(
+                "Test error message".to_string(),
+                Some(Phase::C4Validation),
+                context,
+            )
+            .unwrap();
 
         let report = collector.generate_report().unwrap();
         assert_eq!(report.error_summary.total_errors, 1);
@@ -425,14 +479,16 @@ mod tests {
     #[test]
     fn test_telemetry_export() {
         let collector = TelemetryCollector::new();
-        
+
         // Add some test data
-        collector.record_metric(
-            "test_metric".to_string(),
-            123.45,
-            "units".to_string(),
-            HashMap::new(),
-        ).unwrap();
+        collector
+            .record_metric(
+                "test_metric".to_string(),
+                123.45,
+                "units".to_string(),
+                HashMap::new(),
+            )
+            .unwrap();
 
         let json = collector.export_to_json().unwrap();
         assert!(json.contains("generated_at"));
@@ -443,10 +499,19 @@ mod tests {
     #[test]
     fn test_clear_telemetry() {
         let collector = TelemetryCollector::new();
-        
+
         // Add some data
-        collector.record_metric("test".to_string(), 1.0, "unit".to_string(), HashMap::new()).unwrap();
-        collector.record_event("test".to_string(), None, HashMap::new(), EventSeverity::Info).unwrap();
+        collector
+            .record_metric("test".to_string(), 1.0, "unit".to_string(), HashMap::new())
+            .unwrap();
+        collector
+            .record_event(
+                "test".to_string(),
+                None,
+                HashMap::new(),
+                EventSeverity::Info,
+            )
+            .unwrap();
 
         let report_before = collector.generate_report().unwrap();
         assert!(report_before.total_metrics > 0);

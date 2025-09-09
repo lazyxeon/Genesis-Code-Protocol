@@ -48,7 +48,7 @@ pub enum StartupMode {
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub enum RiskTier {
     R1, // Low risk
-    R2, // Medium risk  
+    R2, // Medium risk
     R3, // High risk
 }
 
@@ -86,7 +86,7 @@ impl GcpRun {
             StartupMode::Autonomous => Phase::I1AutonomousSparkGeneration,
             StartupMode::SparkProvided => Phase::C0AmbiguityToBrief,
         };
-        
+
         Self {
             run_id: Uuid::new_v4(),
             mode,
@@ -105,7 +105,7 @@ impl GcpRun {
         let previous_phase = self.current_phase.clone();
         self.current_phase = next_phase.clone();
         self.updated_at = Utc::now();
-        
+
         // Record telemetry
         self.add_telemetry_event(
             "phase_advance".to_string(),
@@ -114,7 +114,7 @@ impl GcpRun {
                 "new_phase": next_phase
             }),
         );
-        
+
         Ok(())
     }
 
@@ -123,7 +123,7 @@ impl GcpRun {
         let content_size = content.len();
         self.artifacts.insert(name.clone(), content);
         self.updated_at = Utc::now();
-        
+
         self.add_telemetry_event(
             "artifact_added".to_string(),
             serde_json::json!({
@@ -131,7 +131,7 @@ impl GcpRun {
                 "size": content_size
             }),
         );
-        
+
         Ok(())
     }
 
@@ -160,7 +160,12 @@ impl GcpRun {
     /// Validates the current state of the run
     pub fn validate(&self) -> Result<()> {
         // Basic validation rules
-        if self.artifacts.is_empty() && matches!(self.current_phase, Phase::C5Documentation | Phase::C6Deployment) {
+        if self.artifacts.is_empty()
+            && matches!(
+                self.current_phase,
+                Phase::C5Documentation | Phase::C6Deployment
+            )
+        {
             anyhow::bail!("No artifacts found for phase requiring outputs");
         }
 
@@ -186,21 +191,21 @@ pub fn generate_run_id_with_prefix(prefix: &str) -> String {
 /// Performance-critical protocol operations
 pub mod performance {
     use std::time::Instant;
-    
+
     /// High-performance artifact processing
     pub fn process_large_artifact(content: &[u8]) -> Vec<u8> {
         // Simulate high-performance processing
         let start = Instant::now();
         let mut result = content.to_vec();
-        
+
         // Perform some processing operations
         result.sort_unstable();
         result.dedup();
-        
+
         // Log processing time for benchmarking
         let duration = start.elapsed();
         tracing::info!("Processed {} bytes in {:?}", content.len(), duration);
-        
+
         result
     }
 
@@ -221,7 +226,7 @@ mod tests {
     #[test]
     fn test_gcp_run_creation() {
         let run = GcpRun::new(RunMode::Auto, StartupMode::SparkProvided, RiskTier::R1);
-        
+
         assert_eq!(run.mode, RunMode::Auto);
         assert_eq!(run.startup_mode, StartupMode::SparkProvided);
         assert_eq!(run.risk_tier, RiskTier::R1);
@@ -232,10 +237,14 @@ mod tests {
     #[test]
     fn test_artifact_addition() {
         let mut run = GcpRun::new(RunMode::Full, StartupMode::Autonomous, RiskTier::R2);
-        
-        run.add_artifact("test_artifact".to_string(), "test content".to_string()).unwrap();
-        
-        assert_eq!(run.artifacts.get("test_artifact"), Some(&"test content".to_string()));
+
+        run.add_artifact("test_artifact".to_string(), "test content".to_string())
+            .unwrap();
+
+        assert_eq!(
+            run.artifacts.get("test_artifact"),
+            Some(&"test content".to_string())
+        );
         assert_eq!(run.telemetry.len(), 1);
         assert_eq!(run.telemetry[0].event_type, "artifact_added");
     }
@@ -243,9 +252,9 @@ mod tests {
     #[test]
     fn test_phase_advancement() {
         let mut run = GcpRun::new(RunMode::Manual, StartupMode::SparkProvided, RiskTier::R1);
-        
+
         run.advance_phase(Phase::C1RequirementsAnalysis).unwrap();
-        
+
         assert!(matches!(run.current_phase, Phase::C1RequirementsAnalysis));
         assert_eq!(run.telemetry.len(), 1);
         assert_eq!(run.telemetry[0].event_type, "phase_advance");
@@ -254,10 +263,10 @@ mod tests {
     #[test]
     fn test_json_serialization() {
         let run = GcpRun::new(RunMode::Auto, StartupMode::Autonomous, RiskTier::R3);
-        
+
         let json = run.to_json().unwrap();
         let deserialized = GcpRun::from_json(&json).unwrap();
-        
+
         assert_eq!(run.run_id, deserialized.run_id);
         assert_eq!(run.mode, deserialized.mode);
         assert_eq!(run.startup_mode, deserialized.startup_mode);
@@ -268,12 +277,13 @@ mod tests {
     fn test_validation_r2_requires_sbom() {
         let mut run = GcpRun::new(RunMode::Auto, StartupMode::SparkProvided, RiskTier::R2);
         run.current_phase = Phase::C5Documentation;
-        
+
         // Should fail without SBOM
         assert!(run.validate().is_err());
-        
+
         // Should pass with SBOM
-        run.add_artifact("SBOM".to_string(), "sbom content".to_string()).unwrap();
+        run.add_artifact("SBOM".to_string(), "sbom content".to_string())
+            .unwrap();
         assert!(run.validate().is_ok());
     }
 
@@ -281,7 +291,7 @@ mod tests {
     fn test_performance_artifact_processing() {
         let test_data = vec![3u8, 1, 4, 1, 5, 9, 2, 6];
         let result = performance::process_large_artifact(&test_data);
-        
+
         // Should be sorted and deduplicated
         assert_eq!(result, vec![1, 2, 3, 4, 5, 6, 9]);
     }
@@ -290,13 +300,10 @@ mod tests {
     fn test_batch_processing() {
         let artifact1 = vec![3u8, 1, 4];
         let artifact2 = vec![2u8, 7, 1];
-        let artifacts = vec![
-            artifact1.as_slice(),
-            artifact2.as_slice(),
-        ];
-        
+        let artifacts = vec![artifact1.as_slice(), artifact2.as_slice()];
+
         let results = performance::batch_process_artifacts(&artifacts);
-        
+
         assert_eq!(results.len(), 2);
         assert_eq!(results[0], vec![1, 3, 4]);
         assert_eq!(results[1], vec![1, 2, 7]);

@@ -131,7 +131,11 @@ impl RunnerExecutor {
     }
 
     /// Executes a runner with the given context
-    pub async fn execute_runner(&self, runner_name: &str, context: RunnerContext) -> Result<RunnerResult> {
+    pub async fn execute_runner(
+        &self,
+        runner_name: &str,
+        context: RunnerContext,
+    ) -> Result<RunnerResult> {
         let runner = self
             .registry
             .get_runner(runner_name)
@@ -141,10 +145,10 @@ impl RunnerExecutor {
         self.validate_inputs(runner, &context.inputs)?;
 
         let start_time = std::time::Instant::now();
-        
+
         // Execute the runner logic (simplified simulation)
         let result = self.execute_runner_logic(runner, &context).await?;
-        
+
         let execution_time = start_time.elapsed().as_millis() as u64;
 
         Ok(RunnerResult {
@@ -160,15 +164,22 @@ impl RunnerExecutor {
     fn validate_inputs(&self, runner: &Runner, inputs: &HashMap<String, String>) -> Result<()> {
         for input_spec in &runner.inputs {
             if input_spec.required && !inputs.contains_key(&input_spec.name) {
-                anyhow::bail!("Required input '{}' missing for runner '{}'", 
-                             input_spec.name, runner.name);
+                anyhow::bail!(
+                    "Required input '{}' missing for runner '{}'",
+                    input_spec.name,
+                    runner.name
+                );
             }
         }
         Ok(())
     }
 
     /// Executes the actual runner logic (simplified simulation)
-    async fn execute_runner_logic(&self, runner: &Runner, context: &RunnerContext) -> Result<RunnerResult> {
+    async fn execute_runner_logic(
+        &self,
+        runner: &Runner,
+        context: &RunnerContext,
+    ) -> Result<RunnerResult> {
         // Simulate different runner behaviors based on name
         match runner.name.as_str() {
             "code_generator" => self.execute_code_generator(context).await,
@@ -185,7 +196,10 @@ impl RunnerExecutor {
         tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
 
         let mut outputs = HashMap::new();
-        outputs.insert("generated_code".to_string(), "fn main() { println!(\"Hello, world!\"); }".to_string());
+        outputs.insert(
+            "generated_code".to_string(),
+            "fn main() { println!(\"Hello, world!\"); }".to_string(),
+        );
         outputs.insert("build_script".to_string(), "cargo build".to_string());
 
         let mut metrics = HashMap::new();
@@ -206,17 +220,27 @@ impl RunnerExecutor {
         tokio::time::sleep(tokio::time::Duration::from_millis(200)).await;
 
         let has_code = context.inputs.contains_key("source_code");
-        let has_tests = context.inputs.get("source_code")
+        let has_tests = context
+            .inputs
+            .get("source_code")
             .map(|code| code.contains("test"))
             .unwrap_or(false);
 
         let mut outputs = HashMap::new();
-        outputs.insert("quality_report".to_string(), 
-                      format!("Quality analysis: code={}, tests={}", has_code, has_tests));
+        outputs.insert(
+            "quality_report".to_string(),
+            format!("Quality analysis: code={}, tests={}", has_code, has_tests),
+        );
 
         let mut metrics = HashMap::new();
-        metrics.insert("quality_score".to_string(), if has_tests { 8.5 } else { 6.0 });
-        metrics.insert("test_coverage".to_string(), if has_tests { 85.0 } else { 0.0 });
+        metrics.insert(
+            "quality_score".to_string(),
+            if has_tests { 8.5 } else { 6.0 },
+        );
+        metrics.insert(
+            "test_coverage".to_string(),
+            if has_tests { 85.0 } else { 0.0 },
+        );
 
         Ok(RunnerResult {
             success: true,
@@ -231,42 +255,61 @@ impl RunnerExecutor {
     async fn execute_security_scanner(&self, context: &RunnerContext) -> Result<RunnerResult> {
         tokio::time::sleep(tokio::time::Duration::from_millis(300)).await;
 
-        let has_vulnerabilities = context.inputs.get("source_code")
+        let has_vulnerabilities = context
+            .inputs
+            .get("source_code")
             .map(|code| code.contains("unsafe") || code.contains("vulnerability"))
             .unwrap_or(false);
 
         let mut outputs = HashMap::new();
-        outputs.insert("security_report".to_string(), 
-                      if has_vulnerabilities { 
-                          "Security issues found".to_string() 
-                      } else { 
-                          "No security issues detected".to_string() 
-                      });
+        outputs.insert(
+            "security_report".to_string(),
+            if has_vulnerabilities {
+                "Security issues found".to_string()
+            } else {
+                "No security issues detected".to_string()
+            },
+        );
 
         let mut metrics = HashMap::new();
-        metrics.insert("vulnerability_count".to_string(), if has_vulnerabilities { 3.0 } else { 0.0 });
-        metrics.insert("security_score".to_string(), if has_vulnerabilities { 4.0 } else { 9.5 });
+        metrics.insert(
+            "vulnerability_count".to_string(),
+            if has_vulnerabilities { 3.0 } else { 0.0 },
+        );
+        metrics.insert(
+            "security_score".to_string(),
+            if has_vulnerabilities { 4.0 } else { 9.5 },
+        );
 
         Ok(RunnerResult {
             success: !has_vulnerabilities,
             outputs,
             metrics,
             execution_time_ms: 300,
-            error_message: if has_vulnerabilities { 
-                Some("Security vulnerabilities detected".to_string()) 
-            } else { 
-                None 
+            error_message: if has_vulnerabilities {
+                Some("Security vulnerabilities detected".to_string())
+            } else {
+                None
             },
         })
     }
 
     /// Simulates documentation generation runner
-    async fn execute_documentation_generator(&self, _context: &RunnerContext) -> Result<RunnerResult> {
+    async fn execute_documentation_generator(
+        &self,
+        _context: &RunnerContext,
+    ) -> Result<RunnerResult> {
         tokio::time::sleep(tokio::time::Duration::from_millis(150)).await;
 
         let mut outputs = HashMap::new();
-        outputs.insert("readme".to_string(), "# Project Documentation\n\nThis is auto-generated documentation.".to_string());
-        outputs.insert("api_docs".to_string(), "API documentation generated.".to_string());
+        outputs.insert(
+            "readme".to_string(),
+            "# Project Documentation\n\nThis is auto-generated documentation.".to_string(),
+        );
+        outputs.insert(
+            "api_docs".to_string(),
+            "API documentation generated.".to_string(),
+        );
 
         let mut metrics = HashMap::new();
         metrics.insert("doc_coverage".to_string(), 92.0);
@@ -286,7 +329,10 @@ impl RunnerExecutor {
         tokio::time::sleep(tokio::time::Duration::from_millis(50)).await;
 
         let mut outputs = HashMap::new();
-        outputs.insert("result".to_string(), "Generic runner executed successfully".to_string());
+        outputs.insert(
+            "result".to_string(),
+            "Generic runner executed successfully".to_string(),
+        );
 
         let mut metrics = HashMap::new();
         metrics.insert("execution_score".to_string(), 7.5);
@@ -311,21 +357,17 @@ pub fn create_default_registry() -> RunnerRegistry {
         version: "1.0.0".to_string(),
         description: "Generates code based on specifications".to_string(),
         supported_phases: vec![Phase::C3Implementation],
-        inputs: vec![
-            RunnerInput {
-                name: "specification".to_string(),
-                input_type: InputType::Text,
-                required: true,
-                description: "Code specification and requirements".to_string(),
-            },
-        ],
-        outputs: vec![
-            RunnerOutput {
-                name: "generated_code".to_string(),
-                output_type: OutputType::Artifact,
-                description: "Generated source code".to_string(),
-            },
-        ],
+        inputs: vec![RunnerInput {
+            name: "specification".to_string(),
+            input_type: InputType::Text,
+            required: true,
+            description: "Code specification and requirements".to_string(),
+        }],
+        outputs: vec![RunnerOutput {
+            name: "generated_code".to_string(),
+            output_type: OutputType::Artifact,
+            description: "Generated source code".to_string(),
+        }],
         metadata: HashMap::new(),
     };
 
@@ -335,21 +377,17 @@ pub fn create_default_registry() -> RunnerRegistry {
         version: "1.0.0".to_string(),
         description: "Analyzes code quality metrics".to_string(),
         supported_phases: vec![Phase::C4Validation],
-        inputs: vec![
-            RunnerInput {
-                name: "source_code".to_string(),
-                input_type: InputType::Text,
-                required: true,
-                description: "Source code to analyze".to_string(),
-            },
-        ],
-        outputs: vec![
-            RunnerOutput {
-                name: "quality_report".to_string(),
-                output_type: OutputType::Report,
-                description: "Quality analysis report".to_string(),
-            },
-        ],
+        inputs: vec![RunnerInput {
+            name: "source_code".to_string(),
+            input_type: InputType::Text,
+            required: true,
+            description: "Source code to analyze".to_string(),
+        }],
+        outputs: vec![RunnerOutput {
+            name: "quality_report".to_string(),
+            output_type: OutputType::Report,
+            description: "Quality analysis report".to_string(),
+        }],
         metadata: HashMap::new(),
     };
 
@@ -386,7 +424,7 @@ mod tests {
     fn test_find_runners_for_phase() {
         let registry = create_default_registry();
         let runners = registry.find_runners_for_phase(&Phase::C3Implementation);
-        
+
         assert_eq!(runners.len(), 1);
         assert_eq!(runners[0].name, "code_generator");
     }
@@ -399,14 +437,18 @@ mod tests {
         let context = RunnerContext {
             run_id: Uuid::new_v4().to_string(),
             phase: Phase::C3Implementation,
-            inputs: HashMap::from([
-                ("specification".to_string(), "Generate a hello world function".to_string()),
-            ]),
+            inputs: HashMap::from([(
+                "specification".to_string(),
+                "Generate a hello world function".to_string(),
+            )]),
             started_at: Utc::now(),
         };
 
-        let result = executor.execute_runner("code_generator", context).await.unwrap();
-        
+        let result = executor
+            .execute_runner("code_generator", context)
+            .await
+            .unwrap();
+
         assert!(result.success);
         assert!(result.outputs.contains_key("generated_code"));
         assert!(result.execution_time_ms > 0);
@@ -423,21 +465,17 @@ mod tests {
             version: "1.0.0".to_string(),
             description: "Scans for security vulnerabilities".to_string(),
             supported_phases: vec![Phase::C4Validation],
-            inputs: vec![
-                RunnerInput {
-                    name: "source_code".to_string(),
-                    input_type: InputType::Text,
-                    required: true,
-                    description: "Source code to scan".to_string(),
-                },
-            ],
-            outputs: vec![
-                RunnerOutput {
-                    name: "security_report".to_string(),
-                    output_type: OutputType::Report,
-                    description: "Security scan report".to_string(),
-                },
-            ],
+            inputs: vec![RunnerInput {
+                name: "source_code".to_string(),
+                input_type: InputType::Text,
+                required: true,
+                description: "Source code to scan".to_string(),
+            }],
+            outputs: vec![RunnerOutput {
+                name: "security_report".to_string(),
+                output_type: OutputType::Report,
+                description: "Security scan report".to_string(),
+            }],
             metadata: HashMap::new(),
         };
 
@@ -446,14 +484,18 @@ mod tests {
         let context = RunnerContext {
             run_id: Uuid::new_v4().to_string(),
             phase: Phase::C4Validation,
-            inputs: HashMap::from([
-                ("source_code".to_string(), "unsafe { vulnerability_code() }".to_string()),
-            ]),
+            inputs: HashMap::from([(
+                "source_code".to_string(),
+                "unsafe { vulnerability_code() }".to_string(),
+            )]),
             started_at: Utc::now(),
         };
 
-        let result = executor.execute_runner("security_scanner", context).await.unwrap();
-        
+        let result = executor
+            .execute_runner("security_scanner", context)
+            .await
+            .unwrap();
+
         assert!(!result.success);
         assert!(result.error_message.is_some());
         assert!(result.metrics.get("vulnerability_count").unwrap() > &0.0);

@@ -99,7 +99,7 @@ impl GateProcessor {
     fn evaluate_quality(&self, context: &str) -> (GateDecision, f64, String) {
         let has_tests = context.contains("test");
         let has_docs = context.contains("documentation");
-        
+
         let confidence = if has_tests && has_docs { 0.9 } else { 0.6 };
         let decision = if confidence > 0.8 {
             GateDecision::Allow
@@ -116,8 +116,9 @@ impl GateProcessor {
 
     /// Evaluates security concerns
     fn evaluate_security(&self, context: &str) -> (GateDecision, f64, String) {
-        let has_vulnerabilities = context.contains("vulnerability") || context.contains("security issue");
-        
+        let has_vulnerabilities =
+            context.contains("vulnerability") || context.contains("security issue");
+
         let (decision, confidence) = if has_vulnerabilities {
             (GateDecision::Deny, 0.95)
         } else {
@@ -134,7 +135,7 @@ impl GateProcessor {
     /// Evaluates compliance requirements
     fn evaluate_compliance(&self, context: &str) -> (GateDecision, f64, String) {
         let has_compliance_docs = context.contains("compliance") || context.contains("audit");
-        
+
         let confidence = if has_compliance_docs { 0.9 } else { 0.5 };
         let decision = if confidence > 0.7 {
             GateDecision::Allow
@@ -173,17 +174,22 @@ mod tests {
     #[test]
     fn test_gate_processor_creation() {
         let processor = GateProcessor::new();
-        assert!(matches!(processor.auto_gate_verbosity, GateVerbosity::Brief));
+        assert!(matches!(
+            processor.auto_gate_verbosity,
+            GateVerbosity::Brief
+        ));
         assert!(!processor.auto_gate_preview);
     }
 
     #[test]
     fn test_phase_transition_gate() {
         let processor = GateProcessor::new();
-        let signal = processor.process_gate(
-            GateType::PhaseTransition,
-            "All artifacts complete with documentation"
-        ).unwrap();
+        let signal = processor
+            .process_gate(
+                GateType::PhaseTransition,
+                "All artifacts complete with documentation",
+            )
+            .unwrap();
 
         assert!(matches!(signal.decision, GateDecision::Allow));
         assert!(signal.confidence > 0.8);
@@ -193,10 +199,12 @@ mod tests {
     #[test]
     fn test_quality_gate_with_tests_and_docs() {
         let processor = GateProcessor::new();
-        let signal = processor.process_gate(
-            GateType::QualityCheck,
-            "Code includes comprehensive test coverage and documentation"
-        ).unwrap();
+        let signal = processor
+            .process_gate(
+                GateType::QualityCheck,
+                "Code includes comprehensive test coverage and documentation",
+            )
+            .unwrap();
 
         assert!(matches!(signal.decision, GateDecision::Allow));
         assert!(signal.confidence > 0.8);
@@ -205,10 +213,12 @@ mod tests {
     #[test]
     fn test_security_gate_with_vulnerabilities() {
         let processor = GateProcessor::new();
-        let signal = processor.process_gate(
-            GateType::SecurityReview,
-            "Found critical vulnerability in dependencies"
-        ).unwrap();
+        let signal = processor
+            .process_gate(
+                GateType::SecurityReview,
+                "Found critical vulnerability in dependencies",
+            )
+            .unwrap();
 
         assert!(matches!(signal.decision, GateDecision::Deny));
         assert!(signal.confidence > 0.9);

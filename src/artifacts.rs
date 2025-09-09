@@ -35,7 +35,7 @@ impl Artifact {
     /// Creates a new artifact
     pub fn new(name: String, content: String, artifact_type: ArtifactType) -> Self {
         let checksum = format!("{:x}", md5::compute(&content));
-        
+
         Self {
             name,
             content,
@@ -50,8 +50,11 @@ impl Artifact {
     pub fn validate(&self) -> Result<()> {
         let current_checksum = format!("{:x}", md5::compute(&self.content));
         if current_checksum != self.checksum {
-            anyhow::bail!("Artifact checksum mismatch: expected {}, got {}", 
-                         self.checksum, current_checksum);
+            anyhow::bail!(
+                "Artifact checksum mismatch: expected {}, got {}",
+                self.checksum,
+                current_checksum
+            );
         }
         Ok(())
     }
@@ -116,7 +119,10 @@ mod tests {
 
         assert_eq!(artifact.name, "test.md");
         assert_eq!(artifact.content, "# Test Content");
-        assert!(matches!(artifact.artifact_type, ArtifactType::Documentation));
+        assert!(matches!(
+            artifact.artifact_type,
+            ArtifactType::Documentation
+        ));
     }
 
     #[test]
