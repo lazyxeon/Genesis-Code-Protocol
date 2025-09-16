@@ -65,7 +65,7 @@ jobs:
       # Create a pull request for the changelog update, sign commits with the GitHub Actions bot
       - name: Create Pull Request
         if: steps.changes.outputs.changed == 'true'
-        uses: devops-infra/action-pull-request@v0.5.5
+        uses: devops-infra/action-pull-request@v0.6.1
         with:
            github_token: ${{ secrets.GITHUB_TOKEN }}
            source_branch: chore/update-repo-structure
