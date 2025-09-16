@@ -21,7 +21,7 @@ jobs:
       actions: read
       id-token: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - uses: ossf/scorecard-action@05b42c624433fc40578a4040d5cf5e36ddca8cde
