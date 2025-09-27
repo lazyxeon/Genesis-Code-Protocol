@@ -38,25 +38,6 @@
 - security.md
 - setup.py
 - workflow_manifest.json
-- **scripts/**
-  - scripts/__init__.py
-  - scripts/fix_md_spacing.py
-  - scripts/generate_changelog.py
-  - scripts/generate_repo_toc.py
-  - scripts/generate_sbom.py
-  - scripts/make_exit_bundle.sh
-  - scripts/update_repo_structure.py
-  - scripts/validate_dependencies.py
-  - scripts/validate_precommit.sh
-  - scripts/validate_workflows.py
-- **docs/**
-  - docs/RELEASE_WORKFLOW.md
-  - docs/WORKFLOW_FIXES_SUMMARY.md
-  - docs/ci-workflow-diagnoser-runbook.md
-  - docs/dependency-review-workflow.md
-  - docs/index.md
-  - docs/roadmap.md
-  - docs/runbook.md
 - **GCP Runners/**
   - GCP Runners/A V49.0 Master Runners Codex: Flagship Edition.md
   - GCP Runners/Agriculture & Environmental MVR Runner.md
@@ -84,19 +65,6 @@
   - **GCP V50 Supplemental Docs/**
     - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Cartridges Pack.md
     - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Master Runners Codex.md
-- **tests/**
-  - tests/automerge_skip_test.py
-  - tests/conftest.py
-  - tests/contract_test.py
-  - tests/e2e_smoke_test.py
-  - tests/ethicalcheck_test.py
-  - tests/perf_test.py
-  - tests/rollback_test.py
-  - tests/security_test.py
-  - tests/spec_validation_test.py
-  - tests/test_release_bundle.py
-  - tests/test_release_workflows.py
-  - tests/test_workflow_validation.py
 - **Documents/**
   - Documents/A Documents Readme.md
   - Documents/A NinjaAI Repo Analysis.md
@@ -122,28 +90,27 @@
   - Documents/index.md
   - Documents/releases.md
   - Documents/security_report.md
+- **scripts/**
+  - scripts/__init__.py
+  - scripts/fix_md_spacing.py
+  - scripts/generate_changelog.py
+  - scripts/generate_repo_toc.py
+  - scripts/generate_sbom.py
+  - scripts/make_exit_bundle.sh
+  - scripts/update_repo_structure.py
+  - scripts/validate_dependencies.py
+  - scripts/validate_precommit.sh
+  - scripts/validate_workflows.py
 - **tools/**
   - tools/audit-workflows.sh
-- **src/**
-  - src/__init__.py
-  - src/automerge.py
-  - src/codacy.py
-  - src/config.py
-  - src/errors.py
-  - src/ethicalcheck.py
-  - src/fortify.py
-  - src/fuzz.py
-  - src/ingest.py
-  - src/logging_utils.py
-  - src/main.py
-  - src/remediate.py
-  - src/report.py
-  - src/rollback.py
-  - src/scan.py
-  - src/utils.py
-  - **matrix_ci/**
-    - src/matrix_ci/__init__.py
-    - src/matrix_ci/pipeline.py
+- **docs/**
+  - docs/RELEASE_WORKFLOW.md
+  - docs/WORKFLOW_FIXES_SUMMARY.md
+  - docs/ci-workflow-diagnoser-runbook.md
+  - docs/dependency-review-workflow.md
+  - docs/index.md
+  - docs/roadmap.md
+  - docs/runbook.md
 - **GCP-All-Variants/**
   - GCP-All-Variants/Changelog.md
   - GCP-All-Variants/Changelog_P2.md
@@ -193,51 +160,45 @@
   - cli_bundle/phase6_7.py
   - cli_bundle/prompt_utils.py
   - cli_bundle/requirements.txt
+- **tests/**
+  - tests/automerge_skip_test.py
+  - tests/conftest.py
+  - tests/contract_test.py
+  - tests/e2e_smoke_test.py
+  - tests/ethicalcheck_test.py
+  - tests/perf_test.py
+  - tests/rollback_test.py
+  - tests/security_test.py
+  - tests/spec_validation_test.py
+  - tests/test_release_bundle.py
+  - tests/test_release_workflows.py
+  - tests/test_workflow_validation.py
+- **src/**
+  - src/__init__.py
+  - src/automerge.py
+  - src/codacy.py
+  - src/config.py
+  - src/errors.py
+  - src/ethicalcheck.py
+  - src/fortify.py
+  - src/fuzz.py
+  - src/ingest.py
+  - src/logging_utils.py
+  - src/main.py
+  - src/remediate.py
+  - src/report.py
+  - src/rollback.py
+  - src/scan.py
+  - src/utils.py
+  - **matrix_ci/**
+    - src/matrix_ci/__init__.py
+    - src/matrix_ci/pipeline.py
 - **Notebooks/**
   - Notebooks/A Notebook Readme.md
   - Notebooks/Alloy Perceptual Loss.py
   - Notebooks/Alloyscript.py
   - Notebooks/Audio Processing.md
   - Notebooks/Latch LCH.md
-  - **Full Runs/**
-    - Notebooks/Full Runs/A FR Readme.md
-    - Notebooks/Full Runs/High Speed Internet Issue V49 Full Run.md
-    - Notebooks/Full Runs/Known EV issue Full Run, GCPv47.md
-    - Notebooks/Full Runs/Latch Full run.md
-    - Notebooks/Full Runs/Quantum Mechanics Full Run.md
-    - Notebooks/Full Runs/Solar Energy Full Run.md
-    - Notebooks/Full Runs/V48 Full Run.md
-    - **GCP V50 Full Runs/**
-      - Notebooks/Full Runs/GCP V50 Full Runs/Cell Phone Batteries Solution.md
-      - Notebooks/Full Runs/GCP V50 Full Runs/Full auto spark run.md
-      - Notebooks/Full Runs/GCP V50 Full Runs/Herbquit.md
-      - Notebooks/Full Runs/GCP V50 Full Runs/Hybrid ASIC.md
-      - Notebooks/Full Runs/GCP V50 Full Runs/IQ test solution.md
-      - Notebooks/Full Runs/GCP V50 Full Runs/Mercury Tilt Sensor.md
-      - Notebooks/Full Runs/GCP V50 Full Runs/MycoBNNT.md
-      - Notebooks/Full Runs/GCP V50 Full Runs/Reclaimed Horizons Video Game .md
-      - Notebooks/Full Runs/GCP V50 Full Runs/Veilweaver Video Game.md
-      - Notebooks/Full Runs/GCP V50 Full Runs/Veripact.md
-    - **Flagship Full Runs/**
-      - Notebooks/Full Runs/Flagship Full Runs/A FFR Readme.md
-      - Notebooks/Full Runs/Flagship Full Runs/AGROS.md
-      - Notebooks/Full Runs/Flagship Full Runs/APNL-RT
-      - Notebooks/Full Runs/Flagship Full Runs/CMAP-X.md
-      - Notebooks/Full Runs/Flagship Full Runs/COES v1.0.md
-      - Notebooks/Full Runs/Flagship Full Runs/Civic Accord Stack.md
-      - Notebooks/Full Runs/Flagship Full Runs/Crisp-PCM.md
-      - Notebooks/Full Runs/Flagship Full Runs/EMP-GMD-Resilience.md
-      - Notebooks/Full Runs/Flagship Full Runs/FHASS.md
-      - Notebooks/Full Runs/Flagship Full Runs/Gobleki-Tepe.md
-      - Notebooks/Full Runs/Flagship Full Runs/HSO.md
-      - Notebooks/Full Runs/Flagship Full Runs/Helios-Arc PM Sail.md
-      - Notebooks/Full Runs/Flagship Full Runs/LYRA.md
-      - Notebooks/Full Runs/Flagship Full Runs/Nitrasafe.md
-      - Notebooks/Full Runs/Flagship Full Runs/NovelDesign.md
-      - Notebooks/Full Runs/Flagship Full Runs/PALIMPSET.md
-      - Notebooks/Full Runs/Flagship Full Runs/Payguard-DPC.md
-      - Notebooks/Full Runs/Flagship Full Runs/Poseidon Loop.md
-      - Notebooks/Full Runs/Flagship Full Runs/Proofline.md
   - **Modulift Unzipped Output/**
     - Notebooks/Modulift Unzipped Output/CMakeLists.txt
     - Notebooks/Modulift Unzipped Output/README_MODULIFT_v0.1.md
@@ -292,3 +253,42 @@
     - Notebooks/Duality Unzipped Ouput/setup_duality.sh
     - Notebooks/Duality Unzipped Ouput/sim_duality.py
     - Notebooks/Duality Unzipped Ouput/sqm_duality.conf
+  - **Full Runs/**
+    - Notebooks/Full Runs/A FR Readme.md
+    - Notebooks/Full Runs/High Speed Internet Issue V49 Full Run.md
+    - Notebooks/Full Runs/Known EV issue Full Run, GCPv47.md
+    - Notebooks/Full Runs/Latch Full run.md
+    - Notebooks/Full Runs/Quantum Mechanics Full Run.md
+    - Notebooks/Full Runs/Solar Energy Full Run.md
+    - Notebooks/Full Runs/V48 Full Run.md
+    - **Flagship Full Runs/**
+      - Notebooks/Full Runs/Flagship Full Runs/A FFR Readme.md
+      - Notebooks/Full Runs/Flagship Full Runs/AGROS.md
+      - Notebooks/Full Runs/Flagship Full Runs/APNL-RT
+      - Notebooks/Full Runs/Flagship Full Runs/CMAP-X.md
+      - Notebooks/Full Runs/Flagship Full Runs/COES v1.0.md
+      - Notebooks/Full Runs/Flagship Full Runs/Civic Accord Stack.md
+      - Notebooks/Full Runs/Flagship Full Runs/Crisp-PCM.md
+      - Notebooks/Full Runs/Flagship Full Runs/EMP-GMD-Resilience.md
+      - Notebooks/Full Runs/Flagship Full Runs/FHASS.md
+      - Notebooks/Full Runs/Flagship Full Runs/Gobleki-Tepe.md
+      - Notebooks/Full Runs/Flagship Full Runs/HSO.md
+      - Notebooks/Full Runs/Flagship Full Runs/Helios-Arc PM Sail.md
+      - Notebooks/Full Runs/Flagship Full Runs/LYRA.md
+      - Notebooks/Full Runs/Flagship Full Runs/Nitrasafe.md
+      - Notebooks/Full Runs/Flagship Full Runs/NovelDesign.md
+      - Notebooks/Full Runs/Flagship Full Runs/PALIMPSET.md
+      - Notebooks/Full Runs/Flagship Full Runs/Payguard-DPC.md
+      - Notebooks/Full Runs/Flagship Full Runs/Poseidon Loop.md
+      - Notebooks/Full Runs/Flagship Full Runs/Proofline.md
+    - **GCP V50 Full Runs/**
+      - Notebooks/Full Runs/GCP V50 Full Runs/Cell Phone Batteries Solution.md
+      - Notebooks/Full Runs/GCP V50 Full Runs/Full auto spark run.md
+      - Notebooks/Full Runs/GCP V50 Full Runs/Herbquit.md
+      - Notebooks/Full Runs/GCP V50 Full Runs/Hybrid ASIC.md
+      - Notebooks/Full Runs/GCP V50 Full Runs/IQ test solution.md
+      - Notebooks/Full Runs/GCP V50 Full Runs/Mercury Tilt Sensor.md
+      - Notebooks/Full Runs/GCP V50 Full Runs/MycoBNNT.md
+      - Notebooks/Full Runs/GCP V50 Full Runs/Reclaimed Horizons Video Game .md
+      - Notebooks/Full Runs/GCP V50 Full Runs/Veilweaver Video Game.md
+      - Notebooks/Full Runs/GCP V50 Full Runs/Veripact.md
