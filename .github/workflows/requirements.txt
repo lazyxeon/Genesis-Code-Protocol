@@ -4,7 +4,7 @@ scipy==1.10.0
 numpy==1.26.4
 pandas==2.2.2
 matplotlib==3.9.0
-jupyterlab==4.4.6
+jupyterlab==4.4.8
 notebook==7.4.5
 pyspark==3.5.1
 sympy==1.14.0
