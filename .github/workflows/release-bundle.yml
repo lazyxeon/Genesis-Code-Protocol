@@ -33,7 +33,7 @@ jobs:
       artifacts-ready: ${{ steps.upload.outputs.artifacts-ready }}
     steps:
       # Checkout the repository at a known commit
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           ref: ${{ env.TAG }}
           fetch-depth: 0  # Full history for proper provenance
