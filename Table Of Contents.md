@@ -38,25 +38,26 @@
 - security.md
 - setup.py
 - workflow_manifest.json
-- **scripts/**
-  - scripts/__init__.py
-  - scripts/fix_md_spacing.py
-  - scripts/generate_changelog.py
-  - scripts/generate_repo_toc.py
-  - scripts/generate_sbom.py
-  - scripts/make_exit_bundle.sh
-  - scripts/update_repo_structure.py
-  - scripts/validate_dependencies.py
-  - scripts/validate_precommit.sh
-  - scripts/validate_workflows.py
-- **docs/**
-  - docs/RELEASE_WORKFLOW.md
-  - docs/WORKFLOW_FIXES_SUMMARY.md
-  - docs/ci-workflow-diagnoser-runbook.md
-  - docs/dependency-review-workflow.md
-  - docs/index.md
-  - docs/roadmap.md
-  - docs/runbook.md
+- **src/**
+  - src/__init__.py
+  - src/automerge.py
+  - src/codacy.py
+  - src/config.py
+  - src/errors.py
+  - src/ethicalcheck.py
+  - src/fortify.py
+  - src/fuzz.py
+  - src/ingest.py
+  - src/logging_utils.py
+  - src/main.py
+  - src/remediate.py
+  - src/report.py
+  - src/rollback.py
+  - src/scan.py
+  - src/utils.py
+  - **matrix_ci/**
+    - src/matrix_ci/__init__.py
+    - src/matrix_ci/pipeline.py
 - **GCP Runners/**
   - GCP Runners/A V49.0 Master Runners Codex: Flagship Edition.md
   - GCP Runners/Agriculture & Environmental MVR Runner.md
@@ -84,105 +85,6 @@
   - **GCP V50 Supplemental Docs/**
     - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Cartridges Pack.md
     - GCP Runners/GCP V50 Supplemental Docs/GCP V50 Master Runners Codex.md
-- **tests/**
-  - tests/automerge_skip_test.py
-  - tests/conftest.py
-  - tests/contract_test.py
-  - tests/e2e_smoke_test.py
-  - tests/ethicalcheck_test.py
-  - tests/perf_test.py
-  - tests/rollback_test.py
-  - tests/security_test.py
-  - tests/spec_validation_test.py
-  - tests/test_release_bundle.py
-  - tests/test_release_workflows.py
-  - tests/test_workflow_validation.py
-- **Documents/**
-  - Documents/A Documents Readme.md
-  - Documents/A NinjaAI Repo Analysis.md
-  - Documents/AI ChatGPT Critical Analysis Flagship GCP V49.md
-  - Documents/AI ChatGPT Critical Analysis GCP V45.6D.md
-  - Documents/AI ChatGPT Critical Analysis GCP V46.md
-  - Documents/AI ChatGPT Critical Analysis V47 Full Run EV issue.md
-  - Documents/AI Claude Critical Analysis Flagship GCP V49.md
-  - Documents/AI Claude Critical Analysis GCP V45.6d.md
-  - Documents/AI Claude Critical Analysis GCP V46.md
-  - Documents/AI Claude Critical Analysis V47 full run EV issue.md
-  - Documents/AI Grok Critical Analysis Flagship GCPV49.md
-  - Documents/AI Grok Critical Analysis GCP V45.6D.md
-  - Documents/AI Grok Critical Analysis GCP V46 .md
-  - Documents/AI Grok Critical Analysis V47 Full Run EV issue.md
-  - Documents/Feature Requests.md
-  - Documents/Issue Template.md
-  - Documents/Operations Manual.md
-  - Documents/Pull Request Template.md
-  - Documents/Requirements.md
-  - Documents/Security.md
-  - Documents/Theoretical Soundness Analysis.md
-  - Documents/index.md
-  - Documents/releases.md
-  - Documents/security_report.md
-- **tools/**
-  - tools/audit-workflows.sh
-- **src/**
-  - src/__init__.py
-  - src/automerge.py
-  - src/codacy.py
-  - src/config.py
-  - src/errors.py
-  - src/ethicalcheck.py
-  - src/fortify.py
-  - src/fuzz.py
-  - src/ingest.py
-  - src/logging_utils.py
-  - src/main.py
-  - src/remediate.py
-  - src/report.py
-  - src/rollback.py
-  - src/scan.py
-  - src/utils.py
-  - **matrix_ci/**
-    - src/matrix_ci/__init__.py
-    - src/matrix_ci/pipeline.py
-- **GCP-All-Variants/**
-  - GCP-All-Variants/Changelog.md
-  - GCP-All-Variants/Changelog_P2.md
-  - GCP-All-Variants/V09.md
-  - GCP-All-Variants/V11.md
-  - GCP-All-Variants/V20.md
-  - GCP-All-Variants/V22.md
-  - GCP-All-Variants/V23.md
-  - GCP-All-Variants/V30.md
-  - GCP-All-Variants/V34.md
-  - GCP-All-Variants/V35.md
-  - GCP-All-Variants/V36.md
-  - GCP-All-Variants/V40.md
-  - GCP-All-Variants/V41.md
-  - GCP-All-Variants/V42.md
-  - GCP-All-Variants/V43.0.md
-  - GCP-All-Variants/V43.6.md
-  - GCP-All-Variants/V43.7.md
-  - GCP-All-Variants/V44.1.md
-  - GCP-All-Variants/V44.7.md
-  - GCP-All-Variants/V44.8.md
-  - GCP-All-Variants/V44.9b.md
-  - GCP-All-Variants/V44.9d.md
-  - GCP-All-Variants/V45.0.md
-  - GCP-All-Variants/V45.1.md
-  - GCP-All-Variants/V45.2.md
-  - GCP-All-Variants/V45.3.md
-  - GCP-All-Variants/V45.4A.md
-  - GCP-All-Variants/V45.5.md
-  - GCP-All-Variants/V45.6.md
-  - GCP-All-Variants/V46.0.md
-  - GCP-All-Variants/V46.5.md
-  - GCP-All-Variants/V47.0.md
-  - GCP-All-Variants/V47.1.md
-  - GCP-All-Variants/V47.2.md
-  - GCP-All-Variants/V48.0.md
-  - GCP-All-Variants/V49.0.md
-  - GCP-All-Variants/V49.1 Flagship Edition.md
-  - GCP-All-Variants/V50.md
 - **cli_bundle/**
   - cli_bundle/Readme.md
   - cli_bundle/__init__.py
@@ -292,3 +194,101 @@
     - Notebooks/Duality Unzipped Ouput/setup_duality.sh
     - Notebooks/Duality Unzipped Ouput/sim_duality.py
     - Notebooks/Duality Unzipped Ouput/sqm_duality.conf
+- **GCP-All-Variants/**
+  - GCP-All-Variants/Changelog.md
+  - GCP-All-Variants/Changelog_P2.md
+  - GCP-All-Variants/V09.md
+  - GCP-All-Variants/V11.md
+  - GCP-All-Variants/V20.md
+  - GCP-All-Variants/V22.md
+  - GCP-All-Variants/V23.md
+  - GCP-All-Variants/V30.md
+  - GCP-All-Variants/V34.md
+  - GCP-All-Variants/V35.md
+  - GCP-All-Variants/V36.md
+  - GCP-All-Variants/V40.md
+  - GCP-All-Variants/V41.md
+  - GCP-All-Variants/V42.md
+  - GCP-All-Variants/V43.0.md
+  - GCP-All-Variants/V43.6.md
+  - GCP-All-Variants/V43.7.md
+  - GCP-All-Variants/V44.1.md
+  - GCP-All-Variants/V44.7.md
+  - GCP-All-Variants/V44.8.md
+  - GCP-All-Variants/V44.9b.md
+  - GCP-All-Variants/V44.9d.md
+  - GCP-All-Variants/V45.0.md
+  - GCP-All-Variants/V45.1.md
+  - GCP-All-Variants/V45.2.md
+  - GCP-All-Variants/V45.3.md
+  - GCP-All-Variants/V45.4A.md
+  - GCP-All-Variants/V45.5.md
+  - GCP-All-Variants/V45.6.md
+  - GCP-All-Variants/V46.0.md
+  - GCP-All-Variants/V46.5.md
+  - GCP-All-Variants/V47.0.md
+  - GCP-All-Variants/V47.1.md
+  - GCP-All-Variants/V47.2.md
+  - GCP-All-Variants/V48.0.md
+  - GCP-All-Variants/V49.0.md
+  - GCP-All-Variants/V49.1 Flagship Edition.md
+  - GCP-All-Variants/V50.md
+- **Documents/**
+  - Documents/A Documents Readme.md
+  - Documents/A NinjaAI Repo Analysis.md
+  - Documents/AI ChatGPT Critical Analysis Flagship GCP V49.md
+  - Documents/AI ChatGPT Critical Analysis GCP V45.6D.md
+  - Documents/AI ChatGPT Critical Analysis GCP V46.md
+  - Documents/AI ChatGPT Critical Analysis V47 Full Run EV issue.md
+  - Documents/AI Claude Critical Analysis Flagship GCP V49.md
+  - Documents/AI Claude Critical Analysis GCP V45.6d.md
+  - Documents/AI Claude Critical Analysis GCP V46.md
+  - Documents/AI Claude Critical Analysis V47 full run EV issue.md
+  - Documents/AI Grok Critical Analysis Flagship GCPV49.md
+  - Documents/AI Grok Critical Analysis GCP V45.6D.md
+  - Documents/AI Grok Critical Analysis GCP V46 .md
+  - Documents/AI Grok Critical Analysis V47 Full Run EV issue.md
+  - Documents/Feature Requests.md
+  - Documents/Issue Template.md
+  - Documents/Operations Manual.md
+  - Documents/Pull Request Template.md
+  - Documents/Requirements.md
+  - Documents/Security.md
+  - Documents/Theoretical Soundness Analysis.md
+  - Documents/index.md
+  - Documents/releases.md
+  - Documents/security_report.md
+- **docs/**
+  - docs/RELEASE_WORKFLOW.md
+  - docs/WORKFLOW_FIXES_SUMMARY.md
+  - docs/ci-workflow-diagnoser-runbook.md
+  - docs/dependency-review-workflow.md
+  - docs/index.md
+  - docs/roadmap.md
+  - docs/runbook.md
+- **scripts/**
+  - scripts/__init__.py
+  - scripts/fix_md_spacing.py
+  - scripts/generate_changelog.py
+  - scripts/generate_repo_toc.py
+  - scripts/generate_sbom.py
+  - scripts/make_exit_bundle.sh
+  - scripts/update_repo_structure.py
+  - scripts/validate_dependencies.py
+  - scripts/validate_precommit.sh
+  - scripts/validate_workflows.py
+- **tests/**
+  - tests/automerge_skip_test.py
+  - tests/conftest.py
+  - tests/contract_test.py
+  - tests/e2e_smoke_test.py
+  - tests/ethicalcheck_test.py
+  - tests/perf_test.py
+  - tests/rollback_test.py
+  - tests/security_test.py
+  - tests/spec_validation_test.py
+  - tests/test_release_bundle.py
+  - tests/test_release_workflows.py
+  - tests/test_workflow_validation.py
+- **tools/**
+  - tools/audit-workflows.sh
